@@ -9,10 +9,7 @@ import Calendario.Tareas.Tarea;
 
 import java.lang.reflect.Array;
 import java.time.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Calendario {
 
@@ -99,8 +96,8 @@ public class Calendario {
         return alarmaTareasProximas;
     }
 
-    public ArrayList<Actividad> ProximasActividades() {
-        ArrayList<Actividad> actividadesProximas = null;
+    public Set<Actividad> ProximasActividades() {
+        Set<Actividad> actividadesProximas = null;
         LocalDateTime fechaProxima = null;
 
         var eventosProximos = getEventosProximos();
@@ -152,8 +149,8 @@ public class Calendario {
 
 
     // getActividades recibe un intervalo de fechas y devuelve la lista de Actividades dentro del mismo
-    public List<Actividad> getActividades(LocalDateTime desde, LocalDateTime hasta){
-        List<Actividad> actividades = new ArrayList<>();
+    public Set<Actividad> getActividades(LocalDateTime desde, LocalDateTime hasta){
+        Set<Actividad> actividades = new HashSet<>();
         getEventos(desde, hasta, actividades);
         getTareas(desde, hasta, actividades);
         return actividades;
@@ -182,7 +179,7 @@ public class Calendario {
 
     /* getEventos recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
     de los Eventos que se encuentran dentro del mismo */
-    private void getEventos(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
+    private void getEventos(LocalDateTime desde, LocalDateTime hasta, Set<Actividad> actividades){
         for (Evento evento : eventos){
             var instancia = evento.getProximaRepeticion(desde);
             while(instancia != null && instancia.EstaEnElIntervalo(desde, hasta)){
@@ -193,7 +190,7 @@ public class Calendario {
     }
 
     // getTareas recibe un intervalo de tiempo y guarda en una lista las tareas que se encuentran dentro del mismo
-    private void getTareas(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
+    private void getTareas(LocalDateTime desde, LocalDateTime hasta, Set<Actividad> actividades){
         for (Tarea tarea : tareas){
             if (tarea.EstaEnElIntervalo(desde, hasta) && !tarea.estaCompleta()){
                 actividades.add(tarea);
