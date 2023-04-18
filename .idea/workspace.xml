@@ -4,35 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Alarma.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConEmail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConNotificacion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConSonido.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Dia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Frecuencias.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Mes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Tiempo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/EventoConRepeticion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/EventoSinRepeticion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
-    </list>
+    <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +33,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/home/melina/Documents/Algo3/TpCalendario"
   }
 }]]></component>
