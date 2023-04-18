@@ -1,3 +1,3 @@
 package Calendario.Enums;
 
-public enum Dia {DOMINGO, LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO}
+public enum Dia {LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, DOMINGO}

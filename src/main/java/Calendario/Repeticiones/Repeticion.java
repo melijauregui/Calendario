@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import Calendario.Enums.Frecuencias;
 import Calendario.Enums.Mes;
 import Calendario.Eventos.Evento;
+import Calendario.Eventos.InstanciaEvento;
 
 public abstract class Repeticion {
     private LocalDate fechaHasta;
     private int intervalo;
     private int ocurrencias;
-    private static final int sinRepeticion = 0;
-    private static final int repeticionInfinita = -1;
 
 
     // hasta determinda fecha
@@ -30,42 +29,34 @@ public abstract class Repeticion {
     // infinita
     public Repeticion(int intervalo){
         this.intervalo = intervalo;
-        this.ocurrencias = repeticionInfinita;
     }
 
-    // getProximaFechaInicio es un método abstracto que devuelve la fecha de inicio de la repetición que sigue
-    // a la fecha dada
-    public abstract LocalDateTime getProximaFechaInicio(LocalDateTime fecha);
+    //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
+    public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
 
-    // getProximaFechaFin es un método abstracto que devuelve la fecha de finalización de la repetición que sigue
-    // a la fecha dada
-    public abstract LocalDateTime getProximaFechaFin(LocalDateTime fecha);
-
-    // disminuirOcurrencias --> si el Evento termina luego de una cantidad de repeticiones, al obtener cada repetición
-    // se resta en 1 la cantidad de ocurrencias
+    /* disminuirOcurrencias --> si el Evento termina luego de una cantidad de repeticiones, al obtener cada
+    repetición se resta en 1 la cantidad de ocurrencias*/
     public void disminuirOcurrencias(){
-        if (this.ocurrencias > sinRepeticion){
+        if (this.ocurrencias > 1){
             this.ocurrencias-=1;
         }
     }
 
     // esInifinita devuelve true si la repetición nunca acaba, false en caso contrario
     public boolean esInfinita(){
-        return ocurrencias == repeticionInfinita;
+        return (this.ocurrencias == 0 && this.fechaHasta == null);
     }
 
     // terminoRepeticion devuelve true si no hay más repeticiones del Evento, false en caso contrario
     public boolean terminoRepeticion(LocalDate fechaActual){
         if (fechaHasta == null){
-            return this.ocurrencias == sinRepeticion;
+            return this.ocurrencias == 0;
         }
-        return fechaActual.equals(fechaHasta);
+        return fechaActual.isAfter(fechaHasta); //isEqual?
     }
 
     // getIntervalo devuelve el intervalo de duración entre una repetición y la siguiente
     public int getIntervalo(){
         return intervalo;
     }
-
-    //public abstract void RepetirEvento(ArrayList<Evento> almacenamientoFechas, LocalDateTime fechaInicio, LocalDateTime fechaFin);
 }

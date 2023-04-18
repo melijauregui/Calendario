@@ -27,8 +27,12 @@ public class Alarma{
         return this.fechaAlarma.isBefore(otra.getFechaAlarma());
     }
 
-    // determinarFechaAlarma determina la fecha de la Alarma según el intervalo de tiempo relativo a la
-    // fecha de la Actividad para la que está configurada
+    public boolean suenaIgual(Alarma otra){
+        return this.fechaAlarma.isEqual(otra.getFechaAlarma());
+    }
+
+    /* determinarFechaAlarma determina la fecha de la Alarma según el intervalo de tiempo relativo a la
+    fecha de la Actividad para la que está configurada */
     public void determinarFecha(LocalDateTime fechaActividad){
         if (fechaAlarma != null){ return;}
         switch (tiempoRelativo){
@@ -38,6 +42,7 @@ public class Alarma{
             case SEMANAS -> this.fechaAlarma = fechaActividad.minusWeeks(intervalo);
         }
     }
+
 
 
 }

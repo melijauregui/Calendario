@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="" />
+    <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Alarma.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConEmail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConNotificacion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConSonido.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Dia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Frecuencias.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Mes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Tiempo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/EventoConRepeticion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/EventoSinRepeticion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,13 +56,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/home/melina/Documents/Algo3/TpCalendario"
+    "last_opened_file_path": "/home/melina/Documents/Algo3/TpCalendario/src"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
