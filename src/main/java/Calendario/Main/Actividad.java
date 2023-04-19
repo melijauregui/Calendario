@@ -3,16 +3,19 @@ package Calendario.Main;
 import Calendario.Alarmas.Alarma;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Actividad {
     private String titulo;
     private String descripcion;
-    private Alarma alarma;
+    private Set<Alarma> alarmas;
 
 
     public Actividad(String titulo, String descripcion){
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.alarmas = new HashSet<>();
     }
 
     // getTitulo devuelve el título de la Actividad
@@ -28,14 +31,32 @@ public abstract class Actividad {
     // configurarAlarma recibe una Alarma y se la agrega a la Actividad
     public abstract void configurarAlarma(Alarma alarma);
 
-    public abstract LocalDateTime getFechaInicio();
-
-    protected void setAlarma(Alarma alarma){
-        this.alarma = alarma;
+    public void eliminarAlarma(Alarma alarma){
+        alarmas.remove(alarma);
     }
 
-    // getAlarma devuelve la Alarma configurada para la actividad
-    public Alarma getAlarma() {
-        return alarma;
+    public Alarma getProximaAlarma(LocalDateTime fecha){
+        Alarma primerAlarma = null;
+        for(Alarma alarma : getAlarmas()){
+            if (!alarma.suenaAntes(fecha) && (primerAlarma == null || alarma.suenaAntes(primerAlarma))){
+                primerAlarma = alarma;
+            }
+        }
+        return primerAlarma;
     }
+
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
+    }
+    public void setDescripcion(String descripcion){
+        this.titulo = descripcion;
+    }
+
+    protected void agregarAlarma(Alarma alarma){
+        this.alarmas.add(alarma);
+    }
+    protected Set<Alarma> getAlarmas(){
+        return alarmas;
+    }
+
 }

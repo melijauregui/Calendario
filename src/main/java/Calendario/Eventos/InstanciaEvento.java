@@ -6,6 +6,7 @@ import Calendario.Main.Actividad;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class InstanciaEvento extends Actividad{
     Duracion duracion;
@@ -23,7 +24,6 @@ public class InstanciaEvento extends Actividad{
 
     // empiezaDespues devuelve true si la instancia del evento comienza luego de la fecha recibida como argumento
     public boolean empiezaDespues(LocalDateTime fecha){
-
         return this.getFechaInicio().isAfter(fecha);
     }
 
@@ -34,12 +34,24 @@ public class InstanciaEvento extends Actividad{
         return this.duracion.getFechaFin();
     }
 
-    public boolean EstaEnElIntervalo(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+    // estaEnElIntervalo devuelve true si la instancia se encuentra dentro del intervalo definido
+    // por las fechas pasadas por parámetro
+    public boolean estaEnElIntervalo(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         return (fechaInicio.isBefore(getFechaInicio()) && fechaFin.isAfter(getFechaInicio()));
     }
+    // configurarAlarma le agrega a la Instancia la alarma pasada
     public void configurarAlarma(Alarma alarma){
         if (alarma != null){
-            setAlarma(alarma);
+            agregarAlarma(alarma);
         }
     }
+
+    // configurarAlarmas configura todas las alarmas recibidas por parámetro
+    public void configurarAlarmas(Set<Alarma> alarmas){
+        for (Alarma alarma : alarmas){
+            configurarAlarma(alarma);
+        }
+    }
+
+
 }

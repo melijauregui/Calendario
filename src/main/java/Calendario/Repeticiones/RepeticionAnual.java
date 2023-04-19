@@ -1,14 +1,9 @@
 package Calendario.Repeticiones;
 
 
-import Calendario.Enums.Dia;
-import Calendario.Enums.Mes;
-import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class RepeticionAnual extends Repeticion{
     public RepeticionAnual(int intervaloAnios,  LocalDate fechaHasta){

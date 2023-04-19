@@ -3,6 +3,7 @@ package Calendario.Tareas;
 import Calendario.Alarmas.Alarma;
 import Calendario.Enums.Mes;
 import Calendario.Main.Actividad;
+import Calendario.Main.Constantes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class Tarea extends Actividad {
     // de día completo
     public Tarea(String titulo, String descripcion, LocalDate fecha){
         super(titulo, descripcion);
-        this.fecha =  LocalDateTime.of(fecha, LocalTime.of(0, 0));
+        this.fecha =  LocalDateTime.of(fecha, LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
     }
     // tiene fecha y hora
     public Tarea(String titulo, String descripcion, LocalDateTime fecha){
@@ -23,33 +24,42 @@ public class Tarea extends Actividad {
         this.fecha = fecha;
     }
 
+    // ver si sacarlo -->
     /* esDiaCompleto devuelve true si la tarea es de día completo, false en caso contrario --> usar en la
     etapa 3 porque se muestra distinto */
     public boolean esDiaCompleto(){
-        return (fecha.getHour() == 0 && fecha.getMinute() == 0);
+        return (fecha.getHour() == Constantes.horaInicioDiaCompleto && fecha.getMinute() == Constantes.minutoInicioDiaCompleto);
     }
 
-    // EstaEnElIntervalo devuelve true si la tarea se encuentra dentro del intervalo dado
-    public boolean EstaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
+    // estaEnElIntervalo devuelve true si la tarea se encuentra dentro del intervalo de fechas dado
+    public boolean estaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
         return this.fecha.isAfter(desde) && this.fecha.isBefore(hasta);
     }
 
+    // configurarAlarma agrega la Alarma a la Tarea
     public void configurarAlarma(Alarma alarma){
         alarma.determinarFecha(fecha);
-        setAlarma(alarma);
+        agregarAlarma(alarma);
     }
 
+    // completar() marca la tarea como completa
     public void completar(){
         this.completa = true;
     }
 
+    // estaCompleta devuelve true si la tarea ha sido completada, false en caso contrario
     public boolean estaCompleta(){
-        return this.estaCompleta();
+        return this.completa;
     }
 
-    public LocalDateTime getFechaInicio(){
-        return fecha;
+    // setFecha modifica la fecha y hora de una tarea con fecha y hora determinadas
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
 
+    // setFecha modifica la fecha de una tarea de día completo
+    public void setFecha(LocalDate fecha){
+        this.fecha = LocalDateTime.of(fecha, LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
+    }
 }
 

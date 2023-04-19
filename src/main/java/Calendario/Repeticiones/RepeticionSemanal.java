@@ -1,16 +1,11 @@
 package Calendario.Repeticiones;
 
 
-import Calendario.Enums.Dia;
-import Calendario.Enums.Mes;
-import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RepeticionSemanal extends Repeticion{
@@ -32,32 +27,32 @@ public class RepeticionSemanal extends Repeticion{
 
     }
 
+    //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        DayOfWeek diaEvento = getDia(evento.getFechaInicio());
+        int diferencia = getDiferenciaEntreInstancias(evento);
+        LocalDateTime fechaInicioSiguienteEvento = evento.getFechaInicio().plusDays(diferencia);
+        LocalDateTime fechaFinSiguienteEvento = evento.getFechaFin().plusDays(diferencia);
+        return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(),
+                fechaInicioSiguienteEvento, fechaFinSiguienteEvento);
+    }
+
+    // getDiferenciaEntreInstancias calcula la cantidad de días entre el evento pasado por parámetro
+    // y la siguiente repetición
+    private int getDiferenciaEntreInstancias(InstanciaEvento evento){
+        DayOfWeek diaEvento = evento.getFechaInicio().getDayOfWeek();
         DayOfWeek proximoDia =  getProximoDiaMismaSemana(diaEvento);
-        LocalDateTime fechaSiguienteEvento;
+        int diferencia = 0;
         if (proximoDia == null){ // 1er día siguiente semana
-            fechaSiguienteEvento = FechaSiguienteSemana(evento.getFechaInicio(), getPrimerDiaSemana());
-            return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(), fechaSiguienteEvento, fechaSiguienteEvento);
+            diferencia = calcularDiferenciaSemanas(diaEvento);
 
         } else {
-            fechaSiguienteEvento = evento.getFechaInicio().plusDays((calcularDiferenciaDias(diaEvento, proximoDia)));
-            return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(), fechaSiguienteEvento, fechaSiguienteEvento);
+            diferencia = calcularDiferenciaDias(diaEvento, proximoDia);
         }
-    }
-
-    private LocalDateTime FechaSiguienteSemana(LocalDateTime fechaEvento, DayOfWeek primerDiaSemana){
-        var proximaFechaInicio = fechaEvento.plusWeeks(getIntervalo());
-        return proximaFechaInicio.minusDays(calcularDiferenciaDias(getDia(fechaEvento), primerDiaSemana));
+        return diferencia;
     }
 
 
-    // getNumeroDia devuelve el número del enum Dia de la fecha recibida
-    private DayOfWeek getDia(LocalDateTime fecha){
-        return fecha.getDayOfWeek();
-    }
-
-    // getProximoDiaSemana devuelve el número del enum Dia del siguiente día semanal en el que debe
+    // getProximoDiaMismaSemana devuelve el número del enum Dia del siguiente día de la semana en el que debe
     // repetirse el Evento
     private DayOfWeek getProximoDiaMismaSemana (DayOfWeek diaActual){
         // busco el sgte día de la semana en el <diasSemana> xq pueden estar desordenados, ej DOMINGO, VIERNES, LUNES
@@ -84,7 +79,14 @@ public class RepeticionSemanal extends Repeticion{
     }
 
     // calcularDiferenciaDias calcula la cantidad de días en que difieren dos repeticiones consecutivas
+    // de la misma semana
     private int calcularDiferenciaDias(DayOfWeek dia1, DayOfWeek dia2){
         return Math.abs(dia2.ordinal()-dia1.ordinal());
+    }
+
+    // calcularDiferenciaSemanas calcula la cantidad de días en que difieren dos repeticiones consecutivas de
+    // distinta semana
+    private int calcularDiferenciaSemanas(DayOfWeek diaEvento){
+        return 7*getIntervalo()-calcularDiferenciaDias(diaEvento, getPrimerDiaSemana());
     }
 }

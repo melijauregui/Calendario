@@ -1,48 +1,46 @@
 package Calendario.Alarmas;
 
-import Calendario.Enums.Tiempo;
+import Calendario.Enums.TiempoRelativo;
 
 import java.time.LocalDateTime;
 
 public class Alarma{
     private LocalDateTime fechaAlarma;
     private int intervalo;
-    private Tiempo tiempoRelativo;
+    private TiempoRelativo tiempoRelativo;
     public Alarma(LocalDateTime fechaAlarma){
         this.fechaAlarma = fechaAlarma;
     }
-    public Alarma(int intervalo, Tiempo tiempoRelativo){ // falta-> cada instancia de Evento tiene Alarma
+    public Alarma(int intervalo, TiempoRelativo tiempoRelativo){ // falta-> cada instancia de Evento tiene Alarma
         this.intervalo = intervalo;
         this.tiempoRelativo = tiempoRelativo;
     }
 
-
-    // getFechaAlarma devuelve la fecha de la Alarma
-    public LocalDateTime getFechaAlarma() {
-        return fechaAlarma;
-    }
-
-    // suenaAntes devuelve true si la alarma suena antes de la recibida por parámetro
+    // suenaAntes devuelve true si la alarma suena antes de la alarma recibida por parámetro
     public boolean suenaAntes(Alarma otra){
         return this.fechaAlarma.isBefore(otra.getFechaAlarma());
     }
 
+    // suenaAntes devuelve true si la alarma suena antes de la fecha recibida por parámetro
+    public boolean suenaAntes(LocalDateTime fecha){
+        return this.fechaAlarma.isBefore(fecha);
+    }
+
+    // suenaIgual devuelve true si la alarma suena al mismo tiempo que la recibida por parámetro
     public boolean suenaIgual(Alarma otra){
-        return this.fechaAlarma.isEqual(otra.getFechaAlarma());
+        return getFechaAlarma().isEqual(otra.getFechaAlarma());
     }
 
     /* determinarFechaAlarma determina la fecha de la Alarma según el intervalo de tiempo relativo a la
     fecha de la Actividad para la que está configurada */
     public void determinarFecha(LocalDateTime fechaActividad){
         if (fechaAlarma != null){ return;}
-        switch (tiempoRelativo){
-            case MINUTOS -> this.fechaAlarma = fechaActividad.minusMinutes(intervalo);
-            case HORAS -> this.fechaAlarma = fechaActividad.minusHours(intervalo);
-            case DIAS -> this.fechaAlarma = fechaActividad.minusDays(intervalo);
-            case SEMANAS -> this.fechaAlarma = fechaActividad.minusWeeks(intervalo);
-        }
+        fechaAlarma = tiempoRelativo.determinarFechaRelativa(fechaActividad, intervalo);
     }
 
-
+    // getFechaAlarma devuelve la fecha de la Alarma
+    private LocalDateTime getFechaAlarma() {
+        return fechaAlarma;
+    }
 
 }

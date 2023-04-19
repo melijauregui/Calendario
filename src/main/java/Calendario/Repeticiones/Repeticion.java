@@ -13,7 +13,8 @@ public abstract class Repeticion {
     private LocalDate fechaHasta;
     private int intervalo;
     private int ocurrencias;
-
+    private static final int sinRepeticion = 0;
+    private static final int repeticionInfinita = -1;
 
     // hasta determinda fecha
     public Repeticion(int intervalo, LocalDate fechaHasta){
@@ -29,28 +30,28 @@ public abstract class Repeticion {
     // infinita
     public Repeticion(int intervalo){
         this.intervalo = intervalo;
+        this.ocurrencias = repeticionInfinita;
     }
 
     //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
 
-    /* disminuirOcurrencias --> si el Evento termina luego de una cantidad de repeticiones, al obtener cada
-    repetición se resta en 1 la cantidad de ocurrencias*/
+    /* disminuirOcurrencias disminuye en 1 las ocurrencias de la repetición, mientras haya alguna*/
     public void disminuirOcurrencias(){
-        if (this.ocurrencias > 1){
+        if (this.ocurrencias > sinRepeticion){
             this.ocurrencias-=1;
         }
     }
 
     // esInifinita devuelve true si la repetición nunca acaba, false en caso contrario
     public boolean esInfinita(){
-        return (this.ocurrencias == 0 && this.fechaHasta == null);
+        return (this.ocurrencias == repeticionInfinita);
     }
 
     // terminoRepeticion devuelve true si no hay más repeticiones del Evento, false en caso contrario
     public boolean terminoRepeticion(LocalDate fechaActual){
         if (fechaHasta == null){
-            return this.ocurrencias == 0;
+            return this.ocurrencias == sinRepeticion;
         }
         return fechaActual.isAfter(fechaHasta); //isEqual?
     }

@@ -1,159 +1,141 @@
 package Calendario.Main;
 
 import Calendario.Alarmas.Alarma;
-import Calendario.Enums.Dia;
-import Calendario.Enums.Mes;
 import Calendario.Eventos.Evento;
+import Calendario.Eventos.EventoConDuracion;
+import Calendario.Eventos.EventoDiaCompleto;
 import Calendario.Eventos.InstanciaEvento;
+import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
 
-import java.lang.reflect.Array;
 import java.time.*;
 import java.util.*;
 
 public class Calendario {
-
-    //FALTA --> modificar, marcar T como completa,  revisar principios dediseño
-    // Ppios de diseño
-    private List<Evento> eventos;
-    private List<Tarea> tareas;
-    private Alarma proximaAlarma;
+    private Set<Evento> eventos;
+    private Set<Tarea> tareas;
+    private Set<Actividad> actividades;
     private LocalDateTime fechaActual;
 
     public Calendario(){
-        this.eventos = new ArrayList<>();
-        this.tareas = new ArrayList<>();
+        this.eventos = new HashSet<>();
+        this.tareas = new HashSet<>();
+        this.actividades = new HashSet<>();
         this.fechaActual = LocalDateTime.now();
     }
 
-    // agrearTarea recibe una Tarea y la agrega al Calendario. Cambia la próxima actividad de ser necesario
+    // agrearTarea recibe una Tarea y la agrega al Calendario.
     public void agregarTarea(Tarea tarea){
         tareas.add(tarea);
+        actividades.add(tarea);
     }
 
-    // agregarEvento recibe un Evento y lo agrega al Calendario. Cambia la próxima actividad de ser necesario
+    // agregarEvento recibe un Evento y lo agrega al Calendario.
     public void agregarEvento(Evento evento){
         eventos.add(evento);
+        actividades.add(evento);
     }
-
-    /* configurarAlarma recibe Alarma y se la configura a la Actividad dada.
-    Cambia la próxima alarma de ser necesario */
-   public void configurarAlarma(Actividad actividad, Alarma alarma){
-        actividad.configurarAlarma(alarma);
-        cambiarProximaAlarma(alarma);
-    }
-
-    // getProximaAlarma devuelve la próxima Alarma
-   public ArrayList<Alarma> getProximasAlarmas(){
-       ArrayList<Alarma> alarmasProximas = null;
-       LocalDateTime fechaProxima = null;
-
-       var alarmasEventosProximos = getAlarmasEventosProximas();
-       var primerFechaEvento = alarmasEventosProximos.get(0).getFechaAlarma();
-
-       var alarmasTareasProximas = getAlarmasTareasProximas();
-       var primerFechaTarea = alarmasTareasProximas.get(0).getFechaAlarma();
-
-       if (primerFechaTarea.isEqual(primerFechaEvento)){
-           alarmasProximas.addAll(alarmasEventosProximos);
-           alarmasProximas.addAll(alarmasTareasProximas);
-       }else {
-           alarmasProximas.addAll(primerFechaEvento.isBefore(primerFechaTarea) ? alarmasEventosProximos : alarmasTareasProximas);
-       }
-       return alarmasProximas;
-    }
-
-    public ArrayList<Alarma> getAlarmasEventosProximas() {
-        ArrayList<Alarma> AlarmasEventosProximos = null;
-        LocalDateTime fechaProxima = null;
-
-        for (Evento evento : eventos) {
-            var proximaAlarma = evento.getProximaAlarma(fechaActual);
-            if (fechaProxima == null ||
-                    proximaAlarma.getFechaAlarma().isBefore(fechaProxima)) {
-                AlarmasEventosProximos = new ArrayList<>();
-                AlarmasEventosProximos.add(proximaAlarma);
-            } else if (proximaAlarma.getFechaAlarma().isEqual(fechaProxima)) {
-                AlarmasEventosProximos.add(proximaAlarma);
-            }
-        }
-        return AlarmasEventosProximos;
-    }
-
-    public ArrayList<Alarma> getAlarmasTareasProximas(){
-        ArrayList<Alarma> alarmaTareasProximas = null;
-        LocalDateTime fechaProxima = null;
-
-        for (Tarea tarea : tareas) {
-            var alarmaTarea = tarea.getAlarma();
-            if (fechaProxima == null || alarmaTarea.getFechaAlarma().isBefore(fechaProxima)){
-                alarmaTareasProximas = new ArrayList<>();
-                alarmaTareasProximas.add(alarmaTarea);
-            } else if (tarea.getFechaInicio().isEqual(fechaProxima)) {
-                alarmaTareasProximas.add(alarmaTarea);
-            }
-        }
-        return alarmaTareasProximas;
-    }
-
-    public Set<Actividad> ProximasActividades() {
-        Set<Actividad> actividadesProximas = null;
-        LocalDateTime fechaProxima = null;
-
-        var eventosProximos = getEventosProximos();
-        var primerFechaEvento = eventosProximos.get(0).getFechaInicio();
-
-        var tareasProximas = getTareasProximas();
-        var primerFechaTarea = tareasProximas.get(0).getFechaInicio();
-
-        if (primerFechaTarea.isEqual(primerFechaEvento)){
-            actividadesProximas.addAll(eventosProximos);
-            actividadesProximas.addAll(tareasProximas);
-        }else {
-            actividadesProximas.addAll(primerFechaEvento.isBefore(primerFechaTarea) ? eventosProximos : tareasProximas);
-        }
-        return actividadesProximas;
-    }
-
-    public ArrayList<InstanciaEvento> getEventosProximos(){
-       ArrayList<InstanciaEvento> eventosProximos = null;
-        LocalDateTime fechaProxima = null;
-
-        for (Evento evento : eventos){
-            var proximoEvento = evento.getProximaRepeticion(fechaActual);
-            if (fechaProxima == null ||
-                    proximoEvento.getFechaInicio().isBefore(fechaProxima)){
-                eventosProximos = new ArrayList<>();
-                eventosProximos .add(proximoEvento);
-            } else if (proximoEvento.getFechaInicio().isEqual(fechaProxima)){
-                eventosProximos .add(proximoEvento);
-            }
-        }
-        return eventosProximos;
-    }
-
-    public ArrayList<Tarea> getTareasProximas(){
-        ArrayList<Tarea> tareasProximas = null;
-        LocalDateTime fechaProxima = null;
-
-        for (Tarea tarea : tareas) {
-            if (fechaProxima == null || tarea.getFechaInicio().isBefore(fechaProxima)){
-                tareasProximas = new ArrayList<>();
-                tareasProximas.add(tarea);
-            } else if (tarea.getFechaInicio().isEqual(fechaProxima)) {
-                tareasProximas.add(tarea);
-            }
-        }
-        return tareasProximas;
-    }
-
 
     // getActividades recibe un intervalo de fechas y devuelve la lista de Actividades dentro del mismo
-    public Set<Actividad> getActividades(LocalDateTime desde, LocalDateTime hasta){
-        Set<Actividad> actividades = new HashSet<>();
+    public List<Actividad> getActividades(LocalDateTime desde, LocalDateTime hasta){
+        List<Actividad> actividades = new ArrayList<>();
         getEventos(desde, hasta, actividades);
         getTareas(desde, hasta, actividades);
         return actividades;
+    }
+
+    // getProximasAlarmas devuelve un conjunto de alarmas que suenan a la misma fecha y hora, y son las más
+    // próximas a la fecha actual
+   public Set<Alarma> getProximasAlarmas(){
+       Alarma primerAlarma = determinarAlarmaProxima();
+       return getAlarmasMismaFecha(primerAlarma);
+   }
+
+   // completarTarea completa la tarea pasada por parámetro
+    public void completarTarea(Tarea tarea){
+        tarea.completar();
+    }
+
+    // modificarTituloTarea cambia el título de la tarea recibida
+   public void modificarTituloTarea(Tarea tarea, String titulo){
+        tarea.setTitulo(titulo);
+   }
+
+    // modificarTituloEvento cambia el título del evento recibido
+    public void modificarTituloEvento(Evento evento, String titulo){
+        evento.setTitulo(titulo);
+    }
+
+    // modificarDescipcionTarea cambia la descripción de la tarea recibida
+    public void modificarDescipcionTarea(Tarea tarea, String descripcion){
+        tarea.setDescripcion(descripcion);
+    }
+
+    // modificarDescipcionEvento cambia la descripción del evento recibido
+    public void modificarDescipcionEvento(Evento evento, String descripcion){
+        evento.setDescripcion(descripcion);
+    }
+
+    // modificarFechaTarea cambia la fecha de la tarea recibida
+    public void modificarFechaTarea(Tarea tarea, LocalDateTime fecha){
+        tarea.setFecha(fecha);
+    }
+
+    // modificarFechaTarea cambia la fecha de la tarea recibida
+    public void modificarFechaTarea(Tarea tarea, LocalDate fecha){
+        tarea.setFecha(fecha);
+    }
+
+    // modificarFechaInicioEvento cambia la fecha de inicio del evento de día completo
+    public void modificarFechaInicioEvento(EventoDiaCompleto evento, LocalDate fecha){
+        evento.setFechaInicio(fecha);
+    }
+
+    // modificarFechaFinEvento cambia la fecha de finalización del evento de día completo
+    public void modificarFechaFinEvento(EventoDiaCompleto evento, LocalDate fecha){
+        evento.setFechaFin(fecha);
+    }
+
+    // modificarFechaInicioEvento cambia la fecha de inicio del evento con duración
+    public void modificarFechaInicioEvento(EventoConDuracion evento, LocalDateTime fecha){
+        evento.setFechaInicio(fecha);
+    }
+
+    // modificarFechaFinEvento cambia la fecha de finalización del evento con duración
+    public void modificarFechaFinEvento(EventoConDuracion evento, LocalDateTime fecha){
+        evento.setFechaFin(fecha);
+    }
+
+    /* configurarAlarma recibe Alarma y se la agrega a la Actividad dada. */
+    public void configurarAlarma(Actividad actividad, Alarma alarma){
+        actividad.configurarAlarma(alarma);
+    }
+
+    // modificarAlarmaTarea cambia una determinada alarma de la tarea
+    public void modificarAlarmaTarea(Tarea tarea, Alarma anterior, Alarma nueva){
+        tarea.eliminarAlarma(anterior);
+        tarea.configurarAlarma(nueva);
+    }
+
+    // eliminarAlarmaTarea elimina una determinada alarma de la tarea
+    public void eliminarAlarmaTarea(Tarea tarea, Alarma alarma){
+        tarea.eliminarAlarma(alarma);
+    }
+
+    // modificarAlarmaEvento cambia una determinada alarma del evento
+    public void modificarAlarmaEvento(Evento evento, Alarma anterior, Alarma nueva){
+        evento.eliminarAlarma(anterior);
+        evento.configurarAlarma(nueva);
+    }
+
+    // eliminarAlarmaEvento elimina una determinada alarma del evento
+    public void eliminarAlarmaEvento(Evento evento, Alarma alarma){
+        evento.eliminarAlarma(alarma);
+    }
+
+    // modificarRepeticionEvento cambia la repetición del evento
+    public void modificarRepeticionEvento(Evento evento, Repeticion repeticion){
+        evento.setRepeticion(repeticion);
     }
 
     // eliminarTarea saca la tarea del Calendario y borra su información
@@ -168,21 +150,12 @@ public class Calendario {
         evento = null;
     }
 
-    /* cambiarProximaAlarma recibe una Alarma. Si la Alarma suena antes que la 'proximaAlarma',
-    cambia ese atributo*/
-   private void cambiarProximaAlarma(Alarma alarma){
-        if (proximaAlarma == null || alarma.suenaAntes(proximaAlarma)){
-            this.proximaAlarma = alarma;
-        }
-    }
-
-
     /* getEventos recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
     de los Eventos que se encuentran dentro del mismo */
-    private void getEventos(LocalDateTime desde, LocalDateTime hasta, Set<Actividad> actividades){
+    private void getEventos(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Evento evento : eventos){
             var instancia = evento.getProximaRepeticion(desde);
-            while(instancia != null && instancia.EstaEnElIntervalo(desde, hasta)){
+            while(instancia != null && instancia.estaEnElIntervalo(desde, hasta)){
                 actividades.add(instancia);
                 instancia = evento.getProximaRepeticion(instancia.getFechaInicio());
             }
@@ -190,12 +163,36 @@ public class Calendario {
     }
 
     // getTareas recibe un intervalo de tiempo y guarda en una lista las tareas que se encuentran dentro del mismo
-    private void getTareas(LocalDateTime desde, LocalDateTime hasta, Set<Actividad> actividades){
+    private void getTareas(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Tarea tarea : tareas){
-            if (tarea.EstaEnElIntervalo(desde, hasta) && !tarea.estaCompleta()){
+            if (tarea.estaEnElIntervalo(desde, hasta) && !tarea.estaCompleta()){
                 actividades.add(tarea);
             }
         }
+    }
+
+    // getAlarmasMismaFecha devuelve un conjunto de alarmas que suenan a la misma fecha y hora
+    private Set<Alarma>  getAlarmasMismaFecha(Alarma primerAlarma){
+        Set <Alarma> alarmasProximas = new HashSet<>();
+        for(Actividad actividad : actividades){
+            var alarmaActividad = actividad.getProximaAlarma(fechaActual);
+            if (alarmaActividad.suenaIgual(primerAlarma)){
+                alarmasProximas.add(alarmaActividad);
+            }
+        }
+        return alarmasProximas;
+    }
+
+    // determinarAlarmaProxima busca en las actividades del calendario la siguiente alarma a sonar
+    private Alarma determinarAlarmaProxima(){
+        Alarma primerAlarma = null;
+        for(Actividad actividad : actividades){
+            var alarmaActividad = actividad.getProximaAlarma(fechaActual);
+            if (alarmaActividad != null && (primerAlarma == null || alarmaActividad.suenaAntes(primerAlarma))){
+                primerAlarma = alarmaActividad;
+            }
+        }
+        return primerAlarma;
     }
 
 }

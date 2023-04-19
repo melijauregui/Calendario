@@ -1,14 +1,10 @@
 package Calendario.Repeticiones;
 
 
-import Calendario.Enums.Dia;
-import Calendario.Enums.Mes;
-import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class RepeticionMensual extends Repeticion {
     public RepeticionMensual(int intervaloMeses,  LocalDate fechaHasta){
@@ -36,7 +32,7 @@ public class RepeticionMensual extends Repeticion {
     }
 
     public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(), evento.getFechaInicio().plusYears(getIntervalo()), evento.getFechaFin().plusYears(getIntervalo()));
+        return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(), evento.getFechaInicio().plusMonths(getIntervalo()), evento.getFechaFin().plusMonths(getIntervalo()));
     }
 
 }
