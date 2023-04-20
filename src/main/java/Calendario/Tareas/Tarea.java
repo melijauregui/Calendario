@@ -52,14 +52,15 @@ public class Tarea extends Actividad {
         return this.completa;
     }
 
-    // setFecha modifica la fecha y hora de una tarea con fecha y hora determinadas
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    // setFecha modifica la fecha y hora de la tarea
+    public void setFecha(LocalDateTime fechaNueva) {
+        this.fecha = fechaNueva;
     }
 
-    // setFecha modifica la fecha de una tarea de día completo
-    public void setFecha(LocalDate fecha){
-        this.fecha = LocalDateTime.of(fecha, LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
+    // setFecha modifica la fecha de la tarea
+    public void setFecha(LocalDate fechaNueva) {
+        this.fecha = LocalDateTime.of(fechaNueva, fecha.toLocalTime());
     }
+
 }
 

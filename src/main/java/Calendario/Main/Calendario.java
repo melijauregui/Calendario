@@ -4,7 +4,6 @@ import Calendario.Alarmas.Alarma;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.EventoConDuracion;
 import Calendario.Eventos.EventoDiaCompleto;
-import Calendario.Eventos.InstanciaEvento;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
 
@@ -56,24 +55,14 @@ public class Calendario {
         tarea.completar();
     }
 
-    // modificarTituloTarea cambia el título de la tarea recibida
-   public void modificarTituloTarea(Tarea tarea, String titulo){
-        tarea.setTitulo(titulo);
-   }
-
-    // modificarTituloEvento cambia el título del evento recibido
-    public void modificarTituloEvento(Evento evento, String titulo){
-        evento.setTitulo(titulo);
+    // modificarTitulo cambia el título de la actividad recibida
+    public void modificarTitulo(Actividad actividad, String titulo){
+        actividad.setTitulo(titulo);
     }
 
-    // modificarDescipcionTarea cambia la descripción de la tarea recibida
-    public void modificarDescipcionTarea(Tarea tarea, String descripcion){
-        tarea.setDescripcion(descripcion);
-    }
-
-    // modificarDescipcionEvento cambia la descripción del evento recibido
-    public void modificarDescipcionEvento(Evento evento, String descripcion){
-        evento.setDescripcion(descripcion);
+    // modificarDescipcion cambia la descripción de la actividad recibida
+    public void modificarDescipcion(Actividad actividad, String descripcion){
+        actividad.setDescripcion(descripcion);
     }
 
     // modificarFechaTarea cambia la fecha de la tarea recibida
@@ -111,29 +100,18 @@ public class Calendario {
         actividad.configurarAlarma(alarma);
     }
 
-    // modificarAlarmaTarea cambia una determinada alarma de la tarea
-    public void modificarAlarmaTarea(Tarea tarea, Alarma anterior, Alarma nueva){
-        tarea.eliminarAlarma(anterior);
-        tarea.configurarAlarma(nueva);
+    // modificarAlarma cambia una determinada alarma de la actividad
+    public void modificarAlarma(Actividad actividad, Alarma anterior, Alarma nueva){
+        actividad.eliminarAlarma(anterior);
+        actividad.configurarAlarma(nueva);
     }
 
-    // eliminarAlarmaTarea elimina una determinada alarma de la tarea
-    public void eliminarAlarmaTarea(Tarea tarea, Alarma alarma){
-        tarea.eliminarAlarma(alarma);
+    // eliminarAlarma elimina una determinada alarma de la actividad
+    public void eliminarAlarma(Actividad actividad, Alarma alarma){
+        actividad.eliminarAlarma(alarma);
     }
 
-    // modificarAlarmaEvento cambia una determinada alarma del evento
-    public void modificarAlarmaEvento(Evento evento, Alarma anterior, Alarma nueva){
-        evento.eliminarAlarma(anterior);
-        evento.configurarAlarma(nueva);
-    }
-
-    // eliminarAlarmaEvento elimina una determinada alarma del evento
-    public void eliminarAlarmaEvento(Evento evento, Alarma alarma){
-        evento.eliminarAlarma(alarma);
-    }
-
-    // modificarRepeticionEvento cambia la repetición del evento
+       // modificarRepeticionEvento cambia la repetición del evento
     public void modificarRepeticionEvento(Evento evento, Repeticion repeticion){
         evento.setRepeticion(repeticion);
     }
