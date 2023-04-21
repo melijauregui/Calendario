@@ -59,7 +59,7 @@ public class Duracion {
         Duracion nuevaDuracion = new Duracion();
         nuevaDuracion.setDiaInicio(this.diaInicio);
         nuevaDuracion.setDiaFin(this.diaFin);
-        if (this.esDiaCompleto()) {
+        if (!this.esDiaCompleto()) {
             nuevaDuracion.setHoraInicio(this.horaInicio);
             nuevaDuracion.setHoraFin(this.horaFin);
         }
