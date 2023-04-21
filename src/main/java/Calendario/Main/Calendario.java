@@ -66,14 +66,14 @@ public class Calendario {
     }
 
     // modificarFechaTarea cambia la fecha de la tarea recibida
-    public void modificarFechaTarea(Tarea tarea, LocalDateTime fecha){
-        tarea.setFecha(fecha);
+    public void modificarDia(Tarea tarea, LocalDate dia){
+        tarea.setDia(dia);
     }
 
-    // modificarFechaTarea cambia la fecha de la tarea recibida
-    public void modificarFechaTarea(Tarea tarea, LocalDate fecha){
-        tarea.setFecha(fecha);
+    public void modificarHora(Tarea tarea, LocalTime hora){
+        tarea.setHora(hora);
     }
+
 
     // modificarFechaInicioEvento cambia la fecha de inicio del evento de día completo
     public void modificarFechaInicioEvento(Evento evento, InstanciaEvento eventoInicial){
