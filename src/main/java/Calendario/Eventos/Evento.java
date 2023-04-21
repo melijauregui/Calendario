@@ -1,53 +1,31 @@
 package Calendario.Eventos;
 
 import Calendario.Alarmas.Alarma;
+import Calendario.Duracion.Duracion;
 import Calendario.Main.Actividad;
 import Calendario.Repeticiones.Repeticion;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Evento extends Actividad{
+    private InstanciaEvento eventoInicial;
     private ArrayList<InstanciaEvento> almacenamientoFechas = new ArrayList<>();
-    private Repeticion repeticion;
+    private Repeticion repeticion = null;
 
-    public Evento(String titulo, String descripcion, Repeticion repeticion, InstanciaEvento eventoInicial){
-        super(titulo, descripcion);
-        this.repeticion = repeticion;
-        almacenarFechas(eventoInicial);
+    public Evento(){
     }
 
-    public Evento(String titulo, String descripcion, InstanciaEvento eventoInicial){
-        super(titulo, descripcion);
-        almacenarFechas(eventoInicial);
+    public void setEventoInicial(InstanciaEvento eventoInicial){
+        this.eventoInicial = eventoInicial;
+        reiniciarAlmacenamientoFechas();
     }
 
-    // getProximaRepeticion devuelve la primera Instancia que se encuentra a partir de la fecha dada
-    public InstanciaEvento getProximaRepeticion(LocalDateTime fecha){
-        for(InstanciaEvento instancia : almacenamientoFechas){
-            if (instancia.empiezaDespues(fecha)){
-                return instancia;
-            }
-        }
-        if (!esInfinito()) {
-            return null;
-        }
-
-        InstanciaEvento instancia;
-        do {
-            almacenarUnaFecha();
-            instancia = getUltimoEventoAlmacenado();
-        } while (!instancia.empiezaDespues(fecha));
-
-        return instancia;
-    }
-
-    // getProximaRepeticion devuelve la primera Instancia que se encuentra a partir del evento dado
-    public InstanciaEvento getProximaRepeticion(InstanciaEvento evento){
-        return getProximaRepeticion(evento.getFechaInicio());
-    }
 
     // setTitulo cambia el título del evento y de las instancias del mismo
     @Override
@@ -63,11 +41,40 @@ public class Evento extends Actividad{
         setDescripcionInstancias(descrpcion);
     }
 
+
     // setRepeticion cambia la repetición del evento, y la agrega si no tenía una
     public void setRepeticion(Repeticion repeticion){
         this.repeticion = repeticion;
-        reiniciarAlmacenamientoFechas(almacenamientoFechas.get(0));
+        reiniciarAlmacenamientoFechas();
     }
+
+    // getProximaRepeticion devuelve la primera Instancia que se encuentra a partir de la fecha dada
+    public InstanciaEvento getProximaRepeticion(LocalDateTime fecha){
+        for(InstanciaEvento instancia : almacenamientoFechas){
+            if (instancia.empiezaDespues(fecha)){
+                return instancia;
+            }
+        }
+
+        if (!esInfinito()) {
+            return null;
+        }
+
+        InstanciaEvento instancia;
+        do {
+            almacenarUnaFecha();
+            instancia = getUltimoEventoAlmacenado();
+        } while (!instancia.empiezaDespues(fecha));
+
+        return instancia;
+    }
+
+
+    // getProximaRepeticion devuelve la primera Instancia que se encuentra a partir del evento dado
+    public InstanciaEvento getProximaRepeticion(InstanciaEvento evento){
+        return getProximaRepeticion(evento.getFechaInicio());
+    }
+
 
     // configurarAlarma le agrega la alarma al evento, y a las instancias del mismo
     public void configurarAlarma(Alarma alarma){
@@ -116,9 +123,9 @@ public class Evento extends Actividad{
 
     // reiniciarAlmacenamientoFechas elimina las instancias del evento y, a partir de la primer instancia,
     // vuelve a cargarlas
-    protected void reiniciarAlmacenamientoFechas(InstanciaEvento primerEvento){
+    protected void reiniciarAlmacenamientoFechas(){
         almacenamientoFechas.clear();
-        almacenarFechas(primerEvento);
+        almacenarFechas(this.eventoInicial);
     }
 
     // getRepeticionActualizada devuelve la última Instancia de Repetición almacenada

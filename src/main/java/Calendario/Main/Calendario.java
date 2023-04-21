@@ -1,9 +1,9 @@
 package Calendario.Main;
 
 import Calendario.Alarmas.Alarma;
+import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
-import Calendario.Eventos.EventoConDuracion;
-import Calendario.Eventos.EventoDiaCompleto;
+import Calendario.Eventos.InstanciaEvento;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
 
@@ -60,8 +60,8 @@ public class Calendario {
         actividad.setTitulo(titulo);
     }
 
-    // modificarDescipcion cambia la descripción de la actividad recibida
-    public void modificarDescipcion(Actividad actividad, String descripcion){
+    // modificarDescripcion cambia la descripción de la actividad recibida
+    public void modificarDescripcion(Actividad actividad, String descripcion){
         actividad.setDescripcion(descripcion);
     }
 
@@ -76,24 +76,10 @@ public class Calendario {
     }
 
     // modificarFechaInicioEvento cambia la fecha de inicio del evento de día completo
-    public void modificarFechaInicioEvento(EventoDiaCompleto evento, LocalDate fecha){
-        evento.setFechaInicio(fecha);
+    public void modificarFechaInicioEvento(Evento evento, InstanciaEvento eventoInicial){
+        evento.setEventoInicial(eventoInicial);
     }
 
-    // modificarFechaFinEvento cambia la fecha de finalización del evento de día completo
-    public void modificarFechaFinEvento(EventoDiaCompleto evento, LocalDate fecha){
-        evento.setFechaFin(fecha);
-    }
-
-    // modificarFechaInicioEvento cambia la fecha de inicio del evento con duración
-    public void modificarFechaInicioEvento(EventoConDuracion evento, LocalDateTime fecha){
-        evento.setFechaInicio(fecha);
-    }
-
-    // modificarFechaFinEvento cambia la fecha de finalización del evento con duración
-    public void modificarFechaFinEvento(EventoConDuracion evento, LocalDateTime fecha){
-        evento.setFechaFin(fecha);
-    }
 
     /* configurarAlarma recibe Alarma y se la agrega a la Actividad dada. */
     public void configurarAlarma(Actividad actividad, Alarma alarma){

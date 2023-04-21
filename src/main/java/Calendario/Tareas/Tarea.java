@@ -10,35 +10,36 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Tarea extends Actividad {
-    private LocalDateTime fecha;
     private boolean completa;
 
+    private LocalDate dia;
+
+    private LocalTime hora;
+
     // de día completo
-    public Tarea(String titulo, String descripcion, LocalDate fecha){
-        super(titulo, descripcion);
-        this.fecha =  LocalDateTime.of(fecha, LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
-    }
-    // tiene fecha y hora
-    public Tarea(String titulo, String descripcion, LocalDateTime fecha){
-        super(titulo, descripcion);
-        this.fecha = fecha;
+    public Tarea(){
     }
 
-    // ver si sacarlo -->
-    /* esDiaCompleto devuelve true si la tarea es de día completo, false en caso contrario --> usar en la
-    etapa 3 porque se muestra distinto */
+    public void setDia(LocalDate dia){
+        this.dia = dia;
+    }
+
+    public void setHora(LocalTime hora){
+        this.hora = hora;
+    }
+
     public boolean esDiaCompleto(){
-        return (fecha.getHour() == Constantes.horaInicioDiaCompleto && fecha.getMinute() == Constantes.minutoInicioDiaCompleto);
+        return this.hora == null;
     }
 
     // estaEnElIntervalo devuelve true si la tarea se encuentra dentro del intervalo de fechas dado
     public boolean estaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
-        return this.fecha.isAfter(desde) && this.fecha.isBefore(hasta);
+        return this.getFecha().isAfter(desde) && this.getFecha().isBefore(hasta);
     }
 
     // configurarAlarma agrega la Alarma a la Tarea
     public void configurarAlarma(Alarma alarma){
-        alarma.determinarFecha(fecha);
+        alarma.determinarFecha(this.getFecha());
         agregarAlarma(alarma);
     }
 
@@ -52,15 +53,11 @@ public class Tarea extends Actividad {
         return this.completa;
     }
 
-    // setFecha modifica la fecha y hora de la tarea
-    public void setFecha(LocalDateTime fechaNueva) {
-        this.fecha = fechaNueva;
+    public LocalDateTime getFecha(){
+        if (!this.esDiaCompleto()) {
+            return LocalDateTime.of(this.dia, this.hora);
+        }
+        return LocalDateTime.of(this.dia, LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
     }
-
-    // setFecha modifica la fecha de la tarea
-    public void setFecha(LocalDate fechaNueva) {
-        this.fecha = LocalDateTime.of(fechaNueva, fecha.toLocalTime());
-    }
-
 }
 

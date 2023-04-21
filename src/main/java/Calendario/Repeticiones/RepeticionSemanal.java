@@ -30,10 +30,9 @@ public class RepeticionSemanal extends Repeticion{
     //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
         int diferencia = getDiferenciaEntreInstancias(evento);
-        LocalDateTime fechaInicioSiguienteEvento = evento.getFechaInicio().plusDays(diferencia);
-        LocalDateTime fechaFinSiguienteEvento = evento.getFechaFin().plusDays(diferencia);
-        return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(),
-                fechaInicioSiguienteEvento, fechaFinSiguienteEvento);
+        LocalDate diaInicioSiguienteEvento = evento.getDiaInicio().plusDays(diferencia);
+        LocalDate diaFinSiguienteEvento = evento.getDiaFin().plusDays(diferencia);
+        return evento.Clone(diaInicioSiguienteEvento, diaFinSiguienteEvento);
     }
 
     // getDiferenciaEntreInstancias calcula la cantidad de días entre el evento pasado por parámetro

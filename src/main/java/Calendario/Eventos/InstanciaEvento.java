@@ -3,6 +3,7 @@ package Calendario.Eventos;
 import Calendario.Alarmas.Alarma;
 import Calendario.Duracion.Duracion;
 import Calendario.Main.Actividad;
+import java.time.temporal.Temporal;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,18 +11,12 @@ import java.util.Set;
 
 public class InstanciaEvento extends Actividad{
     Duracion duracion;
-    public InstanciaEvento(String titulo, String descripcion,
-                           LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        super(titulo,descripcion);
-        this.duracion = new Duracion(fechaInicio, fechaFin);
+    public InstanciaEvento() {
     }
 
-    public InstanciaEvento(String titulo, String descripcion,
-                           LocalDate fechaInicio, LocalDate fechaFin) {
-        super(titulo,descripcion);
-        this.duracion = new Duracion(fechaInicio, fechaFin);
+    public void setDuracion(Duracion duracion){
+        this.duracion = duracion;
     }
-
     // empiezaDespues devuelve true si la instancia del evento comienza luego de la fecha recibida como argumento
     public boolean empiezaDespues(LocalDateTime fecha){
         return this.getFechaInicio().isAfter(fecha);
@@ -32,6 +27,13 @@ public class InstanciaEvento extends Actividad{
     }
     public LocalDateTime getFechaFin(){
         return this.duracion.getFechaFin();
+    }
+
+    public LocalDate getDiaInicio(){
+        return this.duracion.getDiaInicio();
+    }
+    public LocalDate getDiaFin(){
+        return this.duracion.getDiaFin();
     }
 
     // estaEnElIntervalo devuelve true si la instancia se encuentra dentro del intervalo definido
@@ -53,5 +55,16 @@ public class InstanciaEvento extends Actividad{
         }
     }
 
+    public InstanciaEvento Clone(LocalDate diaInicio, LocalDate diaFin){
+        InstanciaEvento eventoClonado = new InstanciaEvento();
+        eventoClonado.setTitulo(this.getTitulo());
+        eventoClonado.setDescripcion(this.getDescripcion());
+        Duracion nuevaDuracion = this.duracion.Clone();
+        duracion.setDiaInicio(diaInicio);
+        duracion.setDiaFin(diaFin);
+        eventoClonado.setDuracion(nuevaDuracion);
+        return eventoClonado;
+    }
 
 }
+

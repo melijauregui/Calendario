@@ -12,10 +12,7 @@ public abstract class Actividad {
     private Set<Alarma> alarmas;
 
 
-    public Actividad(String titulo, String descripcion){
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.alarmas = new HashSet<>();
+    public Actividad(){
     }
 
     // getTitulo devuelve el título de la Actividad

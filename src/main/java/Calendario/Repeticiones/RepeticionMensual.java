@@ -32,7 +32,7 @@ public class RepeticionMensual extends Repeticion {
     }
 
     public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        return new InstanciaEvento(evento.getTitulo(), evento.getDescripcion(), evento.getFechaInicio().plusMonths(getIntervalo()), evento.getFechaFin().plusMonths(getIntervalo()));
+        return evento.Clone(evento.getDiaInicio().plusMonths(getIntervalo()), evento.getDiaFin().plusMonths(getIntervalo()));
     }
 
 }
