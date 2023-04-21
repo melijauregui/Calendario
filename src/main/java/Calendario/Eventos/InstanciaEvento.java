@@ -60,8 +60,8 @@ public class InstanciaEvento extends Actividad{
         eventoClonado.setTitulo(this.getTitulo());
         eventoClonado.setDescripcion(this.getDescripcion());
         Duracion nuevaDuracion = this.duracion.Clone();
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
+        nuevaDuracion.setDiaInicio(diaInicio);
+        nuevaDuracion.setDiaFin(diaFin);
         eventoClonado.setDuracion(nuevaDuracion);
         return eventoClonado;
     }
