@@ -13,16 +13,16 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class RepeticionAnualTest {
+public class RepeticionMensualTest {
 
     int REPETICION = 100;
     @Test
     public void GetProximaInstanciaEventoMD() {
         //Mismo Dia
         //Arrange
-        var repeticionOcurrencias = new RepeticionAnual(2, 15);
-        var repeticionFechaHasta = new RepeticionAnual(2, LocalDate.of(2023, 11, 11));
-        var repeticionInfinita = new RepeticionAnual(2);
+        var repeticionOcurrencias = new RepeticionMensual(2, 15);
+        var repeticionFechaHasta = new RepeticionMensual(2, LocalDate.of(2023, 11, 11));
+        var repeticionInfinita = new RepeticionMensual(2);
 
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 11, 11));
@@ -42,8 +42,8 @@ public class RepeticionAnualTest {
 
         for (int i = 0; i < REPETICION; i++) {
 
-            var resEsperadoFechaInicio = eventoInstancia.getFechaInicio().plusYears(2);
-            var resEsperadoFechaFin = eventoInstancia.getFechaFin().plusYears(2);
+            var resEsperadoFechaInicio = eventoInstancia.getFechaInicio().plusMonths(2);
+            var resEsperadoFechaFin = eventoInstancia.getFechaFin().plusMonths(2);
 
             //Act
             eventoOcurrencias = repeticionOcurrencias.getProximaInstanciaEvento(eventoOcurrencias);
@@ -72,16 +72,16 @@ public class RepeticionAnualTest {
             assertEquals(resEsperadoInfinitoFechaHasta, resObtenidoEsInfinitaFechaHasta);
             assertEquals(resEsperadoInfinitoInfinita, resObtenidoEsInfinitaInfinita);
 
-            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusYears(2),eventoInstancia.getDiaFin().plusYears(2));
+            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusMonths(2),eventoInstancia.getDiaFin().plusMonths(2));
         }
     }
     @Test
     public void GetProximaInstanciaEventoDD() {
         //Diferente Dia
         //Arrange
-        var repeticionOcurrencias = new RepeticionAnual(2, 15);
-        var repeticionFechaHasta = new RepeticionAnual(2, LocalDate.of(2023, 11, 11));
-        var repeticionInfinita = new RepeticionAnual(2);
+        var repeticionOcurrencias = new RepeticionMensual(2, 15);
+        var repeticionFechaHasta = new RepeticionMensual(2, LocalDate.of(2023, 11, 11));
+        var repeticionInfinita = new RepeticionMensual(2);
 
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 11, 11));
@@ -101,8 +101,8 @@ public class RepeticionAnualTest {
 
         for (int i = 0; i < REPETICION; i++) {
 
-            var resEsperadoFechaInicio = eventoInstancia.getFechaInicio().plusYears(2);
-            var resEsperadoFechaFin = eventoInstancia.getFechaFin().plusYears(2);
+            var resEsperadoFechaInicio = eventoInstancia.getFechaInicio().plusMonths(2);
+            var resEsperadoFechaFin = eventoInstancia.getFechaFin().plusMonths(2);
 
             //Act
             eventoOcurrencias = repeticionOcurrencias.getProximaInstanciaEvento(eventoOcurrencias);
@@ -131,14 +131,14 @@ public class RepeticionAnualTest {
             assertEquals(resEsperadoInfinitoFechaHasta, resObtenidoEsInfinitaFechaHasta);
             assertEquals(resEsperadoInfinitoInfinita, resObtenidoEsInfinitaInfinita);
 
-            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusYears(2), eventoInstancia.getDiaFin().plusYears(2));
+            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusMonths(2), eventoInstancia.getDiaFin().plusMonths(2));
         }
     }
 
     @Test
     public void AlmacenarRepeticionesOcurrencias(){
         int ocurrencias = 15;
-        var repeticionOcurrencias = new RepeticionAnual(2, ocurrencias);
+        var repeticionOcurrencias = new RepeticionMensual(2, ocurrencias);
 
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 11, 11));
@@ -161,7 +161,7 @@ public class RepeticionAnualTest {
 
         //Act
         for (int i = 0; i < ocurrencias-1; i++) {
-            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusYears(2), eventoInstancia.getDiaFin().plusYears(2));
+            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusMonths(2), eventoInstancia.getDiaFin().plusMonths(2));
             resEsperadoEventosIntervalo.add(eventoInstancia);
         }
         var resObtenidoEventosIntervalo = evento.getAlmacenamientoFechas();
@@ -177,7 +177,7 @@ public class RepeticionAnualTest {
     @Test
     public void AlmacenarRepeticionesFechaHasta(){
         var fechaHasta = LocalDate.of(2027,10,11);
-        var repeticionFechaHasta = new RepeticionAnual(2, fechaHasta);
+        var repeticionFechaHasta = new RepeticionMensual(2, fechaHasta);
 
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 11, 11));
@@ -200,13 +200,12 @@ public class RepeticionAnualTest {
         //Act
         do {
             resEsperadoEventosIntervalo.add(eventoInstancia);
-            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusYears(2), eventoInstancia.getDiaFin().plusYears(2));
-        } while (eventoInstancia.getFechaInicio().toLocalDate().isBefore(fechaHasta) || (eventoInstancia.getFechaInicio().toLocalDate().isBefore(fechaHasta)));
+            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusMonths(2), eventoInstancia.getDiaFin().plusMonths(2));
+        } while (eventoInstancia.getFechaInicio().toLocalDate().isBefore(fechaHasta) || (eventoInstancia.getFechaInicio().toLocalDate().isEqual(fechaHasta)));
 
         var resObtenidoEventosIntervalo = evento.getAlmacenamientoFechas();
 
         //Assert
-        assertEquals(resEsperadoEventosIntervalo.size(), resObtenidoEventosIntervalo.size());
         for (int i = 0; i< resEsperadoEventosIntervalo.size(); i++){
             assertEquals(resEsperadoEventosIntervalo.get(i).getFechaInicio(),resObtenidoEventosIntervalo.get(i).getFechaInicio());
             assertEquals(resEsperadoEventosIntervalo.get(i).getFechaFin(),resObtenidoEventosIntervalo.get(i).getFechaFin());

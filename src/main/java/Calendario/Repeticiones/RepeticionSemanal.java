@@ -63,6 +63,7 @@ public class RepeticionSemanal extends Repeticion{
         for(DayOfWeek dia : diasSemana){
             if (dia.ordinal() > proximoDia.ordinal()){
                 proximoDia = dia;
+                break;
             }
         }
         return proximoDia.ordinal() > diaActual.ordinal() ? proximoDia : null;

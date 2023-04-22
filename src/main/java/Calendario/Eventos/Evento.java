@@ -5,13 +5,11 @@ import Calendario.Duracion.Duracion;
 import Calendario.Main.Actividad;
 import Calendario.Repeticiones.Repeticion;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Evento extends Actividad{
     private InstanciaEvento eventoInicial;
@@ -175,6 +173,10 @@ public class Evento extends Actividad{
     // esEventoConRepeticion devuelve true si el evento se repite más de 1 vez
     private boolean esEventoConRepeticion(){
         return this.repeticion != null;
+    }
+
+    public ArrayList<InstanciaEvento> getAlmacenamientoFechas(){
+        return almacenamientoFechas;
     }
 }
 
