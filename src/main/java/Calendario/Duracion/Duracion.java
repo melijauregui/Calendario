@@ -31,16 +31,16 @@ public class Duracion {
 
     public LocalDateTime getFechaInicio() {
         if (!this.esDiaCompleto()) {
-            return LocalDateTime.of(diaInicio, horaInicio);
+            return LocalDateTime.of(getDiaInicio(), horaInicio);
         }
-        return LocalDateTime.of(diaInicio, LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
+        return LocalDateTime.of(getDiaInicio(), LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
     }
 
     public LocalDateTime getFechaFin() {
         if (!this.esDiaCompleto()) {
-            return LocalDateTime.of(diaFin, horaFin);
+            return LocalDateTime.of(getDiaFin(), horaFin);
         }
-        return LocalDateTime.of(diaFin, LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
+        return LocalDateTime.of(getDiaFin(), LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
     }
 
     public LocalDate getDiaInicio(){

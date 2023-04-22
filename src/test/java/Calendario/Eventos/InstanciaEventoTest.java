@@ -1,11 +1,15 @@
 package Calendario.Eventos;
 
+import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.AlarmaConEmail;
+import Calendario.Alarmas.AlarmaConNotificacion;
 import Calendario.Duracion.Duracion;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -147,8 +151,6 @@ public class InstanciaEventoTest {
         assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
     }
 
-
-    // ----------------------------------------------------------------------------
     public void TestDiaIntervaloMDClone(){
         //MismoDía
         //Arrange
@@ -513,11 +515,8 @@ public class InstanciaEventoTest {
 
     }
 
-    //-------------------------------------------------------------------------------------------------
-
     @Test
-    public void TestDiaIntervaloEstaIntervaloFalse() {
-        //MismoDía
+    public void TestConfigurarAlarmaProxima(){
         //Arrange
         var duracion = new Duracion();
         var diaInicio = LocalDate.of(2023, 11, 11);
@@ -529,18 +528,26 @@ public class InstanciaEventoTest {
         duracion.setHoraInicio(horaInicio);
         duracion.setHoraFin(horaFin);
 
+
+        var alarma1 = new AlarmaConNotificacion(LocalDateTime.of(diaInicio, horaInicio.minusMinutes(30)));
+        var alarma2 = new AlarmaConEmail(LocalDateTime.of(diaInicio, horaInicio.plusMinutes(30)));
+        var alarmas = new HashSet<Alarma>();
+        alarmas.add(alarma1);
+        alarmas.add(alarma2);
+
+
         var eventoInstancia = new InstanciaEvento();
         eventoInstancia.setDuracion(duracion);
+        eventoInstancia.configurarAlarmas(alarmas);
 
-        var fechaInicioIntervalo = LocalDateTime.of(2023, 11, 11, 18, 32);
-        var fechaFinIntervalo = LocalDateTime.of(2024, 12, 11, 18, 30);
-        var resEsperado = false;
+        var resEsperado = new HashSet<Alarma>();
+        resEsperado.add(alarma2);
 
         //Act
-        var resObtenido = eventoInstancia.estaEnElIntervalo(fechaInicioIntervalo, fechaFinIntervalo);
+        var alarmasObtenidas = eventoInstancia.getProximasAlarmas(LocalDateTime.of(diaInicio, horaInicio));
 
         //Assert
-        assertEquals(resEsperado, resObtenido);
+        assertEquals(resEsperado, alarmasObtenidas);
     }
 
 }

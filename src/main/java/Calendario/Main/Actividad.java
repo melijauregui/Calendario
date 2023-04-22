@@ -2,6 +2,7 @@ package Calendario.Main;
 
 import Calendario.Alarmas.Alarma;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
 public abstract class Actividad {
     private String titulo;
     private String descripcion;
-    private Set<Alarma> alarmas;
+    private Set<Alarma> alarmas = new HashSet<>();
 
 
     public Actividad(){
@@ -32,14 +33,21 @@ public abstract class Actividad {
         alarmas.remove(alarma);
     }
 
-    public Alarma getProximaAlarma(LocalDateTime fecha){
+    // getProximasAlarmas devuelve todas las alarmas con misma fecha y hora de la actividad, que suenan
+    // más próximas a la fecha pasada
+    public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
+        Set<Alarma> proximasAlarmas = new HashSet<>();
         Alarma primerAlarma = null;
         for(Alarma alarma : getAlarmas()){
-            if (!alarma.suenaAntes(fecha) && (primerAlarma == null || alarma.suenaAntes(primerAlarma))){
+            if (esMasProxima(primerAlarma, alarma, fecha)){
                 primerAlarma = alarma;
+                proximasAlarmas.clear();
+            }
+            if (esMasProxima(primerAlarma, alarma, fecha) || ambasSonProximas(primerAlarma, alarma)){
+                proximasAlarmas.add(alarma);
             }
         }
-        return primerAlarma;
+        return proximasAlarmas;
     }
 
     public void setTitulo(String titulo){
@@ -56,4 +64,11 @@ public abstract class Actividad {
         return alarmas;
     }
 
+    private boolean esMasProxima(Alarma primerAlarma, Alarma otra, LocalDateTime fecha){
+        return !otra.suenaAntes(fecha) && (primerAlarma == null || otra.suenaAntes(primerAlarma));
+    }
+
+    private boolean ambasSonProximas(Alarma primerAlarma, Alarma otra){
+        return primerAlarma != null && otra.suenaIgual(primerAlarma);
+    }
 }

@@ -53,11 +53,9 @@ public class Evento extends Actividad{
                 return instancia;
             }
         }
-
         if (!esInfinito()) {
             return null;
         }
-
         InstanciaEvento instancia;
         do {
             almacenarUnaFecha();
@@ -94,7 +92,7 @@ public class Evento extends Actividad{
         if (!this.esEventoConRepeticion()) {
             almacenamientoFechas.add(primerEvento);
         } else {
-            this.repeticion.AlmacenarRepeticiones(this.almacenamientoFechas, primerEvento);
+            this.repeticion.almacenarRepeticiones(this.almacenamientoFechas, primerEvento);
         }
     }
 
@@ -106,16 +104,16 @@ public class Evento extends Actividad{
 
     // getProximaAlarma devuelve la siguiente alarma del evento
     @Override
-    public Alarma getProximaAlarma(LocalDateTime fecha){
+    public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
         InstanciaEvento evento = getProximaRepeticion(fecha);
-        Alarma alarmaProxima = evento.getProximaAlarma(fecha);
-        while (alarmaProxima == null){
-            alarmaProxima = getProximaRepeticion(evento).getProximaAlarma(fecha);
+        Set<Alarma> alarmasProximas = evento.getProximasAlarmas(fecha);
+        while (alarmasProximas.size() == 0){
+            alarmasProximas = getProximaRepeticion(evento).getProximasAlarmas(fecha);
         }
-        return alarmaProxima;
+        return alarmasProximas;
     }
 
-    // reiniciarAlmacenamientoFechas elimina las instancias del evento y, a partir de la primer instancia,
+    // actualizarAlmacenamientoFechas elimina las instancias del evento y, a partir de la primer instancia,
     // vuelve a cargarlas
     protected void actualizarAlmacenamientoFechas(){
         almacenamientoFechas.clear();

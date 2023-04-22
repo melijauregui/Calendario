@@ -3,6 +3,7 @@ package Calendario.Repeticiones;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import Calendario.Enums.Frecuencias;
 import Calendario.Enums.Mes;
@@ -60,7 +61,7 @@ public abstract class Repeticion {
     }
 
 
-    public void AlmacenarRepeticiones(ArrayList almacenamiento, InstanciaEvento primerEvento) {
+    public void almacenarRepeticiones(List<InstanciaEvento> almacenamiento, InstanciaEvento primerEvento) {
         almacenamiento.add(primerEvento);
         InstanciaEvento utlimoEventoAlmacenado = primerEvento;
         this.disminuirOcurrencias();
