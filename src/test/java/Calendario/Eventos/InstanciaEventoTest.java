@@ -1,11 +1,15 @@
 package Calendario.Eventos;
 
+import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.AlarmaConEmail;
+import Calendario.Alarmas.AlarmaConNotificacion;
 import Calendario.Duracion.Duracion;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -147,8 +151,6 @@ public class InstanciaEventoTest {
         assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
     }
 
-
-    // ----------------------------------------------------------------------------
     public void TestDiaIntervaloMDClone(){
         //MismoDía
         //Arrange
@@ -511,6 +513,41 @@ public class InstanciaEventoTest {
         //Assert
         assertEquals(resEsperado, resObtenido);
 
+    }
+
+    @Test
+    public void TestConfigurarAlarmaProxima(){
+        //Arrange
+        var duracion = new Duracion();
+        var diaInicio = LocalDate.of(2023, 11, 11);
+        var diaFin = LocalDate.of(2023, 11, 11);
+        var horaInicio = LocalTime.of(18, 30);
+        var horaFin = LocalTime.of(19, 30);
+        duracion.setDiaInicio(diaInicio);
+        duracion.setDiaFin(diaFin);
+        duracion.setHoraInicio(horaInicio);
+        duracion.setHoraFin(horaFin);
+
+
+        var alarma1 = new AlarmaConNotificacion(LocalDateTime.of(diaInicio, horaInicio.minusMinutes(30)));
+        var alarma2 = new AlarmaConEmail(LocalDateTime.of(diaInicio, horaInicio.plusMinutes(30)));
+        var alarmas = new HashSet<Alarma>();
+        alarmas.add(alarma1);
+        alarmas.add(alarma2);
+
+
+        var eventoInstancia = new InstanciaEvento();
+        eventoInstancia.setDuracion(duracion);
+        eventoInstancia.configurarAlarmas(alarmas);
+
+        var resEsperado = new HashSet<Alarma>();
+        resEsperado.add(alarma2);
+
+        //Act
+        var alarmasObtenidas = eventoInstancia.getProximasAlarmas(LocalDateTime.of(diaInicio, horaInicio));
+
+        //Assert
+        assertEquals(resEsperado, alarmasObtenidas);
     }
 
 }

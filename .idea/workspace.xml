@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,6 +88,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="InstanciaEventoTest.TestConfigurarAlarmaProxima" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Eventos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Eventos" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Eventos.InstanciaEventoTest" />
+      <option name="METHOD_NAME" value="TestConfigurarAlarmaProxima" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InstanciaEventoTest.TestDiaCompletoEmpiezaDespuesTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Eventos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Eventos" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Eventos.InstanciaEventoTest" />
+      <option name="METHOD_NAME" value="TestDiaCompletoEmpiezaDespuesTrue" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TiempoRelativoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
@@ -97,38 +131,6 @@
       <option name="PACKAGE_NAME" value="Calendario.Enums" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Enums.TiempoRelativoTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TiempoRelativoTest.determinarFechaRelativaDias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Enums" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Enums.TiempoRelativoTest" />
-      <option name="METHOD_NAME" value="determinarFechaRelativaDias" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TiempoRelativoTest.determinarFechaRelativaHoras" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Enums" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Enums.TiempoRelativoTest" />
-      <option name="METHOD_NAME" value="determinarFechaRelativaHoras" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -152,10 +154,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.InstanciaEventoTest" />
+        <item itemvalue="JUnit.InstanciaEventoTest.TestConfigurarAlarmaProxima" />
+        <item itemvalue="JUnit.InstanciaEventoTest.TestDiaCompletoEmpiezaDespuesTrue" />
         <item itemvalue="JUnit.TiempoRelativoTest" />
         <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaSemanas" />
-        <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaDias" />
-        <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaHoras" />
       </list>
     </recent_temporary>
   </component>
@@ -170,6 +172,17 @@
     </task>
     <servers />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java</url>
+          <line>546</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TpCalendario$RepeticionAnualTest.ic" NAME="RepeticionAnualTest Coverage Results" MODIFIED="1682193063428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Repeticiones.*</FILTER>
@@ -178,7 +191,7 @@
       <FILTER>Calendario.Enums.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$All_in_TpCalendario.ic" NAME="All in TpCalendario Coverage Results" MODIFIED="1682114095719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TpCalendario$InstanciaEventoTest.ic" NAME="InstanciaEventoTest Coverage Results" MODIFIED="1682126533037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/TpCalendario$InstanciaEventoTest.ic" NAME="InstanciaEventoTest Coverage Results" MODIFIED="1682196386298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Eventos.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Duracion_in_TpCalendario.ic" NAME="Calendario.Duracion in TpCalendario Coverage Results" MODIFIED="1682114557288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

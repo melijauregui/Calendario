@@ -10,7 +10,7 @@ import java.util.Set;
 public abstract class Actividad {
     private String titulo;
     private String descripcion;
-    private Set<Alarma> alarmas;
+    private Set<Alarma> alarmas = new HashSet<>();
 
 
     public Actividad(){
