@@ -513,34 +513,4 @@ public class InstanciaEventoTest {
 
     }
 
-    //-------------------------------------------------------------------------------------------------
-
-    @Test
-    public void TestDiaIntervaloEstaIntervaloFalse() {
-        //MismoDía
-        //Arrange
-        var duracion = new Duracion();
-        var diaInicio = LocalDate.of(2023, 11, 11);
-        var diaFin = LocalDate.of(2023, 11, 11);
-        var horaInicio = LocalTime.of(18, 30);
-        var horaFin = LocalTime.of(19, 30);
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
-        duracion.setHoraInicio(horaInicio);
-        duracion.setHoraFin(horaFin);
-
-        var eventoInstancia = new InstanciaEvento();
-        eventoInstancia.setDuracion(duracion);
-
-        var fechaInicioIntervalo = LocalDateTime.of(2023, 11, 11, 18, 32);
-        var fechaFinIntervalo = LocalDateTime.of(2024, 12, 11, 18, 30);
-        var resEsperado = false;
-
-        //Act
-        //var resObtenido = eventoInstancia.estaEnElIntervalo(fechaInicioIntervalo, fechaFinIntervalo);
-
-        //Assert
-        //assertEquals(resEsperado, resObtenido);
-    }
-
 }

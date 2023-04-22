@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/Calendario/Alarmas/AlarmaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Calendario/Enums/TiempoRelativoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/ActividadTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +70,22 @@
       <recent name="Calendario.Eventos" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TiempoRelativoTest">
+  <component name="RunManager" selected="JUnit.InstanciaEventoTest">
+    <configuration name="InstanciaEventoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Eventos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Eventos" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Eventos.InstanciaEventoTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TiempoRelativoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
@@ -122,22 +133,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TiempoRelativoTest.determinarFechaRelativaMinutos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Enums" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Enums.TiempoRelativoTest" />
-      <option name="METHOD_NAME" value="determinarFechaRelativaMinutos" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TiempoRelativoTest.determinarFechaRelativaSemanas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
@@ -156,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.InstanciaEventoTest" />
         <item itemvalue="JUnit.TiempoRelativoTest" />
         <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaSemanas" />
         <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaDias" />
         <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaHoras" />
-        <item itemvalue="JUnit.TiempoRelativoTest.determinarFechaRelativaMinutos" />
       </list>
     </recent_temporary>
   </component>
