@@ -46,8 +46,30 @@ public class Calendario {
     // getProximasAlarmas devuelve un conjunto de alarmas que suenan a la misma fecha y hora, y son las más
     // próximas a la fecha actual
    public Set<Alarma> getProximasAlarmas(){
-       Alarma primerAlarma = determinarAlarmaProxima();
-       return getAlarmasMismaFecha(primerAlarma);
+       Set<Alarma> proximasAlarmas = new HashSet<>();
+       Set<Alarma> primerasAlarmas = new HashSet<>();
+       for(Actividad actividad : actividades){
+           Set<Alarma> alarmas = actividad.getProximasAlarmas(fechaActual);
+           if (sonMasProximas(primerasAlarmas, alarmas)){
+               primerasAlarmas = alarmas;
+               proximasAlarmas.clear();
+           }
+           if (sonMasProximas(primerasAlarmas, alarmas) || todasSonProximas(primerasAlarmas, alarmas)){
+               proximasAlarmas.addAll(alarmas);
+           }
+       }
+       return proximasAlarmas;
+   }
+
+   private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+       Alarma primerAlarma = primerasAlarmas.iterator().next();
+       Alarma otra = otras.iterator().next();
+       return !otra.suenaAntes(fechaActual) && (primerasAlarmas.size() == 0 || otra.suenaAntes(primerAlarma));
+   }
+   private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){//return primerAlarma != null && otra.suenaIgual(primerAlarma);
+       Alarma primerAlarma = primerasAlarmas.iterator().next();
+       Alarma otra = otras.iterator().next();
+       return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
    }
 
    // completarTarea completa la tarea pasada por parámetro
@@ -119,7 +141,7 @@ public class Calendario {
     private void getEventos(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Evento evento : eventos){
             var instancia = evento.getProximaRepeticion(desde);
-            while(instancia != null && instancia.estaEnElIntervalo(desde, hasta)){
+            while(instancia != null){
                 actividades.add(instancia);
                 instancia = evento.getProximaRepeticion(instancia.getFechaInicio());
             }
@@ -133,30 +155,6 @@ public class Calendario {
                 actividades.add(tarea);
             }
         }
-    }
-
-    // getAlarmasMismaFecha devuelve un conjunto de alarmas que suenan a la misma fecha y hora
-    private Set<Alarma>  getAlarmasMismaFecha(Alarma primerAlarma){
-        Set <Alarma> alarmasProximas = new HashSet<>();
-        for(Actividad actividad : actividades){
-            var alarmaActividad = actividad.getProximaAlarma(fechaActual);
-            if (alarmaActividad.suenaIgual(primerAlarma)){
-                alarmasProximas.add(alarmaActividad);
-            }
-        }
-        return alarmasProximas;
-    }
-
-    // determinarAlarmaProxima busca en las actividades del calendario la siguiente alarma a sonar
-    private Alarma determinarAlarmaProxima(){
-        Alarma primerAlarma = null;
-        for(Actividad actividad : actividades){
-            var alarmaActividad = actividad.getProximaAlarma(fechaActual);
-            if (alarmaActividad != null && (primerAlarma == null || alarmaActividad.suenaAntes(primerAlarma))){
-                primerAlarma = alarmaActividad;
-            }
-        }
-        return primerAlarma;
     }
 
 }

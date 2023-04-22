@@ -36,11 +36,6 @@ public class InstanciaEvento extends Actividad{
         return this.duracion.getDiaFin();
     }
 
-    // estaEnElIntervalo devuelve true si la instancia se encuentra dentro del intervalo definido
-    // por las fechas pasadas por parámetro
-    public boolean estaEnElIntervalo(LocalDateTime fechaInicio, LocalDateTime fechaFin){
-        return fechaFin.isAfter(getFechaInicio());
-    }
     // configurarAlarma le agrega a la Instancia la alarma pasada
     public void configurarAlarma(Alarma alarma){
         if (alarma != null){
