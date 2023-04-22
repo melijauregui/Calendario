@@ -39,7 +39,7 @@ public class InstanciaEvento extends Actividad{
     // estaEnElIntervalo devuelve true si la instancia se encuentra dentro del intervalo definido
     // por las fechas pasadas por parámetro
     public boolean estaEnElIntervalo(LocalDateTime fechaInicio, LocalDateTime fechaFin){
-        return (fechaInicio.isBefore(getFechaInicio()) && fechaFin.isAfter(getFechaInicio()));
+        return fechaFin.isAfter(getFechaInicio());
     }
     // configurarAlarma le agrega a la Instancia la alarma pasada
     public void configurarAlarma(Alarma alarma){
@@ -50,8 +50,10 @@ public class InstanciaEvento extends Actividad{
 
     // configurarAlarmas configura todas las alarmas recibidas por parámetro
     public void configurarAlarmas(Set<Alarma> alarmas){
-        for (Alarma alarma : alarmas){
-            configurarAlarma(alarma);
+        if (alarmas != null) {
+            for (Alarma alarma : alarmas) {
+                configurarAlarma(alarma);
+            }
         }
     }
 
@@ -63,6 +65,7 @@ public class InstanciaEvento extends Actividad{
         nuevaDuracion.setDiaInicio(diaInicio);
         nuevaDuracion.setDiaFin(diaFin);
         eventoClonado.setDuracion(nuevaDuracion);
+        eventoClonado.configurarAlarmas(this.getAlarmas());
         return eventoClonado;
     }
 

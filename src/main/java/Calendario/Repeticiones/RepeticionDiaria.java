@@ -10,26 +10,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class RepeticionDiaria extends Repeticion {
-
-    // cada "intervaloDias" dias
-    public RepeticionDiaria(int intervaloDias, LocalDate fechaHasta) {
-
-        super(intervaloDias, fechaHasta);
+    public RepeticionDiaria(int intervaloDiaria,  LocalDate fechaHasta){
+        super(intervaloDiaria, fechaHasta);
     }
+    public RepeticionDiaria(int intervaloDiaria, int ocurrencias){
+        super(intervaloDiaria, ocurrencias);
 
-    public RepeticionDiaria(int intervaloDias, int ocurrencias) {
-
-        super(intervaloDias, ocurrencias);
     }
-
-    public RepeticionDiaria(int intervaloDias) {
-        super(intervaloDias);
+    public RepeticionDiaria(int intervaloDiaria){
+        super(intervaloDiaria);
     }
-
 
     //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        return evento.Clone(evento.getDiaInicio().plusDays(getIntervalo()), evento.getDiaFin().plusDays(getIntervalo()));
+        return evento.Clone(evento.getDiaInicio().plusDays(super.getIntervalo()), evento.getDiaFin().plusDays(super.getIntervalo()));
     }
 
 }

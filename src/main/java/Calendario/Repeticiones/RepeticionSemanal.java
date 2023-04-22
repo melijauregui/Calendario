@@ -35,6 +35,10 @@ public class RepeticionSemanal extends Repeticion{
         return evento.Clone(diaInicioSiguienteEvento, diaFinSiguienteEvento);
     }
 
+
+    //------------------------------------------------------------------------------
+
+
     // getDiferenciaEntreInstancias calcula la cantidad de días entre el evento pasado por parámetro
     // y la siguiente repetición
     private int getDiferenciaEntreInstancias(InstanciaEvento evento){

@@ -10,6 +10,7 @@ import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 
 public abstract class Repeticion {
+
     private LocalDate fechaHasta;
     private int intervalo;
     private int ocurrencias;
@@ -33,30 +34,46 @@ public abstract class Repeticion {
         this.ocurrencias = repeticionInfinita;
     }
 
-    //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
-    public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
+    //---------------------------------------------------------------------
 
-    /* disminuirOcurrencias disminuye en 1 las ocurrencias de la repetición, mientras haya alguna*/
-    public void disminuirOcurrencias(){
+    private void disminuirOcurrencias(){
         if (this.ocurrencias > sinRepeticion){
             this.ocurrencias-=1;
         }
     }
 
-    // esInifinita devuelve true si la repetición nunca acaba, false en caso contrario
     public boolean esInfinita(){
         return (this.ocurrencias == repeticionInfinita);
     }
 
-    // terminoRepeticion devuelve true si no hay más repeticiones del Evento, false en caso contrario
-    public boolean terminoRepeticion(LocalDate fechaActual){
+    //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
+    public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
+
+    // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
+    // evento no hay más repeticiones del Evento, false en caso contrario
+    private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
+        LocalDate fechaProximoEvento = getProximaInstanciaEvento(evento).getDiaInicio();
         if (fechaHasta == null){
-            return this.ocurrencias == sinRepeticion;
+            return ocurrencias == sinRepeticion;
         }
-        return fechaActual.isAfter(fechaHasta); //isEqual?
+        return fechaProximoEvento.isAfter(fechaHasta);
     }
 
-    // getIntervalo devuelve el intervalo de duración entre una repetición y la siguiente
+
+    public void AlmacenarRepeticiones(ArrayList almacenamiento, InstanciaEvento primerEvento) {
+        almacenamiento.add(primerEvento);
+        InstanciaEvento utlimoEventoAlmacenado = primerEvento;
+        this.disminuirOcurrencias();
+        if (!esInfinita()) {
+            while (!esUltimaInstanciaEvento(utlimoEventoAlmacenado)) {
+                this.disminuirOcurrencias();
+                var instancia = this.getProximaInstanciaEvento(utlimoEventoAlmacenado);
+                almacenamiento.add(instancia);
+                utlimoEventoAlmacenado = instancia;
+            }
+        }
+    }
+
     public int getIntervalo(){
         return intervalo;
     }

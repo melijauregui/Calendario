@@ -23,7 +23,7 @@ public class Evento extends Actividad{
 
     public void setEventoInicial(InstanciaEvento eventoInicial){
         this.eventoInicial = eventoInicial;
-        reiniciarAlmacenamientoFechas();
+        actualizarAlmacenamientoFechas();
     }
 
 
@@ -45,7 +45,7 @@ public class Evento extends Actividad{
     // setRepeticion cambia la repetición del evento, y la agrega si no tenía una
     public void setRepeticion(Repeticion repeticion){
         this.repeticion = repeticion;
-        reiniciarAlmacenamientoFechas();
+        actualizarAlmacenamientoFechas();
     }
 
     // getProximaRepeticion devuelve la primera Instancia que se encuentra a partir de la fecha dada
@@ -93,13 +93,10 @@ public class Evento extends Actividad{
     /*almacenarFechas agrega al Almacenamiento la Instancia de la primera repetición del Evento.
     Si tiene repetición y no es infinita, agrega las sucesivas Instancias de las repeticiones*/
     private void almacenarFechas(InstanciaEvento primerEvento) {
-        almacenamientoFechas.add(primerEvento);
-        repeticion.disminuirOcurrencias();
-        if (!esInfinito()){
-            while (!repeticion.terminoRepeticion(getFechaInicioUltimoEvento().toLocalDate())){
-                repeticion.disminuirOcurrencias();
-                almacenarUnaFecha();
-            }
+        if (!this.esEventoConRepeticion()) {
+            almacenamientoFechas.add(primerEvento);
+        } else {
+            this.repeticion.AlmacenarRepeticiones(this.almacenamientoFechas, primerEvento);
         }
     }
 
@@ -107,7 +104,6 @@ public class Evento extends Actividad{
     private void almacenarUnaFecha(){
         var instancia = this.repeticion.getProximaInstanciaEvento(getUltimoEventoAlmacenado());
         almacenamientoFechas.add(instancia);
-        instancia.configurarAlarmas(getAlarmas());
     }
 
     // getProximaAlarma devuelve la siguiente alarma del evento
@@ -123,7 +119,7 @@ public class Evento extends Actividad{
 
     // reiniciarAlmacenamientoFechas elimina las instancias del evento y, a partir de la primer instancia,
     // vuelve a cargarlas
-    protected void reiniciarAlmacenamientoFechas(){
+    protected void actualizarAlmacenamientoFechas(){
         almacenamientoFechas.clear();
         almacenarFechas(this.eventoInicial);
     }
