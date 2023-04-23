@@ -54,7 +54,7 @@ public abstract class Actividad {
         this.titulo = titulo;
     }
     public void setDescripcion(String descripcion){
-        this.titulo = descripcion;
+        this.descripcion = descripcion;
     }
 
     protected void agregarAlarma(Alarma alarma){

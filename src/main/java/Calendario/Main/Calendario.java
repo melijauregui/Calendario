@@ -62,11 +62,17 @@ public class Calendario {
    }
 
    private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+        if (primerasAlarmas.size() == 0){
+            return true;
+        }
        Alarma primerAlarma = primerasAlarmas.iterator().next();
        Alarma otra = otras.iterator().next();
-       return !otra.suenaAntes(fechaActual) && (primerasAlarmas.size() == 0 || otra.suenaAntes(primerAlarma));
+       return !otra.suenaAntes(fechaActual) && otra.suenaAntes(primerAlarma);
    }
-   private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){//return primerAlarma != null && otra.suenaIgual(primerAlarma);
+   private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+       if (primerasAlarmas.size() == 0){
+           return true;
+       }
        Alarma primerAlarma = primerasAlarmas.iterator().next();
        Alarma otra = otras.iterator().next();
        return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
@@ -88,17 +94,17 @@ public class Calendario {
     }
 
     // modificarFechaTarea cambia la fecha de la tarea recibida
-    public void modificarDia(Tarea tarea, LocalDate dia){
+    public void modificarDiaTarea(Tarea tarea, LocalDate dia){
         tarea.setDia(dia);
     }
 
-    public void modificarHora(Tarea tarea, LocalTime hora){
+    public void modificarHoraTarea(Tarea tarea, LocalTime hora){
         tarea.setHora(hora);
     }
 
 
-    // modificarFechaInicioEvento cambia la fecha de inicio del evento de día completo
-    public void modificarFechaInicioEvento(Evento evento, InstanciaEvento eventoInicial){
+    // modificarFechaEvento cambia la fecha del evento
+    public void modificarFechaEvento(Evento evento, InstanciaEvento eventoInicial){
         evento.setEventoInicial(eventoInicial);
     }
 
@@ -141,7 +147,7 @@ public class Calendario {
     private void getEventos(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Evento evento : eventos){
             var instancia = evento.getProximaRepeticion(desde);
-            while(instancia != null){
+            while(instancia != null && !instancia.empiezaDespues(hasta)){
                 actividades.add(instancia);
                 instancia = evento.getProximaRepeticion(instancia.getFechaInicio());
             }
