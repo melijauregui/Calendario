@@ -21,6 +21,8 @@ public class Evento extends Actividad{
 
     public void setEventoInicial(InstanciaEvento eventoInicial){
         this.eventoInicial = eventoInicial;
+        eventoInicial.setTitulo(getTitulo());
+        eventoInicial.setDescripcion(getDescripcion());
         actualizarAlmacenamientoFechas();
     }
 
@@ -34,9 +36,9 @@ public class Evento extends Actividad{
 
     // setDescripcion cambia la descripción del evento y de las instancias del mismo
     @Override
-    public void setDescripcion(String descrpcion){
-        super.setDescripcion(descrpcion);
-        setDescripcionInstancias(descrpcion);
+    public void setDescripcion(String descripcion){
+        super.setDescripcion(descripcion);
+        setDescripcionInstancias(descripcion);
     }
 
 
@@ -115,7 +117,7 @@ public class Evento extends Actividad{
 
     // actualizarAlmacenamientoFechas elimina las instancias del evento y, a partir de la primer instancia,
     // vuelve a cargarlas
-    protected void actualizarAlmacenamientoFechas(){
+    private void actualizarAlmacenamientoFechas(){
         almacenamientoFechas.clear();
         almacenarFechas(this.eventoInicial);
     }
