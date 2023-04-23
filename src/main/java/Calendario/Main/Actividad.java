@@ -29,11 +29,12 @@ public abstract class Actividad {
     // configurarAlarma recibe una Alarma y se la agrega a la Actividad
     public abstract void configurarAlarma(Alarma alarma);
 
+    // eliminarAlarma elimina la alarma recibida por parámetro
     public void eliminarAlarma(Alarma alarma){
         alarmas.remove(alarma);
     }
 
-    // getProximasAlarmas devuelve todas las alarmas con misma fecha y hora de la actividad, que suenan
+    // getProximasAlarmas devuelve todas las alarmas con misma fecha y hora, que suenan
     // más próximas a la fecha pasada
     public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
         Set<Alarma> proximasAlarmas = new HashSet<>();
@@ -50,16 +51,22 @@ public abstract class Actividad {
         return proximasAlarmas;
     }
 
+    // setter de título
     public void setTitulo(String titulo){
         this.titulo = titulo;
     }
+
+    // setter de descripción
     public void setDescripcion(String descripcion){
         this.descripcion = descripcion;
     }
 
+    // agregarAlarma agrega la alarma recibida al conjunto de alarmas de la actividad
     protected void agregarAlarma(Alarma alarma){
         this.alarmas.add(alarma);
     }
+
+    // getAlarmas devuelve el conjunto de alarmas de la actividad
     protected Set<Alarma> getAlarmas(){
         return alarmas;
     }

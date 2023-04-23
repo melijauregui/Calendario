@@ -61,23 +61,6 @@ public class Calendario {
        return proximasAlarmas;
    }
 
-   private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
-        if (primerasAlarmas.size() == 0){
-            return true;
-        }
-       Alarma primerAlarma = primerasAlarmas.iterator().next();
-       Alarma otra = otras.iterator().next();
-       return !otra.suenaAntes(fechaActual) && otra.suenaAntes(primerAlarma);
-   }
-   private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
-       if (primerasAlarmas.size() == 0){
-           return true;
-       }
-       Alarma primerAlarma = primerasAlarmas.iterator().next();
-       Alarma otra = otras.iterator().next();
-       return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
-   }
-
    // completarTarea completa la tarea pasada por parámetro
     public void completarTarea(Tarea tarea){
         tarea.completar();
@@ -93,28 +76,27 @@ public class Calendario {
         actividad.setDescripcion(descripcion);
     }
 
-    // modificarFechaTarea cambia la fecha de la tarea recibida
+    // modificarDiaTarea cambia la fecha de la tarea recibida
     public void modificarDiaTarea(Tarea tarea, LocalDate dia){
         tarea.setDia(dia);
     }
 
+    // modificarHoraTarea cambia la hora de la tarea recibida
     public void modificarHoraTarea(Tarea tarea, LocalTime hora){
         tarea.setHora(hora);
     }
 
-
-    // modificarFechaEvento cambia la fecha del evento
+    // modificarFechaEvento cambia la fecha de la primera instancia del evento
     public void modificarFechaEvento(Evento evento, InstanciaEvento eventoInicial){
         evento.setEventoInicial(eventoInicial);
     }
 
-
-    /* configurarAlarma recibe Alarma y se la agrega a la Actividad dada. */
+    /* configurarAlarma recibe una Alarma y se la agrega a la Actividad dada. */
     public void configurarAlarma(Actividad actividad, Alarma alarma){
         actividad.configurarAlarma(alarma);
     }
 
-    // modificarAlarma cambia una determinada alarma de la actividad
+    // modificarAlarma cambia una determinada alarma de la actividad por una nueva
     public void modificarAlarma(Actividad actividad, Alarma anterior, Alarma nueva){
         actividad.eliminarAlarma(anterior);
         actividad.configurarAlarma(nueva);
@@ -125,7 +107,7 @@ public class Calendario {
         actividad.eliminarAlarma(alarma);
     }
 
-       // modificarRepeticionEvento cambia la repetición del evento
+    // modificarRepeticionEvento cambia la repetición del evento
     public void modificarRepeticionEvento(Evento evento, Repeticion repeticion){
         evento.setRepeticion(repeticion);
     }
@@ -157,10 +139,35 @@ public class Calendario {
     // getTareas recibe un intervalo de tiempo y guarda en una lista las tareas que se encuentran dentro del mismo
     private void getTareas(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Tarea tarea : tareas){
-            if (tarea.estaEnElIntervalo(desde, hasta) && !tarea.estaCompleta()){
+            if (tarea.estaEnElIntervalo(desde, hasta)){
                 actividades.add(tarea);
             }
         }
     }
+
+    // sonMasProximas recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan
+    // al mismo tiempo. La función devuelve true si una alarma del conjunto OTRAS suena antes que una del conjunto
+    // PRIMERAS_ALARMAS
+    private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+        if (primerasAlarmas.size() == 0){
+            return true;
+        }
+        Alarma primerAlarma = primerasAlarmas.iterator().next();
+        Alarma otra = otras.iterator().next();
+        return !otra.suenaAntes(fechaActual) && otra.suenaAntes(primerAlarma);
+    }
+
+    // todasSonProximas recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan
+    // al mismo tiempo. La función devuelve true si una alarma del conjunto OTRAS suena igual que una del conjunto
+    // PRIMERAS_ALARMAS
+    private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+        if (primerasAlarmas.size() == 0){
+            return true;
+        }
+        Alarma primerAlarma = primerasAlarmas.iterator().next();
+        Alarma otra = otras.iterator().next();
+        return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
+    }
+
 
 }

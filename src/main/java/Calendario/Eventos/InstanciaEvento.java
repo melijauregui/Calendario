@@ -14,24 +14,32 @@ public class InstanciaEvento extends Actividad{
     public InstanciaEvento() {
     }
 
+    // setter de duración
     public void setDuracion(Duracion duracion){
         this.duracion = duracion;
     }
+
     // empiezaDespues devuelve true si la instancia del evento comienza luego de la fecha recibida como argumento
     public boolean empiezaDespues(LocalDateTime fecha){
         return this.getFechaInicio().isAfter(fecha);
     }
 
+    // getter de fecha y hora de inicio
     public LocalDateTime getFechaInicio(){
         return this.duracion.getFechaInicio();
     }
+
+    // getter de fecha y hora de finalización
     public LocalDateTime getFechaFin(){
         return this.duracion.getFechaFin();
     }
 
+    // getter de fecha de inicio de un evento de día completo
     public LocalDate getDiaInicio(){
         return this.duracion.getDiaInicio();
     }
+
+    // getter de fecha de finalización de un evento de día completo
     public LocalDate getDiaFin(){
         return this.duracion.getDiaFin();
     }
@@ -52,6 +60,7 @@ public class InstanciaEvento extends Actividad{
         }
     }
 
+    // Clone devuelve una copia de la Instancia con las nuevas fechas recibidas como argumento
     public InstanciaEvento Clone(LocalDate diaInicio, LocalDate diaFin){
         InstanciaEvento eventoClonado = new InstanciaEvento();
         eventoClonado.setTitulo(this.getTitulo());

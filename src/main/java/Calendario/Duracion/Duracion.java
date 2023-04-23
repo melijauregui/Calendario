@@ -13,22 +13,27 @@ public class Duracion {
     private LocalTime horaInicio;
     private LocalTime horaFin;
 
-
+    //setter de la fecha de inicio
     public void setDiaInicio(LocalDate diaInicio){
         this.diaInicio = diaInicio;
     }
 
+    //setter de la fecha de fin
     public void setDiaFin(LocalDate diaFin){
         this.diaFin = diaFin;
     }
 
+    //setter de la hora de inicio
     public void setHoraInicio(LocalTime horaInicio){
         this.horaInicio = horaInicio;
     }
+
+    //setter de la hora de fin
     public void setHoraFin(LocalTime horaFin){
         this.horaFin = horaFin;
     }
 
+    //getter de la fecha y hora de inicio
     public LocalDateTime getFechaInicio() {
         if (!this.esDiaCompleto()) {
             return LocalDateTime.of(getDiaInicio(), horaInicio);
@@ -36,6 +41,7 @@ public class Duracion {
         return LocalDateTime.of(getDiaInicio(), LocalTime.of(Constantes.horaInicioDiaCompleto, Constantes.minutoInicioDiaCompleto));
     }
 
+    //getter de la fecha y hora de fin
     public LocalDateTime getFechaFin() {
         if (!this.esDiaCompleto()) {
             return LocalDateTime.of(getDiaFin(), horaFin);
@@ -43,18 +49,18 @@ public class Duracion {
         return LocalDateTime.of(getDiaFin(), LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
     }
 
+    //getDiaInicio devuelve la fecha de inicio de una Duración de día completo
     public LocalDate getDiaInicio(){
         return this.diaInicio;
     }
 
+    //getDiaFin devuelve la fecha de finalización de una Duración de día completo
     public LocalDate getDiaFin(){
         return this.diaFin;
     }
 
-    private boolean esDiaCompleto(){
-        return (horaInicio == null && horaFin == null);
-    }
 
+    //Clone devuelve una copia de la duración
     public Duracion Clone(){
         Duracion nuevaDuracion = new Duracion();
         nuevaDuracion.setDiaInicio(this.diaInicio);
@@ -64,5 +70,10 @@ public class Duracion {
             nuevaDuracion.setHoraFin(this.horaFin);
         }
         return nuevaDuracion;
+    }
+
+    //esDiaCompleto devuelve true si la duración es de día completo
+    private boolean esDiaCompleto(){
+        return (horaInicio == null && horaFin == null);
     }
 }

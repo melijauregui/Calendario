@@ -18,25 +18,28 @@ public class Tarea extends Actividad {
 
     // de día completo
     public Tarea(){
-        this.dia = LocalDate.now();
-        this.hora = LocalTime.now();
+        this.dia = LocalDate.now(); // por default es de día completo
     }
 
+    // setter de fecha
     public void setDia(LocalDate dia){
         this.dia = dia;
     }
 
+    // setter de hora
     public void setHora(LocalTime hora){
         this.hora = hora;
     }
 
+    // esDiaCompleto devuelve true si la tarea dura todo el día
     public boolean esDiaCompleto(){
         return this.hora == null;
     }
 
-    // estaEnElIntervalo devuelve true si la tarea se encuentra dentro del intervalo de fechas dado
+    // estaEnElIntervalo devuelve true si la fecha de la tarea se encuentra dentro del intervalo
+    // de fechas pasado por parámetro
     public boolean estaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
-        return this.getFecha().isAfter(desde) && this.getFecha().isBefore(hasta);
+        return !this.estaCompleta() && (this.getFecha().isAfter(desde) || estaEnElIntervaloDiaCompleto(desde.toLocalDate())) && this.getFecha().isBefore(hasta);
     }
 
     // configurarAlarma agrega la Alarma a la Tarea
@@ -45,21 +48,27 @@ public class Tarea extends Actividad {
         agregarAlarma(alarma);
     }
 
-    // completar() marca la tarea como completa
+    // completar marca la tarea como completa
     public void completar(){
         this.completa = true;
     }
 
-    // estaCompleta devuelve true si la tarea ha sido completada, false en caso contrario
-    public boolean estaCompleta(){
-        return this.completa;
-    }
-
+    // getter de fecha y hora
     public LocalDateTime getFecha(){
         if (!this.esDiaCompleto()) {
             return LocalDateTime.of(this.dia, this.hora);
         }
         return LocalDateTime.of(this.dia, LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
+    }
+
+    // estaEnElIntervalo devuelve true si la tarea se encuentra dentro del intervalo de fechas dado
+    private boolean estaEnElIntervaloDiaCompleto(LocalDate fecha){
+        return this.getFecha().toLocalDate().equals(fecha) && esDiaCompleto();
+    }
+
+    // estaCompleta devuelve true si la tarea ha sido completada, false en caso contrario
+    private boolean estaCompleta(){
+        return this.completa;
     }
 }
 

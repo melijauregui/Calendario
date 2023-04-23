@@ -32,10 +32,10 @@ public class Alarma{
     }
 
     /* determinarFechaAlarma determina la fecha de la Alarma según el intervalo de tiempo relativo a la
-    fecha de la Actividad para la que está configurada */
-    public void determinarFecha(LocalDateTime fechaActividad){
+    fecha pasada */
+    public void determinarFecha(LocalDateTime fecha){
         if (fechaAlarma != null){ return;}
-        fechaAlarma = tiempoRelativo.determinarFechaRelativa(fechaActividad, intervalo);
+        fechaAlarma = tiempoRelativo.determinarFechaRelativa(fecha, intervalo);
     }
 
     // getFechaAlarma devuelve la fecha de la Alarma
