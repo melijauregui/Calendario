@@ -8,6 +8,7 @@ import Calendario.Repeticiones.Repeticion;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.Temporal;
 import java.util.*;
 
@@ -17,6 +18,7 @@ public class Evento extends Actividad{
     private Repeticion repeticion = null;
 
     public Evento(){
+        setPrimerEventoDefault();
     }
 
     public void setEventoInicial(InstanciaEvento eventoInicial){
@@ -163,6 +165,17 @@ public class Evento extends Actividad{
         for (InstanciaEvento instancia : almacenamientoFechas){
             instancia.configurarAlarma(alarma);
         }
+    }
+
+    private void setPrimerEventoDefault(){
+        var duracion = new Duracion();
+        duracion.setHoraInicio(LocalTime.now());
+        duracion.setHoraFin(LocalTime.now());
+        duracion.setDiaInicio(LocalDate.now());
+        duracion.setDiaFin(LocalDate.now());
+        InstanciaEvento primerEvento = new InstanciaEvento();
+        primerEvento.setDuracion(duracion);
+        this.setEventoInicial(primerEvento);
     }
 
     // esInfinito devuelve true si el evento se repite indefinidamente

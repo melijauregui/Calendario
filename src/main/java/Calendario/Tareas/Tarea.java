@@ -18,6 +18,8 @@ public class Tarea extends Actividad {
 
     // de día completo
     public Tarea(){
+        this.dia = LocalDate.now();
+        this.hora = LocalTime.now();
     }
 
     public void setDia(LocalDate dia){
