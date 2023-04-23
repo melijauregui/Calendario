@@ -15,7 +15,6 @@ public abstract class Repeticion {
     private LocalDate fechaHasta;
     private int intervalo;
     private int ocurrencias;
-    private int ocurrenciasRelativas = 0;
     private static final int sinRepeticion = 0;
     private static final int repeticionInfinita = -1;
 
@@ -29,7 +28,6 @@ public abstract class Repeticion {
     public Repeticion(int intervalo, int ocurrencias){
         this.intervalo = intervalo;
         this.ocurrencias = ocurrencias;
-        this.ocurrenciasRelativas = ocurrencias;
     }
     // infinita
     public Repeticion(int intervalo){
@@ -37,18 +35,7 @@ public abstract class Repeticion {
         this.ocurrencias = repeticionInfinita;
     }
 
-<<<<<<< Updated upstream
     // esInfinita devuelve true si la repetición nunca acaba
-=======
-    //---------------------------------------------------------------------
-
-    private void disminuirOcurrencias(){
-        if (this.ocurrenciasRelativas > sinRepeticion){
-            this.ocurrenciasRelativas-=1;
-        }
-    }
-
->>>>>>> Stashed changes
     public boolean esInfinita(){
         return (this.ocurrencias == repeticionInfinita);
     }
@@ -56,23 +43,8 @@ public abstract class Repeticion {
     //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
 
-<<<<<<< Updated upstream
     // almacenarRepeticiones guarda en una lista las sucesivas repeticiones del evento
-=======
-    // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
-    // evento no hay más repeticiones del Evento, false en caso contrario
-    private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
-        LocalDate fechaProximoEvento = getProximaInstanciaEvento(evento).getDiaInicio();
-        if (fechaHasta == null){
-            return ocurrenciasRelativas == sinRepeticion;
-        }
-        return fechaProximoEvento.isAfter(fechaHasta);
-    }
-
-
->>>>>>> Stashed changes
     public void almacenarRepeticiones(List<InstanciaEvento> almacenamiento, InstanciaEvento primerEvento) {
-        this.ocurrenciasRelativas = ocurrencias;
         almacenamiento.add(primerEvento);
         InstanciaEvento utlimoEventoAlmacenado = primerEvento;
         this.disminuirOcurrencias();

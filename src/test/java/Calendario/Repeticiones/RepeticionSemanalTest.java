@@ -20,29 +20,28 @@ public class RepeticionSemanalTest {
 
     @Test
     public void GetProximaInstanciaEventoMD() {
-        //Comprueba que el método GetProximaInstanciaEvento() de Repeticion Anual se comporte como lo esperado
         //Mismo Dia
-
         //Arrange
         var diasSemanas = new ArrayList<DayOfWeek>();
         diasSemanas.add(DayOfWeek.THURSDAY);
         diasSemanas.add(DayOfWeek.MONDAY);
         diasSemanas.add(DayOfWeek.SUNDAY);
-        //defino los diferentes tipos de repeticiones
         var repeticionOcurrencias = new RepeticionSemanal(2, diasSemanas, 15);
         var repeticionFechaHasta = new RepeticionSemanal(2, diasSemanas, LocalDate.of(2023, 11, 11));
         var repeticionInfinita = new RepeticionSemanal(2, diasSemanas);
 
-        //defino instancia inicio
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 4, 24));
         duracion.setDiaFin(LocalDate.of(2023, 4, 24));
         duracion.setHoraInicio(LocalTime.of(18, 30));
         duracion.setHoraFin(LocalTime.of(19, 30));
+
         var eventoInstancia = new InstanciaEvento();
         eventoInstancia.setDuracion(duracion);
 
-        //Resultados Esperados
+        InstanciaEvento eventoOcurrencias = eventoInstancia;
+        InstanciaEvento eventoFechaHasta = eventoInstancia;
+        InstanciaEvento eventoInfinito = eventoInstancia;
         var resEsperadoInfinitoOcurrencias = false;
         var resEsperadoInfinitoFechaHasta = false;
         var resEsperadoInfinitoInfinita = true;
@@ -77,11 +76,8 @@ public class RepeticionSemanalTest {
         resEsperadoFechaInicio.add(LocalDateTime.of(2023, 6, 5, 18, 30));
         resEsperadoFechaFin.add(LocalDateTime.of(2023, 6, 5, 19, 30));
 
-        InstanciaEvento eventoOcurrencias = eventoInstancia;
-        InstanciaEvento eventoFechaHasta = eventoInstancia;
-        InstanciaEvento eventoInfinito = eventoInstancia;
+        //Act
 
-        //Act Resultados Obetenidos
         for (int i = 0; i < 9; i++) {
             eventoOcurrencias = repeticionOcurrencias.getProximaInstanciaEvento(eventoOcurrencias);
             eventoFechaHasta = repeticionOcurrencias.getProximaInstanciaEvento(eventoFechaHasta);
@@ -113,33 +109,30 @@ public class RepeticionSemanalTest {
 
     @Test
     public void AlmacenarRepeticionesOcurrencias() {
-        //Comprueba que el método AlmacenarRepeticiones() de Repeticion Anual se comporte como lo esperado
-
-        //Arrange
         int ocurrencias = 10;
+
         var diasSemanas = new ArrayList<DayOfWeek>();
         diasSemanas.add(DayOfWeek.THURSDAY);
         diasSemanas.add(DayOfWeek.MONDAY);
         diasSemanas.add(DayOfWeek.SUNDAY);
         var repeticionOcurrencias = new RepeticionSemanal(2, diasSemanas, ocurrencias);
 
-        //defino dia Inicio
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 4, 24));
         duracion.setDiaFin(LocalDate.of(2023, 4, 24));
         duracion.setHoraInicio(LocalTime.of(18, 30));
         duracion.setHoraFin(LocalTime.of(19, 30));
+
         var eventoInstancia = new InstanciaEvento();
         eventoInstancia.setDuracion(duracion);
 
         InstanciaEvento eventoOcurrencias = eventoInstancia;
 
-        //defino evento
         var evento = new Evento();
         evento.setEventoInicial(eventoOcurrencias);
         evento.setRepeticion(repeticionOcurrencias);
 
-        //Resultados Esperados
+
         var resEsperadoFechaInicio = new ArrayList<LocalDateTime>();
         var resEsperadoFechaFin = new ArrayList<LocalDateTime>();
 
@@ -174,7 +167,7 @@ public class RepeticionSemanalTest {
         resEsperadoFechaFin.add(LocalDateTime.of(2023, 6, 5, 19, 30));
 
 
-        //Act Resultados Obetenidos
+        //Act
         var resObtenidoEventosIntervalo = evento.getAlmacenamientoFechas();
 
         //Assert
@@ -188,35 +181,29 @@ public class RepeticionSemanalTest {
 
     @Test
     public void AlmacenarRepeticionesFechaHasta() {
-        //Comprueba que el método AlmacenarRepeticiones() de Repeticion Anual se comporte como lo esperado
-
-        //Arrange
-        //defino fecha hasta
         LocalDate fechaHasta = LocalDate.of(2023, 6, 6);
 
         var diasSemanas = new ArrayList<DayOfWeek>();
         diasSemanas.add(DayOfWeek.THURSDAY);
         diasSemanas.add(DayOfWeek.MONDAY);
         diasSemanas.add(DayOfWeek.SUNDAY);
-
         var repeticionOcurrencias = new RepeticionSemanal(2, diasSemanas, fechaHasta);
 
-        //defino dia Inicio
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 4, 24));
         duracion.setDiaFin(LocalDate.of(2023, 4, 24));
         duracion.setHoraInicio(LocalTime.of(18, 30));
         duracion.setHoraFin(LocalTime.of(19, 30));
 
-        //defino evento
         var eventoInstancia = new InstanciaEvento();
         eventoInstancia.setDuracion(duracion);
+
         InstanciaEvento eventoOcurrencias = eventoInstancia;
+
         var evento = new Evento();
         evento.setEventoInicial(eventoOcurrencias);
         evento.setRepeticion(repeticionOcurrencias);
 
-        //Resultados Esperados
         var resEsperadoFechaInicio = new ArrayList<LocalDateTime>();
         var resEsperadoFechaFin = new ArrayList<LocalDateTime>();
 
@@ -251,7 +238,7 @@ public class RepeticionSemanalTest {
         resEsperadoFechaFin.add(LocalDateTime.of(2023, 6, 5, 19, 30));
 
 
-        //Act Resultados Obetenidos
+        //Act
         var resObtenidoEventosIntervalo = evento.getAlmacenamientoFechas();
 
         //Assert
