@@ -138,6 +138,10 @@ public class Evento extends Actividad{
         return almacenamientoFechas.get(almacenamientoFechas.size()-1);
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     // getFechaInicio devuelve la fecha de inicio de la primer instancia del evento
     private LocalDateTime getFechaInicio() {
         return almacenamientoFechas.get(0).getFechaInicio();
