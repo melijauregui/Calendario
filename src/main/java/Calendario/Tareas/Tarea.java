@@ -1,7 +1,6 @@
 package Calendario.Tareas;
 
 import Calendario.Alarmas.Alarma;
-import Calendario.Enums.Mes;
 import Calendario.Main.Actividad;
 import Calendario.Main.Constantes;
 

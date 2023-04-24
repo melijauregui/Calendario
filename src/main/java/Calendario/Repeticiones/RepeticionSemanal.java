@@ -5,7 +5,6 @@ import Calendario.Eventos.InstanciaEvento;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class RepeticionSemanal extends Repeticion{

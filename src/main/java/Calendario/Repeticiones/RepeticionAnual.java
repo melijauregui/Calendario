@@ -1,15 +1,7 @@
 package Calendario.Repeticiones;
 
-
-import Calendario.Duracion.Duracion;
-import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.Temporal;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class RepeticionAnual extends Repeticion {
 

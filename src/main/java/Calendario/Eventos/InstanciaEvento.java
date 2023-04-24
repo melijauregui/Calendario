@@ -3,8 +3,6 @@ package Calendario.Eventos;
 import Calendario.Alarmas.Alarma;
 import Calendario.Duracion.Duracion;
 import Calendario.Main.Actividad;
-import java.time.temporal.Temporal;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;

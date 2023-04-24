@@ -1,7 +1,6 @@
 package Calendario.Main;
 
 import Calendario.Alarmas.Alarma;
-import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Repeticiones.Repeticion;

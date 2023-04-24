@@ -1,13 +1,7 @@
 package Calendario.Repeticiones;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-
-import Calendario.Enums.Frecuencias;
-import Calendario.Enums.Mes;
-import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 
 public abstract class Repeticion {
@@ -37,29 +31,12 @@ public abstract class Repeticion {
         this.ocurrencias = repeticionInfinita;
     }
 
-    private void disminuirOcurrencias(){
-        if (this.ocurrenciasRelativas > sinRepeticion){
-            this.ocurrenciasRelativas-=1;
-        }
-    }
-
     public boolean esInfinita(){
         return (this.ocurrencias == repeticionInfinita);
     }
 
     //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
-
-
-    // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
-    // evento no hay más repeticiones del Evento, false en caso contrario
-    private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
-        LocalDate fechaProximoEvento = getProximaInstanciaEvento(evento).getDiaInicio();
-        if (fechaHasta == null){
-            return ocurrenciasRelativas == sinRepeticion;
-        }
-        return fechaProximoEvento.isAfter(fechaHasta);
-    }
 
 
     public void almacenarRepeticiones(List<InstanciaEvento> almacenamiento, InstanciaEvento primerEvento) {
@@ -80,6 +57,23 @@ public abstract class Repeticion {
     // getter del intervalo
     public int getIntervalo(){
         return intervalo;
+    }
+
+    // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
+    // evento no hay más repeticiones del Evento, false en caso contrario
+    private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
+        LocalDate fechaProximoEvento = getProximaInstanciaEvento(evento).getDiaInicio();
+        if (fechaHasta == null){
+            return ocurrenciasRelativas == sinRepeticion;
+        }
+        return fechaProximoEvento.isAfter(fechaHasta);
+    }
+
+    // disminuirOcurrencias resta en 1 la cantidad de ocurrencias del evento
+    private void disminuirOcurrencias(){
+        if (this.ocurrenciasRelativas > sinRepeticion){
+            this.ocurrenciasRelativas-=1;
+        }
     }
 
 }

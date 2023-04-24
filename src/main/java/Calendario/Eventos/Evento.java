@@ -4,12 +4,8 @@ import Calendario.Alarmas.Alarma;
 import Calendario.Duracion.Duracion;
 import Calendario.Main.Actividad;
 import Calendario.Repeticiones.Repeticion;
-
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.Temporal;
 import java.util.*;
 
 public class Evento extends Actividad{

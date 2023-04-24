@@ -2,9 +2,7 @@ package Calendario.Repeticiones;
 
 
 import Calendario.Eventos.InstanciaEvento;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class RepeticionMensual extends Repeticion {
     public RepeticionMensual(int intervaloMensual,  LocalDate fechaHasta){
