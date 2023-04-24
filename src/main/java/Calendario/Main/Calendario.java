@@ -22,19 +22,25 @@ public class Calendario {
         this.fechaActual = LocalDateTime.now();
     }
 
-    // agrearTarea recibe una Tarea y la agrega al Calendario.
+    /**
+     * Recibe una Tarea y la agrega al Calendario.
+     */
     public void agregarTarea(Tarea tarea){
         tareas.add(tarea);
         actividades.add(tarea);
     }
 
-    // agregarEvento recibe un Evento y lo agrega al Calendario.
+    /**
+     * Recibe un Evento y lo agrega al Calendario.
+     */
     public void agregarEvento(Evento evento){
         eventos.add(evento);
         actividades.add(evento);
     }
 
-    // getActividades recibe un intervalo de fechas y devuelve la lista de Actividades dentro del mismo
+    /**
+     * Recibe un intervalo de fechas y devuelve la lista de Actividades dentro del mismo
+     */
     public List<Actividad> getActividades(LocalDateTime desde, LocalDateTime hasta){
         List<Actividad> actividades = new ArrayList<>();
         getEventos(desde, hasta, actividades);
@@ -42,9 +48,11 @@ public class Calendario {
         return actividades;
     }
 
-    // getProximasAlarmas devuelve un conjunto de alarmas que suenan a la misma fecha y hora, y son las más
-    // próximas a la fecha actual
-   public Set<Alarma> getProximasAlarmas(){
+    /**
+     * Devuelve un conjunto de alarmas que suenan a la misma fecha y hora, y son las más
+     * próximas a la fecha actual
+     */
+    public Set<Alarma> getProximasAlarmas(){
        Set<Alarma> proximasAlarmas = new HashSet<>();
        Set<Alarma> primerasAlarmas = new HashSet<>();
        for(Actividad actividad : actividades){
@@ -60,71 +68,97 @@ public class Calendario {
        return proximasAlarmas;
    }
 
-   // completarTarea completa la tarea pasada por parámetro
+   /**
+    * Completa la tarea pasada por parámetro
+    */
     public void completarTarea(Tarea tarea){
         tarea.completar();
     }
 
-    // modificarTitulo cambia el título de la actividad recibida
+    /**
+     * Cambia el título de la actividad recibida
+     */
     public void modificarTitulo(Actividad actividad, String titulo){
         actividad.setTitulo(titulo);
     }
 
-    // modificarDescripcion cambia la descripción de la actividad recibida
+    /**
+     * Cambia la descripción de la actividad recibida
+     */
     public void modificarDescripcion(Actividad actividad, String descripcion){
         actividad.setDescripcion(descripcion);
     }
 
-    // modificarDiaTarea cambia la fecha de la tarea recibida
+    /**
+     * Cambia la fecha de la tarea recibida
+     */
     public void modificarDiaTarea(Tarea tarea, LocalDate dia){
         tarea.setDia(dia);
     }
 
-    // modificarHoraTarea cambia la hora de la tarea recibida
+    /**
+     * Cambia la hora de la tarea recibida
+     */
     public void modificarHoraTarea(Tarea tarea, LocalTime hora){
         tarea.setHora(hora);
     }
 
-    // modificarFechaEvento cambia la fecha de la primera instancia del evento
+    /**
+     * Cambia la fecha de la primera instancia del evento
+     */
     public void modificarFechaEvento(Evento evento, InstanciaEvento eventoInicial){
         evento.setEventoInicial(eventoInicial);
     }
 
-    /* configurarAlarma recibe una Alarma y se la agrega a la Actividad dada. */
+    /**
+     * Recibe una Alarma y se la agrega a la Actividad dada.
+     */
     public void configurarAlarma(Actividad actividad, Alarma alarma){
         actividad.configurarAlarma(alarma);
     }
 
-    // modificarAlarma cambia una determinada alarma de la actividad por una nueva
+    /**
+     * Cambia una determinada alarma de la actividad por una nueva
+     */
     public void modificarAlarma(Actividad actividad, Alarma anterior, Alarma nueva){
         actividad.eliminarAlarma(anterior);
         actividad.configurarAlarma(nueva);
     }
 
-    // eliminarAlarma elimina una determinada alarma de la actividad
+    /**
+     * Elimina una determinada alarma de la actividad
+     */
     public void eliminarAlarma(Actividad actividad, Alarma alarma){
         actividad.eliminarAlarma(alarma);
     }
 
-    // modificarRepeticionEvento cambia la repetición del evento
+    /**
+     * Cambia la repetición del evento
+     */
     public void modificarRepeticionEvento(Evento evento, Repeticion repeticion){
         evento.setRepeticion(repeticion);
     }
 
-    // eliminarTarea saca la tarea del Calendario y borra su información
+    /**
+     * Saca la tarea del Calendario y borra su información
+     */
     public void eliminarTarea(Tarea tarea){
         tareas.remove(tarea);
         tarea = null;
     }
 
-    // eliminarEvento saca el evento del Calendario y borra su información
+    /**
+     * Saca el evento del Calendario y borra su información
+     */
     public void eliminarEvento(Evento evento){
         eventos.remove(evento);
         evento = null;
     }
 
-    /* getEventos recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
-    de los Eventos que se encuentran dentro del mismo */
+    /**
+     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
+     * de los Eventos que se encuentran dentro del mismo
+     */
     private void getEventos(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Evento evento : eventos){
             var instancia = evento.getProximaRepeticion(desde);
@@ -135,7 +169,9 @@ public class Calendario {
         }
     }
 
-    // getTareas recibe un intervalo de tiempo y guarda en una lista las tareas que se encuentran dentro del mismo
+    /**
+     * Recibe un intervalo de tiempo y guarda en una lista las tareas que se encuentran dentro del mismo
+     */
     private void getTareas(LocalDateTime desde, LocalDateTime hasta, List<Actividad> actividades){
         for (Tarea tarea : tareas){
             if (tarea.estaEnElIntervalo(desde, hasta)){
@@ -144,9 +180,11 @@ public class Calendario {
         }
     }
 
-    // sonMasProximas recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan
-    // al mismo tiempo. La función devuelve true si una alarma del conjunto OTRAS suena antes que una del conjunto
-    // PRIMERAS_ALARMAS
+    /**
+     * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan
+     * al mismo tiempo. La función devuelve true si una alarma del conjunto OTRAS suena antes que una del conjunto
+     * PRIMERAS_ALARMAS
+     */
     private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
         if (primerasAlarmas.size() == 0){
             return true;
@@ -156,9 +194,11 @@ public class Calendario {
         return !otra.suenaAntes(fechaActual) && otra.suenaAntes(primerAlarma);
     }
 
-    // todasSonProximas recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan
-    // al mismo tiempo. La función devuelve true si una alarma del conjunto OTRAS suena igual que una del conjunto
-    // PRIMERAS_ALARMAS
+    /**
+     * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan
+     * al mismo tiempo. La función devuelve true si una alarma del conjunto OTRAS suena igual que una del conjunto
+     * PRIMERAS_ALARMAS
+     */
     private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
         if (primerasAlarmas.size() == 0){
             return true;

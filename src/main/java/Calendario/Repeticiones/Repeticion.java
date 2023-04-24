@@ -13,32 +13,46 @@ public abstract class Repeticion {
     private static final int sinRepeticion = 0;
     private static final int repeticionInfinita = -1;
 
-    // hasta determinda fecha
+    /**
+     * Crea una Repetición que termina en una determinda fecha
+     */
     public Repeticion(int intervalo, LocalDate fechaHasta){
         this.intervalo = intervalo;
         this.fechaHasta = fechaHasta;
     }
 
-    //hasta n ocurrencias
+    /**
+     * Crea una Repetición que termina luego de una cantidad de repeticiones dada
+     */
     public Repeticion(int intervalo, int ocurrencias){
         this.intervalo = intervalo;
         this.ocurrencias = ocurrencias;
         this.ocurrenciasRelativas = ocurrencias;
     }
-    // infinita
+
+    /**
+     * Crea una Repetición infinita
+     */
     public Repeticion(int intervalo){
         this.intervalo = intervalo;
         this.ocurrencias = repeticionInfinita;
     }
 
+    /**
+     * Devuelve true si la repetición nunca acaba
+     */
     public boolean esInfinita(){
         return (this.ocurrencias == repeticionInfinita);
     }
 
-    //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
+    /**
+     * Devuelve el siguiente evento del pasado por parámetro
+     */
     public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
 
-
+    /**
+     * Guarda en una lista las sucesivas instancias del evento
+     */
     public void almacenarRepeticiones(List<InstanciaEvento> almacenamiento, InstanciaEvento primerEvento) {
         this.ocurrenciasRelativas = ocurrencias;
         almacenamiento.add(primerEvento);
@@ -54,13 +68,17 @@ public abstract class Repeticion {
         }
     }
 
-    // getter del intervalo
+    /**
+     * Devuelve el intervalo
+     */
     public int getIntervalo(){
         return intervalo;
     }
 
-    // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
-    // evento no hay más repeticiones del Evento, false en caso contrario
+    /**
+     * Devuelve true si la instancia pasada por parámetro es la última del
+     * evento
+     */
     private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
         LocalDate fechaProximoEvento = getProximaInstanciaEvento(evento).getDiaInicio();
         if (fechaHasta == null){
@@ -69,7 +87,9 @@ public abstract class Repeticion {
         return fechaProximoEvento.isAfter(fechaHasta);
     }
 
-    // disminuirOcurrencias resta en 1 la cantidad de ocurrencias del evento
+    /**
+     * Disminuye en 1 la cantidad de ocurrencias del evento
+     */
     private void disminuirOcurrencias(){
         if (this.ocurrenciasRelativas > sinRepeticion){
             this.ocurrenciasRelativas-=1;
