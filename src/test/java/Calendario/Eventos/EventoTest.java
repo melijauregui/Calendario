@@ -22,15 +22,10 @@ import static org.junit.Assert.*;
 
 public class EventoTest {
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoSetsAnsGetters() {
-        //Act
-=======
     public void TestEventoSetsAnsGetters(){
         //Comprueba que los setters y getters de Evento se comporte como lo esperado
 
         //Arrange
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
 
@@ -103,15 +98,10 @@ public class EventoTest {
     }
 
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoSetsAnsGettersCambiarlos() {
-        //Act
-=======
     public void TestEventoCambiarRepeticion(){
         //Comprueba que al cambiar la repeticion de un evento se comporte como lo esperado
 
         //Arrange
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
 
@@ -140,15 +130,10 @@ public class EventoTest {
         ;
         evento.setRepeticion(repeticion1);
 
-<<<<<<< Updated upstream
-        //Act
-        for (int i = 0; i < ocurrencias - 1; i++) {
-=======
         //Resultados esperados
         List<InstanciaEvento> resEsperadoEventosIntervalo = new ArrayList<>();
         resEsperadoEventosIntervalo.add(eventoInicial);
         for (int i = 0; i < ocurrencias-1; i++) {
->>>>>>> Stashed changes
             eventoInicial = eventoInicial.Clone(eventoInicial.getDiaInicio().plusMonths(2), eventoInicial.getDiaFin().plusMonths(2));
             resEsperadoEventosIntervalo.add(eventoInicial);
         }
@@ -158,16 +143,10 @@ public class EventoTest {
 
         //Assert
         assertEquals(resEsperadoEventosIntervalo.size(), resObtenidoEventosIntervalo1.size());
-<<<<<<< Updated upstream
-        for (int i = 0; i < resEsperadoEventosIntervalo.size(); i++) {
-            assertEquals(resEsperadoEventosIntervalo.get(i).getFechaInicio(), resObtenidoEventosIntervalo1.get(i).getFechaInicio());
-            assertEquals(resEsperadoEventosIntervalo.get(i).getFechaFin(), resObtenidoEventosIntervalo1.get(i).getFechaFin());
-=======
         //Compruebo que los eventos alamacenados sean los correctos
         for (int i = 0; i< resEsperadoEventosIntervalo.size(); i++){
             assertEquals(resEsperadoEventosIntervalo.get(i).getFechaInicio(),resObtenidoEventosIntervalo1.get(i).getFechaInicio());
             assertEquals(resEsperadoEventosIntervalo.get(i).getFechaFin(),resObtenidoEventosIntervalo1.get(i).getFechaFin());
->>>>>>> Stashed changes
         }
 
         //Modifico repeticion
@@ -211,16 +190,11 @@ public class EventoTest {
     }
 
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoGetProximoEvento() {
-        //Act
-=======
     public void TestEventoGetProximoEvento(){
         //Comprueba que el método getProximoEvento(fecha) de Evento se comporte como lo esperado
         //El evento es finito
 
         //Arrange
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
         var evento = new Evento();
@@ -294,16 +268,11 @@ public class EventoTest {
     }
 
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoGetProximoEventoInfinito() {
-        //Act
-=======
     public void TestEventoGetProximoEventoInfinito(){
         //Comprueba que el método getProximoEvento() de Evento se comporte como lo esperado
         //El evento es finito
 
         //Arrange
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
         var evento = new Evento();
@@ -377,15 +346,10 @@ public class EventoTest {
     }
 
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoGetProximoEvento2() {
-        //Act
-=======
     public void TestEventoGetProximoEvento2(){
         //Comprueba que el método getProximoEvento(evento) de Evento se comporte como lo esperado
         //El evento es finito
 
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
         var evento = new Evento();
@@ -457,15 +421,10 @@ public class EventoTest {
     }
 
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoGetProximoEventoInfinito2() {
-        //Act
-=======
     public void TestEventoGetProximoEventoInfinito2(){
         //Comprueba que el método getProximoEvento(evento) de Evento se comporte como lo esperado
         //El evento es infinito
 
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
         var evento = new Evento();
@@ -536,14 +495,9 @@ public class EventoTest {
     }
 
     @Test
-<<<<<<< Updated upstream
-    public void TestEventoSetsAnsGettersCambiarDiaInicio() {
-        //Act
-=======
     public void TestEventoSetsAnsGettersCambiarDiaInicio(){
         //Comprueba que al cambiar la fecha de inicio del evento se comporte como lo esperado
 
->>>>>>> Stashed changes
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
         var evento = new Evento();
@@ -607,13 +561,6 @@ public class EventoTest {
             assertEquals(resEsperadoFechasInicioALmacenadas.get(i), resObtenidoEventosIntervalo.get(i).getFechaInicio());
             assertEquals(resEsperadoFechasFinALmacenadas.get(i), resObtenidoEventosIntervalo.get(i).getFechaFin());
         }
-<<<<<<< Updated upstream
-        assertEquals(resEsperadoTitulo, resObtenidoTitulo);
-        assertEquals(resEsperadoDescripcion, resObtenidoDescripcion);
-
-=======
->>>>>>> Stashed changes
-        //--------------------------------------------------------------------
 
         //defino segundo evento inicial
         var duracion2 = new Duracion();

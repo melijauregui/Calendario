@@ -37,18 +37,12 @@ public abstract class Repeticion {
         this.ocurrencias = repeticionInfinita;
     }
 
-<<<<<<< Updated upstream
-    // esInfinita devuelve true si la repetición nunca acaba
-=======
-    //---------------------------------------------------------------------
-
     private void disminuirOcurrencias(){
         if (this.ocurrenciasRelativas > sinRepeticion){
             this.ocurrenciasRelativas-=1;
         }
     }
 
->>>>>>> Stashed changes
     public boolean esInfinita(){
         return (this.ocurrencias == repeticionInfinita);
     }
@@ -56,9 +50,7 @@ public abstract class Repeticion {
     //getProximaInstanciaEvento devuelve el siguiente evento del pasado por parámetro
     public abstract InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento);
 
-<<<<<<< Updated upstream
-    // almacenarRepeticiones guarda en una lista las sucesivas repeticiones del evento
-=======
+
     // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
     // evento no hay más repeticiones del Evento, false en caso contrario
     private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
@@ -70,7 +62,6 @@ public abstract class Repeticion {
     }
 
 
->>>>>>> Stashed changes
     public void almacenarRepeticiones(List<InstanciaEvento> almacenamiento, InstanciaEvento primerEvento) {
         this.ocurrenciasRelativas = ocurrencias;
         almacenamiento.add(primerEvento);
@@ -91,20 +82,4 @@ public abstract class Repeticion {
         return intervalo;
     }
 
-    // esUltimaRepeticion devuelve true si la instancia pasada por parámetro es la última del
-    // evento
-    private boolean esUltimaInstanciaEvento(InstanciaEvento evento){
-        LocalDate fechaProximoEvento = getProximaInstanciaEvento(evento).getDiaInicio();
-        if (fechaHasta == null){
-            return ocurrencias == sinRepeticion;
-        }
-        return fechaProximoEvento.isAfter(fechaHasta);
-    }
-
-    // disminuirOcurrencias resta 1 a la cantidad de ocurrencias del evento
-    private void disminuirOcurrencias(){
-        if (this.ocurrencias > sinRepeticion){
-            this.ocurrencias-=1;
-        }
-    }
 }
