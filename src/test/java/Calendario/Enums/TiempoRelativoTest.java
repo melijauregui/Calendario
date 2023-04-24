@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class TiempoRelativoTest {
 
     @Test
-    public void determinarFechaRelativaMinutos() {
+    public void TestDeterminarFechaRelativaMinutos() {
         //Arrange
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 50);
         int intervalo = 10;
@@ -25,7 +25,7 @@ public class TiempoRelativoTest {
     }
 
     @Test
-    public void determinarFechaRelativaHoras() {
+    public void TestDeterminarFechaRelativaHoras() {
         //Arrange
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 50);
         int intervalo = 4;
@@ -41,7 +41,7 @@ public class TiempoRelativoTest {
     }
 
     @Test
-    public void determinarFechaRelativaDias() {
+    public void TestDeterminarFechaRelativaDias() {
         //Arrange
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 50);
         int intervalo = 5;
@@ -57,7 +57,7 @@ public class TiempoRelativoTest {
     }
 
     @Test
-    public void determinarFechaRelativaSemanas() {
+    public void TestDeterminarFechaRelativaSemanas() {
         //Arrange
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 50);
         int intervalo = 2;

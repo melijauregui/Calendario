@@ -45,16 +45,17 @@ public class CalendarioTest {
         //Arrange
         var calendario = new Calendario();
         var tarea = new Tarea(); //creada con los valores por default
-        tarea.setDia(LocalDate.of(2023, 4, 22));
-        tarea.setHora(LocalTime.of(15, 40));
+
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 22, 15, 50);
-        var actividadesEsperadas = new ArrayList<Actividad>();
-        actividadesEsperadas.add(tarea);
 
         //Act
         calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea,LocalDate.of(2023, 4, 22));
+        calendario.modificarHoraTarea(tarea, LocalTime.of(15, 40));
         var actividadesResultado = calendario.getActividades(fechaDesde, fechaHasta);
+        var actividadesEsperadas = new ArrayList<Actividad>();
+        actividadesEsperadas.add(tarea);
 
         //Assert
         assertEquals(actividadesEsperadas, actividadesResultado);
@@ -71,16 +72,15 @@ public class CalendarioTest {
         duracion.setDiaFin(LocalDate.of(2023, 4, 25));
         var primerEvento = new InstanciaEvento();
         primerEvento.setDuracion(duracion);
-        evento.setEventoInicial(primerEvento);
         var fechaDesde = LocalDateTime.of(2023, 4, 21, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 22, 15, 50);
-        var actividadesEsperadas = new ArrayList<Actividad>();
-        actividadesEsperadas.add(primerEvento);
 
         //Act
         calendario.agregarEvento(evento);
+        calendario.modificarFechaEvento(evento, primerEvento);
         var actividadesResultado = calendario.getActividades(fechaDesde, fechaHasta);
-
+        var actividadesEsperadas = new ArrayList<Actividad>();
+        actividadesEsperadas.add(primerEvento);
 
         //Assert
         assertEquals(actividadesEsperadas, actividadesResultado);
@@ -96,17 +96,19 @@ public class CalendarioTest {
         duracion.setDiaFin(LocalDate.of(2023, 4, 25));
         var primerEvento = new InstanciaEvento();
         primerEvento.setDuracion(duracion);
-        evento.setEventoInicial(primerEvento);
+
         var tarea = new Tarea(); //creada con los valores por default
-        tarea.setDia(LocalDate.of(2023, 4, 22));
-        tarea.setHora(LocalTime.of(15, 40));
+
         var fechaDesde = LocalDateTime.of(2023, 4, 24, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 50);
         var actividadesEsperadas = new ArrayList<Actividad>();
 
         //Act
         calendario.agregarEvento(evento);
+        calendario.modificarFechaEvento(evento, primerEvento);
         calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea,LocalDate.of(2023, 4, 22));
+        calendario.modificarHoraTarea(tarea,LocalTime.of(15, 40));
         var actividadesResultado = calendario.getActividades(fechaDesde, fechaHasta);
 
 
@@ -127,35 +129,35 @@ public class CalendarioTest {
         duracion.setDiaFin(LocalDate.of(2023, 4, 25));
         var primerEvento = new InstanciaEvento();
         primerEvento.setDuracion(duracion);
-        evento1.setEventoInicial(primerEvento);
 
         //evento con repetición
         var evento2 = new Evento(); //creado con los valores por default
         var repeticion = new RepeticionDiaria(1);
         var primerEvento2 = primerEvento.Clone(duracion.getDiaInicio().minusDays(2), duracion.getDiaFin());
-        evento2.setEventoInicial(primerEvento2);
-        evento2.setRepeticion(repeticion);
 
         //tarea
         var tarea = new Tarea(); //creada con los valores por default
-        tarea.setDia(LocalDate.of(2023, 4, 23));
-        tarea.setHora(LocalTime.of(15, 40));
 
         //intervalo
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 50);
+
+        //Act
+        calendario.agregarEvento(evento1);
+        calendario.modificarFechaEvento(evento1, primerEvento);
+        calendario.agregarEvento(evento2);
+        calendario.modificarFechaEvento(evento2, primerEvento2);
+        calendario.modificarRepeticionEvento(evento2, repeticion);
+        calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea, LocalDate.of(2023, 4, 23));
+        calendario.modificarHoraTarea(tarea,LocalTime.of(15, 40));
+        var actividadesResultado = calendario.getActividades(fechaDesde, fechaHasta);
 
         // actividades esperadas --> tarea 22/4, primerEvento 23/4
         // El primerEvento2 es el 21/4 y no entra en el intervalo. El segundoEvento2 comienza el 22/4, pero antes de las 15:30
         var tercerEvento2 = evento2.getProximaRepeticion(LocalDateTime.of(2023, 4, 22, 15, 30)); // 23/4
         var cuartoEvento2 = evento2.getProximaRepeticion(tercerEvento2); // 24/3
         var actEsperadas = 4;
-
-        //Act
-        calendario.agregarEvento(evento1);
-        calendario.agregarEvento(evento2);
-        calendario.agregarTarea(tarea);
-        var actividadesResultado = calendario.getActividades(fechaDesde, fechaHasta);
 
         //Assert
         assertEquals(actEsperadas, actividadesResultado.size());
@@ -175,15 +177,15 @@ public class CalendarioTest {
         var fecha2 = fecha1.minusMinutes(10);
         var alarma3 = new AlarmaConNotificacion(fecha2);
         var alarma4 = new AlarmaConEmail(fecha2);
-        var tarea1 = new Tarea();
-        tarea1.setDia(fecha1.toLocalDate());
-        tarea1.setHora(fecha1.toLocalTime());
-        var tarea2 = new Tarea();
-        tarea2.setDia(fecha2.toLocalDate());
-        tarea2.setHora(fecha2.toLocalTime());
         var calendario = new Calendario();
+        var tarea1 = new Tarea();
         calendario.agregarTarea(tarea1);
+        calendario.modificarDiaTarea(tarea1, fecha1.toLocalDate());
+        calendario.modificarHoraTarea(tarea1, fecha1.toLocalTime());
+        var tarea2 = new Tarea();
         calendario.agregarTarea(tarea2);
+        calendario.modificarDiaTarea(tarea2, fecha2.toLocalDate());
+        calendario.modificarHoraTarea(tarea2, fecha2.toLocalTime());
         var cantidadEsperadas = 3;
 
         //Act
@@ -206,10 +208,10 @@ public class CalendarioTest {
         //Arrange
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
         var tarea = new Tarea();
-        tarea.setDia(fecha.toLocalDate());
-        tarea.setHora(fecha.toLocalTime());
         var calendario = new Calendario();
         calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea,fecha.toLocalDate());
+        calendario.modificarHoraTarea(tarea, fecha.toLocalTime());
         var tamanioEsperado = 0;
 
         //Act
@@ -225,9 +227,9 @@ public class CalendarioTest {
         //Arrange
         var calendario = new Calendario();
         var tarea = new Tarea();
-        tarea.setTitulo("título viejo");
-        var tituloNuevo = "título nuevo";
         calendario.agregarTarea(tarea);
+        calendario.modificarTitulo(tarea,"título viejo");
+        var tituloNuevo = "título nuevo";
 
         //Act
         calendario.modificarTitulo(tarea, tituloNuevo);
@@ -241,10 +243,10 @@ public class CalendarioTest {
     public void TestModificarDescripcion() {
         //Arrange
         var evento = new Evento();
-        evento.setDescripcion("descripción vieja");
-        var descripcionNueva = "descripción nueva";
         var calendario = new Calendario();
         calendario.agregarEvento(evento);
+        calendario.modificarDescripcion(evento,"descripción vieja");
+        var descripcionNueva = "descripción nueva";
 
         //Act
         calendario.modificarDescripcion(evento, descripcionNueva);
@@ -255,7 +257,7 @@ public class CalendarioTest {
     }
 
     @Test
-    public void TestModificarDia() {
+    public void TestModificarDiaTarea() {
         //Arrange
         var calendario = new Calendario();
         var tarea = new Tarea();
@@ -322,15 +324,15 @@ public class CalendarioTest {
     }
 
     @Test
-    public void configurarAlarma() {
+    public void TestConfigurarAlarma() {
         //Arrange
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
         var alarma = new AlarmaConNotificacion(fecha);
         var tarea = new Tarea();
-        tarea.setDia(fecha.toLocalDate());
-        tarea.setHora(fecha.toLocalTime());
         var calendario = new Calendario();
         calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea,fecha.toLocalDate());
+        calendario.modificarHoraTarea(tarea, fecha.toLocalTime());
         var cantidadEsperadas = 1;
 
         //Act
@@ -343,7 +345,7 @@ public class CalendarioTest {
     }
 
     @Test
-    public void modificarAlarma() {
+    public void TestModificarAlarma() {
         //Arrange
         var fecha1 = LocalDateTime.of(2023, 4, 22, 15, 30);
         var alarma1 = new AlarmaConNotificacion(fecha1);
@@ -357,9 +359,9 @@ public class CalendarioTest {
         duracionInicial.setHoraFin(LocalTime.of(20, 5));
         var eventoInicial = new InstanciaEvento();
         eventoInicial.setDuracion(duracionInicial);
-        evento.setEventoInicial(eventoInicial);
         var calendario = new Calendario();
         calendario.agregarEvento(evento);
+        calendario.modificarFechaEvento(evento, eventoInicial);
         var cantidadEsperadas = 1;
         calendario.configurarAlarma(evento, alarma1);
 
@@ -373,15 +375,15 @@ public class CalendarioTest {
     }
 
     @Test
-    public void eliminarAlarma() {
+    public void TestEliminarAlarma() {
         //Arrange
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
         var alarma = new AlarmaConNotificacion(fecha);
-        var tarea = new Tarea();
-        tarea.setDia(fecha.toLocalDate());
-        tarea.setHora(fecha.toLocalTime());
         var calendario = new Calendario();
+        var tarea = new Tarea();
         calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea,fecha.toLocalDate());
+        calendario.modificarHoraTarea(tarea,fecha.toLocalTime());
         var cantidadEsperadas = 0;
         calendario.configurarAlarma(tarea, alarma);
 
@@ -395,7 +397,7 @@ public class CalendarioTest {
     }
 
     @Test
-    public void modificarRepeticionEvento() {
+    public void TestModificarRepeticionEvento() {
         //Arrange
         var evento= new Evento();
         var duracion = new Duracion();
@@ -405,10 +407,10 @@ public class CalendarioTest {
         duracion.setHoraFin(LocalTime.of(20, 5));
         var eventoInicial = new InstanciaEvento();
         eventoInicial.setDuracion(duracion);
-        evento.setEventoInicial(eventoInicial);
-        var repeticion = new RepeticionDiaria(2, 2);
         var calendario = new Calendario();
         calendario.agregarEvento(evento);
+        calendario.modificarFechaEvento(evento, eventoInicial);
+        var repeticion = new RepeticionDiaria(2, 2);
 
         //Act
         calendario.modificarRepeticionEvento(evento, repeticion);
@@ -423,14 +425,14 @@ public class CalendarioTest {
     }
 
     @Test
-    public void eliminarTarea() {
+    public void TestEliminarTarea() {
         //Arrange
         var calendario = new Calendario();
         var tarea = new Tarea();
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
-        tarea.setDia(fecha.toLocalDate());
-        tarea.setHora(fecha.toLocalTime());
         calendario.agregarTarea(tarea);
+        calendario.modificarDiaTarea(tarea,fecha.toLocalDate());
+        calendario.modificarHoraTarea(tarea,fecha.toLocalTime());
         var tamanioEsperado = 0;
 
         //Act
@@ -442,7 +444,7 @@ public class CalendarioTest {
     }
 
     @Test
-    public void eliminarEvento() {
+    public void TestEliminarEvento() {
         //Arrange
         var evento= new Evento();
         var duracion = new Duracion();
@@ -454,9 +456,9 @@ public class CalendarioTest {
         duracion.setHoraFin(fechaFin.toLocalTime());
         var eventoInicial = new InstanciaEvento();
         eventoInicial.setDuracion(duracion);
-        evento.setEventoInicial(eventoInicial);
         var calendario = new Calendario();
         calendario.agregarEvento(evento);
+        calendario.modificarFechaEvento(evento, eventoInicial);
         var cantidadEsperadas = 0;
 
         //Act

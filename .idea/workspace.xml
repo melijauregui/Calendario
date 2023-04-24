@@ -8,25 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9165d47-0504-413f-be91-4eeff92b52d4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Alarma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Alarma.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConNotificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConNotificacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConSonido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaConSonido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Duracion/Duracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Duracion/Duracion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/TiempoRelativo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/TiempoRelativo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Enums/TiempoRelativoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Enums/TiempoRelativoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,19 +45,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "git-widget-placeholder": "Etapa2",
-    "last_opened_file_path": "C:/Users/Sofia/Documents/Facultad/Fiuba/2023/Algo3/Github/TpCalendario",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Etapa2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sofia/Documents/Facultad/Fiuba/2023/Algo3/Github/TpCalendario&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -92,14 +76,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.Calendario in TpCalendario">
-    <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="TEST_OBJECT" value="directory" />
@@ -108,49 +84,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventoTest.TestEventoGetProximoEvento2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestEliminarEvento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.Eventos.*" />
+          <option name="PATTERN" value="Calendario.Main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Eventos" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Eventos.EventoTest" />
-      <option name="METHOD_NAME" value="TestEventoGetProximoEvento2" />
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestEliminarEvento" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventoTest.TestEventoGetProximoEventoInfinito2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestEliminarTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.Eventos.*" />
+          <option name="PATTERN" value="Calendario.Main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Eventos" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Eventos.EventoTest" />
-      <option name="METHOD_NAME" value="TestEventoGetProximoEventoInfinito2" />
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestEliminarTarea" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EventoTest.TestEventoSetsAnsGettersCambiarDiaInicio" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarRepeticionEvento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.Eventos.*" />
+          <option name="PATTERN" value="Calendario.Main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Eventos" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Eventos.EventoTest" />
-      <option name="METHOD_NAME" value="TestEventoSetsAnsGettersCambiarDiaInicio" />
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionEvento" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.eliminarAlarma" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="eliminarAlarma" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -159,10 +151,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Calendario in TpCalendario" />
-        <item itemvalue="JUnit.EventoTest.TestEventoSetsAnsGettersCambiarDiaInicio" />
-        <item itemvalue="JUnit.All in TpCalendario" />
-        <item itemvalue="JUnit.EventoTest.TestEventoGetProximoEventoInfinito2" />
-        <item itemvalue="JUnit.EventoTest.TestEventoGetProximoEvento2" />
+        <item itemvalue="JUnit.CalendarioTest.TestEliminarEvento" />
+        <item itemvalue="JUnit.CalendarioTest.TestEliminarTarea" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionEvento" />
+        <item itemvalue="JUnit.CalendarioTest.eliminarAlarma" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +204,7 @@
     <SUITE FILE_PATH="coverage/TpCalendario$TareaTest_TestEsDiaCompleto.ic" NAME="TareaTest.TestEsDiaCompleto Coverage Results" MODIFIED="1682218679820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Tareas.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1682350290660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1682362242281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TpCalendario$TiempoRelativoTest.ic" NAME="TiempoRelativoTest Coverage Results" MODIFIED="1682218754282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Enums.*</FILTER>
     </SUITE>
