@@ -50,8 +50,8 @@ public abstract class ActividadParticular {
             if (esMasProxima(primerAlarma, alarma, fecha)){
                 primerAlarma = alarma;
                 proximasAlarmas.clear();
-            }
-            if (esMasProxima(primerAlarma, alarma, fecha) || ambasSonProximas(primerAlarma, alarma)){
+                proximasAlarmas.add(alarma);
+            }else if (ambasSonProximas(primerAlarma, alarma)){
                 proximasAlarmas.add(alarma);
             }
         }
@@ -92,7 +92,7 @@ public abstract class ActividadParticular {
      * Devuelve true si 'otra' suena antes que 'primerAlarma' y es más próxima a la fecha pasada por parámetro
      */
     private boolean esMasProxima(Alarma primerAlarma, Alarma otra, LocalDateTime fecha){
-        return !otra.suenaAntes(fecha) && (primerAlarma == null || otra.suenaAntes(primerAlarma));
+        return otra.suenaDespues(fecha) && (primerAlarma == null || otra.suenaAntes(primerAlarma));
     }
 
     /**

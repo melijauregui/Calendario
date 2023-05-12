@@ -86,7 +86,7 @@ public class Evento implements Actividad {
         List<InstanciaEvento> eventos = new ArrayList<>();
         InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
         while (instancia != null && !instancia.empiezaDespues(hasta)){
-            if (instancia.empiezaDespues(desde)){
+            if (instancia.empiezaDespues(desde) || instancia.empiezaIgual(desde)){
                 eventos.add(instancia);
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
@@ -98,7 +98,7 @@ public class Evento implements Actividad {
     /**
      * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida
      */
-    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
+    public InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
         fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
         fechaFin = repeticion.getProximaFechaFin(fechaFin);
         if (fechaInicio == null){
@@ -119,17 +119,18 @@ public class Evento implements Actividad {
      * próximas a la fecha pasada
      */
     public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
+        Set <Alarma> alarmasProximas = new HashSet<>();
         InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
         while (instancia != null){
             if (instancia.empiezaDespues(fecha)){
-                Set <Alarma> alarmasProximas = instancia.getProximasAlarmas(fecha);
+                alarmasProximas = instancia.getProximasAlarmas(fecha);
                 if (!estaVacia(alarmasProximas)){
                     return alarmasProximas;
                 }
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
         }
-        return null;
+        return alarmasProximas;
     }
 
 
@@ -144,9 +145,10 @@ public class Evento implements Actividad {
     /**
      * Devuelve la fecha de inicio de la primer instancia del evento
      */
-    private LocalDateTime getFechaInicio() {
+    public LocalDateTime getFechaInicio() {
         return duracion.getFechaInicio();
     }
+
 
     private boolean estaVacia(Collection collection){
         return collection.size() == 0;

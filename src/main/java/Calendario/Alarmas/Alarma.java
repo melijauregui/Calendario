@@ -38,6 +38,9 @@ public class Alarma {
     public boolean suenaAntes(LocalDateTime fecha){
         return this.fechaAlarma.isBefore(fecha);
     }
+    public boolean suenaDespues(LocalDateTime fecha){
+        return this.fechaAlarma.isAfter(fecha);
+    }
 
     /**
      * Devuelve true si la alarma suena al mismo tiempo que la recibida por parámetro
@@ -50,7 +53,7 @@ public class Alarma {
     /**
      * Devuelve la fecha de la Alarma
      */
-    private LocalDateTime getFechaAlarma() {
+    public LocalDateTime getFechaAlarma() {
         return fechaAlarma;
     }
 

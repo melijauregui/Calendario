@@ -26,6 +26,9 @@ public class InstanciaEvento extends ActividadParticular {
     public boolean empiezaDespues(LocalDateTime fecha){
         return this.getFechaInicio().isAfter(fecha);
     }
+    public boolean empiezaIgual(LocalDateTime fecha){
+        return this.getFechaInicio().isEqual(fecha);
+    }
 
     /**
      * Devuelve la fecha y hora de inicio
@@ -58,9 +61,9 @@ public class InstanciaEvento extends ActividadParticular {
     /**
      * Le agrega a la Instancia la alarma pasada
      */
-    public void configurarAlarma(AlarmaEvento alarma){
-        if (alarma != null){
-            agregarAlarma(alarma.crearAlarmaInstaciaEvento(getFechaInicio()));
+    public void configurarAlarma(AlarmaEvento alarmaEvento){
+        if (alarmaEvento != null){
+            super.agregarAlarma(alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio()));
         }
     }
 
