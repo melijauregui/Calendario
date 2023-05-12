@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="TestEvento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,21 +62,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RepeticionDiariaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Repeticiones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionDiariaTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RepeticionMensualTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
@@ -111,13 +92,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TareaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Tareas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Tareas" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Tareas.TareaTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in TpCalendario" />
+        <item itemvalue="JUnit.TareaTest" />
         <item itemvalue="JUnit.Calendario in TpCalendario" />
         <item itemvalue="JUnit.RepeticionSemanalTest" />
         <item itemvalue="JUnit.RepeticionMensualTest" />
-        <item itemvalue="JUnit.RepeticionDiariaTest" />
       </list>
     </recent_temporary>
   </component>
@@ -144,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683920135041</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="TestEvento">
+      <created>1683925046943</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683925046943</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
