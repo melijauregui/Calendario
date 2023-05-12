@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="">
+    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="TestEvento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" afterDir="false" />
@@ -133,6 +133,14 @@
       <option name="presentableId" value="Default" />
       <updated>1683906269731</updated>
     </task>
+    <task id="LOCAL-00001" summary="TestEvento">
+      <created>1683920123910</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683920123910</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
