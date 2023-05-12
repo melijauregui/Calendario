@@ -9,8 +9,10 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 public class InstanciaEvento extends ActividadParticular {
+
     Duracion duracion;
-    public InstanciaEvento() {
+    public InstanciaEvento(String titulo, String descripcion) {
+        super(titulo, descripcion);
     }
 
     /**

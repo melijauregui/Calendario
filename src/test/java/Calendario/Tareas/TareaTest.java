@@ -1,5 +1,9 @@
 package Calendario.Tareas;
-/*
+
+import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.Aviso.AvisoConSonido;
+import Calendario.Alarmas.Aviso.AvisoEmail;
+import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Enums.TiempoRelativo;
 import org.junit.Test;
 
@@ -14,7 +18,9 @@ public class TareaTest {
     @Test
     public void TestEsDiaCompleto() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var dia = LocalDate.of(2023, 4, 22);
         tarea.setDia(dia);
 
@@ -28,9 +34,11 @@ public class TareaTest {
     @Test
     public void TestEstaEnElIntervalo() {
         //Arrange
-        var tarea1 = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea1 = new Tarea(titulo, descripcion);
         tarea1.setDia(LocalDate.of(2023, 4, 22));
-        var tarea2 = new Tarea();
+        var tarea2 = new Tarea(titulo, descripcion);
         tarea2.setDia(LocalDate.of(2023, 4, 22));
         tarea2.setHora(LocalTime.of(20, 0));
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 0);
@@ -45,38 +53,42 @@ public class TareaTest {
         assertTrue(resultadoTarea2);
     }
 
+
     @Test
     public void TestConfigurarAlarma() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
-        var alarma = new AlarmaConSonido(10, TiempoRelativo.MINUTOS);
+        Alarma alarma = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoNotificacion());
 
         //Act
-        tarea.configurarAlarma(alarma);
+        tarea.agregarAlarma(alarma);
         var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
 
         //Assert
         assertTrue(resultado.contains(alarma));
-
-
     }
+
 
     @Test
     public void TestGetProximasAlarma() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
-        var alarma1 = new AlarmaConSonido(10, TiempoRelativo.MINUTOS);
-        var alarma2 = new AlarmaConNotificacion(10, TiempoRelativo.MINUTOS);
-        var alarma3 = new AlarmaConEmail(fecha.plusDays(1));
-        tarea.configurarAlarma(alarma1);
-        tarea.configurarAlarma(alarma2);
-        tarea.configurarAlarma(alarma3);
+        var alarma1 = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoConSonido());
+        var alarma2 = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoNotificacion());
+        var alarma3 = new Alarma(fecha.plusDays(1), new AvisoEmail());
+        tarea.agregarAlarma(alarma1);
+        tarea.agregarAlarma(alarma2);
+        tarea.agregarAlarma(alarma3);
 
         //Act
         var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
@@ -88,15 +100,18 @@ public class TareaTest {
 
     }
 
+
     @Test
     public void TestEliminarAlarma() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
-        var alarma = new AlarmaConSonido(10, TiempoRelativo.MINUTOS);
-        tarea.configurarAlarma(alarma);
+        var alarma = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoConSonido());
+        tarea.agregarAlarma(alarma);
 
         //Act
         tarea.eliminarAlarma(alarma);
@@ -105,13 +120,14 @@ public class TareaTest {
 
         //Assert
         assertEquals(tamanioEsperado, resultado);
-
-
     }
+
     @Test
     public void TestCompletar() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         tarea.setDia(LocalDate.of(2023, 4, 22));
         tarea.setHora(LocalTime.of(20, 0));
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 0);
@@ -125,10 +141,13 @@ public class TareaTest {
         assertFalse(resultado);
     }
 
+
     @Test
     public void TestGetFecha() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
@@ -143,34 +162,41 @@ public class TareaTest {
     @Test
     public void TestGetTitulo() {
         //Arrange
-        var tarea = new Tarea();
-        var titulo = "título";
-        tarea.setTitulo(titulo);
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
+        var titulo2 = "título";
+        tarea.setTitulo(titulo2);
 
         //Act
         var resultado = tarea.getTitulo();
 
         //Assert
-        assertEquals(titulo, resultado);
+        assertEquals(titulo2, resultado);
     }
 
     @Test
     public void TestGetDescripcion() {
         //Arrange
-        var tarea = new Tarea();
-        var descripcion = "descripcion";
-        tarea.setDescripcion(descripcion);
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
+        var descripcion2 = "descripcion";
+        tarea.setDescripcion(descripcion2);
 
         //Act
         var resultado = tarea.getDescripcion();
 
         //Assert
-        assertEquals(descripcion, resultado);
+        assertEquals(descripcion2, resultado);
     }
+
     @Test
     public void TestSetDia() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var dia = LocalDate.of(2023, 4, 22);
 
         //Act
@@ -182,10 +208,13 @@ public class TareaTest {
 
     }
 
+
     @Test
     public void TestSetHora() {
         //Arrange
-        var tarea = new Tarea();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var tarea = new Tarea(titulo, descripcion);
         var dia = LocalDate.of(2023, 4, 22);
         var hora = LocalTime.of(20, 0);
         tarea.setDia(dia);
@@ -198,8 +227,4 @@ public class TareaTest {
         assertEquals(hora, resultado);
     }
 
-
-
 }
-
- */

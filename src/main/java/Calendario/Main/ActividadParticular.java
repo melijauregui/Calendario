@@ -1,21 +1,21 @@
 package Calendario.Main;
 
 import Calendario.Alarmas.Alarma;
-import Calendario.Alarmas.Aviso.Aviso;
-import Calendario.Enums.TiempoRelativo;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 public abstract class ActividadParticular {
-    private String titulo;
-    private String descripcion;
+    protected String titulo;
+    protected String descripcion;
     private Set<Alarma> alarmas = new HashSet<>();
 
 
-    public ActividadParticular(){
+    public ActividadParticular(String titulo, String descripcion){
+        this.titulo = titulo;
+        this.descripcion = descripcion;
     }
 
     /**
@@ -58,19 +58,6 @@ public abstract class ActividadParticular {
         return proximasAlarmas;
     }
 
-    /**
-     * Setea el título
-     */
-    public void setTitulo(String titulo){
-        this.titulo = titulo;
-    }
-
-    /**
-     * Setea la descripción
-     */
-    public void setDescripcion(String descripcion){
-        this.descripcion = descripcion;
-    }
 
     /**
      * Agrega la alarma recibida al conjunto de alarmas de la actividad

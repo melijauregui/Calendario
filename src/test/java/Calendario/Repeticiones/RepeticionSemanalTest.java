@@ -1,5 +1,5 @@
 package Calendario.Repeticiones;
-/*
+
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
@@ -39,7 +39,9 @@ public class RepeticionSemanalTest {
         duracion.setDiaFin(LocalDate.of(2023, 4, 24));
         duracion.setHoraInicio(LocalTime.of(18, 30));
         duracion.setHoraFin(LocalTime.of(19, 30));
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //Resultados Esperados
@@ -47,56 +49,49 @@ public class RepeticionSemanalTest {
         var resEsperadoInfinitoFechaHasta = false;
         var resEsperadoInfinitoInfinita = true;
 
-        var resEsperadoFechaInicio = new ArrayList<LocalDateTime>();
-        var resEsperadoFechaFin = new ArrayList<LocalDateTime>();
+        var resEsperadoFechaInicio = new ArrayList<LocalDate>();
+        var resEsperadoFechaFin = new ArrayList<LocalDate>();
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 4, 27, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 4, 27, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 4, 27));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 4, 27));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 4, 30, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 4, 30, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 4, 30));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 4, 30));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 5, 8, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 5, 8, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 5, 8));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 5, 8));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 5, 11, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 5, 11, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 5, 11));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 5, 11));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 5, 14, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 5, 14, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 5, 14));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 5, 14));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 5, 22, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 5, 22, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 5, 22));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 5, 22));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 5, 25, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 5, 25, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 5, 25));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 5, 25));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 5, 28, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 5, 28, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 5, 28));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 5, 28));
 
-        resEsperadoFechaInicio.add(LocalDateTime.of(2023, 6, 5, 18, 30));
-        resEsperadoFechaFin.add(LocalDateTime.of(2023, 6, 5, 19, 30));
+        resEsperadoFechaInicio.add(LocalDate.of(2023, 6, 5));
+        resEsperadoFechaFin.add(LocalDate.of(2023, 6, 5));
 
-        InstanciaEvento eventoOcurrencias = eventoInstancia;
-        InstanciaEvento eventoFechaHasta = eventoInstancia;
-        InstanciaEvento eventoInfinito = eventoInstancia;
 
         //Act Resultados Obetenidos
         for (int i = 0; i < 9; i++) {
-            eventoOcurrencias = repeticionOcurrencias.getProximaInstanciaEvento(eventoOcurrencias);
-            eventoFechaHasta = repeticionOcurrencias.getProximaInstanciaEvento(eventoFechaHasta);
-            eventoInfinito = repeticionOcurrencias.getProximaInstanciaEvento(eventoInfinito);
+            InstanciaEvento eventoOcurrencias = eventoInstancia;
+            InstanciaEvento eventoFechaHasta = eventoInstancia;
+            InstanciaEvento eventoInfinito = eventoInstancia;
+            var resObtenidoFechaInicioOcurrencias = repeticionOcurrencias.getProximaFecha(eventoOcurrencias.getDiaInicio());
+            var resObtenidoFechaFinOcurrencias = repeticionOcurrencias.getProximaFechaFin(eventoOcurrencias.getDiaFin());
+            var resObtenidoFechaInicioFechaHasta = repeticionFechaHasta.getProximaFecha(eventoFechaHasta.getDiaInicio());
+            var resObtenidoFechaFinFechaHasta = repeticionFechaHasta.getProximaFechaFin(eventoFechaHasta.getDiaFin());
+            var resObtenidoFechaInicioInfinita = repeticionInfinita.getProximaFecha(eventoInfinito.getDiaInicio());
+            var resObtenidoFechaFinInfinita = repeticionInfinita.getProximaFechaFin(eventoInfinito.getDiaFin());
 
-            var resObtenidoFechaInicioOcurrencias = eventoOcurrencias.getFechaInicio();
-            var resObtenidoFechaFinOcurrencias = eventoOcurrencias.getFechaFin();
-            var resObtenidoFechaInicioFechaHasta = eventoFechaHasta.getFechaInicio();
-            var resObtenidoFechaFinFechaHasta = eventoFechaHasta.getFechaFin();
-            var resObtenidoFechaInicioInfinita = eventoInfinito.getFechaInicio();
-            var resObtenidoFechaFinInfinita = eventoInfinito.getFechaFin();
-
-            var resObtenidoEsInfinitaOcurrencias = repeticionOcurrencias.esInfinita();
-            var resObtenidoEsInfinitaFechaHasta = repeticionFechaHasta.esInfinita();
-            var resObtenidoEsInfinitaInfinita = repeticionInfinita.esInfinita();
 
             //Assert
             assertEquals(resEsperadoFechaInicio.get(i), resObtenidoFechaInicioOcurrencias);
@@ -105,11 +100,17 @@ public class RepeticionSemanalTest {
             assertEquals(resEsperadoFechaFin.get(i), resObtenidoFechaFinFechaHasta);
             assertEquals(resEsperadoFechaInicio.get(i), resObtenidoFechaInicioInfinita);
             assertEquals(resEsperadoFechaFin.get(i), resObtenidoFechaFinInfinita);
-            assertEquals(resEsperadoInfinitoOcurrencias, resObtenidoEsInfinitaOcurrencias);
-            assertEquals(resEsperadoInfinitoFechaHasta, resObtenidoEsInfinitaFechaHasta);
-            assertEquals(resEsperadoInfinitoInfinita, resObtenidoEsInfinitaInfinita);
+
+            var duracion2 = new Duracion();
+            duracion2.setDiaInicio(resEsperadoFechaInicio.get(i));
+            duracion2.setDiaFin(resEsperadoFechaFin.get(i));
+
+            eventoInstancia = new InstanciaEvento(titulo, descripcion);
+            eventoInstancia.setDuracion(duracion2);
         }
     }
+
+}/*
 
     @Test
     public void AlmacenarRepeticionesOcurrencias() {

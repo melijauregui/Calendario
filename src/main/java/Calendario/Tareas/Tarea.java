@@ -1,6 +1,5 @@
 package Calendario.Tareas;
 
-import Calendario.Alarmas.Alarma;
 import Calendario.Main.Actividad;
 import Calendario.Main.ActividadParticular;
 import Calendario.Main.Constantes;
@@ -10,13 +9,28 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Tarea extends ActividadParticular implements Actividad {
+
     private boolean completada;
 
     private LocalDate dia;
 
     private LocalTime hora;
 
-    public Tarea(){
+    public Tarea(String titulo, String descripcion){
+        super(titulo, descripcion);
+    }
+    /**
+     * Setea el título
+     */
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
+    }
+
+    /**
+     * Setea la descripción
+     */
+    public void setDescripcion(String descripcion){
+        this.descripcion = descripcion;
     }
 
     /**

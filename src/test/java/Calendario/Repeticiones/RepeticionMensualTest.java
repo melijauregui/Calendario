@@ -1,5 +1,5 @@
 package Calendario.Repeticiones;
-/*
+
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
@@ -16,9 +16,10 @@ import static org.junit.Assert.*;
 public class RepeticionMensualTest {
 
     int REPETICION = 100;
+
     @Test
     public void GetProximaInstanciaEventoMD() {
-        //Comprueba que el método GetProximaInstanciaEvento() de Repeticion Mensual se comporte como lo esperado
+        //Comprueba que el método GetProximaInstanciaEvento() de Repeticion Anual se comporte como lo esperado
         //Mismo Dia
 
         //Arrange
@@ -33,37 +34,35 @@ public class RepeticionMensualTest {
         duracion.setDiaFin(LocalDate.of(2023, 11, 11));
         duracion.setHoraInicio(LocalTime.of(18, 30));
         duracion.setHoraFin(LocalTime.of(19, 30));
-        var eventoInstancia = new InstanciaEvento();
+
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //Resultados Esperados
-        var resEsperadoInfinitoOcurrencias = false;
-        var resEsperadoInfinitoFechaHasta = false;
-        var resEsperadoInfinitoInfinita = true;
 
-        InstanciaEvento eventoOcurrencias = eventoInstancia;
-        InstanciaEvento eventoFechaHasta = eventoInstancia;
-        InstanciaEvento eventoInfinito = eventoInstancia;
+
         for (int i = 0; i < REPETICION; i++) {
+            InstanciaEvento eventoOcurrencias = eventoInstancia;
+            InstanciaEvento eventoFechaHasta = eventoInstancia;
+            InstanciaEvento eventoInfinito = eventoInstancia;
 
-            var resEsperadoFechaInicio = eventoInstancia.getFechaInicio().plusMonths(2);
-            var resEsperadoFechaFin = eventoInstancia.getFechaFin().plusMonths(2);
+            var resEsperadoFechaInicio = eventoInstancia.getDiaInicio().plusMonths(2);
+            var resEsperadoFechaFin = eventoInstancia.getDiaFin().plusMonths(2);
 
             //Act Resultados Obetenidos
-            eventoOcurrencias = repeticionOcurrencias.getProximaInstanciaEvento(eventoOcurrencias);
+            /*eventoOcurrencias = repeticionOcurrencias.getProximaFechaInicio(eventoOcurrencias.getDiaInicio());
             eventoFechaHasta = repeticionOcurrencias.getProximaInstanciaEvento(eventoFechaHasta);
-            eventoInfinito = repeticionOcurrencias.getProximaInstanciaEvento(eventoInfinito);
+            eventoInfinito = repeticionOcurrencias.getProximaInstanciaEvento(eventoInfinito); */
 
-            var resObtenidoFechaInicioOcurrencias = eventoOcurrencias.getFechaInicio();
-            var resObtenidoFechaFinOcurrencias = eventoOcurrencias.getFechaFin();
-            var resObtenidoFechaInicioFechaHasta = eventoFechaHasta.getFechaInicio();
-            var resObtenidoFechaFinFechaHasta = eventoFechaHasta.getFechaFin();
-            var resObtenidoFechaInicioInfinita = eventoInfinito.getFechaInicio();
-            var resObtenidoFechaFinInfinita = eventoInfinito.getFechaFin();
+            var resObtenidoFechaInicioOcurrencias = repeticionOcurrencias.getProximaFecha(eventoOcurrencias.getDiaInicio());
+            var resObtenidoFechaFinOcurrencias = repeticionOcurrencias.getProximaFechaFin(eventoOcurrencias.getDiaFin());
+            var resObtenidoFechaInicioFechaHasta = repeticionFechaHasta.getProximaFecha(eventoFechaHasta.getDiaInicio());
+            var resObtenidoFechaFinFechaHasta = repeticionFechaHasta.getProximaFechaFin(eventoFechaHasta.getDiaFin());
+            var resObtenidoFechaInicioInfinita = repeticionInfinita.getProximaFecha(eventoInfinito.getDiaInicio());
+            var resObtenidoFechaFinInfinita = repeticionInfinita.getProximaFechaFin(eventoInfinito.getDiaFin());
 
-            var resObtenidoEsInfinitaOcurrencias = repeticionOcurrencias.esInfinita();
-            var resObtenidoEsInfinitaFechaHasta = repeticionFechaHasta.esInfinita();
-            var resObtenidoEsInfinitaInfinita = repeticionInfinita.esInfinita();
 
             //Assert compruebo que sea efectivamente el próximo evento en cada repeticion
             assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicioOcurrencias);
@@ -72,13 +71,17 @@ public class RepeticionMensualTest {
             assertEquals(resEsperadoFechaFin, resObtenidoFechaFinFechaHasta);
             assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicioInfinita);
             assertEquals(resEsperadoFechaFin, resObtenidoFechaFinInfinita);
-            assertEquals(resEsperadoInfinitoOcurrencias, resObtenidoEsInfinitaOcurrencias);
-            assertEquals(resEsperadoInfinitoFechaHasta, resObtenidoEsInfinitaFechaHasta);
-            assertEquals(resEsperadoInfinitoInfinita, resObtenidoEsInfinitaInfinita);
 
-            eventoInstancia = eventoInstancia.Clone(eventoInstancia.getDiaInicio().plusMonths(2),eventoInstancia.getDiaFin().plusMonths(2));
+            var duracion2 = new Duracion();
+            duracion2.setDiaInicio(eventoInstancia.getDiaInicio().plusMonths(2));
+            duracion2.setDiaFin(eventoInstancia.getDiaFin().plusMonths(2));
+
+            eventoInstancia = new InstanciaEvento(titulo, descripcion);
+            eventoInstancia.setDuracion(duracion2);
         }
     }
+}
+/*
     @Test
     public void GetProximaInstanciaEventoDD() {
         //Comprueba que el método GetProximaInstanciaEvento() de Repeticion mensual se comporte como lo esperado
