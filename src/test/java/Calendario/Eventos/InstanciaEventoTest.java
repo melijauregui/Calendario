@@ -1,5 +1,8 @@
 package Calendario.Eventos;
-/*
+
+import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.Aviso.AvisoConSonido;
+import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Duracion.Duracion;
 import org.junit.Test;
 
@@ -13,7 +16,7 @@ import static org.junit.Assert.*;
 public class InstanciaEventoTest {
 
     @Test
-    public void TestDiaIntervaloMDSettersAndGetters(){
+    public void TestDiaIntervaloMDSettersAndGetters() {
         //Comprueba que los setters y getters de la instancia evento se comporte como lo esperado
         //MismoDía
 
@@ -28,8 +31,11 @@ public class InstanciaEventoTest {
         duracion.setDiaFin(diaFin);
         duracion.setHoraInicio(horaInicio);
         duracion.setHoraFin(horaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
+
 
         //Resultados Esperados
         var resEsperadoDiaInicio = diaInicio;
@@ -49,8 +55,9 @@ public class InstanciaEventoTest {
         assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicio);
         assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
     }
+
     @Test
-    public void TestDiaCompletoMDSettersAndGetters(){
+    public void TestDiaCompletoMDSettersAndGetters() {
         //Comprueba que los setters y getters de la instancia evento se comporte como lo esperado
         //Mismo día y completo
 
@@ -63,7 +70,9 @@ public class InstanciaEventoTest {
         var horaFin = LocalTime.of(23, 59);
         duracion.setDiaInicio(diaInicio);
         duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //Resultados Esperados
@@ -86,7 +95,7 @@ public class InstanciaEventoTest {
     }
 
     @Test
-    public void TestDiaIntervaloDDSettersAndGetters(){
+    public void TestDiaIntervaloDDSettersAndGetters() {
         //Comprueba que los setters y getters de la instancia evento se comporte como lo esperado
         //Diferente día
 
@@ -107,7 +116,9 @@ public class InstanciaEventoTest {
         var resEsperadoDiaFin = diaFin;
         var resEsperadoFechaInicio = LocalDateTime.of(diaInicio, horaInicio);
         var resEsperadoFechaFin = LocalDateTime.of(diaFin, horaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //Act Resultados Obtenidos
@@ -122,8 +133,9 @@ public class InstanciaEventoTest {
         assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicio);
         assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
     }
+
     @Test
-    public void TestDiaCompletoDDSettersAndGetters(){
+    public void TestDiaCompletoDDSettersAndGetters() {
         //Comprueba que los setters y getters de la instancia evento se comporte como lo esperado
         //Diferente Día
 
@@ -136,7 +148,9 @@ public class InstanciaEventoTest {
         var horaFin = LocalTime.of(23, 59);
         duracion.setDiaInicio(diaInicio);
         duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //Resultados Esperados
@@ -158,183 +172,6 @@ public class InstanciaEventoTest {
         assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
     }
 
-/*    public void TestDiaIntervaloMDClone(){
-        //Comprueba que el metodo clone de instancia evento se comporte como lo esperado
-        //MismoDía
-
-        //Arrange
-        //defino fecha
-        var duracion = new Duracion();
-        var diaInicio = LocalDate.of(2023, 11, 11);
-        var diaFin = LocalDate.of(2023, 11, 11);
-        var horaInicio = LocalTime.of(18, 30);
-        var horaFin = LocalTime.of(19, 30);
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
-        duracion.setHoraInicio(horaInicio);
-        duracion.setHoraFin(horaFin);
-        var eventoInstancia = new InstanciaEvento();
-        eventoInstancia.setDuracion(duracion);
-
-        //fecha para instancia clon
-        var diaInicioDespues = diaInicio.plusDays(3);
-        var diaFinDespues = diaFin.plusDays(3);
-
-        //Resultados Esperados
-        var resEsperadoDiaInicio = diaInicioDespues;
-        var resEsperadoDiaFin = diaFinDespues;
-        var resEsperadoFechaInicio = LocalDateTime.of(diaInicioDespues, horaInicio);
-        var resEsperadoFechaFin = LocalDateTime.of(diaFinDespues, horaFin);
-
-        //obtengo instancia clone
-        var eventoClon = eventoInstancia.Clone(diaInicioDespues, diaFinDespues);
-
-        //Act Resultados Obtenidos
-        var resObtenidoDiaInicio = eventoClon.getDiaInicio();
-        var resObtenidoDiaFin = eventoClon.getDiaFin();
-        var resObtenidoFechaInicio = eventoClon.getFechaInicio();
-        var resObtenidoFechaFin = eventoClon.getFechaFin();
-
-        //Assert
-        assertEquals(resEsperadoDiaInicio, resObtenidoDiaInicio);
-        assertEquals(resEsperadoDiaFin, resObtenidoDiaFin);
-        assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicio);
-        assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
-    }
-    @Test
-    public void TestDiaCompletoMDClon(){
-        //Comprueba que el metodo clone de instancia evento se comporte como lo esperado
-        //Mismo día
-
-        //Arrange
-        //defino fecha
-        var duracion = new Duracion();
-        var diaInicio = LocalDate.of(2023, 11, 11);
-        var diaFin = LocalDate.of(2023, 11, 11);
-        var horaInicio = LocalTime.of(00, 00);
-        var horaFin = LocalTime.of(23, 59);
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
-        eventoInstancia.setDuracion(duracion);
-
-        //fecha para instancia clon
-        var diaInicioDespues = diaInicio.plusDays(3);
-        var diaFinDespues = diaFin.plusDays(3);
-
-        //Resultados Esperados
-        var resEsperadoDiaInicio = diaInicioDespues;
-        var resEsperadoDiaFin = diaFinDespues;
-        var resEsperadoFechaInicio = LocalDateTime.of(diaInicioDespues, horaInicio);
-        var resEsperadoFechaFin = LocalDateTime.of(diaFinDespues, horaFin);
-
-        //obtengo instancia clone
-        var eventoClon = eventoInstancia.Clone(diaInicioDespues, diaFinDespues);
-
-
-        //Act Resultados Obtenidos
-        var duracionClon = duracion.Clone();
-        var resObtenidoDiaInicio = eventoClon.getDiaInicio();
-        var resObtenidoDiaFin = eventoClon.getDiaFin();
-        var resObtenidoFechaInicio = eventoClon.getFechaInicio();
-        var resObtenidoFechaFin = eventoClon.getFechaFin();
-
-        //Assert
-        assertEquals(resEsperadoDiaInicio, resObtenidoDiaInicio);
-        assertEquals(resEsperadoDiaFin, resObtenidoDiaFin);
-        assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicio);
-        assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
-    }
-
-    @Test
-    public void TestDiaIntervaloDDClon(){
-        //Comprueba que el metodo clone de instancia evento se comporte como lo esperado
-        //Diferente día
-
-        //Arrange
-        //defino fecha
-        var duracion = new Duracion();
-        var diaInicio = LocalDate.of(2023, 11, 11);
-        var diaFin = LocalDate.of(2023, 12, 7);
-        var horaInicio = LocalTime.of(18, 30);
-        var horaFin = LocalTime.of(19, 30);
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
-        duracion.setHoraInicio(horaInicio);
-        duracion.setHoraFin(horaFin);
-        var eventoInstancia = new InstanciaEvento();
-        eventoInstancia.setDuracion(duracion);
-
-        //fecha para instancia clon
-        var diaInicioDespues = diaInicio.plusDays(3);
-        var diaFinDespues = diaFin.plusDays(3);
-
-        //Resultados Esperados
-        var resEsperadoDiaInicio = diaInicioDespues;
-        var resEsperadoDiaFin = diaFinDespues;
-        var resEsperadoFechaInicio = LocalDateTime.of(diaInicioDespues, horaInicio);
-        var resEsperadoFechaFin = LocalDateTime.of(diaFinDespues, horaFin);
-
-        //obtengo instancia clone
-        var eventoClon = eventoInstancia.Clone(diaInicioDespues, diaFinDespues);
-
-        //Act Resultados Obtenidos
-        var duracionClon = duracion.Clone();
-        var resObtenidoDiaInicio = eventoClon.getDiaInicio();
-        var resObtenidoDiaFin = eventoClon.getDiaFin();
-        var resObtenidoFechaInicio = eventoClon.getFechaInicio();
-        var resObtenidoFechaFin = eventoClon.getFechaFin();
-
-        //Assert
-        assertEquals(resEsperadoDiaInicio, resObtenidoDiaInicio);
-        assertEquals(resEsperadoDiaFin, resObtenidoDiaFin);
-        assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicio);
-        assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
-    }
-    @Test
-    public void TestDiaCompletoDDClon(){
-        //Comprueba que el metodo clone de instancia evento se comporte como lo esperado
-        //DiaCompleto
-
-        //Arrange
-        //defino fecha
-        var duracion = new Duracion();
-        var diaInicio = LocalDate.of(2023, 11, 11);
-        var diaFin = LocalDate.of(2023, 12, 7);
-        var horaInicio = LocalTime.of(00, 00);
-        var horaFin = LocalTime.of(23, 59);
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
-        eventoInstancia.setDuracion(duracion);
-
-        //fecha para instancia clon
-        var diaInicioDespues = diaInicio.plusDays(3);
-        var diaFinDespues = diaFin.plusDays(3);
-
-        //Resultados Esperados
-        var resEsperadoDiaInicio = diaInicioDespues;
-        var resEsperadoDiaFin = diaFinDespues;
-        var resEsperadoFechaInicio = LocalDateTime.of(diaInicioDespues, horaInicio);
-        var resEsperadoFechaFin = LocalDateTime.of(diaFinDespues, horaFin);
-
-        //obtengo instancia clone
-        var eventoClon = eventoInstancia.Clone(diaInicioDespues, diaFinDespues);
-
-        //Act Resultados Obtenidos
-        var duracionClon = duracion.Clone();
-        var resObtenidoDiaInicio = eventoClon.getDiaInicio();
-        var resObtenidoDiaFin = eventoClon.getDiaFin();
-        var resObtenidoFechaInicio = eventoClon.getFechaInicio();
-        var resObtenidoFechaFin = eventoClon.getFechaFin();
-
-        //Assert
-        assertEquals(resEsperadoDiaInicio, resObtenidoDiaInicio);
-        assertEquals(resEsperadoDiaFin, resObtenidoDiaFin);
-        assertEquals(resEsperadoFechaInicio, resObtenidoFechaInicio);
-        assertEquals(resEsperadoFechaFin, resObtenidoFechaFin);
-    }*/
-/*
     //----------------------------------------------------------------------------------
     @Test
     public void TestDiaIntervaloCambiarFecha(){
@@ -352,7 +189,9 @@ public class InstanciaEventoTest {
         duracion.setDiaFin(diaFin);
         duracion.setHoraInicio(horaInicio);
         duracion.setHoraFin(horaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //defino segunda fecha
@@ -399,7 +238,9 @@ public class InstanciaEventoTest {
         var horaFin = LocalTime.of(23, 59);
         duracion.setDiaInicio(diaInicio);
         duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //defino segunda fecha
@@ -448,7 +289,9 @@ public class InstanciaEventoTest {
         duracion.setDiaFin(diaFin);
         duracion.setHoraInicio(horaInicio);
         duracion.setHoraFin(horaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //defino fecha
@@ -480,7 +323,9 @@ public class InstanciaEventoTest {
         duracion.setDiaFin(diaFin);
         duracion.setHoraInicio(horaInicio);
         duracion.setHoraFin(horaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //defino fecha
@@ -509,7 +354,9 @@ public class InstanciaEventoTest {
         var diaFin = LocalDate.of(2023, 11, 11);
         duracion.setDiaInicio(diaInicio);
         duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //defino fecha
@@ -537,7 +384,9 @@ public class InstanciaEventoTest {
         var diaFin = LocalDate.of(2023, 11, 11);
         duracion.setDiaInicio(diaInicio);
         duracion.setDiaFin(diaFin);
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
 
         //defino fecha
@@ -568,16 +417,15 @@ public class InstanciaEventoTest {
         duracion.setHoraFin(horaFin);
 
 
-        var alarma1 = new AlarmaConNotificacion(LocalDateTime.of(diaInicio, horaInicio.minusMinutes(30)));
-        var alarma2 = new AlarmaConEmail(LocalDateTime.of(diaInicio, horaInicio.plusMinutes(30)));
-        var alarmas = new HashSet<Alarma>();
-        alarmas.add(alarma1);
-        alarmas.add(alarma2);
+        var alarma1 = new Alarma(LocalDateTime.of(diaInicio, horaInicio.minusMinutes(30)), new AvisoNotificacion());
+        var alarma2 = new Alarma(LocalDateTime.of(diaInicio, horaInicio.plusMinutes(30)), new AvisoConSonido());
 
-
-        var eventoInstancia = new InstanciaEvento();
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
         eventoInstancia.setDuracion(duracion);
-        eventoInstancia.configurarAlarmas(alarmas);
+        eventoInstancia.agregarAlarma(alarma1);
+        eventoInstancia.agregarAlarma(alarma2);
 
         var resEsperado = new HashSet<Alarma>();
         resEsperado.add(alarma2);
@@ -589,4 +437,4 @@ public class InstanciaEventoTest {
         assertEquals(resEsperado, alarmasObtenidas);
     }
 
-}*/
+}
