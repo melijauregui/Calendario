@@ -96,7 +96,7 @@ public abstract class Repeticion {
      */
     protected boolean terminoRepeticion(LocalDate fecha){
         if (fechaHasta == null){
-            return ocurrenciasRelativas == sinRepeticion;
+            return ocurrenciasRelativas-1 == sinRepeticion;
         }
         return fecha.isAfter(fechaHasta);
     }
