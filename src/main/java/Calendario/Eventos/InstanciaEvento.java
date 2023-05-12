@@ -60,8 +60,7 @@ public class InstanciaEvento extends ActividadParticular {
      */
     public void configurarAlarma(AlarmaEvento alarma){
         if (alarma != null){
-            var alarmas = super.getAlarmas();
-            alarmas.add(alarma.crearAlarmaInstaciaEvento(getFechaInicio()));
+            agregarAlarma(alarma.crearAlarmaInstaciaEvento(getFechaInicio()));
         }
     }
 
