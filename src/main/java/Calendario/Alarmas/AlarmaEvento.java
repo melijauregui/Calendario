@@ -30,7 +30,7 @@ public class AlarmaEvento {
     }
 
     private boolean esFechaRelativa(){
-        return intervalo == sinIntervalo;
+        return intervalo != sinIntervalo;
     }
 
 }

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="TestEvento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaEvento.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +19,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Modificaciones2" />
+        <entry key="$PROJECT_DIR$" value="Modificaciones3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,6 +40,37 @@
   }
 }</component>
   <component name="RunManager" selected="JUnit.All in TpCalendario">
+    <configuration name="AlarmaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Alarmas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Alarmas" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Alarmas.AlarmaTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AlarmaTest.TestDeterminarFechaRelativa" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Alarmas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Alarmas" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Alarmas.AlarmaTest" />
+      <option name="METHOD_NAME" value="TestDeterminarFechaRelativa" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="PACKAGE_NAME" value="" />
@@ -62,36 +93,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RepeticionMensualTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Repeticiones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionMensualTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RepeticionSemanalTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Repeticiones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionSemanalTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TareaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
@@ -110,10 +111,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in TpCalendario" />
+        <item itemvalue="JUnit.AlarmaTest" />
+        <item itemvalue="JUnit.AlarmaTest.TestDeterminarFechaRelativa" />
         <item itemvalue="JUnit.TareaTest" />
         <item itemvalue="JUnit.Calendario in TpCalendario" />
-        <item itemvalue="JUnit.RepeticionSemanalTest" />
-        <item itemvalue="JUnit.RepeticionMensualTest" />
       </list>
     </recent_temporary>
   </component>
@@ -152,7 +153,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TestEvento" />
-    <option name="LAST_COMMIT_MESSAGE" value="TestEvento" />
+    <MESSAGE value="TestTarea" />
+    <option name="LAST_COMMIT_MESSAGE" value="TestTarea" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -161,6 +163,11 @@
           <url>file://$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java</url>
           <line>79</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Alarmas/AlarmaTest.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
