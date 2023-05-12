@@ -13,8 +13,8 @@ public class Evento implements Actividad {
     private String titulo;
     private String descripcion;
     private Duracion duracion;
-    private Repeticion repeticion = null;
-    private Set<AlarmaEvento> alarmas;
+    private Repeticion repeticion;
+    private Set<AlarmaEvento> alarmas = new HashSet<>();
 
     public Evento(){
     }
