@@ -68,9 +68,7 @@ public class Evento implements Actividad {
      * del mismo
      */
     public InstanciaEvento crearInstancia(LocalDate diaInicio, LocalDate diaFin){
-        InstanciaEvento instancia = new InstanciaEvento();
-        instancia.setTitulo(getTitulo());
-        instancia.setDescripcion(getDescripcion());
+        InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion());
         Duracion nuevaDuracion = this.duracion.Clone();
         nuevaDuracion.setDiaInicio(diaInicio);
         nuevaDuracion.setDiaFin(diaFin);

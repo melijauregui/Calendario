@@ -318,7 +318,6 @@ public class EventoTest {
         duracion.setHoraInicio(horaInicio);
         duracion.setDiaFin(diaFin);
         duracion.setHoraFin(horaFin);
-        var eventoInicial = new InstanciaEvento();
 
 
         //seteo en evento el dia inicial y su repeticion
@@ -434,7 +433,7 @@ public class EventoTest {
         var resObtenidoDescripcion = evento.getDescripcion();
 
         //Assert
-        var eventoInicial = new InstanciaEvento();
+        var eventoInicial = new InstanciaEvento(titulo, descripcion);
         eventoInicial.setDuracion(duracion);
         for (int i = 1; i < resEsperadoFechasInicioALmacenadas.size(); i++) {
             //Compruebo que ante el evento dado de efectivamente el próximo evento
@@ -509,7 +508,7 @@ public class EventoTest {
         var resObtenidoDescripcion = evento.getDescripcion();
 
         //Assert
-        var eventoInicial = new InstanciaEvento();
+        var eventoInicial = new InstanciaEvento(titulo, descripcion);
         eventoInicial.setDuracion(duracion);
         for (int i = 1; i < resEsperadoFechasInicioALmacenadas.size(); i++) {
             var resObtenido = evento.getProximaRepeticion(eventoInicial.getFechaInicio().toLocalDate(), eventoInicial.getFechaFin().toLocalDate());
@@ -552,7 +551,7 @@ public class EventoTest {
         evento.setRepeticion(repeticion);
 
         //Resultados Esperados
-        var eventoInicial = new InstanciaEvento();
+        var eventoInicial = new InstanciaEvento(titulo, descripcion);
         eventoInicial.setDuracion(duracion);
         List<InstanciaEvento> resEsperadoEventosIntervalo = new ArrayList<>();
         resEsperadoEventosIntervalo.add(eventoInicial);
@@ -651,21 +650,25 @@ public class EventoTest {
         evento.agregarAlarma(alarma1);
         evento.agregarAlarma(alarma2);
 
+        var instancia = evento.crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
+
+
         // alarmas próximas a 'fechaDesde' --> corresponden a la segunda alarma del evento inicial, porque es la primera
         // que suena
         var fechaDesde = LocalDateTime.of(diaInicio.minusDays(1), horaInicio);
+        var j = instancia.getProximasAlarmas(fechaDesde);
         var alarmasProximas = evento.getProximasAlarmas(fechaDesde);
 
-        var alarmasEsperadas = new ArrayList<>();
+        var alarmasEsperadas = new ArrayList<LocalDateTime>();
         alarmasEsperadas.add(LocalDateTime.of(diaInicio, horaInicio).minusHours(10));
         var tamanioEsperado = 1;
-        var alarmasFechas = alarmasEsperadas.stream().toList();
+        List<Alarma> alarmasFechas = alarmasProximas.stream().toList();
 
         //Assert
         assertEquals(tamanioEsperado, alarmasProximas.size());
 
-        for (Object f : alarmasFechas) {
-            assertTrue(alarmasEsperadas.contains(f));
+        for (Alarma f : alarmasFechas) {
+           alarmasEsperadas.get(0).isEqual(f.getFechaAlarma());
         }
     }
 
@@ -690,7 +693,7 @@ public class EventoTest {
         duracion.setDiaFin(diaFin);
         duracion.setHoraFin(horaFin);
 
-        var eventoInicial = new InstanciaEvento();
+        var eventoInicial = new InstanciaEvento(titulo, descripcion);
         eventoInicial.setDuracion(duracion);
         evento.setDuracion(duracion);
 
