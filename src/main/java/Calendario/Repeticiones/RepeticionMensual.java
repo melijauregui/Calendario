@@ -28,11 +28,8 @@ public class RepeticionMensual extends Repeticion {
         super(intervaloMensual);
     }
 
-    /**
-     * Devuelve el siguiente evento del pasado por parámetro
-     */
-    public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        return evento.Clone(evento.getDiaInicio().plusMonths(super.getIntervalo()), evento.getDiaFin().plusMonths(super.getIntervalo()));
+    public LocalDate getProximaFecha(LocalDate fecha){
+        return fecha.plusMonths(getIntervalo());
     }
 
 }

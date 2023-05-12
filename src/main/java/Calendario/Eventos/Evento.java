@@ -1,6 +1,7 @@
 package Calendario.Eventos;
 
 import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Main.Actividad;
 import Calendario.Repeticiones.Repeticion;
@@ -8,227 +9,143 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Evento extends Actividad{
-    private InstanciaEvento eventoInicial;
-    private ArrayList<InstanciaEvento> almacenamientoFechas = new ArrayList<>();
+public class Evento implements Actividad {
+    private String titulo;
+    private String descripcion;
+    private Duracion duracion;
     private Repeticion repeticion = null;
+    private Set<AlarmaEvento> alarmas;
 
     public Evento(){
-        setPrimerEventoDefault();
     }
-
     /**
-     * Recibe la primera instancia del Evento y guarda su información
+     * Setea el título
      */
-    public void setEventoInicial(InstanciaEvento eventoInicial){
-        this.eventoInicial = eventoInicial;
-        eventoInicial.setTitulo(getTitulo());
-        eventoInicial.setDescripcion(getDescripcion());
-        actualizarAlmacenamientoFechas();
-    }
-
-
-    /**
-     * Cambia el título del evento y de las instancias del mismo
-     */
-    @Override
     public void setTitulo(String titulo){
-        super.setTitulo(titulo);
-        setTituloInstancias(titulo);
+        this.titulo = titulo;
     }
 
     /**
-     * Cambia la descripción del evento y de las instancias del mismo
+     * Setea la descripción
      */
-    @Override
     public void setDescripcion(String descripcion){
-        super.setDescripcion(descripcion);
-        setDescripcionInstancias(descripcion);
+        this.descripcion = descripcion;
     }
 
 
     /**
-     * Cambia la repetición del evento, y actualiza las instancias del mismo
+     * Devuelve el título de la InstanciaEvento
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * Devuelve la descripción de la InstanciaEvento
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+
+    /**
+     * Cambia la duración del evento
+     */
+    public void setDuracion(Duracion duracion){
+        this.duracion = duracion;
+    }
+
+    /**
+     * Cambia la repetición del evento
      */
     public void setRepeticion(Repeticion repeticion){
         this.repeticion = repeticion;
-        actualizarAlmacenamientoFechas();
+
     }
 
     /**
-     * Devuelve la primera Instancia que se encuentra a partir de la fecha dada
+     * Crea una Instancia del evento con su información y una nueva duración que depende de la repetición
+     * del mismo
      */
-    public InstanciaEvento getProximaRepeticion(LocalDateTime fecha){
-        for(InstanciaEvento instancia : almacenamientoFechas){
-            if (instancia.empiezaDespues(fecha)){
-                return instancia;
-            }
-        }
-        if (!esInfinito()) {
-            return null;
-        }
-        InstanciaEvento instancia;
-        do {
-            almacenarUnaFecha();
-            instancia = getUltimoEventoAlmacenado();
-        } while (!instancia.empiezaDespues(fecha));
-
+    public InstanciaEvento crearInstancia(LocalDate diaInicio, LocalDate diaFin){
+        InstanciaEvento instancia = new InstanciaEvento();
+        instancia.setTitulo(getTitulo());
+        instancia.setDescripcion(getDescripcion());
+        Duracion nuevaDuracion = this.duracion.Clone();
+        nuevaDuracion.setDiaInicio(diaInicio);
+        nuevaDuracion.setDiaFin(diaFin);
+        instancia.setDuracion(nuevaDuracion);
+        instancia.configurarAlarmas(this.alarmas);
         return instancia;
     }
 
-
     /**
-     * Devuelve la primera Instancia que se encuentra a partir del evento dado
+     * Devuelve todas las instancias del evento que se inician en el intervalo de fechas pasado
      */
-    public InstanciaEvento getProximaRepeticion(InstanciaEvento evento){
-        return getProximaRepeticion(evento.getFechaInicio());
+    public List<InstanciaEvento> getProximasRepeticiones(LocalDateTime desde, LocalDateTime hasta){
+        List<InstanciaEvento> eventos = new ArrayList<>();
+        InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
+        while (instancia != null && !instancia.empiezaDespues(hasta)){
+            if (instancia.empiezaDespues(desde)){
+                eventos.add(instancia);
+            }
+            instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
+        }
+        return eventos;
+
     }
 
+    /**
+     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida
+     */
+    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
+        fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
+        fechaFin = repeticion.getProximaFechaFin(fechaFin);
+        if (fechaInicio == null){
+            return null;
+        }
+        return crearInstancia(fechaInicio, fechaFin);
+    }
 
     /**
-     * Agrega la alarma al evento, y a las instancias del mismo
+     * Agrega la alarma al evento
      */
-    public void configurarAlarma(Alarma alarma){
-        alarma.determinarFecha(getFechaInicio());
-        agregarAlarma(alarma);
-        setAlarmaInstancias(alarma);
+    public void agregarAlarma(AlarmaEvento alarma){
+        alarmas.add(alarma);
     }
 
     /**
      * Devuelve el conjunto de alarmas que suenan al mismo tiempo y son las más
      * próximas a la fecha pasada
      */
-    @Override
     public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
-        InstanciaEvento evento = getProximaRepeticion(fecha);
-        Set<Alarma> alarmasProximas = evento.getProximasAlarmas(fecha);
-        while (!estaVacia(getAlarmas()) && estaVacia(alarmasProximas)){
-            alarmasProximas = getProximaRepeticion(evento).getProximasAlarmas(fecha);
+        InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
+        while (instancia != null){
+            if (instancia.empiezaDespues(fecha)){
+                Set <Alarma> alarmasProximas = instancia.getProximasAlarmas(fecha);
+                if (!estaVacia(alarmasProximas)){
+                    return alarmasProximas;
+                }
+            }
+            instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
         }
-        return alarmasProximas;
+        return null;
     }
 
 
     /**
-     * Elimina la alarma recibida del Evento y sus instancias
+     * Elimina la alarma recibida del Evento
      */
-    @Override
-    public void eliminarAlarma(Alarma alarma){
-        super.eliminarAlarma(alarma);
-        eliminarAlarmaInstancias(alarma);
-    }
 
-    /**
-     * Devuelve todas las instancias del evento, o algunas si el mismo
-     * es infinito.
-     */
-    public List<InstanciaEvento> getAlmacenamientoFechas(){
-        return almacenamientoFechas;
-    }
-
-    /**
-     * Agrega al Almacenamiento las sucesivas instancias del evento, o solamente
-     * la primera si es un evento sin repetición
-     */
-    private void almacenarFechas(InstanciaEvento primerEvento) {
-        if (!this.esEventoConRepeticion()) {
-            almacenamientoFechas.add(primerEvento);
-        } else {
-            this.repeticion.almacenarRepeticiones(this.almacenamientoFechas, primerEvento);
-        }
-    }
-
-    /**
-     * Agrega al Almacenamiento la Instancia de la repetición que le sigue a la última guardada
-     */
-    private void almacenarUnaFecha(){
-        var instancia = this.repeticion.getProximaInstanciaEvento(getUltimoEventoAlmacenado());
-        almacenamientoFechas.add(instancia);
-    }
-
-    /**
-     * Elimina las instancias del evento y, a partir de la primer instancia,
-     * vuelve a cargarlas
-     */
-    private void actualizarAlmacenamientoFechas(){
-        almacenamientoFechas.clear();
-        almacenarFechas(this.eventoInicial);
-    }
-
-    /**
-     * Devuelve la última Instancia de Repetición almacenada
-     */
-    private InstanciaEvento getUltimoEventoAlmacenado(){
-        return almacenamientoFechas.get(almacenamientoFechas.size()-1);
+    public void eliminarAlarma(AlarmaEvento alarma){
+        alarmas.remove(alarma);
     }
 
     /**
      * Devuelve la fecha de inicio de la primer instancia del evento
      */
     private LocalDateTime getFechaInicio() {
-        return almacenamientoFechas.get(0).getFechaInicio();
-    }
-
-    /**
-     * Cambia el título de las instancias del evento
-     */
-    private void setTituloInstancias(String titulo){
-        for (InstanciaEvento instancia : almacenamientoFechas){
-            instancia.setTitulo(titulo);
-        }
-    }
-
-    /**
-     * Cambia la descripción de las instancias del evento
-     */
-    private void setDescripcionInstancias(String descipcion){
-        for (InstanciaEvento instancia : almacenamientoFechas){
-            instancia.setDescripcion(descipcion);
-        }
-    }
-
-    /**
-     * Elimina la alarma recibida de las instancias del evento
-     */
-    private void eliminarAlarmaInstancias(Alarma alarma){
-        for (InstanciaEvento instancia : almacenamientoFechas){
-            instancia.eliminarAlarma(alarma);
-        }
-    }
-
-    /**
-     * Le configura la alarma a cada instancia del evento
-     */
-    private void setAlarmaInstancias(Alarma alarma){
-        for (InstanciaEvento instancia : almacenamientoFechas){
-            instancia.configurarAlarma(alarma);
-        }
-    }
-
-    /**
-     * Crea una primera instancia por default del evento. Esta es de día completo
-     */
-    private void setPrimerEventoDefault(){
-        var duracion = new Duracion(); // por default, es un evento de día completo
-        duracion.setDiaInicio(LocalDate.now());
-        duracion.setDiaFin(LocalDate.now());
-        InstanciaEvento primerEvento = new InstanciaEvento();
-        primerEvento.setDuracion(duracion);
-        this.setEventoInicial(primerEvento);
-    }
-
-    /**
-     * Devuelve true si el evento se repite indefinidamente
-     */
-    private boolean esInfinito(){
-        return esEventoConRepeticion() && this.repeticion.esInfinita();
-    }
-
-    /**
-     * Devuelve true si el evento se repite más de 1 vez
-     */
-    private boolean esEventoConRepeticion(){
-        return this.repeticion != null;
+        return duracion.getFechaInicio();
     }
 
     private boolean estaVacia(Collection collection){
@@ -236,6 +153,5 @@ public class Evento extends Actividad{
     }
 
 }
-
 
 

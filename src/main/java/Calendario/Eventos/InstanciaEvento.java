@@ -1,13 +1,14 @@
 package Calendario.Eventos;
 
-import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
-import Calendario.Main.Actividad;
+import Calendario.Main.ActividadParticular;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class InstanciaEvento extends Actividad{
+public class InstanciaEvento extends ActividadParticular {
     Duracion duracion;
     public InstanciaEvento() {
     }
@@ -57,36 +58,22 @@ public class InstanciaEvento extends Actividad{
     /**
      * Le agrega a la Instancia la alarma pasada
      */
-    public void configurarAlarma(Alarma alarma){
+    public void configurarAlarma(AlarmaEvento alarma){
         if (alarma != null){
-            agregarAlarma(alarma);
+            var alarmas = super.getAlarmas();
+            alarmas.add(alarma.crearAlarmaInstaciaEvento(getFechaInicio()));
         }
     }
 
     /**
      * Configura todas las alarmas recibidas por parámetro
      */
-    public void configurarAlarmas(Set<Alarma> alarmas){
+    public void configurarAlarmas(Set<AlarmaEvento> alarmas){
         if (alarmas != null) {
-            for (Alarma alarma : alarmas) {
+            for (AlarmaEvento alarma : alarmas) {
                 configurarAlarma(alarma);
             }
         }
-    }
-
-    /**
-     * Devuelve una copia de la Instancia con las nuevas fechas recibidas como argumento
-     */
-    public InstanciaEvento Clone(LocalDate diaInicio, LocalDate diaFin){
-        InstanciaEvento eventoClonado = new InstanciaEvento();
-        eventoClonado.setTitulo(this.getTitulo());
-        eventoClonado.setDescripcion(this.getDescripcion());
-        Duracion nuevaDuracion = this.duracion.Clone();
-        nuevaDuracion.setDiaInicio(diaInicio);
-        nuevaDuracion.setDiaFin(diaFin);
-        eventoClonado.setDuracion(nuevaDuracion);
-        eventoClonado.configurarAlarmas(this.getAlarmas());
-        return eventoClonado;
     }
 
 }

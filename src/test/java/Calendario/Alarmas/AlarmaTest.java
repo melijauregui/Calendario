@@ -1,5 +1,8 @@
 package Calendario.Alarmas;
 
+import Calendario.Alarmas.Aviso.Aviso;
+import Calendario.Alarmas.Aviso.AvisoConSonido;
+import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Enums.TiempoRelativo;
 import org.junit.Test;
 
@@ -12,7 +15,7 @@ public class AlarmaTest {
     public void TestAlarmaSuenaAntesDeUnaFecha() {
         // Arrange
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 15);
-        Alarma alarma = new AlarmaConEmail(fecha);
+        Alarma alarma = new Alarma(fecha, new AvisoConSonido());
         LocalDateTime fechaAntes = LocalDateTime.of(2023, 4, 22, 16, 14);
         LocalDateTime fechaDespues = LocalDateTime.of(2023, 4, 22, 16, 16);
 
@@ -28,30 +31,30 @@ public class AlarmaTest {
     @Test
     public void TestDeterminarFechaRelativa() {
         //Arrange
-        Alarma alarma = new AlarmaConSonido(10, TiempoRelativo.MINUTOS);
+        AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoConSonido());
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 15);
         LocalDateTime fechaAntes = LocalDateTime.of(2023, 4, 22, 16, 4);
         LocalDateTime fechaDespues = LocalDateTime.of(2023, 4, 22, 16, 6);
 
         // Act
-        alarma.determinarFecha(fecha);
+        var alarmaFecha = alarma.crearAlarmaInstaciaEvento(fecha);
 
         //Assert
-        assertFalse(alarma.suenaAntes(fechaAntes));
-        assertTrue(alarma.suenaAntes(fechaDespues));
+        assertFalse(alarmaFecha.suenaAntes(fechaAntes));
+        assertTrue(alarmaFecha.suenaAntes(fechaDespues));
 
 
     }
     @Test
     public void TestSuenaAntesDeOtraAlarma() {
          //Arrange
-         Alarma alarma = new AlarmaConEmail(10, TiempoRelativo.MINUTOS);
+         AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoConSonido());
          LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 15);
-         Alarma otra = new AlarmaConNotificacion(fecha);
-         alarma.determinarFecha(fecha);
+         Alarma otra = new Alarma(fecha, new AvisoNotificacion());
+         var alarmaFecha = alarma.crearAlarmaInstaciaEvento(fecha);
 
          //Act
-         boolean suenaAntes = alarma.suenaAntes(otra);
+         boolean suenaAntes = alarmaFecha.suenaAntes(otra);
 
          //Assert
          assertTrue(suenaAntes);
@@ -60,14 +63,14 @@ public class AlarmaTest {
     @Test
     public void TestAlarmasSuenanAlMismoTiempo() {
         //Arrange
-        Alarma alarma = new AlarmaConNotificacion(10, TiempoRelativo.MINUTOS);
+        AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoConSonido());
         LocalDateTime fechaAlarma = LocalDateTime.of(2023, 4, 22, 16, 25);
         LocalDateTime fechaOtra = LocalDateTime.of(2023, 4, 22, 16, 15);
-        Alarma otra = new AlarmaConNotificacion(fechaOtra);
-        alarma.determinarFecha(fechaAlarma);
+        Alarma otra = new Alarma(fechaOtra, new AvisoNotificacion());
+        var alarmaFecha = alarma.crearAlarmaInstaciaEvento(fechaAlarma);
 
         //Act
-        boolean suenaIgual = alarma.suenaIgual(otra);
+        boolean suenaIgual = alarmaFecha.suenaIgual(otra);
 
         //Assert
         assertTrue(suenaIgual);

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class RepeticionSemanal extends Repeticion{
     private List<DayOfWeek> diasSemana;
+    int diferenciaEntreRepeticiones;
 
     /**
      * Crea una Repetición que termina en una determinda fecha
@@ -35,30 +36,46 @@ public class RepeticionSemanal extends Repeticion{
 
     }
 
-    /**
+    @Override
+    public LocalDate getProximaFechaFin(LocalDate fecha){
+        return getProximaFecha(fecha, diferenciaEntreRepeticiones);
+
+    }
+
+    public LocalDate getProximaFecha(LocalDate fecha){
+        diferenciaEntreRepeticiones = getDiferenciaEntreFechas(fecha);
+        return getProximaFecha(fecha, diferenciaEntreRepeticiones);
+    }
+
+    private LocalDate getProximaFecha(LocalDate fecha, int diferencia){
+        return fecha.plusDays(diferencia);
+    }
+
+
+/*    *//**
      * Devuelve el siguiente evento del pasado por parámetro
-     */
+     *//*
     public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
         int diferencia = getDiferenciaEntreInstancias(evento);
         LocalDate diaInicioSiguienteEvento = evento.getDiaInicio().plusDays(diferencia);
         LocalDate diaFinSiguienteEvento = evento.getDiaFin().plusDays(diferencia);
         return evento.Clone(diaInicioSiguienteEvento, diaFinSiguienteEvento);
-    }
+    }*/
 
 
     /**
-     * Calcula la cantidad de días entre el evento pasado por parámetro
+     * Calcula la cantidad de días entre la fecha pasada por parámetro
      * y la siguiente repetición
      */
-    private int getDiferenciaEntreInstancias(InstanciaEvento evento){
-        DayOfWeek diaEvento = evento.getFechaInicio().getDayOfWeek();
-        DayOfWeek proximoDia =  getProximoDiaMismaSemana(diaEvento);
+    private int getDiferenciaEntreFechas(LocalDate fecha){
+        DayOfWeek dia = fecha.getDayOfWeek();
+        DayOfWeek proximoDia =  getProximoDiaMismaSemana(dia);
         int diferencia = 0;
         if (proximoDia == null){ // 1er día siguiente semana
-            diferencia = calcularDiferenciaSemanas(diaEvento);
+            diferencia = calcularDiferenciaSemanas(dia);
 
         } else {
-            diferencia = calcularDiferenciaDias(diaEvento, proximoDia);
+            diferencia = calcularDiferenciaDias(dia, proximoDia);
         }
         return diferencia;
     }

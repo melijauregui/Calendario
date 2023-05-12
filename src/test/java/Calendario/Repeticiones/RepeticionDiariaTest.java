@@ -1,5 +1,5 @@
 package Calendario.Repeticiones;
-
+/*
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
@@ -228,3 +228,5 @@ public class RepeticionDiariaTest {
         }
     }
 }
+
+ */

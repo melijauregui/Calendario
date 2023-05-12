@@ -2,22 +2,21 @@ package Calendario.Tareas;
 
 import Calendario.Alarmas.Alarma;
 import Calendario.Main.Actividad;
+import Calendario.Main.ActividadParticular;
 import Calendario.Main.Constantes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Tarea extends Actividad {
-    private boolean completa;
+public class Tarea extends ActividadParticular implements Actividad {
+    private boolean completada;
 
     private LocalDate dia;
 
     private LocalTime hora;
 
-    // de día completo
     public Tarea(){
-        this.dia = LocalDate.now(); // por default es de día completo
     }
 
     /**
@@ -50,18 +49,10 @@ public class Tarea extends Actividad {
     }
 
     /**
-     * Agrega la Alarma a la Tarea
-     */
-    public void configurarAlarma(Alarma alarma){
-        alarma.determinarFecha(this.getFecha());
-        agregarAlarma(alarma);
-    }
-
-    /**
-     * Marca la tarea como completa
+     * Marca la tarea como completada
      */
     public void completar(){
-        this.completa = true;
+        this.completada = true;
     }
 
     /**
@@ -75,7 +66,7 @@ public class Tarea extends Actividad {
     }
 
     /**
-     * Devuelve true si la tarea se encuentra dentro del intervalo de fechas dado
+     * Devuelve true si la tarea es de dia completo y se encuentra dentro del intervalo de fechas dado
      */
     private boolean estaEnElIntervaloDiaCompleto(LocalDate fecha){
         return this.getFecha().toLocalDate().equals(fecha) && esDiaCompleto();
@@ -85,7 +76,8 @@ public class Tarea extends Actividad {
      * Devuelve true si la tarea ha sido completada, false en caso contrario
      */
     private boolean estaCompleta(){
-        return this.completa;
+        return this.completada;
     }
+
 }
 

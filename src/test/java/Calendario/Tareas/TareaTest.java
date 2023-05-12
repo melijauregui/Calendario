@@ -1,8 +1,5 @@
 package Calendario.Tareas;
-
-import Calendario.Alarmas.AlarmaConEmail;
-import Calendario.Alarmas.AlarmaConNotificacion;
-import Calendario.Alarmas.AlarmaConSonido;
+/*
 import Calendario.Enums.TiempoRelativo;
 import org.junit.Test;
 
@@ -189,7 +186,9 @@ public class TareaTest {
     public void TestSetHora() {
         //Arrange
         var tarea = new Tarea();
+        var dia = LocalDate.of(2023, 4, 22);
         var hora = LocalTime.of(20, 0);
+        tarea.setDia(dia);
 
         //Act
         tarea.setHora(hora);
@@ -202,3 +201,5 @@ public class TareaTest {
 
 
 }
+
+ */

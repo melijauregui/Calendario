@@ -28,11 +28,8 @@ public class RepeticionDiaria extends Repeticion {
         super(intervaloDiaria);
     }
 
-    /**
-     * Devuelve el siguiente evento del pasado por parámetro
-     */
-    public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        return evento.Clone(evento.getDiaInicio().plusDays(super.getIntervalo()), evento.getDiaFin().plusDays(super.getIntervalo()));
+    public LocalDate getProximaFecha(LocalDate fecha){
+        return fecha.plusDays(getIntervalo());
     }
 
 }

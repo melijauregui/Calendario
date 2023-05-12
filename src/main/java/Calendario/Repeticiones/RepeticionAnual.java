@@ -27,11 +27,9 @@ public class RepeticionAnual extends Repeticion {
         super(intervaloAnual);
     }
 
-    /**
-     * Devuelve el siguiente evento del pasado por parámetro
-     */
-    public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        return evento.Clone(evento.getDiaInicio().plusYears(super.getIntervalo()), evento.getDiaFin().plusYears(super.getIntervalo()));
+    public LocalDate getProximaFecha(LocalDate fecha){
+        return fecha.plusYears(getIntervalo());
     }
+
 
 }

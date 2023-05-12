@@ -1,27 +1,28 @@
 package Calendario.Alarmas;
 
+import Calendario.Alarmas.Aviso.Aviso;
 import Calendario.Enums.TiempoRelativo;
 
 import java.time.LocalDateTime;
 
-public class Alarma{
+public class Alarma {
     private LocalDateTime fechaAlarma;
-    private int intervalo;
-    private TiempoRelativo tiempoRelativo;
+    private Aviso aviso;
 
     /**
      * Crea una Alarma con fecha y hora absolutas
      */
-    public Alarma(LocalDateTime fechaAlarma){
+    public Alarma(LocalDateTime fechaAlarma,  Aviso aviso){
+        this.aviso = aviso;
         this.fechaAlarma = fechaAlarma;
     }
 
     /**
-     * Crea una Alarma con un intervalo de tiempo relativo a otra fecha
+     * Crea una Alarma con un intervalo de tiempo relativo
      */
-    public Alarma(int intervalo, TiempoRelativo tiempoRelativo){ // falta-> cada instancia de Evento tiene Alarma
-        this.intervalo = intervalo;
-        this.tiempoRelativo = tiempoRelativo;
+    public Alarma(int intervalo, TiempoRelativo tiempoRelativo, LocalDateTime fecha, Aviso aviso){
+        fechaAlarma = tiempoRelativo.determinarFechaRelativa(fecha, intervalo);
+        this.aviso = aviso;
     }
 
     /**
@@ -45,14 +46,6 @@ public class Alarma{
         return getFechaAlarma().isEqual(otra.getFechaAlarma());
     }
 
-    /**
-     * Determina la fecha de la Alarma según el intervalo de tiempo relativo a la
-     * fecha pasada
-     */
-    public void determinarFecha(LocalDateTime fecha){
-        if (fechaAlarma != null){ return;}
-        fechaAlarma = tiempoRelativo.determinarFechaRelativa(fecha, intervalo);
-    }
 
     /**
      * Devuelve la fecha de la Alarma
@@ -61,4 +54,7 @@ public class Alarma{
         return fechaAlarma;
     }
 
+    public void avisar(){
+        aviso.avisar();
+    }
 }

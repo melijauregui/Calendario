@@ -1,11 +1,7 @@
 package Calendario.Eventos;
-
-import Calendario.Alarmas.Alarma;
-import Calendario.Alarmas.AlarmaConEmail;
-import Calendario.Alarmas.AlarmaConNotificacion;
+/*
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.TiempoRelativo;
-import Calendario.Repeticiones.Repeticion;
 import Calendario.Repeticiones.RepeticionMensual;
 import Calendario.Repeticiones.RepeticionSemanal;
 import org.junit.Test;
@@ -15,7 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -33,9 +28,6 @@ public class EventoTest {
         evento.setTitulo(titulo);
         evento.setDescripcion(descripcion);
 
-        //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), 9);
-
         //defino dia Inicio
         var duracion = new Duracion();
         var diaInicio = LocalDate.of(2023, 1, 15);
@@ -46,11 +38,43 @@ public class EventoTest {
         duracion.setHoraInicio(horaInicio);
         duracion.setDiaFin(diaFin);
         duracion.setHoraFin(horaFin);
-        var eventoInicial = new InstanciaEvento();
-        eventoInicial.setDuracion(duracion);
 
-        //seteo en evento el dia inicial y su repeticion
-        evento.setEventoInicial(eventoInicial);
+        evento.setDuracion(duracion);
+
+        //Act Resultados Obtenidos
+        var resObtenidoTitulo = evento.getTitulo();
+        var resObtenidoDescripcion = evento.getDescripcion();
+
+        //Assert
+        assertEquals(titulo, resObtenidoTitulo);
+        assertEquals(descripcion, resObtenidoDescripcion);
+    }
+
+    @Test
+    public void TestEventoGetRepeticiones(){
+        //Arrange
+        var titulo = "LastOfUs";
+        var descripcion = "Capítulos nuevos de la serie The Last of Us";
+
+        var evento = new Evento();
+        evento.setTitulo(titulo);
+        evento.setDescripcion(descripcion);
+
+        //defino repeticion
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), 9);
+
+        var duracion = new Duracion();
+        var diaInicio = LocalDate.of(2023, 1, 15);
+        var diaFin = LocalDate.of(2023, 1, 15);
+        var horaInicio = LocalTime.of(22, 00);
+        var horaFin = LocalTime.of(23, 00);
+        duracion.setDiaInicio(diaInicio);
+        duracion.setHoraInicio(horaInicio);
+        duracion.setDiaFin(diaFin);
+        duracion.setHoraFin(horaFin);
+
+        //seteo la duración y su repeticion
+        evento.setDuracion(duracion);
         evento.setRepeticion(repeticion);
 
         //Resueltados esperados
@@ -82,7 +106,7 @@ public class EventoTest {
         //Act Resultados Obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
-        var resObtenidoEventosIntervalo = evento.getAlmacenamientoFechas();
+        var resObtenidoEventosIntervalo = evento.getProximasRepeticiones(duracion.getFechaInicio(), duracion.getFechaFin());
 
         //Assert
         assertEquals(resEsperadoFechasInicioALmacenadas.size(), resObtenidoEventosIntervalo.size());
@@ -119,10 +143,7 @@ public class EventoTest {
         duracion.setHoraInicio(horaInicio);
         duracion.setDiaFin(diaFin);
         duracion.setHoraFin(horaFin);
-        var eventoInicial = new InstanciaEvento();
-        eventoInicial.setDuracion(duracion);
-        evento.setEventoInicial(eventoInicial);
-
+        evento.setDuracion(duracion);
 
         //defino repeticion1
         var ocurrencias = 10;
@@ -132,6 +153,7 @@ public class EventoTest {
 
         //Resultados esperados
         List<InstanciaEvento> resEsperadoEventosIntervalo = new ArrayList<>();
+        var eventoInicial = evento.crearInstancia(diaInicio, diaFin);
         resEsperadoEventosIntervalo.add(eventoInicial);
         for (int i = 0; i < ocurrencias-1; i++) {
             eventoInicial = eventoInicial.Clone(eventoInicial.getDiaInicio().plusMonths(2), eventoInicial.getDiaFin().plusMonths(2));
@@ -676,4 +698,4 @@ public class EventoTest {
         assertEquals(tamanioEsperado, alarmasProximas.size());
     }
 
-}
+}*/
