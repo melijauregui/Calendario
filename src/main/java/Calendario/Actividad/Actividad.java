@@ -12,8 +12,15 @@ public abstract class Actividad {
     public Actividad(){
     }
 
+
+    /**
+     * Devuelve el título de la Actividad
+     */
     public abstract String getTitulo();
 
+    /**
+     * Devuelve la descripción de la Actividad
+     */
     public abstract String getDescripcion();
 
     /**

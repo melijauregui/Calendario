@@ -65,16 +65,22 @@ public class Tarea extends ActividadMutable {
         return LocalDateTime.of(this.dia, LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
     }
 
+    /**
+     * Agrega la Alarma pasada por parámetro al conjunto de alarmas de la Tarea
+     */
     public void agregarAlarma(Alarma alarma){
         getAlarmas().add(alarma);
     }
 
+    /**
+     * Elimina la Alarma pasada por parámetro del conjunto de alarmas de la Tarea
+     */
     public void eliminarAlarma(Alarma alarma){
         getAlarmas().remove(alarma);
     }
 
     /**
-     * Devuelve true si la tarea es de dia completo y se encuentra dentro del intervalo de fechas dado
+     * Devuelve true si la tarea es de día completo y se encuentra dentro del intervalo de fechas dado
      */
     private boolean estaEnElIntervaloDiaCompleto(LocalDate fecha){
         return this.getFecha().toLocalDate().equals(fecha) && esDiaCompleto();

@@ -134,7 +134,7 @@ public class Calendario {
     }
 
     /**
-     * Cambia la fecha de la primera instancia del evento
+     * Cambia la fecha la duración del evento
      */
     public void modificarFechaEvento(Evento evento, Duracion duracion){
         evento.setDuracion(duracion);
@@ -154,14 +154,14 @@ public class Calendario {
     }
 
     /**
-     * Recibe una Alarma y se la agrega al evento dado.
+     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
      */
     public void modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, AlarmaEvento alarmaNueva){
         evento.eliminarAlarma(alarmaVieja);
         evento.agregarAlarma(alarmaNueva);
     }
     /**
-     * Recibe una Alarma y se la agrega a la tarea dada.
+     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
      */
     public void modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, Alarma alarmaNueva){
         tarea.eliminarAlarma(alarmaVieja);
@@ -169,12 +169,15 @@ public class Calendario {
     }
 
     /**
-     * Elimina una determinada alarma de la actividad
+     * Elimina una determinada alarma de la tarea
      */
     public void eliminarAlarmaTarea(Tarea tarea, Alarma alarma){
         tarea.eliminarAlarma(alarma);
     }
 
+    /**
+     * Elimina una determinada alarma del evento
+     */
     public void eliminarAlarmaEvento(Evento evento, AlarmaEvento alarma){
         evento.eliminarAlarma(alarma);
     }
@@ -191,14 +194,18 @@ public class Calendario {
      * Saca la tarea del Calendario y borra su información
      */
     public void eliminarTarea(Tarea tarea){
+        actividades.remove(tarea);
         tareas.remove(tarea);
+        tarea = null; //borra la información de la tarea
     }
 
     /**
      * Saca el evento del Calendario y borra su información
      */
     public void eliminarEvento(Evento evento){
+        actividades.remove(evento);
         eventos.remove(evento);
+        evento = null;  //borra la información del evento
     }
 
     /**

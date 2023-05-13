@@ -27,6 +27,9 @@ public class RepeticionAnual extends Repeticion {
         super(intervaloAnual);
     }
 
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de años
+     */
     public LocalDate getProximaFecha(LocalDate fecha){
         return fecha.plusYears(getIntervalo());
     }

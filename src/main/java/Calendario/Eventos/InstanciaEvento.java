@@ -23,14 +23,14 @@ public class InstanciaEvento extends Actividad {
     }
 
     /**
-     * Devuelve el título de la Actividad
+     * Devuelve el título de la Instancia
      */
     public String getTitulo() {
         return titulo;
     }
 
     /**
-     * Devuelve la descripción de la Actividad
+     * Devuelve la descripción de la Instancia
      */
     public String getDescripcion() {
         return descripcion;
@@ -42,6 +42,10 @@ public class InstanciaEvento extends Actividad {
     public boolean empiezaDespues(LocalDateTime fecha){
         return this.getFechaInicio().isAfter(fecha);
     }
+
+    /**
+     * Devuelve true si la instancia del evento comienza al mismo tiempo que la fecha recibida como argumento
+     */
     public boolean empiezaIgual(LocalDateTime fecha){
         return this.getFechaInicio().isEqual(fecha);
     }

@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Evento extends ActividadMutable {
-    private String titulo;
-    private String descripcion;
+
     private Duracion duracion;
     private Repeticion repeticion;
     private Set<AlarmaEvento> alarmas = new HashSet<>();
@@ -65,7 +64,8 @@ public class Evento extends ActividadMutable {
     }
 
     /**
-     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida
+     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida.
+     * Si el evento no tiene repetición, o la misma acabó devuelve null.
      */
     private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
         if (repeticion == null){

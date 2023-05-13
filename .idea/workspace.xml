@@ -5,33 +5,105 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="TestEvento">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Calendario/Actividad/ActividadMutableTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_4_23_10_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_4_23_10_11__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_4_23_10_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_4_23_10_37__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_4_2023_15_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_4_2023_15_09__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_4_2023_23_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_4_2023_23_18__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_4_2023_23_19__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_4_2023_23_19__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_5_23_12_03__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_5_23_12_03__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Calendario/Eventos/Evento.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Calendario/Eventos/Evento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Calendario/Eventos/InstanciaEvento.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Calendario/Eventos/InstanciaEvento.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Calendario/Main/Actividad.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Calendario/Main/Actividad.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Calendario/Tareas/Tarea.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/Calendario/Tareas/Tarea.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Alarmas/Alarma.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Alarmas/AlarmaConEmail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Alarmas/AlarmaConNotificacion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Alarmas/AlarmaConSonido.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Alarmas/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Alarmas/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Duracion/Duracion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Duracion/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Duracion/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Enums/TiempoRelativo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Enums/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Enums/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Eventos/Evento.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Eventos/InstanciaEvento.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Eventos/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Eventos/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Main/Actividad.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Main/Calendario.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Main/Constantes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Main/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Main/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/Repeticion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/RepeticionAnual.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/RepeticionDiaria.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/RepeticionMensual.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/RepeticionSemanal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Repeticiones/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Tareas/Tarea.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Tareas/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/Calendario/Tareas/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/allclasses-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/allpackages-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/constant-values.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/copy.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/element-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/legal/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/legal/jquery.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/legal/jqueryUI.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/member-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/module-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/package-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/resources/glass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/resources/x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/script-dir/jquery-3.6.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/script-dir/jquery-ui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/script-dir/jquery-ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/search-page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/tag-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/Actividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/Actividad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Alarma.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Alarma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/AlarmaEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/Aviso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/Aviso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/AvisoConSonido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/AvisoConSonido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/AvisoEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/AvisoEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/AvisoNotificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Alarmas/Aviso/AvisoNotificacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/InstanciaEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Actividad.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/ActividadParticular.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/Actividad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/EventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/EventoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/InstanciaEventoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +146,9 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "git-widget-placeholder": "Modificaciones2"
+    "git-widget-placeholder": "Modificaciones2",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "last_opened_file_path": "C:/Users/Sofia/Documents/Facultad/Fiuba/2023/Algo3/Github/TpCalendario"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -96,57 +170,58 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RepeticionSemanalTest.RepeticionConFecha" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="PATTERN" value="Calendario.Repeticiones.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarioTest.TestConfigurarAlarmaEvento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestConfigurarAlarmaEvento" />
+      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionSemanalTest" />
+      <option name="METHOD_NAME" value="RepeticionConFecha" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestEliminrAlarmaEvento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RepeticionSemanalTest.RepeticionConOcurrencias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="PATTERN" value="Calendario.Repeticiones.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestEliminrAlarmaEvento" />
+      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionSemanalTest" />
+      <option name="METHOD_NAME" value="RepeticionConOcurrencias" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Eventos in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RepeticionSemanalTest.RepeticionInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Repeticiones.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionSemanalTest" />
+      <option name="METHOD_NAME" value="RepeticionInfinita" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Repeticiones in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/Calendario/Eventos" />
+      <dir value="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -154,10 +229,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.Calendario in TpCalendario" />
-        <item itemvalue="JUnit.Eventos in TpCalendario" />
-        <item itemvalue="JUnit.CalendarioTest" />
-        <item itemvalue="JUnit.CalendarioTest.TestEliminrAlarmaEvento" />
-        <item itemvalue="JUnit.CalendarioTest.TestConfigurarAlarmaEvento" />
+        <item itemvalue="JUnit.Repeticiones in TpCalendario" />
+        <item itemvalue="JUnit.RepeticionSemanalTest.RepeticionInfinita" />
+        <item itemvalue="JUnit.RepeticionSemanalTest.RepeticionConFecha" />
+        <item itemvalue="JUnit.RepeticionSemanalTest.RepeticionConOcurrencias" />
       </list>
     </recent_temporary>
   </component>
@@ -212,6 +287,16 @@
           <line>83</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -236,11 +321,12 @@
     <SUITE FILE_PATH="coverage/TpCalendario$TareaTest.ic" NAME="TareaTest Coverage Results" MODIFIED="1682218695522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Tareas.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1683946520391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1683985347344" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TpCalendario$TiempoRelativoTest.ic" NAME="TiempoRelativoTest Coverage Results" MODIFIED="1682218754282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Enums.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$All_in_TpCalendario.ic" NAME="All in TpCalendario Coverage Results" MODIFIED="1682224038359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Repeticiones_in_TpCalendario.ic" NAME="Repeticiones in TpCalendario Coverage Results" MODIFIED="1683984009408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TpCalendario$RepeticionSemanalTest.ic" NAME="RepeticionSemanalTest Coverage Results" MODIFIED="1682199213054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Repeticiones.*</FILTER>
     </SUITE>

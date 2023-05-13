@@ -36,31 +36,31 @@ public class RepeticionSemanal extends Repeticion{
 
     }
 
+    /**
+     * Dada la fecha de finalización de la repetición anterior, devuelve la de la siguiente
+     **/
     @Override
     public LocalDate getProximaFechaFin(LocalDate fecha){
         return getProximaFecha(fecha, diferenciaEntreRepeticiones);
 
     }
 
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de semanas
+     */
     public LocalDate getProximaFecha(LocalDate fecha){
         diferenciaEntreRepeticiones = getDiferenciaEntreFechas(fecha);
         return getProximaFecha(fecha, diferenciaEntreRepeticiones);
     }
 
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según la diferencia de días entre las
+     * repeticiones
+     */
     private LocalDate getProximaFecha(LocalDate fecha, int diferencia){
         return fecha.plusDays(diferencia);
     }
 
-
-/*    *//**
-     * Devuelve el siguiente evento del pasado por parámetro
-     *//*
-    public InstanciaEvento getProximaInstanciaEvento(InstanciaEvento evento) {
-        int diferencia = getDiferenciaEntreInstancias(evento);
-        LocalDate diaInicioSiguienteEvento = evento.getDiaInicio().plusDays(diferencia);
-        LocalDate diaFinSiguienteEvento = evento.getDiaFin().plusDays(diferencia);
-        return evento.Clone(diaInicioSiguienteEvento, diaFinSiguienteEvento);
-    }*/
 
 
     /**

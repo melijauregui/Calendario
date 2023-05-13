@@ -28,6 +28,9 @@ public class RepeticionDiaria extends Repeticion {
         super(intervaloDiaria);
     }
 
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de días
+     */
     public LocalDate getProximaFecha(LocalDate fecha){
         return fecha.plusDays(getIntervalo());
     }
