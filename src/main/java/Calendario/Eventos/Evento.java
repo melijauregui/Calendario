@@ -3,13 +3,13 @@ package Calendario.Eventos;
 import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
-import Calendario.Main.Actividad;
+import Calendario.Actividad.ActividadMutable;
 import Calendario.Repeticiones.Repeticion;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Evento implements Actividad {
+public class Evento extends ActividadMutable {
     private String titulo;
     private String descripcion;
     private Duracion duracion;
@@ -17,34 +17,6 @@ public class Evento implements Actividad {
     private Set<AlarmaEvento> alarmas = new HashSet<>();
 
     public Evento(){
-    }
-    /**
-     * Setea el título
-     */
-    public void setTitulo(String titulo){
-        this.titulo = titulo;
-    }
-
-    /**
-     * Setea la descripción
-     */
-    public void setDescripcion(String descripcion){
-        this.descripcion = descripcion;
-    }
-
-
-    /**
-     * Devuelve el título de la InstanciaEvento
-     */
-    public String getTitulo() {
-        return titulo;
-    }
-
-    /**
-     * Devuelve la descripción de la InstanciaEvento
-     */
-    public String getDescripcion() {
-        return descripcion;
     }
 
 
@@ -68,12 +40,11 @@ public class Evento implements Actividad {
      * del mismo
      */
     public InstanciaEvento crearInstancia(LocalDate diaInicio, LocalDate diaFin){
-        InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion());
         Duracion nuevaDuracion = this.duracion.Clone();
         nuevaDuracion.setDiaInicio(diaInicio);
         nuevaDuracion.setDiaFin(diaFin);
-        instancia.setDuracion(nuevaDuracion);
-        instancia.configurarAlarmas(this.alarmas);
+        InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion(), nuevaDuracion, alarmas);
+        //instancia.configurarAlarmas(this.alarmas);
         return instancia;
     }
 
@@ -96,7 +67,10 @@ public class Evento implements Actividad {
     /**
      * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida
      */
-    public InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
+    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
+        if (repeticion == null){
+            return null;
+        }
         fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
         fechaFin = repeticion.getProximaFechaFin(fechaFin);
         if (fechaInicio == null){
@@ -141,7 +115,7 @@ public class Evento implements Actividad {
     }
 
     /**
-     * Devuelve la fecha de inicio de la primer instancia del evento
+     * Devuelve la fecha de inicio de la primera instancia del evento
      */
     public LocalDateTime getFechaInicio() {
         return duracion.getFechaInicio();

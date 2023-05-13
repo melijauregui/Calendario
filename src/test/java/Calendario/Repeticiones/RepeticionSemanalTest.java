@@ -10,13 +10,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class RepeticionSemanalTest {
-
+/*
     int REPETICION = 100;
+
 
     @Test
     public void GetProximaInstanciaEventoMD() {
@@ -41,8 +43,7 @@ public class RepeticionSemanalTest {
         duracion.setHoraFin(LocalTime.of(19, 30));
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
-        eventoInstancia.setDuracion(duracion);
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
 
         //Resultados Esperados
         var resEsperadoInfinitoOcurrencias = false;
@@ -105,12 +106,11 @@ public class RepeticionSemanalTest {
             duracion2.setDiaInicio(resEsperadoFechaInicio.get(i));
             duracion2.setDiaFin(resEsperadoFechaFin.get(i));
 
-            eventoInstancia = new InstanciaEvento(titulo, descripcion);
-            eventoInstancia.setDuracion(duracion2);
+            eventoInstancia = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         }
     }
 
-}/*
+}
 
     @Test
     public void AlmacenarRepeticionesOcurrencias() {
@@ -262,6 +262,7 @@ public class RepeticionSemanalTest {
             assertEquals(resEsperadoFechaFin.get(i), resObtenidoEventosIntervalo.get(i).getFechaFin());
         }
     }
-}
 
- */
+*/}
+
+

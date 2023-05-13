@@ -20,9 +20,11 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
         var dia = LocalDate.of(2023, 4, 22);
         tarea.setDia(dia);
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
 
         //Act
         var resultado = tarea.esDiaCompleto();
@@ -36,9 +38,13 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea1 = new Tarea(titulo, descripcion);
+        var tarea1 = new Tarea();
+        tarea1.setTitulo(titulo);
+        tarea1.setDescripcion(descripcion);
         tarea1.setDia(LocalDate.of(2023, 4, 22));
-        var tarea2 = new Tarea(titulo, descripcion);
+        var tarea2 = new Tarea();
+        tarea2.setTitulo(titulo);
+        tarea2.setDescripcion(descripcion);
         tarea2.setDia(LocalDate.of(2023, 4, 22));
         tarea2.setHora(LocalTime.of(20, 0));
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 0);
@@ -59,7 +65,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
@@ -79,7 +87,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
@@ -106,7 +116,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
@@ -127,7 +139,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         tarea.setDia(LocalDate.of(2023, 4, 22));
         tarea.setHora(LocalTime.of(20, 0));
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 0);
@@ -147,7 +161,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
@@ -164,7 +180,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var titulo2 = "título";
         tarea.setTitulo(titulo2);
 
@@ -180,7 +198,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var descripcion2 = "descripcion";
         tarea.setDescripcion(descripcion2);
 
@@ -196,7 +216,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var dia = LocalDate.of(2023, 4, 22);
 
         //Act
@@ -214,7 +236,9 @@ public class TareaTest {
         //Arrange
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var tarea = new Tarea(titulo, descripcion);
+        var tarea = new Tarea();
+        tarea.setTitulo(titulo);
+        tarea.setDescripcion(descripcion);
         var dia = LocalDate.of(2023, 4, 22);
         var hora = LocalTime.of(20, 0);
         tarea.setDia(dia);

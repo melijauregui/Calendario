@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -37,8 +38,7 @@ public class RepeticionMensualTest {
 
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";
-        var eventoInstancia = new InstanciaEvento(titulo, descripcion);
-        eventoInstancia.setDuracion(duracion);
+        var eventoInstancia = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
 
         //Resultados Esperados
 
@@ -76,8 +76,7 @@ public class RepeticionMensualTest {
             duracion2.setDiaInicio(eventoInstancia.getDiaInicio().plusMonths(2));
             duracion2.setDiaFin(eventoInstancia.getDiaFin().plusMonths(2));
 
-            eventoInstancia = new InstanciaEvento(titulo, descripcion);
-            eventoInstancia.setDuracion(duracion2);
+            eventoInstancia = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         }
     }
 }

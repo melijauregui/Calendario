@@ -1,9 +1,15 @@
 package Calendario.Main;
-/*
+
+import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadMutable;
+import Calendario.Alarmas.Aviso.AvisoConSonido;
+import Calendario.Alarmas.Aviso.AvisoEmail;
+import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Repeticiones.RepeticionDiaria;
+import Calendario.Tareas.Tarea;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -12,6 +18,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import Calendario.Alarmas.*;
 
 import static org.junit.Assert.*;
 
@@ -64,22 +72,23 @@ public class CalendarioTest {
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 4, 22));
         duracion.setDiaFin(LocalDate.of(2023, 4, 25));
-        var primerEvento = new InstanciaEvento();
-        primerEvento.setDuracion(duracion);
         var fechaDesde = LocalDateTime.of(2023, 4, 21, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 22, 15, 50);
 
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
+        var primerEvento = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         //Act
         var evento = calendario.crearEvento(titulo, descripcion, duracion);
-        calendario.modificarFechaEvento(evento, primerEvento);
+        calendario.modificarFechaEvento(evento, duracion);
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
-        var actividadesEsperadas = new ArrayList<Actividad>();
-        actividadesEsperadas.add(primerEvento);
+        var actividadResultado = actividadesResultado.get(0);
+        var tamanioEsperado = 1;
 
         //Assert
-        assertEquals(actividadesEsperadas, actividadesResultado);
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(primerEvento.getTitulo(), actividadResultado.getTitulo());
+        assertEquals(primerEvento.getDescripcion(), actividadResultado.getDescripcion());
     }
 
     @Test
@@ -143,10 +152,6 @@ public class CalendarioTest {
         var duracion = new Duracion();
         duracion.setDiaInicio(LocalDate.of(2023, 4, 23));
         duracion.setDiaFin(LocalDate.of(2023, 4, 25));
-        var primerEvento = new InstanciaEvento();
-        primerEvento.setDuracion(duracion);
-
-
 
         var fechaDesde = LocalDateTime.of(2023, 4, 24, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 50);
@@ -154,10 +159,12 @@ public class CalendarioTest {
 
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
+        var primerEvento = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
+
 
         //Act
         var evento = calendario.crearEvento(titulo, descripcion, duracion);
-        calendario.modificarFechaEvento(evento, primerEvento);
+        calendario.modificarFechaEvento(evento, duracion);
         var tarea = calendario.crearTarea(titulo, descripcion, LocalDate.of(2023, 4, 22));
 
         calendario.modificarHoraTarea(tarea,LocalTime.of(15, 40));
@@ -167,6 +174,7 @@ public class CalendarioTest {
         //Assert
         assertEquals(actividadesEsperadas, actividadesResultado);
     }
+
     @Test
     public void TestObtenerVariasActividades() {
 
@@ -182,13 +190,6 @@ public class CalendarioTest {
         duracion1.setDiaInicio(diaInicio);
         duracion1.setDiaFin(diaFin);
 
-        var duracion2 = new Duracion();
-        duracion2.setDiaInicio(diaInicio);
-        duracion2.setDiaFin(diaFin);
-
-        var primerEvento = new InstanciaEvento();
-        primerEvento.setDuracion(duracion1);
-
         //evento con repetición
         var repeticion = new RepeticionDiaria(1);
 
@@ -197,33 +198,45 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 50);
 
         var titulo = "TP1";
+        var titulo2 = "TP1 2.0";
+        var titulo3 = "TP1 3.0";
         var descripcion = "Entrega limite del TP1";
+        //var primerEvento = new InstanciaEvento(titulo, descripcion, duracion1, new HashSet<>());
 
         //tarea
         var fechaTarea =  LocalDateTime.of(2023, 4, 23, 15, 40);
 
+        var actEsperadas = 4;
+        int cantRepeticionesEvento1 = 1;
+        int cantRepeticionesEvento2 = 2;
+        int cantEvento1 = 0;
+        int cantEvento2 = 0;
+
         //Act
         var evento1 = calendario.crearEvento(titulo, descripcion, duracion1);
-        calendario.modificarFechaEvento(evento1, primerEvento);
+        //calendario.modificarFechaEvento(evento1, primerEvento);
 
-        var evento2 = calendario.crearEvento(titulo, descripcion, duracion2, repeticion);
+        var evento2 = calendario.crearEvento(titulo2, descripcion, duracion1, repeticion);
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fechaTarea);
+        var tarea = calendario.crearTarea(titulo3, descripcion, fechaTarea);
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
 
-        // actividades esperadas --> tarea 22/4, primerEvento 23/4
-        // El primerEvento2 es el 21/4 y no entra en el intervalo. El segundoEvento2 comienza el 22/4, pero antes de las 15:30
-        var tercerEvento2 = evento2.getProximaRepeticion(LocalDateTime.of(2023, 4, 22, 15, 30)); // 23/4
-        var cuartoEvento2 = evento2.getProximaRepeticion(tercerEvento2); // 24/3
-        var actEsperadas = 4;
-
         //Assert
         assertEquals(actEsperadas, actividadesResultado.size());
-        assertTrue(actividadesResultado.contains(tarea));
-        assertTrue(actividadesResultado.contains(primerEvento));
-        assertTrue(actividadesResultado.contains(tercerEvento2));
-        assertTrue(actividadesResultado.contains(cuartoEvento2));
+        for (Actividad actividad: actividadesResultado){
+            if (actividad.getTitulo().equals(titulo3)){
+                assertEquals(tarea, actividad);
+            }
+            if (actividad.getTitulo().equals(titulo)){
+                cantEvento1++;
+            }
+            if (actividad.getTitulo().equals(titulo2)){
+                cantEvento2++;
+            }
+        }
+        assertEquals(cantRepeticionesEvento1, cantEvento1);
+        assertEquals(cantRepeticionesEvento2, cantEvento2);
 
     }
 
@@ -231,11 +244,11 @@ public class CalendarioTest {
     public void TestGetProximasAlarmas() {
         //Arrange
         var fecha1 = LocalDateTime.of(2100, 4, 22, 15, 30);
-        var alarma1 = new AlarmaConNotificacion(fecha1);
-        var alarma2 = new AlarmaConNotificacion(10, TiempoRelativo.MINUTOS);
+        var alarma1 = new Alarma(fecha1, new AvisoNotificacion());
+        var alarma2 = new Alarma(10, TiempoRelativo.MINUTOS, fecha1, new AvisoNotificacion());
         var fecha2 = fecha1.minusMinutes(10);
-        var alarma3 = new AlarmaConNotificacion(fecha2);
-        var alarma4 = new AlarmaConEmail(fecha2);
+        var alarma3 = new Alarma(fecha2, new AvisoNotificacion());
+        var alarma4 = new Alarma(fecha2, new AvisoEmail());
         var calendario = new Calendario();
 
 
@@ -249,10 +262,10 @@ public class CalendarioTest {
         var cantidadEsperadas = 3;
 
         //Act
-        calendario.configurarAlarma(tarea1, alarma1);
-        calendario.configurarAlarma(tarea1, alarma2);
-        calendario.configurarAlarma(tarea2, alarma3);
-        calendario.configurarAlarma(tarea2, alarma4);
+        calendario.agregarAlarmaTarea(tarea1, alarma1);
+        calendario.agregarAlarmaTarea(tarea1, alarma2);
+        calendario.agregarAlarmaTarea(tarea2, alarma3);
+        calendario.agregarAlarmaTarea(tarea2, alarma4);
         Set<Alarma> resultado = calendario.getProximasAlarmas();
 
         //Assert
@@ -284,6 +297,7 @@ public class CalendarioTest {
         //Assert
         assertEquals(tamanioEsperado, resultado);
     }
+
 
     @Test
     public void TestModificarTitulo() {
@@ -387,9 +401,6 @@ public class CalendarioTest {
         duracionInicial.setHoraInicio(LocalTime.of(20, 0));
         duracionInicial.setHoraFin(LocalTime.of(20, 5));
 
-        var eventoInicial = new InstanciaEvento();
-        eventoInicial.setDuracion(duracionInicial);
-
         var evento = calendario.crearEvento(titulo, descripcion, duracionInicial);
 
         var fechaFinNueva = LocalDate.of(2023, 4, 22);
@@ -398,26 +409,24 @@ public class CalendarioTest {
         duracionNueva.setDiaFin(LocalDate.of(2023, 4, 22));
         duracionNueva.setHoraInicio(LocalTime.of(20, 0));
         duracionNueva.setHoraFin(LocalTime.of(20, 5));
-
-        var eventoNuevo = new InstanciaEvento();
-        eventoNuevo.setDuracion(duracionNueva);
+        var fechaDesde = LocalDateTime.of(2023, 4, 21, 0, 0);
+        var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 5);
 
         //Act
-        calendario.modificarFechaEvento(evento, eventoNuevo);
-        var resultado = evento.getProximaRepeticion( LocalDateTime.of(2023, 4, 21, 0, 0)).getFechaFin().toLocalDate();
-
+        calendario.modificarFechaEvento(evento, duracionNueva);
+        var resultado = evento.getProximasRepeticiones(fechaDesde, fechaHasta).get(0).getFechaFin().toLocalDate();
         //Assert
         assertEquals(fechaFinNueva, resultado);
     }
 
     @Test
-    public void TestConfigurarAlarma() {
+    public void TestConfigurarAlarmaTarea() {
         //Arrange
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
-        var alarma = new AlarmaConNotificacion(fecha);
+        var alarma = new Alarma(fecha, new AvisoNotificacion());
 
         var calendario = new Calendario();
 
@@ -426,8 +435,8 @@ public class CalendarioTest {
         var cantidadEsperadas = 1;
 
         //Act
-        calendario.configurarAlarma(tarea, alarma);
-        var resultado = tarea.getAlarmas();
+        calendario.agregarAlarmaTarea(tarea, alarma);
+        var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
 
         //Assert
         assertEquals(cantidadEsperadas, resultado.size());
@@ -435,16 +444,39 @@ public class CalendarioTest {
     }
 
     @Test
-    public void TestModificarAlarma() {
+    public void TestModificarAlarmaTarea() {
         //Arrange
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var fecha1 = LocalDateTime.of(2023, 4, 22, 15, 30);
-        var alarma1 = new AlarmaConNotificacion(fecha1);
+        var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
+        var alarma = new Alarma(fecha, new AvisoNotificacion());
+        var alarma2 = new Alarma(fecha, new AvisoConSonido());
 
-        var fecha2 = LocalDateTime.of(2023, 4, 22, 16, 50);
-        var alarma2 = new AlarmaConNotificacion(fecha2);
+        var calendario = new Calendario();
+
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+
+        var cantidadEsperadas = 1;
+        calendario.agregarAlarmaTarea(tarea, alarma);
+
+        //Act
+        calendario.modificarAlarmaTarea(tarea, alarma,alarma2);
+        var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
+
+        //Assert
+        assertEquals(cantidadEsperadas, resultado.size());
+        assertTrue(resultado.contains(alarma2));
+        assertFalse(resultado.contains(alarma));
+    }
+
+    @Test
+    public void TestConfigurarAlarmaEvento() {
+        //Arrange
+        var titulo = "TP1";
+        var descripcion = "Entrega limite del TP1";
+
+        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, new AvisoNotificacion());
 
         var duracionInicial = new Duracion();
         duracionInicial.setDiaInicio(LocalDate.of(2023, 4, 22));
@@ -455,41 +487,109 @@ public class CalendarioTest {
         var calendario = new Calendario();
         var evento = calendario.crearEvento(titulo, descripcion, duracionInicial);
 
-
         var cantidadEsperadas = 1;
-        calendario.configurarAlarma(evento, alarma1);
+
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 25);
+        var fechaEsperada = fechaDesde.plusMinutes(5);
 
         //Act
-        calendario.modificarAlarma(evento, alarma1, alarma2);
-        var resultado = evento.getAlarmas();
+        calendario.agregarAlarmaEvento(evento, alarma1);
+        var alarmasRes = evento.getProximasAlarmas(fechaDesde);
+        var resultado = alarmasRes.iterator().next().getFechaAlarma();
 
         //Assert
-        assertEquals(cantidadEsperadas, resultado.size());
-        assertTrue(resultado.contains(alarma2));
+        assertEquals(cantidadEsperadas, alarmasRes.size());
+        assertEquals(fechaEsperada,resultado);
     }
 
     @Test
-    public void TestEliminarAlarma() {
+    public void TestModificarAlarmaEvento() {
+        //Arrange
+        var titulo = "TP1";
+        var descripcion = "Entrega limite del TP1";
+
+        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, new AvisoNotificacion());
+
+        var alarma2 = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoNotificacion());
+
+        var duracionInicial = new Duracion();
+        duracionInicial.setDiaInicio(LocalDate.of(2023, 4, 22));
+        duracionInicial.setDiaFin(LocalDate.of(2023, 4, 22));
+        duracionInicial.setHoraInicio(LocalTime.of(20, 0));
+        duracionInicial.setHoraFin(LocalTime.of(20, 5));
+
+        var calendario = new Calendario();
+        var evento = calendario.crearEvento(titulo, descripcion, duracionInicial);
+
+        var cantidadEsperadas = 1;
+        calendario.agregarAlarmaEvento(evento, alarma1);
+
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 45);
+        var fechaEsperada = fechaDesde.plusMinutes(5);
+
+        //Act
+        calendario.modificarAlarmaEvento(evento, alarma1, alarma2);
+        var alarmasRes = evento.getProximasAlarmas(fechaDesde);
+        var resultado = alarmasRes.iterator().next().getFechaAlarma();
+
+        //Assert
+        assertEquals(cantidadEsperadas, alarmasRes.size());
+        assertEquals(fechaEsperada,resultado);
+    }
+
+    @Test
+    public void TestEliminarAlarmaTarea() {
         //Arrange
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
-        var alarma = new AlarmaConNotificacion(fecha);
+        var alarma = new Alarma(fecha, new AvisoNotificacion());
         var calendario = new Calendario();
 
         var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var cantidadEsperadas = 0;
-        calendario.configurarAlarma(tarea, alarma);
+        calendario.agregarAlarmaTarea(tarea, alarma);
 
         //Act
-        calendario.eliminarAlarma(tarea, alarma);
-        var resultado = tarea.getAlarmas();
+        calendario.eliminarAlarmaTarea(tarea, alarma);
+        var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
 
         //Assert
         assertEquals(cantidadEsperadas, resultado.size());
         assertFalse(resultado.contains(alarma));
+    }
+
+    @Test
+    public void TestEliminrAlarmaEvento() {
+        //Arrange
+        var titulo = "TP1";
+        var descripcion = "Entrega limite del TP1";
+
+        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, new AvisoNotificacion());
+
+        var duracionInicial = new Duracion();
+        duracionInicial.setDiaInicio(LocalDate.of(2023, 4, 22));
+        duracionInicial.setDiaFin(LocalDate.of(2023, 4, 22));
+        duracionInicial.setHoraInicio(LocalTime.of(20, 0));
+        duracionInicial.setHoraFin(LocalTime.of(20, 5));
+
+        var calendario = new Calendario();
+        var evento = calendario.crearEvento(titulo, descripcion, duracionInicial);
+
+        var cantidadEsperadas = 0;
+        calendario.agregarAlarmaEvento(evento, alarma1);
+
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 45);
+        var fechaEsperada = fechaDesde.plusMinutes(5);
+
+        //Act
+        calendario.eliminarAlarmaEvento(evento, alarma1);
+        var alarmasRes = evento.getProximasAlarmas(fechaDesde);
+
+        //Assert
+        assertEquals(cantidadEsperadas, alarmasRes.size());
     }
 
     @Test
@@ -503,24 +603,25 @@ public class CalendarioTest {
         duracion.setDiaFin(LocalDate.of(2023, 4, 22));
         duracion.setHoraInicio(LocalTime.of(20, 0));
         duracion.setHoraFin(LocalTime.of(20, 5));
-        var eventoInicial = new InstanciaEvento();
-        eventoInicial.setDuracion(duracion);
         var calendario = new Calendario();
 
         var evento = calendario.crearEvento(titulo, descripcion, duracion);
-        calendario.modificarFechaEvento(evento, eventoInicial);
+        calendario.modificarFechaEvento(evento, duracion);
         var repeticion = new RepeticionDiaria(2, 2);
+
+        int tamanioEsperado = 1;
 
         //Act
         calendario.modificarRepeticionEvento(evento, repeticion);
-        var segundoEvento = evento.getProximaRepeticion(eventoInicial);
-        var tercerEvento = evento.getProximaRepeticion(segundoEvento);
-        var fechaEsperada = LocalDateTime.of(2023, 4, 24, 20, 0);
-        var resultado = segundoEvento.getFechaInicio();
+        var eventos = evento.getProximasRepeticiones(duracion.getFechaInicio().minusDays(1),
+                duracion.getFechaInicio().plusDays(1));
+        var fechaEsperada = LocalDateTime.of(2023, 4, 22, 20, 0);
+        var resultadoFecha = eventos.iterator().next().getFechaInicio();
+
 
         //Assert
-        assertNull(tercerEvento);
-        assertEquals(fechaEsperada, resultado);
+        assertEquals(tamanioEsperado, eventos.size());
+        assertEquals(fechaEsperada, resultadoFecha);
     }
 
     @Test
@@ -571,6 +672,6 @@ public class CalendarioTest {
         //Assert
         assertEquals(cantidadEsperadas, resultado.size());
     }
+
 }
 
- */

@@ -1,14 +1,14 @@
 package Calendario.Tareas;
 
-import Calendario.Main.Actividad;
-import Calendario.Main.ActividadParticular;
+import Calendario.Alarmas.Alarma;
+import Calendario.Actividad.ActividadMutable;
 import Calendario.Main.Constantes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Tarea extends ActividadParticular implements Actividad {
+public class Tarea extends ActividadMutable {
 
     private boolean completada;
 
@@ -16,21 +16,7 @@ public class Tarea extends ActividadParticular implements Actividad {
 
     private LocalTime hora;
 
-    public Tarea(String titulo, String descripcion){
-        super(titulo, descripcion);
-    }
-    /**
-     * Setea el título
-     */
-    public void setTitulo(String titulo){
-        this.titulo = titulo;
-    }
-
-    /**
-     * Setea la descripción
-     */
-    public void setDescripcion(String descripcion){
-        this.descripcion = descripcion;
+    public Tarea(){
     }
 
     /**
@@ -77,6 +63,14 @@ public class Tarea extends ActividadParticular implements Actividad {
             return LocalDateTime.of(this.dia, this.hora);
         }
         return LocalDateTime.of(this.dia, LocalTime.of(Constantes.horaFinDiaCompleto, Constantes.minutoFinDiaCompleto));
+    }
+
+    public void agregarAlarma(Alarma alarma){
+        getAlarmas().add(alarma);
+    }
+
+    public void eliminarAlarma(Alarma alarma){
+        getAlarmas().remove(alarma);
     }
 
     /**

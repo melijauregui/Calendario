@@ -1,43 +1,20 @@
-package Calendario.Main;
+package Calendario.Actividad;
 
 import Calendario.Alarmas.Alarma;
-
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class ActividadParticular {
-    protected String titulo;
-    protected String descripcion;
+public abstract class Actividad {
     private Set<Alarma> alarmas = new HashSet<>();
 
-
-    public ActividadParticular(String titulo, String descripcion){
-        this.titulo = titulo;
-        this.descripcion = descripcion;
+    public Actividad(){
     }
 
-    /**
-     * Devuelve el título de la Actividad
-     */
-    public String getTitulo() {
-        return titulo;
-    }
+    public abstract String getTitulo();
 
-    /**
-     * Devuelve la descripción de la Actividad
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * Elimina la alarma recibida por parámetro
-     */
-    public void eliminarAlarma(Alarma alarma){
-        alarmas.remove(alarma);
-    }
+    public abstract String getDescripcion();
 
     /**
      * Devuelve todas las alarmas con misma fecha y hora, que suenan
@@ -60,18 +37,9 @@ public abstract class ActividadParticular {
 
 
     /**
-     * Agrega la alarma recibida al conjunto de alarmas de la actividad
-     */
-
-    public void agregarAlarma(Alarma alarma){
-        this.alarmas.add(alarma);
-    }
-
-
-    /**
      * Devuelve el conjunto de alarmas de la actividad
      */
-    private Set<Alarma> getAlarmas(){
+    protected Set<Alarma> getAlarmas(){
         return alarmas;
     }
 
@@ -88,4 +56,6 @@ public abstract class ActividadParticular {
     private boolean ambasSonProximas(Alarma primerAlarma, Alarma otra){
         return primerAlarma != null && otra.suenaIgual(primerAlarma);
     }
+
+
 }
