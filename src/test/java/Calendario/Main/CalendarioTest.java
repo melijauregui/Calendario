@@ -414,7 +414,7 @@ public class CalendarioTest {
 
         //Act
         calendario.modificarFechaEvento(evento, duracionNueva);
-        var resultado = evento.getProximasRepeticiones(fechaDesde, fechaHasta).get(0).getFechaFin().toLocalDate();
+        var resultado = evento.getRepeticionesEnIntervalo(fechaDesde, fechaHasta).get(0).getFechaFin().toLocalDate();
         //Assert
         assertEquals(fechaFinNueva, resultado);
     }
@@ -613,7 +613,7 @@ public class CalendarioTest {
 
         //Act
         calendario.modificarRepeticionEvento(evento, repeticion);
-        var eventos = evento.getProximasRepeticiones(duracion.getFechaInicio().minusDays(1),
+        var eventos = evento.getRepeticionesEnIntervalo(duracion.getFechaInicio().minusDays(1),
                 duracion.getFechaInicio().plusDays(1));
         var fechaEsperada = LocalDateTime.of(2023, 4, 22, 20, 0);
         var resultadoFecha = eventos.iterator().next().getFechaInicio();

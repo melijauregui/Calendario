@@ -50,7 +50,7 @@ public class Evento extends ActividadMutable {
     /**
      * Devuelve todas las instancias del evento que se inician en el intervalo de fechas pasado
      */
-    public List<InstanciaEvento> getProximasRepeticiones(LocalDateTime desde, LocalDateTime hasta){
+    public List<InstanciaEvento> getRepeticionesEnIntervalo(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> eventos = new ArrayList<>();
         InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
         while (instancia != null && !instancia.empiezaDespues(hasta)){

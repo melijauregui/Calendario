@@ -31,17 +31,14 @@ public class Calendario {
      * Recibe la información de un evento sin repetición. Lo crea, lo agrega al Calendario y lo devuelve
      */
     public Evento crearEvento(String titulo, String descripcion, Duracion duracion){
-        Evento evento = new Evento();
-        agregarInformacionEvento(evento, titulo, descripcion, duracion);
-        return evento;
+        return agregarInformacionEvento(titulo, descripcion, duracion);
     }
 
     /**
      * Recibe la información de un evento con repetición. Lo crea, lo agrega al Calendario y lo devuelve
      */
     public Evento crearEvento(String titulo, String descripcion, Duracion duracion, Repeticion repeticion){
-        Evento evento = new Evento();
-        agregarInformacionEvento(evento, titulo, descripcion, duracion);
+        Evento evento = agregarInformacionEvento(titulo, descripcion, duracion);
         modificarRepeticionEvento(evento, repeticion);
         return evento;
     }
@@ -50,9 +47,7 @@ public class Calendario {
      * Recibe la información de una tarea de día completo. La crea, la agreaga al calendario y la devuelve
      */
     public Tarea crearTarea(String titulo, String descripcion, LocalDate dia){
-        Tarea tarea = new Tarea();
-        agregarInformacionTarea(tarea, titulo, descripcion, dia);
-        return tarea;
+        return agregarInformacionTarea(titulo, descripcion, dia);
     }
 
     /**
@@ -60,8 +55,7 @@ public class Calendario {
      * y la devuelve
      */
     public Tarea crearTarea(String titulo, String descripcion, LocalDateTime fecha){
-        Tarea tarea = new Tarea();
-        agregarInformacionTarea(tarea,titulo, descripcion, fecha.toLocalDate());
+        Tarea tarea = agregarInformacionTarea(titulo, descripcion, fecha.toLocalDate());
         modificarHoraTarea(tarea, fecha.toLocalTime());
         return tarea;
     }
@@ -215,7 +209,7 @@ public class Calendario {
     private List<InstanciaEvento> getEventos(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> proximosEventos = new ArrayList<>();
         for (Evento evento : eventos){
-            var instancias = evento.getProximasRepeticiones(desde, hasta);
+            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
             if (instancias != null){
                 proximosEventos.addAll(instancias);
             }
@@ -272,27 +266,30 @@ public class Calendario {
         actividades.add(actividad);
         modificarTitulo(actividad, titulo);
         modificarDescripcion(actividad, descripcion);
-
     }
 
     /**
      *  Recibe un Evento y la información del mismo. Lo agrega a los eventos del Calendario y modifica
      *  su duración, título y descripción
      */
-    private void agregarInformacionEvento(Evento evento, String titulo, String descripcion, Duracion duracion){
+    private Evento agregarInformacionEvento(String titulo, String descripcion, Duracion duracion){
+        Evento evento = new Evento();
         eventos.add(evento);
         agregarInformacionActividad(evento, titulo, descripcion);
         modificarFechaEvento(evento, duracion);
+        return evento;
     }
 
     /**
      * Recibe una Tarea y la información de la misma. La agrega a las tareas del calendario y modifica su día,
      * título y descripción
      */
-    private void agregarInformacionTarea(Tarea tarea, String titulo, String descripcion, LocalDate dia){
+    private Tarea agregarInformacionTarea(String titulo, String descripcion, LocalDate dia){
+        Tarea tarea = new Tarea();
         tareas.add(tarea);
         agregarInformacionActividad(tarea, titulo, descripcion);
         modificarDiaTarea(tarea, dia);
+        return  tarea;
     }
 
 

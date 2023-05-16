@@ -110,7 +110,7 @@ public class EventoTest {
         //Act Resultados Obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
-        var resObtenidoEventosIntervalo = evento.getProximasRepeticiones(duracion.getFechaInicio(), LocalDateTime.of(2024, 3, 12, 23, 00));
+        var resObtenidoEventosIntervalo = evento.getRepeticionesEnIntervalo(duracion.getFechaInicio(), LocalDateTime.of(2024, 3, 12, 23, 00));
 
         //Assert
         assertEquals(resEsperadoFechasInicioALmacenadas.size(), resObtenidoEventosIntervalo.size());
@@ -164,7 +164,7 @@ public class EventoTest {
         }
 
         //Act Resultados Obtenidos
-        var resObtenidoEventosIntervalo1 = evento.getProximasRepeticiones(LocalDateTime.of(diaInicio, horaInicio), eventoInicial.getFechaFin());
+        var resObtenidoEventosIntervalo1 = evento.getRepeticionesEnIntervalo(LocalDateTime.of(diaInicio, horaInicio), eventoInicial.getFechaFin());
 
         //Assert
         assertEquals(resEsperadoEventosIntervalo.size(), resObtenidoEventosIntervalo1.size());
@@ -203,7 +203,7 @@ public class EventoTest {
         );
 
         //Act Resultados obtenidos luego de cambiar repeticion
-        var resObtenidoEventosIntervalo2 = evento.getProximasRepeticiones(LocalDateTime.of(2023, 1, 15, 22, 00), LocalDateTime.of(2023, 3, 12, 23, 00));
+        var resObtenidoEventosIntervalo2 = evento.getRepeticionesEnIntervalo(LocalDateTime.of(2023, 1, 15, 22, 00), LocalDateTime.of(2023, 3, 12, 23, 00));
 
         //Assert
         assertEquals(resEsperadoFechasInicioALmacenadas.size(), resObtenidoEventosIntervalo2.size());
@@ -278,7 +278,7 @@ public class EventoTest {
         var diaAnteriorPrueba = 2; //debe estar entre [1,6] para que las pruebas sigan dando como lo esperado
         //Assert
 
-        var proximasRepeticiones = evento.getProximasRepeticiones(
+        var proximasRepeticiones = evento.getRepeticionesEnIntervalo(
                 resEsperadoFechasInicioALmacenadas.get(0).minusDays(diaAnteriorPrueba),
                 resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
                 );
@@ -359,7 +359,7 @@ public class EventoTest {
         //Act Resultados obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
-        var proximasRepeticiones = evento.getProximasRepeticiones(
+        var proximasRepeticiones = evento.getRepeticionesEnIntervalo(
                 resEsperadoFechasInicioALmacenadas.get(0).minusDays(1),
                 resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
         );
@@ -441,7 +441,7 @@ public class EventoTest {
         //Act Resultados obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
-        var proximasRepeticiones = evento.getProximasRepeticiones(
+        var proximasRepeticiones = evento.getRepeticionesEnIntervalo(
                 resEsperadoFechasInicioALmacenadas.get(0).minusDays(1),
                 resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
         );
@@ -519,7 +519,7 @@ public class EventoTest {
         //Act Resultados obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
-        var proximasRepeticiones = evento.getProximasRepeticiones(
+        var proximasRepeticiones = evento.getRepeticionesEnIntervalo(
                 resEsperadoFechasInicioALmacenadas.get(0).minusDays(1),
                 resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
         );
@@ -596,7 +596,7 @@ public class EventoTest {
         //Act Resultados Obtenidos con el primer evento Inicial
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
-        var resObtenidoEventosIntervalo = evento.getProximasRepeticiones(LocalDateTime.of(2022, 1, 15, 22, 00), LocalDateTime.of(2024, 3, 12, 23, 00));
+        var resObtenidoEventosIntervalo = evento.getRepeticionesEnIntervalo(LocalDateTime.of(2022, 1, 15, 22, 00), LocalDateTime.of(2024, 3, 12, 23, 00));
 
         //Assert
         assertEquals(resEsperadoFechasInicioALmacenadas.size(), resObtenidoEventosIntervalo.size());
@@ -620,7 +620,7 @@ public class EventoTest {
         evento.setDuracion(duracion2);
 
         //Act 2
-        var resObtenidoEventosIntervalo2 = evento.getProximasRepeticiones(LocalDateTime.of(2022, 1, 15, 22, 00), LocalDateTime.of(2024, 3, 12, 23, 00));
+        var resObtenidoEventosIntervalo2 = evento.getRepeticionesEnIntervalo(LocalDateTime.of(2022, 1, 15, 22, 00), LocalDateTime.of(2024, 3, 12, 23, 00));
         ;
 
         //Assert
