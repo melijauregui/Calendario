@@ -31,12 +31,8 @@ public abstract class Actividad {
         Set<Alarma> proximasAlarmas = new HashSet<>();
         Alarma primerAlarma = null;
         for(Alarma alarma : getAlarmas()){
-            if (esMasProxima(primerAlarma, alarma, fecha)){
+            if (debeIncluirAlarma(proximasAlarmas, primerAlarma, alarma, fecha)){
                 primerAlarma = alarma;
-                proximasAlarmas.clear();
-                proximasAlarmas.add(alarma);
-            }else if (ambasSonProximas(primerAlarma, alarma)){
-                proximasAlarmas.add(alarma);
             }
         }
         return proximasAlarmas;
@@ -64,5 +60,15 @@ public abstract class Actividad {
         return primerAlarma != null && otra.suenaIgual(primerAlarma);
     }
 
-
+    private boolean debeIncluirAlarma(Set<Alarma> proximasAlarmas, Alarma primerAlarma, Alarma alarma, LocalDateTime fecha){
+        if (esMasProxima(primerAlarma, alarma, fecha)){
+            proximasAlarmas.clear();
+            proximasAlarmas.add(alarma);
+            return true;
+        }else if (ambasSonProximas(primerAlarma, alarma)){
+            proximasAlarmas.add(alarma);
+            return true;
+        }
+        return false;
+    }
 }
