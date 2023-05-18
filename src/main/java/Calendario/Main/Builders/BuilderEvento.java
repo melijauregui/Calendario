@@ -12,19 +12,35 @@ import java.util.List;
 public class BuilderEvento {
     private Evento evento  = new Evento();
 
+    /**
+     * Recibe la información de un Evento con Repetición y se la setea
+     */
     public BuilderEvento(String titulo, String descripcion, Duracion duracion, BuilderRepeticion builderRepeticion){
         setInformacion(titulo, descripcion, duracion);
         evento.setRepeticion(builderRepeticion.crearRepeticion());
     }
+
+    /**
+     * Recibe la información de un Evento sin Repetición y se la setea
+     */
     public BuilderEvento(String titulo, String descripcion, Duracion duracion){
         setInformacion(titulo, descripcion, duracion);
     }
+
+    /**
+     * Devuelve el Evento creado
+     */
+    public Evento crearEvento(){
+        return evento;
+    }
+
+    /**
+     * Modifica el título, la descripción y la duración del Evento
+     */
     private void setInformacion(String titulo, String descripcion, Duracion duracion){
         evento.setTitulo(titulo);
         evento.setDescripcion(descripcion);
         evento.setDuracion(duracion);
     }
-    public Evento crearEvento(){
-        return evento;
-    }
+
 }

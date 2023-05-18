@@ -10,12 +10,23 @@ import java.time.LocalDateTime;
 public class BuilderAlarma {
     private Alarma alarma;
 
+    /**
+     * Recibe la información de una Alarma con Tiempo Relativo y se la setea
+     */
     public BuilderAlarma(LocalDateTime fecha ,int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
         alarma = new Alarma(intervalo, tiempoRelativo, fecha, aviso.crearAviso());
     }
+
+    /**
+     * Recibe la información de una Alarma con fecha y hora absoluta y se la setea
+     */
     public BuilderAlarma(LocalDateTime fecha, TipoAviso aviso){
         alarma = new Alarma(fecha, aviso.crearAviso());
     }
+
+    /**
+     * Devuelve la Alarma creada
+     */
     public Alarma CrearAlarma(){
         return alarma;
     }

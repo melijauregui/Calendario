@@ -9,18 +9,30 @@ import java.time.LocalDateTime;
 
 public enum TipoAviso {
     SONIDO{
+
+        /**
+         * Crea un Aviso con Sonido y lo devuelve
+         */
         @Override
         public Aviso crearAviso() {
             return new AvisoConSonido();
         }
     },
     EMAIL{
+
+        /**
+         * Crea un Aviso por Email y lo devuelve
+         */
         @Override
         public Aviso crearAviso() {
             return new AvisoEmail();
         }
     },
     NOTIFICACION{
+
+        /**
+         * Crea un Aviso con Notificación y lo devuelve
+         */
         @Override
         public Aviso crearAviso() {
             return new AvisoNotificacion();
@@ -29,7 +41,7 @@ public enum TipoAviso {
     TipoAviso(){}
 
     /**
-     * Calcula una fecha relativa a otra
+     * Crea un Aviso y lo devuelve
      */
     public abstract Aviso crearAviso();}
 

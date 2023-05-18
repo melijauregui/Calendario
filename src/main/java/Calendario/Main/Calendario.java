@@ -28,7 +28,7 @@ public class Calendario {
     }
 
     /**
-     * Recibe la información de un evento con repetición. Lo crea, lo agrega al Calendario y lo devuelve
+     * Recibe un BuilderEvento. Crea un Evento a partir de éste, lo agrega al Calendario y lo devuelve
      */
     public Evento crearEvento(BuilderEvento builderEvento){
         Evento evento = builderEvento.crearEvento();
@@ -38,8 +38,7 @@ public class Calendario {
     }
 
     /**
-     * Recibe la información de una tarea con fecha y hora de vencimiento. La crea, la agreaga al calendario
-     * y la devuelve
+     * Recibe un BuilderTarea. Crea una Tarea a partir de éste, la agrega al Calendario y la devuelve
      */
     public Tarea crearTarea(BuilderTarea builderTarea){
         Tarea tarea = builderTarea.crearTarea();
@@ -123,15 +122,18 @@ public class Calendario {
     }
 
     /**
-     * Recibe una Alarma y se la agrega al evento dado.
+     * Recibe un BuilderAlarmaEvento. Crea la AlarmaEvento a partir de éste, se la agrega al Evento y la
+     * devuelve
      */
     public AlarmaEvento agregarAlarmaEvento(Evento evento, BuilderAlarmaEvento builderAlarmaEvento){
         var alarmaEvento = builderAlarmaEvento.CrearAlarmaEvento();
         evento.agregarAlarma(alarmaEvento);
         return alarmaEvento;
     }
+
     /**
-     * Recibe una Alarma y se la agrega a la tarea dada.
+     * Recibe un BuilderAlarma. Crea la Alarma a partir de éste, se la agrega a la Tarea y la
+     * devuelve
      */
     public Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
         var alarma = builderAlarma.CrearAlarma();
@@ -140,14 +142,15 @@ public class Calendario {
     }
 
     /**
-     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
+     * Recibe una alarma existente y un BuilderAlarmaEvento que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
      */
     public AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
         evento.eliminarAlarma(alarmaVieja);
         return agregarAlarmaEvento(evento, builderAlarmaEvento);
     }
+
     /**
-     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
+     * Recibe una alarma existente y un BuilderAlarma que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
      */
     public Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
         tarea.eliminarAlarma(alarmaVieja);
@@ -170,7 +173,7 @@ public class Calendario {
 
 
     /**
-     * Cambia la repetición del evento
+     * Recibe un BuilderRepeticion. Crea la Repetición a partir de éste y se la setea al Evento
      */
     public void modificarRepeticionEvento(Evento evento, BuilderRepeticion builderRepeticion){
         evento.setRepeticion(builderRepeticion.crearRepeticion());
