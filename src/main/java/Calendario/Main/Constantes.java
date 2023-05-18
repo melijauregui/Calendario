@@ -13,6 +13,9 @@ public class Constantes {
     public static final String DIA = "dia";
     public static final String HORA = "hora";
     public static final String MINUTO = "minuto";
-    public static final String CALENDARIO = "calendario";
+    public static final int TAREAS = 1;
+    public static final int EVENTOS = 0;
+    public static final int ACTIVIDADES = 2;
+
 
 }

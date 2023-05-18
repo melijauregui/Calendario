@@ -15,12 +15,14 @@ import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import javax.json.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.time.*;
 import java.util.*;
 
@@ -269,11 +271,18 @@ public class Calendario implements Serializable {
         builder.registerTypeAdapter(LocalTime.class, new LocalTimeAdapter());
         builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
         Gson gson = builder.create();
-        String calendarioJson = gson.toJson(this);
+
+        String eventosJson = gson.toJson(eventos);
+        String tareasJson = gson.toJson(tareas);
+        String actividadesJson = gson.toJson(actividades);
+
         JsonWriterFactory factory = Json.createWriterFactory(new HashMap<>());
         JsonWriter writer = factory.createWriter(bytes);
-        JsonObject calendario = Json.createObjectBuilder().add(Constantes.CALENDARIO,calendarioJson).build();
-        writer.write(calendario);
+        JsonArray calendario = Json.createArrayBuilder()
+                .add(eventosJson).add(tareasJson)
+                .add(actividadesJson).build();
+
+        writer.writeArray(calendario);
         writer.close();
     }
 
@@ -283,9 +292,23 @@ public class Calendario implements Serializable {
         builder.registerTypeAdapter(LocalTime.class, new LocalTimeAdapter());
         builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
         Gson gson = builder.create();
+
         JsonReaderFactory factory = Json.createReaderFactory(new HashMap<>());
         JsonReader reader = factory.createReader(bytes);
-        Calendario calendario = gson.fromJson(reader.readObject().toString(), Calendario.class);
+        JsonArray elems = reader.readArray();
+
+        String eventosJson = elems.getString(Constantes.EVENTOS);
+        String tareasJson = elems.getString(Constantes.TAREAS);
+        String actividadesJson = elems.getString(Constantes.ACTIVIDADES);
+
+        Calendario calendario = new Calendario();
+        Type eventoTipo = new TypeToken<Set<Evento>>(){}.getType();
+        Type tareaTipo = new TypeToken<Set<Tarea>>(){}.getType();
+        Type actividadTipo = new TypeToken<Set<ActividadMutable>>(){}.getType();
+        calendario.actividades = gson.fromJson(actividadesJson, actividadTipo);
+        calendario.eventos = gson.fromJson(eventosJson, eventoTipo);
+        calendario.tareas = gson.fromJson(tareasJson, tareaTipo);
+
         reader.close();
         return calendario;
     }

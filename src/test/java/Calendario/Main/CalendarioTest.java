@@ -8,6 +8,7 @@ import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
+import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Builders.*;
 import Calendario.Repeticiones.RepeticionDiaria;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import Calendario.Alarmas.*;
@@ -204,7 +206,6 @@ public class CalendarioTest {
         var titulo2 = "TP1 2.0";
         var titulo3 = "TP1 3.0";
         var descripcion = "Entrega limite del TP1";
-        //var primerEvento = new InstanciaEvento(titulo, descripcion, duracion1, new HashSet<>());
 
         //tarea
         var fechaTarea =  LocalDateTime.of(2023, 4, 23, 15, 40);
@@ -217,7 +218,6 @@ public class CalendarioTest {
 
         //Act
         var evento1 = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracion1));
-        //calendario.modificarFechaEvento(evento1, primerEvento);
 
         var evento2 = calendario.crearEvento(new BuilderEvento(titulo2, descripcion, duracion1, new BuilderRepeticion(1, Frecuencia.DIARIA)));
 
@@ -676,12 +676,77 @@ public class CalendarioTest {
     }
 
     @Test
-    public void TestSerializar(){
+    public void TestPersistencia(){
+        // Arrange
         Calendario calendario = new Calendario();
+
+        var titulo = "TP";
+        var titulo2 = "TP 2.0";
+        var titulo3 = "TP 3.0";
+        var descripcion = "Etapa 2";
+
+        var duracion1 = new Duracion();
+        var fechaInicio = LocalDateTime.of(2023, 5, 10, 15, 35);
+        var fechaFin = LocalDateTime.of(2023, 5, 13, 15, 35);
+        duracion1.setDiaInicio(fechaInicio.toLocalDate());
+        duracion1.setDiaFin(fechaFin.toLocalDate());
+        duracion1.setHoraInicio(fechaInicio.toLocalTime());
+        duracion1.setHoraFin(fechaFin.toLocalTime());
+        calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracion1));
+
+        var duracion2 = new Duracion();
+        var fechaDesde = LocalDateTime.of(2023, 5, 10, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 5, 10, 15, 50);
+        duracion2.setDiaInicio(fechaDesde.toLocalDate());
+        duracion2.setDiaFin(fechaHasta.toLocalDate());
+        duracion2.setHoraInicio(fechaDesde.toLocalTime());
+        duracion2.setHoraFin(fechaHasta.toLocalTime());
+        calendario.crearEvento(new BuilderEvento(titulo2, descripcion, duracion2, new BuilderRepeticion(1, Frecuencia.DIARIA)));
+
+        var fechaTarea =  LocalDateTime.of(2023, 5, 10, 15, 40);
+        Tarea tarea = calendario.crearTarea(new BuilderTarea(titulo3, descripcion, fechaTarea));
+
+        var cantidadActEsperadas = 4;
+        int cantRepeticionesEvento1 = 1;
+        int cantRepeticionesEvento2 = 2;
+        int cantEvento1 = 0;
+        int cantEvento2 = 0;
+
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
+        int tamanioEsperado = 0;
+        LocalDateTime desde = LocalDateTime.of(2023, 5, 10, 15, 30);
+        LocalDateTime hasta = LocalDateTime.of(2023, 5, 13, 13, 30);
+
+        // Act
         calendario.serializar(bytes);
         Calendario calendarioDeserializado = Calendario.deserializar(new ByteArrayInputStream(bytes.toByteArray()));
+
+
+        // Assert
         assertNotNull(calendarioDeserializado);
+
+        List<Actividad> actividadesResultado = calendarioDeserializado.getActividadesEnElIntervalo(desde, hasta);
+        Set<Alarma> alarmasResultado = calendarioDeserializado.getProximasAlarmas();
+
+        // calendario y calendarioDeserializado deben tener la misma info, pero son instancias distintas en memoria
+        assertEquals(tamanioEsperado, alarmasResultado.size());
+
+        assertEquals(cantidadActEsperadas, actividadesResultado.size());
+        for (Actividad actividad: actividadesResultado){
+            if (actividad.getTitulo().equals(titulo3)){
+                //assertEquals(tarea, actividad);
+            }
+            if (actividad.getTitulo().equals(titulo)){
+                cantEvento1++;
+            }
+            if (actividad.getTitulo().equals(titulo2)){
+                cantEvento2++;
+            }
+        }
+        assertEquals(cantRepeticionesEvento1, cantEvento1);
+        assertEquals(cantRepeticionesEvento2, cantEvento2);
+        //Falta --> crear alarmas y comparar
     }
 
 }
