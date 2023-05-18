@@ -7,6 +7,7 @@ import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
+import Calendario.Main.Builders.*;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
 
@@ -26,37 +27,24 @@ public class Calendario {
         this.fechaActual = LocalDateTime.now();
     }
 
-
-    /**
-     * Recibe la información de un evento sin repetición. Lo crea, lo agrega al Calendario y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, Duracion duracion){
-        return agregarInformacionEvento(titulo, descripcion, duracion);
-    }
-
     /**
      * Recibe la información de un evento con repetición. Lo crea, lo agrega al Calendario y lo devuelve
      */
-    public Evento crearEvento(String titulo, String descripcion, Duracion duracion, Repeticion repeticion){
-        Evento evento = agregarInformacionEvento(titulo, descripcion, duracion);
-        modificarRepeticionEvento(evento, repeticion);
+    public Evento crearEvento(BuilderEvento builderEvento){
+        Evento evento = builderEvento.crearEvento();
+        eventos.add(evento);
+        actividades.add(evento);
         return evento;
-    }
-
-    /**
-     * Recibe la información de una tarea de día completo. La crea, la agreaga al calendario y la devuelve
-     */
-    public Tarea crearTarea(String titulo, String descripcion, LocalDate dia){
-        return agregarInformacionTarea(titulo, descripcion, dia);
     }
 
     /**
      * Recibe la información de una tarea con fecha y hora de vencimiento. La crea, la agreaga al calendario
      * y la devuelve
      */
-    public Tarea crearTarea(String titulo, String descripcion, LocalDateTime fecha){
-        Tarea tarea = agregarInformacionTarea(titulo, descripcion, fecha.toLocalDate());
-        modificarHoraTarea(tarea, fecha.toLocalTime());
+    public Tarea crearTarea(BuilderTarea builderTarea){
+        Tarea tarea = builderTarea.crearTarea();
+        tareas.add(tarea);
+        actividades.add(tarea);
         return tarea;
     }
 
@@ -137,29 +125,33 @@ public class Calendario {
     /**
      * Recibe una Alarma y se la agrega al evento dado.
      */
-    public void agregarAlarmaEvento(Evento evento, AlarmaEvento alarma){
-        evento.agregarAlarma(alarma);
+    public AlarmaEvento agregarAlarmaEvento(Evento evento, BuilderAlarmaEvento builderAlarmaEvento){
+        var alarmaEvento = builderAlarmaEvento.CrearAlarmaEvento();
+        evento.agregarAlarma(alarmaEvento);
+        return alarmaEvento;
     }
     /**
      * Recibe una Alarma y se la agrega a la tarea dada.
      */
-    public void agregarAlarmaTarea(Tarea tarea, Alarma alarma){
+    public Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
+        var alarma = builderAlarma.CrearAlarma();
         tarea.agregarAlarma(alarma);
+        return alarma;
     }
 
     /**
      * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
      */
-    public void modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, AlarmaEvento alarmaNueva){
+    public AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
         evento.eliminarAlarma(alarmaVieja);
-        evento.agregarAlarma(alarmaNueva);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
     }
     /**
      * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
      */
-    public void modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, Alarma alarmaNueva){
+    public Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
         tarea.eliminarAlarma(alarmaVieja);
-        tarea.agregarAlarma(alarmaNueva);
+        return agregarAlarmaTarea(tarea, builderAlarma);
     }
 
     /**
@@ -180,8 +172,8 @@ public class Calendario {
     /**
      * Cambia la repetición del evento
      */
-    public void modificarRepeticionEvento(Evento evento, Repeticion repeticion){
-        evento.setRepeticion(repeticion);
+    public void modificarRepeticionEvento(Evento evento, BuilderRepeticion builderRepeticion){
+        evento.setRepeticion(builderRepeticion.crearRepeticion());
     }
 
     /**
@@ -257,40 +249,5 @@ public class Calendario {
         Alarma otra = otras.iterator().next();
         return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
     }
-
-    /**
-     *  Recibe una Actividad y la información de la misma. La agrega a las actividades del Calendario
-     *  y modifica su título y descripción
-     */
-    private void agregarInformacionActividad(ActividadMutable actividad, String titulo, String descripcion) {
-        actividades.add(actividad);
-        modificarTitulo(actividad, titulo);
-        modificarDescripcion(actividad, descripcion);
-    }
-
-    /**
-     *  Recibe un Evento y la información del mismo. Lo agrega a los eventos del Calendario y modifica
-     *  su duración, título y descripción
-     */
-    private Evento agregarInformacionEvento(String titulo, String descripcion, Duracion duracion){
-        Evento evento = new Evento();
-        eventos.add(evento);
-        agregarInformacionActividad(evento, titulo, descripcion);
-        modificarFechaEvento(evento, duracion);
-        return evento;
-    }
-
-    /**
-     * Recibe una Tarea y la información de la misma. La agrega a las tareas del calendario y modifica su día,
-     * título y descripción
-     */
-    private Tarea agregarInformacionTarea(String titulo, String descripcion, LocalDate dia){
-        Tarea tarea = new Tarea();
-        tareas.add(tarea);
-        agregarInformacionActividad(tarea, titulo, descripcion);
-        modificarDiaTarea(tarea, dia);
-        return  tarea;
-    }
-
 
 }
