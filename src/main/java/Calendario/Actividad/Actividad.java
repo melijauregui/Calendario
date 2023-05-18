@@ -42,7 +42,7 @@ public abstract class Actividad {
     /**
      * Devuelve el conjunto de alarmas de la actividad
      */
-    protected Set<Alarma> getAlarmas(){
+    public Set<Alarma> getAlarmas(){
         return alarmas;
     }
 

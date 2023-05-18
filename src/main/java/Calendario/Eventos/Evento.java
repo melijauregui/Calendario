@@ -13,7 +13,7 @@ public class Evento extends ActividadMutable {
 
     private Duracion duracion;
     private Repeticion repeticion;
-    private Set<AlarmaEvento> alarmas = new HashSet<>();
+    private Set<AlarmaEvento> alarmasEvento = new HashSet<>();
 
     public Evento(){
     }
@@ -42,7 +42,7 @@ public class Evento extends ActividadMutable {
         Duracion nuevaDuracion = this.duracion.Clone();
         nuevaDuracion.setDiaInicio(diaInicio);
         nuevaDuracion.setDiaFin(diaFin);
-        InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion(), nuevaDuracion, alarmas);
+        InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion(), nuevaDuracion, alarmasEvento);
         //instancia.configurarAlarmas(this.alarmas);
         return instancia;
     }
@@ -83,7 +83,7 @@ public class Evento extends ActividadMutable {
      * Agrega la alarma al evento
      */
     public void agregarAlarma(AlarmaEvento alarma){
-        alarmas.add(alarma);
+        alarmasEvento.add(alarma);
     }
 
     /**
@@ -111,7 +111,7 @@ public class Evento extends ActividadMutable {
      */
 
     public void eliminarAlarma(AlarmaEvento alarma){
-        alarmas.remove(alarma);
+        alarmasEvento.remove(alarma);
     }
 
     /**

@@ -14,6 +14,9 @@ import Calendario.Repeticiones.RepeticionDiaria;
 import Calendario.Tareas.Tarea;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -670,6 +673,15 @@ public class CalendarioTest {
 
         //Assert
         assertEquals(cantidadEsperadas, resultado.size());
+    }
+
+    @Test
+    public void TestSerializar(){
+        Calendario calendario = new Calendario();
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        calendario.serializar(bytes);
+        Calendario calendarioDeserializado = Calendario.deserializar(new ByteArrayInputStream(bytes.toByteArray()));
+        assertNotNull(calendarioDeserializado);
     }
 
 }

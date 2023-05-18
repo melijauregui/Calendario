@@ -7,14 +7,24 @@ import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
+import Calendario.Main.Adapters.LocalDateAdapter;
+import Calendario.Main.Adapters.LocalDateTimeAdapter;
+import Calendario.Main.Adapters.LocalTimeAdapter;
 import Calendario.Main.Builders.*;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import javax.json.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-public class Calendario {
+public class Calendario implements Serializable {
     private Set<Evento> eventos;
     private Set<Tarea> tareas;
     private Set<ActividadMutable> actividades;
@@ -252,5 +262,33 @@ public class Calendario {
         Alarma otra = otras.iterator().next();
         return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
     }
+
+    public void serializar(OutputStream bytes)  {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(LocalDate.class, new LocalDateAdapter());
+        builder.registerTypeAdapter(LocalTime.class, new LocalTimeAdapter());
+        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
+        Gson gson = builder.create();
+        String calendarioJson = gson.toJson(this);
+        JsonWriterFactory factory = Json.createWriterFactory(new HashMap<>());
+        JsonWriter writer = factory.createWriter(bytes);
+        JsonObject calendario = Json.createObjectBuilder().add(Constantes.CALENDARIO,calendarioJson).build();
+        writer.write(calendario);
+        writer.close();
+    }
+
+    public static Calendario deserializar(InputStream bytes) {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(LocalDate.class, new LocalDateAdapter());
+        builder.registerTypeAdapter(LocalTime.class, new LocalTimeAdapter());
+        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
+        Gson gson = builder.create();
+        JsonReaderFactory factory = Json.createReaderFactory(new HashMap<>());
+        JsonReader reader = factory.createReader(bytes);
+        Calendario calendario = gson.fromJson(reader.readObject().toString(), Calendario.class);
+        reader.close();
+        return calendario;
+    }
+
 
 }
