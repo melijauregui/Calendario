@@ -7,19 +7,9 @@ import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
-import Calendario.Main.Adapters.LocalDateAdapter;
-import Calendario.Main.Adapters.LocalDateTimeAdapter;
-import Calendario.Main.Adapters.LocalTimeAdapter;
 import Calendario.Main.Builders.*;
-import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import javax.json.*;
 import java.io.*;
-import java.lang.reflect.Type;
 import java.time.*;
 import java.util.*;
 
@@ -27,13 +17,13 @@ public class Calendario implements Serializable {
     private Set<Evento> eventos;
     private Set<Tarea> tareas;
     private Set<ActividadMutable> actividades;
-    private LocalDateTime fechaActual;
+    //private LocalDateTime fechaActual;
 
     public Calendario(){
         this.eventos = new HashSet<>();
         this.tareas = new HashSet<>();
         this.actividades = new HashSet<>();
-        this.fechaActual = LocalDateTime.now();
+        //this.fechaActual = LocalDateTime.now();
     }
 
     /**
@@ -69,19 +59,16 @@ public class Calendario implements Serializable {
     }
 
     /**
-     * Dada la próxima alarma que debe sonar (tiene la fecha más próxima a la actual), obtiene todas las
+     * Dada la próxima alarma que debe sonar (tiene la fecha más próxima a la pasada por parámetro), obtiene todas las
      * alarmas de cada Actividad que suenan a esa misma fecha. Las guarda en un conjunto y lo devueve.
      */
-    public Set<Alarma> getProximasAlarmas(){
+    public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
         Set<Alarma> proximasAlarmas = new HashSet<>();
         Set<Alarma> primerasAlarmas = new HashSet<>();
         for(Actividad actividad : actividades){
-            Set<Alarma> alarmas = actividad.getProximasAlarmas(fechaActual);
-            if (sonMasProximas(primerasAlarmas, alarmas)){
+            Set<Alarma> alarmas = actividad.getProximasAlarmas(fecha);
+            if (debeIncluirAlarma(primerasAlarmas, alarmas, fecha)){
                 primerasAlarmas = alarmas;
-                proximasAlarmas.clear();
-            }
-            if (sonMasProximas(primerasAlarmas, alarmas) || todasSonProximas(primerasAlarmas, alarmas)){
                 proximasAlarmas.addAll(alarmas);
             }
         }
@@ -210,7 +197,7 @@ public class Calendario implements Serializable {
      * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
      * de los Eventos del calendario que inician dentro del mismo
      */
-    public List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
+    private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> proximosEventos = new ArrayList<>();
         for (Evento evento : eventos){
             var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
@@ -221,7 +208,13 @@ public class Calendario implements Serializable {
         return  proximosEventos;
     }
 
-    public List<Evento> getEventos(LocalDateTime desde, LocalDateTime hasta){
+
+    /*
+     *//**
+     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
+     * de los Eventos del calendario que inician dentro del mismo
+     *//*
+    private List<Evento> getEventos(LocalDateTime desde, LocalDateTime hasta){
         List<Evento> proximosEventos = new ArrayList<>();
         for (Evento evento : eventos){
             var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
@@ -230,13 +223,14 @@ public class Calendario implements Serializable {
             }
         }
         return  proximosEventos;
-    }
+    }*/
+
 
     /**
      * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
      */
-    public List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
-        List<Tarea> proximasTareas = new ArrayList<Tarea>();
+    private List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
+        List<Tarea> proximasTareas = new ArrayList<>();
         for (Tarea tarea : tareas){
             if (tarea.estaEnElIntervalo(desde, hasta)){
                 proximasTareas.add(tarea);
@@ -247,30 +241,42 @@ public class Calendario implements Serializable {
 
     /**
      * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
-     * La función devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha actual que una del conjunto
+     * Devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha pasada que una del conjunto
      * PRIMERAS_ALARMAS
      */
-    private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
-        if (primerasAlarmas.size() == 0){
-            return true;
-        }
-        Alarma primerAlarma = primerasAlarmas.iterator().next();
-        Alarma otra = otras.iterator().next();
-        return !otra.suenaAntes(fechaActual) && otra.suenaAntes(primerAlarma);
+    private boolean esMasProxima(Alarma primerAlarma, Alarma otra, LocalDateTime fecha){
+        return !otra.suenaAntes(fecha) && otra.suenaAntes(primerAlarma);
     }
 
     /**
      * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
-     * La función devuelve true si una alarma del conjunto OTRAS es igual de próxima a la fecha actual que una del conjunto
-     * PRIMERAS_ALARMAS
+     * Devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha pasada que una del conjunto
+     * PRIMERAS_ALARMAS, o si suenan al mismo tiempo
      */
-    private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+    private boolean debeIncluirAlarma(Set<Alarma> primerasAlarmas, Set<Alarma> otras, LocalDateTime fecha){
         if (primerasAlarmas.size() == 0){
             return true;
         }
+        if (otras.size() == 0){
+            return false;
+        }
         Alarma primerAlarma = primerasAlarmas.iterator().next();
         Alarma otra = otras.iterator().next();
-        return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
+        if (esMasProxima(primerAlarma, otra, fecha)){
+            primerasAlarmas.clear();
+            return true;
+        }
+        return (ambasSonProximas(primerAlarma, otra));
+
+    }
+
+    /**
+     * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
+     * Devuelve true si una alarma del conjunto OTRAS es igual de próxima a la fecha pasada que una del conjunto
+     * PRIMERAS_ALARMAS
+     */
+    private boolean ambasSonProximas(Alarma primerAlarma, Alarma otra){
+        return otra.suenaIgual(primerAlarma);
     }
 /*
     public void serializar(OutputStream bytes)  {
@@ -321,15 +327,29 @@ public class Calendario implements Serializable {
         return calendario;
     }
 */
-    public static Calendario deserializar(String nomArch) throws IOException, ClassNotFoundException { ObjectInputStream o =
-        new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArch))); Calendario c= (Calendario) o.readObject();
-    o.close();
-    return c;
+/*    public static Calendario deserializar(String nomArch) throws IOException, ClassNotFoundException {
+        ObjectInputStream o = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArch)));
+        Calendario c= (Calendario)
+        o.readObject();
+        o.close();
+        return c;
 }
     public void serializar(String nomArch) throws IOException { ObjectOutputStream c =
             new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomArch)));
         c.writeObject(this);
         c.close();
-    }
+    }*/
 
+
+    public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInStream = new ObjectInputStream(bytes);
+        objectInStream.close();
+        return (Calendario) objectInStream.readObject();
+    }
+    public void serializar(OutputStream bytes) throws IOException {
+        ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
+        objectOutStream.writeObject(this);
+        objectOutStream.flush();
+        objectOutStream.close();
+    }
 }

@@ -2,6 +2,7 @@ package Calendario.Main;
 
 import Calendario.Actividad.Actividad;
 import Calendario.Actividad.ActividadMutable;
+import Calendario.Alarmas.Aviso.Aviso;
 import Calendario.Alarmas.Aviso.AvisoConSonido;
 import Calendario.Alarmas.Aviso.AvisoEmail;
 import Calendario.Alarmas.Aviso.AvisoNotificacion;
@@ -37,7 +38,7 @@ public class CalendarioTest {
     public void TestCalendarioVacio(){
         //Arrange
         var calendario = new Calendario();
-        var alarmasResultado = calendario.getProximasAlarmas();
+        var alarmasResultado = calendario.getProximasAlarmas(LocalDateTime.of(2023, 11, 5, 2, 2, 4));
         var alarmasEsperadas = new HashSet<Alarma>();
 
         //Act
@@ -247,13 +248,10 @@ public class CalendarioTest {
     @Test
     public void TestGetProximasAlarmas() {
         //Arrange
-        var fecha1 = LocalDateTime.of(2100, 4, 22, 15, 30);
-        var alarma1 = new Alarma(fecha1, new AvisoNotificacion());
-        var alarma2 = new Alarma(10, TiempoRelativo.MINUTOS, fecha1, new AvisoNotificacion());
-        var fecha2 = fecha1.minusMinutes(10);
-        var alarma3 = new Alarma(fecha2, new AvisoNotificacion());
-        var alarma4 = new Alarma(fecha2, new AvisoEmail());
+        var fecha1 = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fecha2 = fecha1.plusMinutes(10);
         var calendario = new Calendario();
+        var fechaAlarma = fecha1.minusMinutes(5);
 
 
         var titulo = "TP1";
@@ -263,20 +261,21 @@ public class CalendarioTest {
 
         var tarea2 = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha2));
 
-        var cantidadEsperadas = 3;
+        var cantidadEsperadas = 1; //suena 15:30
 
         //Act
-        alarma1 = calendario.agregarAlarmaTarea(tarea1, new BuilderAlarma(fecha1, TipoAviso.NOTIFICACION));
-        alarma2 = calendario.agregarAlarmaTarea(tarea1, new BuilderAlarma(fecha1, 10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
-        alarma3 = calendario.agregarAlarmaTarea(tarea2, new BuilderAlarma(fecha2,  TipoAviso.NOTIFICACION));
-        alarma4 = calendario.agregarAlarmaTarea(tarea2, new BuilderAlarma(fecha2, TipoAviso.NOTIFICACION));
-        Set<Alarma> resultado = calendario.getProximasAlarmas();
+        var alarma1 = calendario.agregarAlarmaTarea(tarea1, new BuilderAlarma(fecha1, TipoAviso.NOTIFICACION));
+        var alarma2 = calendario.agregarAlarmaTarea(tarea1, new BuilderAlarma(fecha1, 10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
+        var alarma3 = calendario.agregarAlarmaTarea(tarea2, new BuilderAlarma(fecha2,  TipoAviso.NOTIFICACION));
+        var alarma4 = calendario.agregarAlarmaTarea(tarea2, new BuilderAlarma(fecha2, TipoAviso.NOTIFICACION));
+        Set<Alarma> resultado = calendario.getProximasAlarmas(fechaAlarma);
 
         //Assert
         assertEquals(cantidadEsperadas, resultado.size());
-        assertTrue(resultado.contains(alarma2));
-        assertTrue(resultado.contains(alarma3));
-        assertTrue(resultado.contains(alarma4));
+        assertFalse(resultado.contains(alarma2));
+        assertTrue(resultado.contains(alarma1));
+        assertFalse(resultado.contains(alarma3));
+        assertFalse(resultado.contains(alarma4));
 
     }
 
@@ -758,7 +757,7 @@ public class CalendarioTest {
         // Arrange
         Calendario calendario = new Calendario();
 
-        LocalDateTime desde = LocalDateTime.of(2023, 5, 10, 15, 30);
+        LocalDateTime desde = LocalDateTime.of(2023, 5, 10, 15, 31);
         LocalDateTime hasta = LocalDateTime.of(2023, 5, 13, 13, 30);
 
 
@@ -772,7 +771,8 @@ public class CalendarioTest {
         duracion1.setDiaFin(fechaFin.toLocalDate());
         duracion1.setHoraInicio(fechaInicio.toLocalTime());
         duracion1.setHoraFin(fechaFin.toLocalTime());
-        calendario.crearEvento(new BuilderEvento(tituloE1, descripcionE1, duracion1));
+        var evento1 = calendario.crearEvento(new BuilderEvento(tituloE1, descripcionE1, duracion1));
+        calendario.agregarAlarmaEvento(evento1, new BuilderAlarmaEvento(TipoAviso.NOTIFICACION));
 
 
         //Evento2
@@ -794,41 +794,80 @@ public class CalendarioTest {
         var fechaT1 =  LocalDateTime.of(2023, 5, 10, 15, 40);
         var tarea1 = calendario.crearTarea(new BuilderTarea(tituloT1, descripcionT1, fechaT1));
 
-
-
         //ESPERADO
         var actividadesEsperadas = calendario.getActividadesEnElIntervalo(desde, hasta);
         var cantidadActEsperadas = actividadesEsperadas.size();
-        var tareasEsperadas = calendario.getTareas(desde, hasta);
-        var cantidadTareasEsperadas = tareasEsperadas.size() ;
-        var instanciasEventosEsperadas = calendario.getInstanciasEventos(desde, hasta);
-        var cantidadInstanciasEventosEsperadas = instanciasEventosEsperadas.size();
-        var eventosEsperadas = calendario.getEventos(desde, hasta);
-        var cantidadEventosEsperadas = eventosEsperadas.size();
+        //var tareasEsperadas = calendario.getTareas(desde, hasta);
+        //var cantidadTareasEsperadas = tareasEsperadas.size() ;
+        //var instanciasEventosEsperadas = calendario.getInstanciasEventos(desde, hasta);
+        //var cantidadInstanciasEventosEsperadas = instanciasEventosEsperadas.size();
+        //var eventosEsperadas = calendario.getEventos(desde, hasta);
+        //var cantidadEventosEsperadas = eventosEsperadas.size();
+        var cantidadEvento1Esperada = 1;
+        var cantidadEvento2Esperada = 2;
+        int cantidadEsperadaAlarmas = 1;
+        int cantidadTareasEsperadas = 1;
+
+
+        int cantEvento1 = 0;
+        int cantEvento2 = 0;
+        int cantTareas = 0;
 
         //ACT
 
-        calendario.serializar("test.txt");
-        Calendario calendarioDeserializado = calendario.deserializar("test.txt");
-        int tamanioEsperado = 0;
+        // serializar
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        calendario.serializar(bytes);
+
+        // deserializar
+        Calendario calendarioDeserializado = Calendario.deserializar(new ByteArrayInputStream(bytes.toByteArray()));
+
+        //calendario.serializar("test.txt");
+        //Calendario calendarioDeserializado = calendario.deserializar("test.txt");
+
+        List<Actividad> actividadesResultado = calendarioDeserializado.getActividadesEnElIntervalo(desde, hasta);
+        Set<Alarma> alarmasResultado = calendarioDeserializado.getProximasAlarmas(desde);
+
 
         // Assert
 
-        List<Actividad> actividadesResultado = calendarioDeserializado.getActividadesEnElIntervalo(desde, hasta);
-        List<Tarea> tareasResultado = calendarioDeserializado.getTareas(desde, hasta);
-        List<Evento> eventosResultado = calendarioDeserializado.getEventos(desde, hasta);
-        List<InstanciaEvento> instanciaEventosResultado = calendarioDeserializado.getInstanciasEventos(desde, hasta);
-        Set<Alarma> alarmasResultado = calendarioDeserializado.getProximasAlarmas();
+        //List<Tarea> tareasResultado = calendarioDeserializado.getTareas(desde, hasta);
+        //List<Evento> eventosResultado = calendarioDeserializado.getEventos(desde, hasta);
+        //List<InstanciaEvento> instanciaEventosResultado = calendarioDeserializado.getInstanciasEventos(desde, hasta);
 
-        // calendario y calendarioDeserializado deben tener la misma info, pero son instancias distintas en memoria
-        assertEquals(tamanioEsperado, alarmasResultado.size());
 
         assertEquals(cantidadActEsperadas, actividadesResultado.size());
-        assertEquals(cantidadTareasEsperadas, tareasResultado.size());
-        assertEquals(cantidadEventosEsperadas, eventosResultado.size());
-        assertEquals(cantidadInstanciasEventosEsperadas, instanciaEventosResultado.size());
+        assertEquals(cantidadEsperadaAlarmas, alarmasResultado.size());
 
-        for (Tarea t: tareasResultado){
+        for (Actividad actividad: actividadesResultado){
+            int cantAlarmas = actividad.getAlarmas().size();
+            if (actividad.getTitulo().equals(tituloT1)){
+                assertEquals(descripcionT1, actividad.getDescripcion());
+                assertEquals(0, cantAlarmas);
+                cantTareas++;
+            }
+            if (actividad.getTitulo().equals(tituloE1)){
+                assertEquals(descripcionE1,actividad.getDescripcion());
+                assertEquals(cantidadEsperadaAlarmas, cantAlarmas);
+                cantEvento1++;
+            }
+            if (actividad.getTitulo().equals(tituloE2)){
+                assertEquals(descripcionE2,actividad.getDescripcion());
+                assertEquals(0, cantAlarmas);
+                cantEvento2++;
+            }
+
+        }
+
+        assertEquals(cantidadTareasEsperadas, cantTareas);
+        assertEquals(cantidadEvento1Esperada, cantEvento1);
+        assertEquals(cantidadEvento2Esperada, cantEvento2);
+
+        //assertEquals(cantidadTareasEsperadas, tareasResultado.size());
+        //assertEquals(cantidadEventosEsperadas, eventosResultado.size());
+        //assertEquals(cantidadInstanciasEventosEsperadas, instanciaEventosResultado.size());
+
+        /*for (Tarea t: tareasResultado){
             for (Tarea to : tareasEsperadas)
                 if (t.getTitulo().equals(to.getTitulo())){
                     assertEquals(to.getFecha(), t.getFecha());
@@ -852,11 +891,8 @@ public class CalendarioTest {
                     }
                 }
             }
-        }
+        }*/
 
-
-        //assertEquals(cantRepeticionesEvento1, cantEvento1);
-        //Falta --> crear alarmas y comparar
     }
 
 }

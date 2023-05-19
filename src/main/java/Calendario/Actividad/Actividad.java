@@ -33,6 +33,7 @@ public abstract class Actividad implements Serializable {
         Alarma primerAlarma = null;
         for(Alarma alarma : getAlarmas()){
             if (debeIncluirAlarma(proximasAlarmas, primerAlarma, alarma, fecha)){
+                proximasAlarmas.add(alarma);
                 primerAlarma = alarma;
             }
         }
@@ -61,15 +62,14 @@ public abstract class Actividad implements Serializable {
         return primerAlarma != null && otra.suenaIgual(primerAlarma);
     }
 
+    /**
+     * Devuelve true si 'alarma' es más próxima que 'primerAlarma' o suenan al mismo tiempo
+     */
     private boolean debeIncluirAlarma(Set<Alarma> proximasAlarmas, Alarma primerAlarma, Alarma alarma, LocalDateTime fecha){
         if (esMasProxima(primerAlarma, alarma, fecha)){
             proximasAlarmas.clear();
-            proximasAlarmas.add(alarma);
-            return true;
-        }else if (ambasSonProximas(primerAlarma, alarma)){
-            proximasAlarmas.add(alarma);
             return true;
         }
-        return false;
+        return (ambasSonProximas(primerAlarma, alarma));
     }
 }
