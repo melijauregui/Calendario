@@ -18,10 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import javax.json.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.time.*;
 import java.util.*;
@@ -66,7 +63,7 @@ public class Calendario implements Serializable {
      */
     public List<Actividad> getActividadesEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
         List<Actividad> actividadesProximas = new ArrayList<>();
-        actividadesProximas.addAll(getEventos(desde, hasta));
+        actividadesProximas.addAll(getInstanciasEventos(desde, hasta));
         actividadesProximas.addAll(getTareas(desde, hasta));
         return actividadesProximas;
     }
@@ -213,7 +210,7 @@ public class Calendario implements Serializable {
      * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
      * de los Eventos del calendario que inician dentro del mismo
      */
-    private List<InstanciaEvento> getEventos(LocalDateTime desde, LocalDateTime hasta){
+    public List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> proximosEventos = new ArrayList<>();
         for (Evento evento : eventos){
             var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
@@ -224,11 +221,22 @@ public class Calendario implements Serializable {
         return  proximosEventos;
     }
 
+    public List<Evento> getEventos(LocalDateTime desde, LocalDateTime hasta){
+        List<Evento> proximosEventos = new ArrayList<>();
+        for (Evento evento : eventos){
+            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
+            if (instancias != null){
+                proximosEventos.add(evento);
+            }
+        }
+        return  proximosEventos;
+    }
+
     /**
      * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
      */
-    private List<Actividad> getTareas(LocalDateTime desde, LocalDateTime hasta){
-        List<Actividad> proximasTareas = new ArrayList<>();
+    public List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
+        List<Tarea> proximasTareas = new ArrayList<Tarea>();
         for (Tarea tarea : tareas){
             if (tarea.estaEnElIntervalo(desde, hasta)){
                 proximasTareas.add(tarea);
@@ -264,7 +272,7 @@ public class Calendario implements Serializable {
         Alarma otra = otras.iterator().next();
         return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
     }
-
+/*
     public void serializar(OutputStream bytes)  {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LocalDate.class, new LocalDateAdapter());
@@ -312,6 +320,16 @@ public class Calendario implements Serializable {
         reader.close();
         return calendario;
     }
-
+*/
+    public static Calendario deserializar(String nomArch) throws IOException, ClassNotFoundException { ObjectInputStream o =
+        new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArch))); Calendario c= (Calendario) o.readObject();
+    o.close();
+    return c;
+}
+    public void serializar(String nomArch) throws IOException { ObjectOutputStream c =
+            new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomArch)));
+        c.writeObject(this);
+        c.close();
+    }
 
 }

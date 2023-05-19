@@ -5,9 +5,10 @@ import Calendario.Alarmas.Aviso.AvisoConSonido;
 import Calendario.Alarmas.Aviso.AvisoEmail;
 import Calendario.Alarmas.Aviso.AvisoNotificacion;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public enum TipoAviso {
+public enum TipoAviso implements Serializable {
     SONIDO{
 
         /**

@@ -1,12 +1,14 @@
 package Calendario.Main.Builders;
 
-import Calendario.Repeticiones.Repeticion;
-import Calendario.Repeticiones.RepeticionAnual;
-import Calendario.Repeticiones.RepeticionDiaria;
-import Calendario.Repeticiones.RepeticionMensual;
+import Calendario.Repeticiones.*;
 
 
+
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public enum Frecuencia {
     ANUAL {
@@ -24,6 +26,11 @@ public enum Frecuencia {
         @Override
         public Repeticion crearRepeticion(int intervalo, int ocurrencias){
             return new RepeticionAnual(intervalo, ocurrencias);
+        }
+        public void setDias(List<DayOfWeek> dias){
+        }
+        public List<DayOfWeek> getDias(){
+            return new ArrayList<DayOfWeek>();
         }
 
         /**
@@ -51,7 +58,11 @@ public enum Frecuencia {
         public Repeticion crearRepeticion(int intervalo, int ocurrencias){
             return new RepeticionDiaria(intervalo, ocurrencias);
         }
-
+        public void setDias(List<DayOfWeek> dias){
+        }
+        public List<DayOfWeek> getDias(){
+            return new ArrayList<DayOfWeek>();
+        }
         /**
          * Recibe la información de una Repeticion infinita, crea una RepeticionDiaria y la devuelve
          */
@@ -77,13 +88,48 @@ public enum Frecuencia {
         public Repeticion crearRepeticion(int intervalo, int ocurrencias){
             return new RepeticionMensual(intervalo, ocurrencias);
         }
-
+        public void setDias(List<DayOfWeek> dias){
+        }
+        public List<DayOfWeek> getDias(){
+            return new ArrayList<DayOfWeek>();
+        }
         /**
          * Recibe la información de una Repeticion infinita, crea una RepeticionMensual y la devuelve
          */
         @Override
         public Repeticion crearRepeticion(int intervalo){
             return new RepeticionMensual(intervalo);
+        }
+    },
+    SEMANAL{
+        private List<DayOfWeek> dias;
+
+        public void setDias(List<DayOfWeek> dias){
+            this.dias = dias;
+        }
+        public List<DayOfWeek> getDias(){
+            return dias;
+        }
+        @Override
+        public Repeticion crearRepeticion(int intervalo, LocalDate fechaHasta){
+            return new RepeticionSemanal(intervalo, dias, fechaHasta);
+
+        }
+
+        /**
+         * Recibe la información de una Repeticion con límite de ocurrencias, crea una RepeticionMensual y la devuelve
+         */
+        @Override
+        public Repeticion crearRepeticion(int intervalo, int ocurrencias){
+            return new RepeticionSemanal(intervalo, dias, ocurrencias);
+        }
+
+        /**
+         * Recibe la información de una Repeticion infinita, crea una RepeticionMensual y la devuelve
+         */
+        @Override
+        public Repeticion crearRepeticion(int intervalo){
+            return new RepeticionSemanal(intervalo, dias);
         }
     };
 
@@ -103,5 +149,8 @@ public enum Frecuencia {
      * Recibe la información de una Repeticion infinita, la crea y la devuelve
      */
     public abstract Repeticion crearRepeticion(int intervalo);
+    public abstract void setDias(List<DayOfWeek> dias);
+
+    public abstract List<DayOfWeek> getDias();
 }
 

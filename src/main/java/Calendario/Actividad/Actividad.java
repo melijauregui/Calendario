@@ -2,11 +2,12 @@ package Calendario.Actividad;
 
 import Calendario.Alarmas.Alarma;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class Actividad {
+public abstract class Actividad implements Serializable {
     private Set<Alarma> alarmas = new HashSet<>();
 
     public Actividad(){

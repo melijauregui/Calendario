@@ -1,6 +1,7 @@
 package Calendario.Repeticiones;
 
 import Calendario.Eventos.InstanciaEvento;
+import Calendario.Main.Builders.Frecuencia;
 
 import java.time.LocalDate;
 
@@ -35,4 +36,7 @@ public class RepeticionDiaria extends Repeticion {
         return fecha.plusDays(getIntervalo());
     }
 
+    public Frecuencia getFrecuencia(){
+        return Frecuencia.DIARIA;
+    }
 }

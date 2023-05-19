@@ -1,8 +1,9 @@
 package Calendario.Enums;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public enum TiempoRelativo {
+public enum TiempoRelativo implements Serializable {
     MINUTOS {
         /**
          * Obtiene una fecha relativa a otra, dado un intervalo medido en

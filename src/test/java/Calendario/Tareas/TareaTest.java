@@ -7,13 +7,14 @@ import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Enums.TiempoRelativo;
 import org.junit.Test;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.junit.Assert.*;
 
-public class TareaTest {
+public class TareaTest implements Serializable {
 
     @Test
     public void TestEsDiaCompleto() {

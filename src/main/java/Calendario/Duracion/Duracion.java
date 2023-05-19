@@ -7,12 +7,13 @@ import com.google.gson.Gson;
 import javax.json.*;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 
-public class Duracion {
+public class Duracion implements Serializable {
     private LocalDate diaInicio;
     private LocalDate diaFin;
 

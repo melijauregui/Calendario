@@ -18,6 +18,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -674,7 +675,7 @@ public class CalendarioTest {
         //Assert
         assertEquals(cantidadEsperadas, resultado.size());
     }
-
+/*
     @Test
     public void TestPersistencia(){
         // Arrange
@@ -746,6 +747,115 @@ public class CalendarioTest {
         }
         assertEquals(cantRepeticionesEvento1, cantEvento1);
         assertEquals(cantRepeticionesEvento2, cantEvento2);
+        //Falta --> crear alarmas y comparar
+    }
+
+}
+*/
+
+    @Test
+    public void TestPersistencia2() throws IOException, ClassNotFoundException{
+        // Arrange
+        Calendario calendario = new Calendario();
+
+        LocalDateTime desde = LocalDateTime.of(2023, 5, 10, 15, 30);
+        LocalDateTime hasta = LocalDateTime.of(2023, 5, 13, 13, 30);
+
+
+        //Evento1
+        var tituloE1 = "E1";
+        var descripcionE1 = "E1";
+        var duracion1 = new Duracion();
+        var fechaInicio = LocalDateTime.of(2023, 5, 10, 15, 35);
+        var fechaFin = LocalDateTime.of(2023, 5, 13, 15, 35);
+        duracion1.setDiaInicio(fechaInicio.toLocalDate());
+        duracion1.setDiaFin(fechaFin.toLocalDate());
+        duracion1.setHoraInicio(fechaInicio.toLocalTime());
+        duracion1.setHoraFin(fechaFin.toLocalTime());
+        calendario.crearEvento(new BuilderEvento(tituloE1, descripcionE1, duracion1));
+
+
+        //Evento2
+        var tituloE2 = "E2";
+        var descripcionE2 = "E2";
+        var duracion2 = new Duracion();
+        var fechaDesde = LocalDateTime.of(2023, 5, 10, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 5, 10, 15, 50);
+        duracion2.setDiaInicio(fechaDesde.toLocalDate());
+        duracion2.setDiaFin(fechaHasta.toLocalDate());
+        duracion2.setHoraInicio(fechaDesde.toLocalTime());
+        duracion2.setHoraFin(fechaHasta.toLocalTime());
+        calendario.crearEvento(new BuilderEvento(tituloE2, descripcionE2, duracion2, new BuilderRepeticion(1, Frecuencia.DIARIA, fechaHasta.plusMonths(1).toLocalDate())));
+
+
+        //Tarea1
+        var tituloT1 = "T1";
+        var descripcionT1 = "T1";
+        var fechaT1 =  LocalDateTime.of(2023, 5, 10, 15, 40);
+        var tarea1 = calendario.crearTarea(new BuilderTarea(tituloT1, descripcionT1, fechaT1));
+
+
+
+        //ESPERADO
+        var actividadesEsperadas = calendario.getActividadesEnElIntervalo(desde, hasta);
+        var cantidadActEsperadas = actividadesEsperadas.size();
+        var tareasEsperadas = calendario.getTareas(desde, hasta);
+        var cantidadTareasEsperadas = tareasEsperadas.size() ;
+        var instanciasEventosEsperadas = calendario.getInstanciasEventos(desde, hasta);
+        var cantidadInstanciasEventosEsperadas = instanciasEventosEsperadas.size();
+        var eventosEsperadas = calendario.getEventos(desde, hasta);
+        var cantidadEventosEsperadas = eventosEsperadas.size();
+
+        //ACT
+
+        calendario.serializar("test.txt");
+        Calendario calendarioDeserializado = calendario.deserializar("test.txt");
+        int tamanioEsperado = 0;
+
+        // Assert
+
+        List<Actividad> actividadesResultado = calendarioDeserializado.getActividadesEnElIntervalo(desde, hasta);
+        List<Tarea> tareasResultado = calendarioDeserializado.getTareas(desde, hasta);
+        List<Evento> eventosResultado = calendarioDeserializado.getEventos(desde, hasta);
+        List<InstanciaEvento> instanciaEventosResultado = calendarioDeserializado.getInstanciasEventos(desde, hasta);
+        Set<Alarma> alarmasResultado = calendarioDeserializado.getProximasAlarmas();
+
+        // calendario y calendarioDeserializado deben tener la misma info, pero son instancias distintas en memoria
+        assertEquals(tamanioEsperado, alarmasResultado.size());
+
+        assertEquals(cantidadActEsperadas, actividadesResultado.size());
+        assertEquals(cantidadTareasEsperadas, tareasResultado.size());
+        assertEquals(cantidadEventosEsperadas, eventosResultado.size());
+        assertEquals(cantidadInstanciasEventosEsperadas, instanciaEventosResultado.size());
+
+        for (Tarea t: tareasResultado){
+            for (Tarea to : tareasEsperadas)
+                if (t.getTitulo().equals(to.getTitulo())){
+                    assertEquals(to.getFecha(), t.getFecha());
+                    assertEquals(to.getDescripcion(), t.getDescripcion());
+                }
+        }
+
+        for (Evento e: eventosResultado){
+            for (Evento eo: eventosEsperadas) {
+                if (e.getTitulo().equals(eo.getTitulo())) {
+                    assertEquals(e.getFechaInicio(), eo.getFechaInicio());
+                    assertEquals(e.getDescripcion(), eo.getDescripcion());
+                    assertEquals(e.getRepeticionesEnIntervalo(desde, hasta).size(), eo.getRepeticionesEnIntervalo(desde, hasta).size());
+                    assertEquals(e.getDuracion().getFechaInicio(), eo.getDuracion().getFechaInicio());
+                    assertEquals(e.getDuracion().getFechaFin(), eo.getDuracion().getFechaFin());
+                    assertEquals(e.getFrecuencia(), eo.getFrecuencia());
+                    if (e.getFrecuencia() == Frecuencia.SEMANAL) {
+                        for (DayOfWeek day : e.getFrecuencia().getDias()){
+                            eo.getFrecuencia().getDias().contains(day);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        //assertEquals(cantRepeticionesEvento1, cantEvento1);
         //Falta --> crear alarmas y comparar
     }
 

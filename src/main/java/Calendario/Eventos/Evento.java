@@ -4,12 +4,15 @@ import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.ActividadMutable;
+import Calendario.Main.Builders.Frecuencia;
 import Calendario.Repeticiones.Repeticion;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Evento extends ActividadMutable {
+public class Evento extends ActividadMutable implements Serializable {
 
     private Duracion duracion;
     private Repeticion repeticion;
@@ -126,6 +129,15 @@ public class Evento extends ActividadMutable {
         return collection.size() == 0;
     }
 
+    public Frecuencia getFrecuencia(){
+        if (repeticion == null){
+            return null;
+        }
+        return repeticion.getFrecuencia();
+    }
+    public Duracion getDuracion(){
+        return duracion;
+    }
 }
 
 

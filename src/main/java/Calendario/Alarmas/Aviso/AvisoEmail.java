@@ -1,6 +1,8 @@
 package Calendario.Alarmas.Aviso;
 
-public class AvisoEmail implements Aviso{
+import java.io.Serializable;
+
+public class AvisoEmail implements Aviso, Serializable {
     public AvisoEmail(){
 
     }

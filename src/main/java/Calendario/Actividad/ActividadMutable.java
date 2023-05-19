@@ -1,6 +1,8 @@
 package Calendario.Actividad;
 
-public class ActividadMutable extends Actividad {
+import java.io.Serializable;
+
+public class ActividadMutable extends Actividad implements Serializable {
 
     private String titulo;
     private String descripcion;

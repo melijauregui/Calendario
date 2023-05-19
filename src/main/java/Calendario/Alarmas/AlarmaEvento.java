@@ -3,9 +3,10 @@ package Calendario.Alarmas;
 import Calendario.Alarmas.Aviso.Aviso;
 import Calendario.Enums.TiempoRelativo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class AlarmaEvento {
+public class AlarmaEvento implements Serializable {
     private int intervalo;
     private TiempoRelativo tiempoRelativo;
     private Aviso aviso;

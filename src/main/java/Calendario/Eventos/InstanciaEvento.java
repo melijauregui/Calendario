@@ -4,11 +4,12 @@ import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.Actividad;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class InstanciaEvento extends Actividad {
+public class InstanciaEvento extends Actividad implements Serializable {
     private String titulo;
     private String descripcion;
 

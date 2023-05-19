@@ -1,10 +1,12 @@
 package Calendario.Repeticiones;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import Calendario.Eventos.InstanciaEvento;
+import Calendario.Main.Builders.Frecuencia;
 
-public abstract class Repeticion {
+public abstract class Repeticion implements Serializable {
 
     private LocalDate fechaHasta;
     private int intervalo;
@@ -93,5 +95,6 @@ public abstract class Repeticion {
             this.ocurrenciasRelativas-=1;
         }
     }
+    public abstract Frecuencia getFrecuencia();
 
 }
