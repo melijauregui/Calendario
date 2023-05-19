@@ -17,13 +17,11 @@ public class Calendario implements Serializable {
     private Set<Evento> eventos;
     private Set<Tarea> tareas;
     private Set<ActividadMutable> actividades;
-    //private LocalDateTime fechaActual;
 
     public Calendario(){
         this.eventos = new HashSet<>();
         this.tareas = new HashSet<>();
         this.actividades = new HashSet<>();
-        //this.fechaActual = LocalDateTime.now();
     }
 
     /**
@@ -48,7 +46,7 @@ public class Calendario implements Serializable {
 
 
     /**
-     * Recibe un intervalo de fechas y devuelve la lista de Actividades que inician (Eventos) o vencen (Tareas) dentro
+     * Recibe un intervalo de fechas y devuelve la lista de Actividades que inician (InstanciaEventos) o vencen (Tareas) dentro
      * del mismo
      */
     public List<Actividad> getActividadesEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
@@ -122,7 +120,7 @@ public class Calendario implements Serializable {
      * devuelve
      */
     public AlarmaEvento agregarAlarmaEvento(Evento evento, BuilderAlarmaEvento builderAlarmaEvento){
-        var alarmaEvento = builderAlarmaEvento.CrearAlarmaEvento();
+        var alarmaEvento = builderAlarmaEvento.crearAlarmaEvento();
         evento.agregarAlarma(alarmaEvento);
         return alarmaEvento;
     }
@@ -132,7 +130,7 @@ public class Calendario implements Serializable {
      * devuelve
      */
     public Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
-        var alarma = builderAlarma.CrearAlarma();
+        var alarma = builderAlarma.crearAlarma();
         tarea.agregarAlarma(alarma);
         return alarma;
     }
@@ -208,24 +206,6 @@ public class Calendario implements Serializable {
         return  proximosEventos;
     }
 
-
-    /*
-     *//**
-     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
-     * de los Eventos del calendario que inician dentro del mismo
-     *//*
-    private List<Evento> getEventos(LocalDateTime desde, LocalDateTime hasta){
-        List<Evento> proximosEventos = new ArrayList<>();
-        for (Evento evento : eventos){
-            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
-            if (instancias != null){
-                proximosEventos.add(evento);
-            }
-        }
-        return  proximosEventos;
-    }*/
-
-
     /**
      * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
      */
@@ -278,74 +258,20 @@ public class Calendario implements Serializable {
     private boolean ambasSonProximas(Alarma primerAlarma, Alarma otra){
         return otra.suenaIgual(primerAlarma);
     }
-/*
-    public void serializar(OutputStream bytes)  {
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(LocalDate.class, new LocalDateAdapter());
-        builder.registerTypeAdapter(LocalTime.class, new LocalTimeAdapter());
-        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
-        Gson gson = builder.create();
 
-        String eventosJson = gson.toJson(eventos);
-        String tareasJson = gson.toJson(tareas);
-        String actividadesJson = gson.toJson(actividades);
-
-        JsonWriterFactory factory = Json.createWriterFactory(new HashMap<>());
-        JsonWriter writer = factory.createWriter(bytes);
-        JsonArray calendario = Json.createArrayBuilder()
-                .add(eventosJson).add(tareasJson)
-                .add(actividadesJson).build();
-
-        writer.writeArray(calendario);
-        writer.close();
-    }
-
-    public static Calendario deserializar(InputStream bytes) {
-        GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(LocalDate.class, new LocalDateAdapter());
-        builder.registerTypeAdapter(LocalTime.class, new LocalTimeAdapter());
-        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
-        Gson gson = builder.create();
-
-        JsonReaderFactory factory = Json.createReaderFactory(new HashMap<>());
-        JsonReader reader = factory.createReader(bytes);
-        JsonArray elems = reader.readArray();
-
-        String eventosJson = elems.getString(Constantes.EVENTOS);
-        String tareasJson = elems.getString(Constantes.TAREAS);
-        String actividadesJson = elems.getString(Constantes.ACTIVIDADES);
-
-        Calendario calendario = new Calendario();
-        Type eventoTipo = new TypeToken<Set<Evento>>(){}.getType();
-        Type tareaTipo = new TypeToken<Set<Tarea>>(){}.getType();
-        Type actividadTipo = new TypeToken<Set<ActividadMutable>>(){}.getType();
-        calendario.actividades = gson.fromJson(actividadesJson, actividadTipo);
-        calendario.eventos = gson.fromJson(eventosJson, eventoTipo);
-        calendario.tareas = gson.fromJson(tareasJson, tareaTipo);
-
-        reader.close();
-        return calendario;
-    }
-*/
-/*    public static Calendario deserializar(String nomArch) throws IOException, ClassNotFoundException {
-        ObjectInputStream o = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomArch)));
-        Calendario c= (Calendario)
-        o.readObject();
-        o.close();
-        return c;
-}
-    public void serializar(String nomArch) throws IOException { ObjectOutputStream c =
-            new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomArch)));
-        c.writeObject(this);
-        c.close();
-    }*/
-
-
+    /**
+     * Reconstruye el Calendario a partir de la secuencia de bytes pasada. Devuelve un nuevo Calendario con
+     * la misma información
+     */
     public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInStream = new ObjectInputStream(bytes);
         objectInStream.close();
         return (Calendario) objectInStream.readObject();
     }
+
+    /**
+     * Guarda el estado actual del Calendario.
+     */
     public void serializar(OutputStream bytes) throws IOException {
         ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
         objectOutStream.writeObject(this);

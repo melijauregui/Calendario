@@ -1,7 +1,6 @@
 package Calendario.Main.Builders;
 
-import Calendario.Duracion.Duracion;
-import Calendario.Eventos.Evento;
+import Calendario.Enums.Frecuencia;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Repeticiones.RepeticionSemanal;
 

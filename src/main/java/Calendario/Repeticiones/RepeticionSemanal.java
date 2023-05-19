@@ -1,9 +1,6 @@
 package Calendario.Repeticiones;
 
 
-import Calendario.Eventos.InstanciaEvento;
-import Calendario.Main.Builders.Frecuencia;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -127,10 +124,5 @@ public class RepeticionSemanal extends Repeticion{
      */
     private int calcularDiferenciaSemanas(DayOfWeek diaEvento){
         return 7*getIntervalo()-calcularDiferenciaDias(diaEvento, getPrimerDiaSemana());
-    }
-    public Frecuencia getFrecuencia(){
-        Frecuencia f = Frecuencia.SEMANAL;
-        f.setDias(diasSemana);
-        return f;
     }
 }

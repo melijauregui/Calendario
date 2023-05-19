@@ -54,7 +54,6 @@ public class Alarma implements Serializable {
         return getFechaAlarma().isEqual(otra.getFechaAlarma());
     }
 
-
     /**
      * Devuelve la fecha de la Alarma
      */

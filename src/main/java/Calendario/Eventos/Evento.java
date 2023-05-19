@@ -4,7 +4,6 @@ import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.ActividadMutable;
-import Calendario.Main.Builders.Frecuencia;
 import Calendario.Repeticiones.Repeticion;
 
 import java.io.Serializable;
@@ -46,7 +45,6 @@ public class Evento extends ActividadMutable implements Serializable {
         nuevaDuracion.setDiaInicio(diaInicio);
         nuevaDuracion.setDiaFin(diaFin);
         InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion(), nuevaDuracion, alarmasEvento);
-        //instancia.configurarAlarmas(this.alarmas);
         return instancia;
     }
 
@@ -124,20 +122,14 @@ public class Evento extends ActividadMutable implements Serializable {
         return duracion.getFechaInicio();
     }
 
-
+    /**
+     * Devuelve true si la colección pasada está vacía
+     */
     private boolean estaVacia(Collection collection){
         return collection.size() == 0;
     }
 
-    public Frecuencia getFrecuencia(){
-        if (repeticion == null){
-            return null;
-        }
-        return repeticion.getFrecuencia();
-    }
-    public Duracion getDuracion(){
-        return duracion;
-    }
+
 }
 
 

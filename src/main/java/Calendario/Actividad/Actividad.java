@@ -40,7 +40,6 @@ public abstract class Actividad implements Serializable {
         return proximasAlarmas;
     }
 
-
     /**
      * Devuelve el conjunto de alarmas de la actividad
      */

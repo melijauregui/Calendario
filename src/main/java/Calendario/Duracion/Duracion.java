@@ -103,25 +103,4 @@ public class Duracion implements Serializable {
         return (horaInicio == null && horaFin == null);
     }
 
-    public void serializar(OutputStream bytes)  {
-        Gson gson = new Gson();
-        String diaInicioJson = gson.toJson(diaInicio);
-        String diaFinJson = gson.toJson(diaFin);
-        String horaInicioJson = gson.toJson(horaInicio);
-        String horaFinJson = gson.toJson(horaFin);
-        JsonWriterFactory factory = Json.createWriterFactory(new HashMap<>());
-        JsonWriter writer = factory.createWriter(bytes);
-        JsonArray duracion = Json.createArrayBuilder().add(diaInicioJson).add(diaFinJson).add(horaInicioJson).add(horaFinJson).build();
-        writer.write(duracion);
-        writer.close();
-    }
-
-    public static Calendario deserializar(InputStream bytes) {
-        JsonReaderFactory factory = Json.createReaderFactory(new HashMap<>());
-        JsonReader reader = factory.createReader(bytes);
-        JsonArray arrayActividades = reader.readArray();
-        Calendario calendario = (Calendario) reader.read();
-        reader.close();
-        return calendario;
-    }
 }

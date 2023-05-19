@@ -1,8 +1,5 @@
 package Calendario.Repeticiones;
 
-import Calendario.Eventos.InstanciaEvento;
-import Calendario.Main.Builders.Frecuencia;
-
 import java.time.LocalDate;
 
 public class RepeticionAnual extends Repeticion {
@@ -34,10 +31,6 @@ public class RepeticionAnual extends Repeticion {
      */
     public LocalDate getProximaFecha(LocalDate fecha){
         return fecha.plusYears(getIntervalo());
-    }
-
-    public Frecuencia getFrecuencia(){
-        return Frecuencia.ANUAL;
     }
 
 }

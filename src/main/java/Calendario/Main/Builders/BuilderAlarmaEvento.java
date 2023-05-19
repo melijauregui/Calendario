@@ -28,7 +28,7 @@ public class BuilderAlarmaEvento {
     /**
      * Devuelve la AlarmaEvento creada
      */
-    public AlarmaEvento CrearAlarmaEvento(){
+    public AlarmaEvento crearAlarmaEvento(){
         return alarmaEvento;
     }
 }
