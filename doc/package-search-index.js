@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"Calendario.Alarmas"},{"l":"Calendario.Duracion"},{"l":"Calendario.Enums"},{"l":"Calendario.Eventos"},{"l":"Calendario.Main"},{"l":"Calendario.Repeticiones"},{"l":"Calendario.Tareas"}];updateSearchResults();

@@ -1,5 +1,7 @@
 package Calendario.Main;
 
+import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadMutable;
 import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
@@ -14,7 +16,7 @@ import java.util.*;
 public class Calendario {
     private Set<Evento> eventos;
     private Set<Tarea> tareas;
-    private Set<Actividad> actividades;
+    private Set<ActividadMutable> actividades;
     private LocalDateTime fechaActual;
 
     public Calendario(){
@@ -48,8 +50,8 @@ public class Calendario {
      * Recibe la información de una tarea de día completo. La crea, la agreaga al calendario y la devuelve
      */
     public Tarea crearTarea(String titulo, String descripcion, LocalDate dia){
-        Tarea tarea = new Tarea(titulo, descripcion);
-        agregarInformacionTarea(tarea, dia);
+        Tarea tarea = new Tarea();
+        agregarInformacionTarea(tarea, titulo, descripcion, dia);
         return tarea;
     }
 
@@ -58,8 +60,8 @@ public class Calendario {
      * y la devuelve
      */
     public Tarea crearTarea(String titulo, String descripcion, LocalDateTime fecha){
-        Tarea tarea = new Tarea(titulo, descripcion);
-        agregarInformacionTarea(tarea, fecha.toLocalDate());
+        Tarea tarea = new Tarea();
+        agregarInformacionTarea(tarea,titulo, descripcion, fecha.toLocalDate());
         modificarHoraTarea(tarea, fecha.toLocalTime());
         return tarea;
     }
@@ -69,8 +71,8 @@ public class Calendario {
      * Recibe un intervalo de fechas y devuelve la lista de Actividades que inician (Eventos) o vencen (Tareas) dentro
      * del mismo
      */
-    public List<ActividadParticular> getActividadesEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
-        List<ActividadParticular> actividadesProximas = new ArrayList<>();
+    public List<Actividad> getActividadesEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
+        List<Actividad> actividadesProximas = new ArrayList<>();
         actividadesProximas.addAll(getEventos(desde, hasta));
         actividadesProximas.addAll(getTareas(desde, hasta));
         return actividadesProximas;
@@ -106,14 +108,14 @@ public class Calendario {
     /**
      * Cambia el título de la actividad recibida
      */
-    public void modificarTitulo(Actividad actividad, String titulo){
+    public void modificarTitulo(ActividadMutable actividad, String titulo){
         actividad.setTitulo(titulo);
     }
 
     /**
      * Cambia la descripción de la actividad recibida
      */
-    public void modificarDescripcion(Actividad actividad, String descripcion){
+    public void modificarDescripcion(ActividadMutable actividad, String descripcion){
         actividad.setDescripcion(descripcion);
     }
 
@@ -132,7 +134,7 @@ public class Calendario {
     }
 
     /**
-     * Cambia la fecha de la primera instancia del evento
+     * Cambia la fecha la duración del evento
      */
     public void modificarFechaEvento(Evento evento, Duracion duracion){
         evento.setDuracion(duracion);
@@ -152,12 +154,30 @@ public class Calendario {
     }
 
     /**
-     * Elimina una determinada alarma de la actividad
+     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
+     */
+    public void modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, AlarmaEvento alarmaNueva){
+        evento.eliminarAlarma(alarmaVieja);
+        evento.agregarAlarma(alarmaNueva);
+    }
+    /**
+     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
+     */
+    public void modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, Alarma alarmaNueva){
+        tarea.eliminarAlarma(alarmaVieja);
+        tarea.agregarAlarma(alarmaNueva);
+    }
+
+    /**
+     * Elimina una determinada alarma de la tarea
      */
     public void eliminarAlarmaTarea(Tarea tarea, Alarma alarma){
         tarea.eliminarAlarma(alarma);
     }
 
+    /**
+     * Elimina una determinada alarma del evento
+     */
     public void eliminarAlarmaEvento(Evento evento, AlarmaEvento alarma){
         evento.eliminarAlarma(alarma);
     }
@@ -174,14 +194,18 @@ public class Calendario {
      * Saca la tarea del Calendario y borra su información
      */
     public void eliminarTarea(Tarea tarea){
+        actividades.remove(tarea);
         tareas.remove(tarea);
+        tarea = null; //borra la información de la tarea
     }
 
     /**
      * Saca el evento del Calendario y borra su información
      */
     public void eliminarEvento(Evento evento){
+        actividades.remove(evento);
         eventos.remove(evento);
+        evento = null;  //borra la información del evento
     }
 
     /**
@@ -202,8 +226,8 @@ public class Calendario {
     /**
      * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
      */
-    private List<ActividadParticular> getTareas(LocalDateTime desde, LocalDateTime hasta){
-        List<ActividadParticular> proximasTareas = new ArrayList<>();
+    private List<Actividad> getTareas(LocalDateTime desde, LocalDateTime hasta){
+        List<Actividad> proximasTareas = new ArrayList<>();
         for (Tarea tarea : tareas){
             if (tarea.estaEnElIntervalo(desde, hasta)){
                 proximasTareas.add(tarea);
@@ -241,13 +265,23 @@ public class Calendario {
     }
 
     /**
+     *  Recibe una Actividad y la información de la misma. La agrega a las actividades del Calendario
+     *  y modifica su título y descripción
+     */
+    private void agregarInformacionActividad(ActividadMutable actividad, String titulo, String descripcion) {
+        actividades.add(actividad);
+        modificarTitulo(actividad, titulo);
+        modificarDescripcion(actividad, descripcion);
+
+    }
+
+    /**
      *  Recibe un Evento y la información del mismo. Lo agrega a los eventos del Calendario y modifica
      *  su duración, título y descripción
      */
     private void agregarInformacionEvento(Evento evento, String titulo, String descripcion, Duracion duracion){
         eventos.add(evento);
-        modificarTitulo(evento, titulo);
-        modificarDescripcion(evento, descripcion);
+        agregarInformacionActividad(evento, titulo, descripcion);
         modificarFechaEvento(evento, duracion);
     }
 
@@ -255,8 +289,9 @@ public class Calendario {
      * Recibe una Tarea y la información de la misma. La agrega a las tareas del calendario y modifica su día,
      * título y descripción
      */
-    public void agregarInformacionTarea(Tarea tarea, LocalDate dia){
+    private void agregarInformacionTarea(Tarea tarea, String titulo, String descripcion, LocalDate dia){
         tareas.add(tarea);
+        agregarInformacionActividad(tarea, titulo, descripcion);
         modificarDiaTarea(tarea, dia);
     }
 

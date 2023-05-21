@@ -2,24 +2,38 @@ package Calendario.Eventos;
 
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
-import Calendario.Main.ActividadParticular;
+import Calendario.Actividad.Actividad;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class InstanciaEvento extends ActividadParticular {
+public class InstanciaEvento extends Actividad {
+    private String titulo;
+    private String descripcion;
 
     Duracion duracion;
-    public InstanciaEvento(String titulo, String descripcion) {
-        super(titulo, descripcion);
+
+    public InstanciaEvento(String titulo, String descripcion, Duracion duracion, Set<AlarmaEvento> alarmas){
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        configurarAlarmas(alarmas);
+
     }
 
     /**
-     * Devuelve la duración
+     * Devuelve el título de la Instancia
      */
-    public void setDuracion(Duracion duracion){
-        this.duracion = duracion;
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * Devuelve la descripción de la Instancia
+     */
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
@@ -28,6 +42,10 @@ public class InstanciaEvento extends ActividadParticular {
     public boolean empiezaDespues(LocalDateTime fecha){
         return this.getFechaInicio().isAfter(fecha);
     }
+
+    /**
+     * Devuelve true si la instancia del evento comienza al mismo tiempo que la fecha recibida como argumento
+     */
     public boolean empiezaIgual(LocalDateTime fecha){
         return this.getFechaInicio().isEqual(fecha);
     }
@@ -63,16 +81,16 @@ public class InstanciaEvento extends ActividadParticular {
     /**
      * Le agrega a la Instancia la alarma pasada
      */
-    public void configurarAlarma(AlarmaEvento alarmaEvento){
+    private void configurarAlarma(AlarmaEvento alarmaEvento){
         if (alarmaEvento != null){
-            super.agregarAlarma(alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio()));
+            super.getAlarmas().add(alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio()));
         }
     }
 
     /**
      * Configura todas las alarmas recibidas por parámetro
      */
-    public void configurarAlarmas(Set<AlarmaEvento> alarmas){
+    private void configurarAlarmas(Set<AlarmaEvento> alarmas){
         if (alarmas != null) {
             for (AlarmaEvento alarma : alarmas) {
                 configurarAlarma(alarma);

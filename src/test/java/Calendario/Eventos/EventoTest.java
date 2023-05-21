@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -212,7 +213,7 @@ public class EventoTest {
             assertEquals(resEsperadoFechasFinALmacenadas.get(i), resObtenidoEventosIntervalo2.get(i).getFechaFin());
         }
     }
-/*
+
     @Test
     public void TestEventoGetProximoEvento() {
         //Comprueba que el método getProximoEvento(fecha) de Evento se comporte como lo esperado
@@ -277,11 +278,16 @@ public class EventoTest {
         var diaAnteriorPrueba = 2; //debe estar entre [1,6] para que las pruebas sigan dando como lo esperado
         //Assert
 
-        for (int i = 0; i < resEsperadoFechasInicioALmacenadas.size(); i++) {
+        var proximasRepeticiones = evento.getProximasRepeticiones(
+                resEsperadoFechasInicioALmacenadas.get(0).minusDays(diaAnteriorPrueba),
+                resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
+                );
+
+        for (int i = 0; i < proximasRepeticiones.size(); i++) {
             //Compruebo que ante la fecha dada de efectivamente el próximo evento
             var diaFechaInicio = resEsperadoFechasInicioALmacenadas.get(i).minusDays(diaAnteriorPrueba);
-            var diaFechaFin = resEsperadoFechasFinALmacenadas.get(i).minusDays(diaAnteriorPrueba);
-            var resObtenido = evento.getProximaRepeticion(diaFechaInicio.toLocalDate(), diaFechaFin.toLocalDate());
+            var diaFechaFin = resEsperadoFechasFinALmacenadas.get(i);
+            var resObtenido = proximasRepeticiones.get(i);
             assertEquals(resEsperadoFechasInicioALmacenadas.get(i), resObtenido.getFechaInicio());
             assertEquals(resEsperadoFechasFinALmacenadas.get(i), resObtenido.getFechaFin());
             assertEquals(resEsperadoTitulo, resObtenido.getTitulo());
@@ -290,7 +296,7 @@ public class EventoTest {
         assertEquals(resEsperadoTitulo, resObtenidoTitulo);
         assertEquals(resEsperadoDescripcion, resObtenidoDescripcion);
     }
-*/
+
 
 
     @Test
@@ -353,15 +359,19 @@ public class EventoTest {
         //Act Resultados obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
+        var proximasRepeticiones = evento.getProximasRepeticiones(
+                resEsperadoFechasInicioALmacenadas.get(0).minusDays(1),
+                resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
+        );
 
         //Número para comprobar que den los resultados esperados
         var diaAnteriorPrueba = 2; //debe estar entre [1,6] para que las pruebas sigan dando como lo esperado
         //Assert
-        for (int i = 0; i < resEsperadoFechasInicioALmacenadas.size(); i++) {
+        for (int i = 0; i < proximasRepeticiones.size(); i++) {
             //Compruebo que ante la fecha dada de efectivamente el próximo evento
             var diaFechaInicio = resEsperadoFechasInicioALmacenadas.get(i).minusDays(diaAnteriorPrueba);
             var diaFechaFin = resEsperadoFechasFinALmacenadas.get(i).minusDays(diaAnteriorPrueba);
-            var resObtenido = evento.getProximaRepeticion(diaFechaInicio.toLocalDate(), diaFechaFin.toLocalDate());
+            var resObtenido = proximasRepeticiones.get(i);
             assertEquals(resEsperadoFechasInicioALmacenadas.get(i), resObtenido.getFechaInicio());
             assertEquals(resEsperadoFechasFinALmacenadas.get(i), resObtenido.getFechaFin());
             assertEquals(resEsperadoTitulo, resObtenido.getTitulo());
@@ -431,13 +441,16 @@ public class EventoTest {
         //Act Resultados obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
+        var proximasRepeticiones = evento.getProximasRepeticiones(
+                resEsperadoFechasInicioALmacenadas.get(0).minusDays(1),
+                resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
+        );
 
         //Assert
-        var eventoInicial = new InstanciaEvento(titulo, descripcion);
-        eventoInicial.setDuracion(duracion);
+        var eventoInicial = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         for (int i = 1; i < resEsperadoFechasInicioALmacenadas.size(); i++) {
             //Compruebo que ante el evento dado de efectivamente el próximo evento
-            var resObtenido = evento.getProximaRepeticion(eventoInicial.getFechaInicio().toLocalDate(), eventoInicial.getFechaFin().toLocalDate());
+            var resObtenido = proximasRepeticiones.get(i);
             assertEquals(resEsperadoFechasInicioALmacenadas.get(i), resObtenido.getFechaInicio());
             assertEquals(resEsperadoFechasFinALmacenadas.get(i), resObtenido.getFechaFin());
             assertEquals(resEsperadoTitulo, resObtenido.getTitulo());
@@ -506,12 +519,15 @@ public class EventoTest {
         //Act Resultados obtenidos
         var resObtenidoTitulo = evento.getTitulo();
         var resObtenidoDescripcion = evento.getDescripcion();
+        var proximasRepeticiones = evento.getProximasRepeticiones(
+                resEsperadoFechasInicioALmacenadas.get(0).minusDays(1),
+                resEsperadoFechasFinALmacenadas.get(resEsperadoFechasFinALmacenadas.size()-1)
+        );
 
         //Assert
-        var eventoInicial = new InstanciaEvento(titulo, descripcion);
-        eventoInicial.setDuracion(duracion);
+        var eventoInicial = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         for (int i = 1; i < resEsperadoFechasInicioALmacenadas.size(); i++) {
-            var resObtenido = evento.getProximaRepeticion(eventoInicial.getFechaInicio().toLocalDate(), eventoInicial.getFechaFin().toLocalDate());
+            var resObtenido = proximasRepeticiones.get(i);
             assertEquals(resEsperadoFechasInicioALmacenadas.get(i), resObtenido.getFechaInicio());
             assertEquals(resEsperadoFechasFinALmacenadas.get(i), resObtenido.getFechaFin());
             assertEquals(resEsperadoTitulo, resObtenido.getTitulo());
@@ -551,8 +567,7 @@ public class EventoTest {
         evento.setRepeticion(repeticion);
 
         //Resultados Esperados
-        var eventoInicial = new InstanciaEvento(titulo, descripcion);
-        eventoInicial.setDuracion(duracion);
+        var eventoInicial = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         List<InstanciaEvento> resEsperadoEventosIntervalo = new ArrayList<>();
         resEsperadoEventosIntervalo.add(eventoInicial);
         var resEsperadoFechasInicioALmacenadas = List.of(
@@ -693,8 +708,7 @@ public class EventoTest {
         duracion.setDiaFin(diaFin);
         duracion.setHoraFin(horaFin);
 
-        var eventoInicial = new InstanciaEvento(titulo, descripcion);
-        eventoInicial.setDuracion(duracion);
+        var eventoInicial = new InstanciaEvento(titulo, descripcion, duracion, new HashSet<>());
         evento.setDuracion(duracion);
 
         evento.setRepeticion(repeticion);

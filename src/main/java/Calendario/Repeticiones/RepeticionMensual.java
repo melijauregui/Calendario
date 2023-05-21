@@ -28,6 +28,9 @@ public class RepeticionMensual extends Repeticion {
         super(intervaloMensual);
     }
 
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de meses
+     */
     public LocalDate getProximaFecha(LocalDate fecha){
         return fecha.plusMonths(getIntervalo());
     }

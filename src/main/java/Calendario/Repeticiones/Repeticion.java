@@ -38,50 +38,34 @@ public abstract class Repeticion {
         this.ocurrencias = repeticionInfinita;
     }
 
-/*    *//**
-     * Devuelve true si la repetición nunca acaba
-     *//*
-    public boolean esInfinita(){
-        return (this.ocurrencias == repeticionInfinita);
-    }*/
 
-
+    /**
+     * Dada la fecha de inicio de la repetición anterior, devuelve la de la siguiente
+     * o null si la misma ya acabó
+     */
     public LocalDate getProximaFechaInicio(LocalDate fecha){
-        if (terminoRepeticion(fecha)){
+        LocalDate fechaProxima =  getProximaFecha(fecha);
+        if (terminoRepeticion(fechaProxima)){
             ocurrenciasRelativas = ocurrencias;
             return null;
         }
         disminuirOcurrencias();
-        return getProximaFecha(fecha);
+        return fechaProxima;
     }
 
+    /**
+     * Dada la fecha de finalización de la repetición anterior, devuelve la de la siguiente
+     **/
     public LocalDate getProximaFechaFin(LocalDate fecha){
         return getProximaFecha(fecha);
 
     }
 
+
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de repetición
+     */
     protected abstract LocalDate getProximaFecha(LocalDate fecha);
-
-
-/*
-    *//**
-     * Guarda en una lista las sucesivas instancias del evento. Si la repetición es infinita, solo
-     * guarda la pasada por parámetro.
-     *//*
-    public void almacenarRepeticiones(List<InstanciaEvento> almacenamiento, InstanciaEvento primerEvento) {
-        this.ocurrenciasRelativas = ocurrencias;
-        almacenamiento.add(primerEvento);
-        InstanciaEvento utlimoEventoAlmacenado = primerEvento;
-        this.disminuirOcurrencias();
-        if (!esInfinita()) {
-            while (!esUltimaInstanciaEvento(utlimoEventoAlmacenado)) {
-                this.disminuirOcurrencias();
-                var instancia = this.getProximaInstanciaEvento(utlimoEventoAlmacenado);
-                almacenamiento.add(instancia);
-                utlimoEventoAlmacenado = instancia;
-            }
-        }
-    }*/
 
     /**
      * Devuelve el intervalo
