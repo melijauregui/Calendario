@@ -65,7 +65,7 @@ public class Calendario implements Serializable {
         Set<Alarma> primerasAlarmas = new HashSet<>();
         for(Actividad actividad : actividades){
             Set<Alarma> alarmas = actividad.getProximasAlarmas(fecha);
-            if (debeIncluirAlarma(primerasAlarmas, alarmas, fecha)){
+            if (debeIncluirAlarma(proximasAlarmas, primerasAlarmas,alarmas, fecha)){
                 primerasAlarmas = alarmas;
                 proximasAlarmas.addAll(alarmas);
             }
@@ -233,7 +233,7 @@ public class Calendario implements Serializable {
      * Devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha pasada que una del conjunto
      * PRIMERAS_ALARMAS, o si suenan al mismo tiempo
      */
-    private boolean debeIncluirAlarma(Set<Alarma> primerasAlarmas, Set<Alarma> otras, LocalDateTime fecha){
+    private boolean debeIncluirAlarma(Set<Alarma> proximasAlarmas, Set<Alarma> primerasAlarmas, Set<Alarma> otras, LocalDateTime fecha){
         if (primerasAlarmas.size() == 0){
             return true;
         }
@@ -243,7 +243,7 @@ public class Calendario implements Serializable {
         Alarma primerAlarma = primerasAlarmas.iterator().next();
         Alarma otra = otras.iterator().next();
         if (esMasProxima(primerAlarma, otra, fecha)){
-            primerasAlarmas.clear();
+            proximasAlarmas.clear();
             return true;
         }
         return (ambasSonProximas(primerAlarma, otra));
