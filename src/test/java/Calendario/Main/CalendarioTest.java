@@ -55,7 +55,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40)));
+        var tarea = calendario.crearTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var actividadesEsperadas = new ArrayList<Actividad>();
         actividadesEsperadas.add(tarea);
@@ -103,7 +103,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 1);
 
         //Act
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, diaTarea));
+        var tarea = calendario.crearTarea(titulo, descripcion, diaTarea);
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var tareaResultado = actividadesResultado.get(0);
 
@@ -161,7 +161,7 @@ public class CalendarioTest {
 
         //Act
         var evento = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracion));
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40)));
+        var tarea = calendario.crearTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40));
         var cantActividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta).size();
 
 
@@ -206,7 +206,7 @@ public class CalendarioTest {
         //Act
         var evento1 = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracion1));
         var evento2 = calendario.crearEvento(new BuilderEvento(titulo2, descripcion, duracion1, new BuilderRepeticion(1, Frecuencia.DIARIA)));
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo3, descripcion, fechaTarea));
+        var tarea = calendario.crearTarea(titulo3, descripcion, fechaTarea);
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
 
@@ -240,17 +240,17 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var tarea1 = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha1));
+        var tarea1 = calendario.crearTarea(titulo, descripcion, fecha1);
 
-        var tarea2 = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha2));
+        var tarea2 = calendario.crearTarea(titulo, descripcion, fecha2);
 
         var cantidadEsperadas = 1; //suena 15:30
 
         //Act
-        var alarma1 = calendario.agregarAlarmaTarea(tarea1, new BuilderAlarma(fecha1, TipoAviso.NOTIFICACION));
-        var alarma2 = calendario.agregarAlarmaTarea(tarea1, new BuilderAlarma(fecha1, 10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
-        var alarma3 = calendario.agregarAlarmaTarea(tarea2, new BuilderAlarma(fecha2,  TipoAviso.NOTIFICACION));
-        var alarma4 = calendario.agregarAlarmaTarea(tarea2, new BuilderAlarma(fecha2, TipoAviso.NOTIFICACION));
+        var alarma1 = calendario.agregarAlarmaTarea(tarea1, fecha1, TipoAviso.NOTIFICACION);
+        var alarma2 = calendario.agregarAlarmaTarea(tarea1,fecha1, 10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
+        var alarma3 = calendario.agregarAlarmaTarea(tarea2, fecha2,  TipoAviso.NOTIFICACION);
+        var alarma4 = calendario.agregarAlarmaTarea(tarea2, fecha2, TipoAviso.NOTIFICACION);
         Set<Alarma> resultado = calendario.getProximasAlarmas(fechaAlarma);
 
         //Assert
@@ -272,7 +272,7 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha));
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var tamanioEsperado = 0;
 
@@ -293,7 +293,7 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha));
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var tituloNuevo = "título nuevo";
 
@@ -340,7 +340,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
         var diaviejo = LocalDate.of(2023, 4, 22);
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, diaviejo));
+        var tarea = calendario.crearTarea(titulo, descripcion, diaviejo);
 
         var fechaNueva = LocalDate.of(2023, 4, 23);
 
@@ -362,7 +362,7 @@ public class CalendarioTest {
 
         var fechaVieja = LocalDateTime.of(2100, 4, 22, 20, 0);
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion,fechaVieja));
+        var tarea = calendario.crearTarea(titulo, descripcion,fechaVieja);
 
         var horaNueva = LocalTime.of(20, 5);
         //Act
@@ -416,12 +416,12 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha));
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var cantidadEsperadas = 1;
 
         //Act
-        alarma = calendario.agregarAlarmaTarea(tarea, new BuilderAlarma(fecha, TipoAviso.NOTIFICACION));
+        alarma = calendario.agregarAlarmaTarea(tarea, fecha, TipoAviso.NOTIFICACION);
         var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
 
         //Assert
@@ -439,13 +439,13 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha));
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var cantidadEsperadas = 1;
-        var alarma = calendario.agregarAlarmaTarea(tarea, new BuilderAlarma(fecha, TipoAviso.NOTIFICACION));
+        var alarma = calendario.agregarAlarmaTarea(tarea, fecha, TipoAviso.NOTIFICACION);
 
         //Act
-        var alarma2 = calendario.modificarAlarmaTarea(tarea, alarma, new BuilderAlarma(fecha, TipoAviso.SONIDO));
+        var alarma2 = calendario.modificarAlarmaTarea(tarea, alarma, fecha, TipoAviso.SONIDO);
         var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
 
         //Assert
@@ -477,7 +477,7 @@ public class CalendarioTest {
         var fechaEsperada = fechaDesde.plusMinutes(5);
 
         //Act
-        calendario.agregarAlarmaEvento(evento, new BuilderAlarmaEvento(30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
+        calendario.agregarAlarmaEvento(evento, 30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
         var alarmasRes = evento.getProximasAlarmas(fechaDesde);
         var resultado = alarmasRes.iterator().next().getFechaAlarma();
 
@@ -506,13 +506,13 @@ public class CalendarioTest {
         var evento = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracionInicial));
 
         var cantidadEsperadas = 1;
-        calendario.agregarAlarmaEvento(evento, new BuilderAlarmaEvento(30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
+        calendario.agregarAlarmaEvento(evento,30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
 
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 45);
         var fechaEsperada = fechaDesde.plusMinutes(5);
 
         //Act
-        calendario.modificarAlarmaEvento(evento, alarma1, new BuilderAlarmaEvento(10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
+        calendario.modificarAlarmaEvento(evento, alarma1,10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
         var alarmasRes = evento.getProximasAlarmas(fechaDesde);
         var resultado = alarmasRes.iterator().next().getFechaAlarma();
 
@@ -530,10 +530,10 @@ public class CalendarioTest {
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha));
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var cantidadEsperadas = 0;
-        var alarma = calendario.agregarAlarmaTarea(tarea, new BuilderAlarma(fecha, TipoAviso.NOTIFICACION));
+        var alarma = calendario.agregarAlarmaTarea(tarea,fecha, TipoAviso.NOTIFICACION);
 
         //Act
         calendario.eliminarAlarmaTarea(tarea, alarma);
@@ -562,7 +562,7 @@ public class CalendarioTest {
         var evento = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracionInicial));
 
         var cantidadEsperadas = 0;
-        calendario.agregarAlarmaEvento(evento, new BuilderAlarmaEvento(30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION));
+        calendario.agregarAlarmaEvento(evento, 30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
 
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 45);
 
@@ -593,7 +593,7 @@ public class CalendarioTest {
         int tamanioEsperado = 1;
 
         //Act
-        calendario.modificarRepeticionEvento(evento, new BuilderRepeticion(2, Frecuencia.DIARIA, 2));
+        calendario.modificarRepeticionEvento(evento, 2, Frecuencia.DIARIA, 2);
         var eventos = evento.getRepeticionesEnIntervalo(duracion.getFechaInicio().minusDays(1),
                 duracion.getFechaInicio().plusDays(1));
         var fechaEsperada = LocalDateTime.of(2023, 4, 22, 20, 0);
@@ -613,7 +613,7 @@ public class CalendarioTest {
         var calendario = new Calendario();
 
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
-        var tarea = calendario.crearTarea(new BuilderTarea(titulo, descripcion, fecha));
+        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
 
         var tamanioEsperado = 0;
 
@@ -673,7 +673,7 @@ public class CalendarioTest {
         duracion1.setHoraInicio(fechaInicio.toLocalTime());
         duracion1.setHoraFin(fechaFin.toLocalTime());
         var evento1 = calendario.crearEvento(new BuilderEvento(tituloE1, descripcionE1, duracion1));
-        calendario.agregarAlarmaEvento(evento1, new BuilderAlarmaEvento(TipoAviso.NOTIFICACION));
+        calendario.agregarAlarmaEvento(evento1, TipoAviso.NOTIFICACION);
 
         //Evento2
         var tituloE2 = "E2";
@@ -692,7 +692,7 @@ public class CalendarioTest {
         var tituloT1 = "T1";
         var descripcionT1 = "T1";
         var fechaT1 =  LocalDateTime.of(2023, 5, 10, 15, 40);
-        var tarea1 = calendario.crearTarea(new BuilderTarea(tituloT1, descripcionT1, fechaT1));
+        var tarea1 = calendario.crearTarea(tituloT1, descripcionT1, fechaT1);
 
         //ESPERADO
         var actividadesEsperadas = calendario.getActividadesEnElIntervalo(desde, hasta);
