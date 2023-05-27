@@ -45,7 +45,7 @@ public class Tarea extends ActividadMutable {
      * de fechas pasado por parámetro
      */
     public boolean estaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
-        return !this.estaCompleta() && (this.getFecha().isAfter(desde) || estaEnElIntervaloDiaCompleto(desde.toLocalDate())) && this.getFecha().isBefore(hasta);
+        return !this.estaCompleta() && (estaEnElIntervaloConHora(desde, hasta) || estaEnElIntervaloDiaCompleto(desde.toLocalDate()));
     }
 
     /**
@@ -84,6 +84,13 @@ public class Tarea extends ActividadMutable {
      */
     private boolean estaEnElIntervaloDiaCompleto(LocalDate fecha){
         return this.getFecha().toLocalDate().equals(fecha) && esDiaCompleto();
+    }
+
+    /**
+     * Devuelve true si la tarea con hora se encuentra dentro del intervalo de fechas dado
+     */
+    private boolean estaEnElIntervaloConHora(LocalDateTime desde, LocalDateTime hasta){
+        return !this.getFecha().isBefore(desde) && this.getFecha().isBefore(hasta);
     }
 
     /**

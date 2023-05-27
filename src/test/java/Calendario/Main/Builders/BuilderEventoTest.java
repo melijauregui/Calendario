@@ -16,14 +16,11 @@ public class BuilderEventoTest {
         // Arrange
         var titulo = "Builder con repetición";
         var descripcion = "Crea un evento con repetición";
-        var duracion = new Duracion();
         var fecha = LocalDate.of(2023,2,2);
-        duracion.setDiaInicio(fecha);
-        duracion.setDiaFin(fecha);
         var tipoEsperado = Evento.class;
 
         // Act
-        var builder = new BuilderEvento(titulo, descripcion, duracion, new BuilderRepeticion(5, Frecuencia.DIARIA));
+        var builder = new BuilderEvento(titulo, descripcion, new BuilderDuracion(fecha, fecha), new BuilderRepeticion(5, Frecuencia.DIARIA));
         var evento = builder.crearEvento();
         var tipoResultado = evento.getClass();
 
@@ -39,14 +36,11 @@ public class BuilderEventoTest {
         // Arrange
         var titulo = "Builder sinn repetición";
         var descripcion = "Crea un evento sin repetición";
-        var duracion = new Duracion();
         var fecha = LocalDate.of(2023,2,2);
-        duracion.setDiaInicio(fecha);
-        duracion.setDiaFin(fecha);
         var tipoEsperado = Evento.class;
 
         // Act
-        var builder = new BuilderEvento(titulo, descripcion, duracion);
+        var builder = new BuilderEvento(titulo, descripcion, new BuilderDuracion(fecha, fecha));
         var evento = builder.crearEvento();
         var tipoResultado = evento.getClass();
 

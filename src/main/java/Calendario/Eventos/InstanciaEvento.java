@@ -45,10 +45,17 @@ public class InstanciaEvento extends Actividad implements Serializable {
     }
 
     /**
-     * Devuelve true si la instancia del evento comienza al mismo tiempo que la fecha recibida como argumento
+     * Devuelve true si la instancia del evento comienza el mismo día y hora que la fecha recibida como argumento
      */
     public boolean empiezaIgual(LocalDateTime fecha){
         return this.getFechaInicio().isEqual(fecha);
+    }
+
+    /**
+     * Devuelve true si la instancia del evento comienza el mismo día que la fecha recibida como argumento
+     */
+    public boolean empiezaIgual(LocalDate dia){
+        return this.getDiaInicio().isEqual(dia);
     }
 
     /**
