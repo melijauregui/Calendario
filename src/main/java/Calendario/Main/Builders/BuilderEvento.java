@@ -15,16 +15,16 @@ public class BuilderEvento {
     /**
      * Recibe la información de un Evento con Repetición y se la setea
      */
-    public BuilderEvento(String titulo, String descripcion, Duracion duracion, BuilderRepeticion builderRepeticion){
-        setInformacion(titulo, descripcion, duracion);
+    public BuilderEvento(String titulo, String descripcion, BuilderDuracion builderDuracion, BuilderRepeticion builderRepeticion){
+        setInformacion(titulo, descripcion, builderDuracion);
         evento.setRepeticion(builderRepeticion.crearRepeticion());
     }
 
     /**
      * Recibe la información de un Evento sin Repetición y se la setea
      */
-    public BuilderEvento(String titulo, String descripcion, Duracion duracion){
-        setInformacion(titulo, descripcion, duracion);
+    public BuilderEvento(String titulo, String descripcion, BuilderDuracion builderDuracion){
+        setInformacion(titulo, descripcion, builderDuracion);
     }
 
     /**
@@ -37,7 +37,8 @@ public class BuilderEvento {
     /**
      * Modifica el título, la descripción y la duración del Evento
      */
-    private void setInformacion(String titulo, String descripcion, Duracion duracion){
+    private void setInformacion(String titulo, String descripcion, BuilderDuracion builderDuracion){
+        Duracion duracion = builderDuracion.crearDuracion();
         evento.setTitulo(titulo);
         evento.setDescripcion(descripcion);
         evento.setDuracion(duracion);

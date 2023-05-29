@@ -55,7 +55,7 @@ public class Evento extends ActividadMutable implements Serializable {
         List<InstanciaEvento> eventos = new ArrayList<>();
         InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
         while (instancia != null && !instancia.empiezaDespues(hasta)){
-            if (instancia.empiezaDespues(desde) || instancia.empiezaIgual(desde)){
+            if (debeIncluirInstancia(instancia, desde)){
                 eventos.add(instancia);
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
@@ -64,21 +64,6 @@ public class Evento extends ActividadMutable implements Serializable {
 
     }
 
-    /**
-     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida.
-     * Si el evento no tiene repetición, o la misma acabó devuelve null.
-     */
-    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
-        if (repeticion == null){
-            return null;
-        }
-        fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
-        fechaFin = repeticion.getProximaFechaFin(fechaFin);
-        if (fechaInicio == null){
-            return null;
-        }
-        return crearInstancia(fechaInicio, fechaFin);
-    }
 
     /**
      * Agrega la alarma al evento
@@ -127,6 +112,29 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     private boolean estaVacia(Collection collection){
         return collection.size() == 0;
+    }
+
+    /**
+     * Devuelve true si la instancia empieza despúes o al mismo tiempo que la fecha pasada por parámetro
+     */
+    private boolean debeIncluirInstancia(InstanciaEvento instancia, LocalDateTime desde){
+        return (instancia.empiezaDespues(desde) || instancia.empiezaIgual(desde) || (duracion.esDiaCompleto() && instancia.empiezaIgual(desde.toLocalDate())));
+    }
+
+    /**
+     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida.
+     * Si el evento no tiene repetición, o la misma acabó devuelve null.
+     */
+    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
+        if (repeticion == null){
+            return null;
+        }
+        fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
+        fechaFin = repeticion.getProximaFechaFin(fechaFin);
+        if (fechaInicio == null){
+            return null;
+        }
+        return crearInstancia(fechaInicio, fechaFin);
     }
 
 

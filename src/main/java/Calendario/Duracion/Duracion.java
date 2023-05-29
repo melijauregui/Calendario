@@ -84,7 +84,7 @@ public class Duracion implements Serializable {
 
     /**
      * Devuelve una copia de la duración
-     */
+     */{}
     public Duracion Clone(){
         Duracion nuevaDuracion = new Duracion();
         nuevaDuracion.setDiaInicio(this.diaInicio);
@@ -97,9 +97,9 @@ public class Duracion implements Serializable {
     }
 
     /**
-     * esDiaCompleto devuelve true si la duración es de día completo
+     * Devuelve true si la duración es de día completo
      */
-    private boolean esDiaCompleto(){
+    public boolean esDiaCompleto(){
         return (horaInicio == null && horaFin == null);
     }
 
