@@ -199,15 +199,6 @@ public class Calendario implements Serializable {
         BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion);
         return crearEvento(builderEvento);
     }
-    /**
-     * Recibe un BuilderEvento. Crea un Evento a partir de éste, lo agrega al Calendario y lo devuelve
-     */
-    private Evento crearEvento(BuilderEvento builderEvento){
-        Evento evento = builderEvento.crearEvento();
-        eventos.add(evento);
-        actividades.add(evento);
-        return evento;
-    }
 
     /**
      * Recibe la información de una Tarea de día completo. Usa un BuilderTarea para crearla, la agrega al Calendario y la devuelve
@@ -225,15 +216,6 @@ public class Calendario implements Serializable {
         return crearTarea(builderTarea);
     }
 
-    /**
-     * Recibe un BuilderTarea. Crea una Tarea a partir de éste, la agrega al Calendario y la devuelve
-     */
-    private Tarea crearTarea(BuilderTarea builderTarea){
-        Tarea tarea = builderTarea.crearTarea();
-        tareas.add(tarea);
-        actividades.add(tarea);
-        return tarea;
-    }
 
     //GETTERS DE ACTIVIDADES
     /**
@@ -246,33 +228,7 @@ public class Calendario implements Serializable {
         actividadesProximas.addAll(getTareas(desde, hasta));
         return actividadesProximas;
     }
-    /**
-     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
-     * de los Eventos del calendario que inician dentro del mismo
-     */
-    private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
-        List<InstanciaEvento> proximosEventos = new ArrayList<>();
-        for (Evento evento : eventos){
-            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
-            if (instancias != null){
-                proximosEventos.addAll(instancias);
-            }
-        }
-        return  proximosEventos;
-    }
 
-    /**
-     * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
-     */
-    private List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
-        List<Tarea> proximasTareas = new ArrayList<>();
-        for (Tarea tarea : tareas){
-            if (tarea.estaEnElIntervalo(desde, hasta)){
-                proximasTareas.add(tarea);
-            }
-        }
-        return proximasTareas;
-    }
 
     /**
      * Dada la próxima alarma que debe sonar (tiene la fecha más próxima a la pasada por parámetro), obtiene todas las
@@ -420,21 +376,6 @@ public class Calendario implements Serializable {
         BuilderAlarma builderAlarma = new BuilderAlarma(fecha,aviso);
         return modificarAlarmaTarea(tarea, alarmaVieja, builderAlarma);
     }
-    /**
-     * Recibe una alarma existente y un BuilderAlarmaEvento que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
-     */
-    private AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
-        evento.eliminarAlarma(alarmaVieja);
-        return agregarAlarmaEvento(evento, builderAlarmaEvento);
-    }
-
-    /**
-     * Recibe una alarma existente y un BuilderAlarma que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
-     */
-    private Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
-        tarea.eliminarAlarma(alarmaVieja);
-        return agregarAlarmaTarea(tarea, builderAlarma);
-    }
 
     /**
      * Recibe la información de una Repetición con fecha de vencimiento, la crea a partir del BuilderRepeticion
@@ -523,7 +464,114 @@ public class Calendario implements Serializable {
     }
 
 
-    //METODOS PARA ALARMAS
+    //SERIALIZACIÓN
+    /**
+     * Reconstruye el Calendario a partir de la secuencia de bytes pasada. Devuelve un nuevo Calendario con
+     * la misma información
+     */
+    public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInStream = new ObjectInputStream(bytes);
+        objectInStream.close();
+        return (Calendario) objectInStream.readObject();
+    }
+
+    /**
+     * Guarda el estado actual del Calendario.
+     */
+    public void serializar(OutputStream bytes) throws IOException {
+        ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
+        objectOutStream.writeObject(this);
+        objectOutStream.flush();
+        objectOutStream.close();
+    }
+
+    //MÉTODOS PRIVADOS ACTIVIDADES
+    /**
+     * Recibe un BuilderEvento. Crea un Evento a partir de éste, lo agrega al Calendario y lo devuelve
+     */
+    private Evento crearEvento(BuilderEvento builderEvento){
+        Evento evento = builderEvento.crearEvento();
+        eventos.add(evento);
+        actividades.add(evento);
+        return evento;
+    }
+
+    /**
+     * Recibe un BuilderTarea. Crea una Tarea a partir de éste, la agrega al Calendario y la devuelve
+     */
+    private Tarea crearTarea(BuilderTarea builderTarea){
+        Tarea tarea = builderTarea.crearTarea();
+        tareas.add(tarea);
+        actividades.add(tarea);
+        return tarea;
+    }
+
+    /**
+     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
+     * de los Eventos del calendario que inician dentro del mismo
+     */
+    private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
+        List<InstanciaEvento> proximosEventos = new ArrayList<>();
+        for (Evento evento : eventos){
+            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
+            if (instancias != null){
+                proximosEventos.addAll(instancias);
+            }
+        }
+        return  proximosEventos;
+    }
+
+
+    /**
+     * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
+     */
+    private List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
+        List<Tarea> proximasTareas = new ArrayList<>();
+        for (Tarea tarea : tareas){
+            if (tarea.estaEnElIntervalo(desde, hasta)){
+                proximasTareas.add(tarea);
+            }
+        }
+        return proximasTareas;
+    }
+    //METODOS PARA ALARMAS PRIVADOS
+
+    /**
+     * Recibe un BuilderAlarmaEvento. Crea la AlarmaEvento a partir de éste, se la agrega al Evento y la
+     * devuelve
+     */
+    private AlarmaEvento agregarAlarmaEvento(Evento evento, BuilderAlarmaEvento builderAlarmaEvento){
+        var alarmaEvento = builderAlarmaEvento.crearAlarmaEvento();
+        evento.agregarAlarma(alarmaEvento);
+        return alarmaEvento;
+    }
+
+    /**
+     * Recibe un BuilderAlarma. Crea la Alarma a partir de éste, se la agrega a la Tarea y la
+     * devuelve
+     */
+    private Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
+        var alarma = builderAlarma.crearAlarma();
+        tarea.agregarAlarma(alarma);
+        return alarma;
+    }
+
+
+    /**
+     * Recibe una alarma existente y un BuilderAlarmaEvento que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
+     */
+    private AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
+        evento.eliminarAlarma(alarmaVieja);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe una alarma existente y un BuilderAlarma que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
+     */
+    private Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
+        tarea.eliminarAlarma(alarmaVieja);
+        return agregarAlarmaTarea(tarea, builderAlarma);
+    }
 
     /**
      * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
@@ -565,48 +613,6 @@ public class Calendario implements Serializable {
         return otra.suenaIgual(primerAlarma);
     }
 
-
-    /**
-     * Recibe un BuilderAlarmaEvento. Crea la AlarmaEvento a partir de éste, se la agrega al Evento y la
-     * devuelve
-     */
-    private AlarmaEvento agregarAlarmaEvento(Evento evento, BuilderAlarmaEvento builderAlarmaEvento){
-        var alarmaEvento = builderAlarmaEvento.crearAlarmaEvento();
-        evento.agregarAlarma(alarmaEvento);
-        return alarmaEvento;
-    }
-
-    /**
-     * Recibe un BuilderAlarma. Crea la Alarma a partir de éste, se la agrega a la Tarea y la
-     * devuelve
-     */
-    private Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
-        var alarma = builderAlarma.crearAlarma();
-        tarea.agregarAlarma(alarma);
-        return alarma;
-    }
-
-
-    //SERIALIZACIÓN
-    /**
-     * Reconstruye el Calendario a partir de la secuencia de bytes pasada. Devuelve un nuevo Calendario con
-     * la misma información
-     */
-    public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInStream = new ObjectInputStream(bytes);
-        objectInStream.close();
-        return (Calendario) objectInStream.readObject();
-    }
-
-    /**
-     * Guarda el estado actual del Calendario.
-     */
-    public void serializar(OutputStream bytes) throws IOException {
-        ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
-        objectOutStream.writeObject(this);
-        objectOutStream.flush();
-        objectOutStream.close();
-    }
 
 
 }

@@ -61,11 +61,6 @@ public abstract class Repeticion implements Serializable {
     }
 
     /**
-     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de repetición
-     */
-    protected abstract LocalDate getProximaFecha(LocalDate fecha);
-
-    /**
      * Devuelve el intervalo
      */
     public int getIntervalo(){
@@ -91,5 +86,10 @@ public abstract class Repeticion implements Serializable {
             this.ocurrenciasRelativas-=1;
         }
     }
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de repetición
+     */
+    protected abstract LocalDate getProximaFecha(LocalDate fecha);
+
 
 }

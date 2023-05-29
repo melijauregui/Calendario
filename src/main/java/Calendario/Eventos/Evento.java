@@ -64,21 +64,6 @@ public class Evento extends ActividadMutable implements Serializable {
 
     }
 
-    /**
-     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida.
-     * Si el evento no tiene repetición, o la misma acabó devuelve null.
-     */
-    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
-        if (repeticion == null){
-            return null;
-        }
-        fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
-        fechaFin = repeticion.getProximaFechaFin(fechaFin);
-        if (fechaInicio == null){
-            return null;
-        }
-        return crearInstancia(fechaInicio, fechaFin);
-    }
 
     /**
      * Agrega la alarma al evento
@@ -134,6 +119,22 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     private boolean debeIncluirInstancia(InstanciaEvento instancia, LocalDateTime desde){
         return (instancia.empiezaDespues(desde) || instancia.empiezaIgual(desde) || (duracion.esDiaCompleto() && instancia.empiezaIgual(desde.toLocalDate())));
+    }
+
+    /**
+     * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida.
+     * Si el evento no tiene repetición, o la misma acabó devuelve null.
+     */
+    private InstanciaEvento getProximaRepeticion(LocalDate fechaInicio, LocalDate fechaFin){
+        if (repeticion == null){
+            return null;
+        }
+        fechaInicio = repeticion.getProximaFechaInicio(fechaInicio);
+        fechaFin = repeticion.getProximaFechaFin(fechaFin);
+        if (fechaInicio == null){
+            return null;
+        }
+        return crearInstancia(fechaInicio, fechaFin);
     }
 
 
