@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="builders">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
     </list>
@@ -50,7 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "git-widget-placeholder": "Tests__Calendario",
+    "git-widget-placeholder": "Correcciones-argumentos",
     "last_opened_file_path": "C:/Users/Sofia/Documents/Facultad/Fiuba/2023/Algo3/Github/TpCalendario"
   }
 }]]></component>
@@ -66,7 +67,7 @@
       <recent name="Calendario.Main" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Calendario in TpCalendario">
+  <component name="RunManager" selected="JUnit.CalendarioTest.TestModificarDiaTarea">
     <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="TEST_OBJECT" value="directory" />
@@ -75,15 +76,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarioTest.TestCrearYObtenerEventoConHoraYRepeticionConFechaVencimiento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestCompletarTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -93,13 +86,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestCrearYObtenerEventoConHoraYRepeticionConFechaVencimiento" />
+      <option name="METHOD_NAME" value="TestCompletarTarea" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestCrearYObtenerEventoConHoraYRepeticionInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarDescripcion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -109,13 +102,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestCrearYObtenerEventoConHoraYRepeticionInfinita" />
+      <option name="METHOD_NAME" value="TestModificarDescripcion" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestCrearYObtenerEventoDiaCompletoYRepeticionInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarDiaTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -125,13 +118,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestCrearYObtenerEventoDiaCompletoYRepeticionInfinita" />
+      <option name="METHOD_NAME" value="TestModificarDiaTarea" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestCrearYObtenerEventoSinRepeticionDiaCompleto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarHoraTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -141,7 +134,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestCrearYObtenerEventoSinRepeticionDiaCompleto" />
+      <option name="METHOD_NAME" value="TestModificarHoraTarea" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.TestModificarTitulo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestModificarTitulo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalendarioTest.TestCrearYObtenerEventoSinRepeticionDiaCompleto" />
-        <item itemvalue="JUnit.CalendarioTest.TestCrearYObtenerEventoDiaCompletoYRepeticionInfinita" />
-        <item itemvalue="JUnit.CalendarioTest.TestCrearYObtenerEventoConHoraYRepeticionInfinita" />
-        <item itemvalue="JUnit.CalendarioTest.TestCrearYObtenerEventoConHoraYRepeticionConFechaVencimiento" />
-        <item itemvalue="JUnit.Calendario in TpCalendario" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarDiaTarea" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarHoraTarea" />
+        <item itemvalue="JUnit.CalendarioTest.TestCompletarTarea" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarTitulo" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarDescripcion" />
       </list>
     </recent_temporary>
   </component>
@@ -188,7 +197,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java</url>
-          <line>888</line>
+          <line>887</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

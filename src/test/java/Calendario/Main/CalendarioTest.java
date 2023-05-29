@@ -558,19 +558,6 @@ public class CalendarioTest {
 
     }
 
-
-    // Falta -->
-    // -corregir tests actuales
-    // -agregar:
-    //           modificarFechaEvento [diaCompleto/conHora] --> 2
-    //           modificarRepeticion [Frecuenta/Semanal] [fecha/ocurrencias/infinita] --> 6
-    //           agregarAlarmaTarea [absoluta/relativa] --> 2
-    //           agregarAlarmaEvento [absoluta/relativa] --> 2
-    //           modificarAlarmaTarea [absoluta/relativa] --> 2
-    //           modificarAlarmaEvento [absoluta/relativa] --> 2
-
-
- /*
     @Test
     public void TestGetProximasAlarmas() {
         //Arrange
@@ -658,11 +645,7 @@ public class CalendarioTest {
         var diaInicio = LocalDate.of(2023, 4, 23);
         var diaFin = LocalDate.of(2023, 4, 25);
 
-        var duracion = new Duracion();
-        duracion.setDiaInicio(diaInicio);
-        duracion.setDiaFin(diaFin);
-
-        var evento = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracion));
+        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin);
 
         var descripcionNueva = "descripción nueva";
 
@@ -715,6 +698,20 @@ public class CalendarioTest {
         //Assert
         assertEquals(horaNueva, resultado);
     }
+
+
+    // Falta -->
+    // -corregir tests actuales
+    // -agregar:
+    //           modificarFechaEvento [diaCompleto/conHora] --> 2
+    //           modificarRepeticion [Frecuenta/Semanal] [fecha/ocurrencias/infinita] --> 6
+    //           agregarAlarmaTarea [absoluta/relativa] --> 2
+    //           agregarAlarmaEvento [absoluta/relativa] --> 2
+    //           modificarAlarmaTarea [absoluta/relativa] --> 2
+    //           modificarAlarmaEvento [absoluta/relativa] --> 2
+
+    /*
+
 
     @Test
     public void TestModificarFechaEvento() {
