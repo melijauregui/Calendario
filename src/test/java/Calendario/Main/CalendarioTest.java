@@ -104,7 +104,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        var evento = calendario.crearEvento(titulo, descripcion,diaInicio, diaFin, horaInicio, horaFin);
+        calendario.crearEvento(titulo, descripcion,diaInicio, diaFin, horaInicio, horaFin);
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var actividadResultado = actividadesResultado.get(0);
         var tamanioEsperado = 1;

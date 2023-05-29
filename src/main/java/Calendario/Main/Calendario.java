@@ -27,6 +27,8 @@ public class Calendario implements Serializable {
         this.actividades = new HashSet<>();
     }
 
+    //CREACIÓN DE ACTIVIDADES
+
     /**
      * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición con fecha de vencimiento.
      * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
@@ -190,14 +192,22 @@ public class Calendario implements Serializable {
 
     /**
      * Recibe la información de un Evento de día completo, sin Repetición.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
+     * Crea el Evento a partir de los Builders 'Duracion y Evento' correspondientes y lo devuelve
      */
     public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin){
         BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
         BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion);
         return crearEvento(builderEvento);
     }
-
+    /**
+     * Recibe un BuilderEvento. Crea un Evento a partir de éste, lo agrega al Calendario y lo devuelve
+     */
+    private Evento crearEvento(BuilderEvento builderEvento){
+        Evento evento = builderEvento.crearEvento();
+        eventos.add(evento);
+        actividades.add(evento);
+        return evento;
+    }
 
     /**
      * Recibe la información de una Tarea de día completo. Usa un BuilderTarea para crearla, la agrega al Calendario y la devuelve
@@ -215,7 +225,17 @@ public class Calendario implements Serializable {
         return crearTarea(builderTarea);
     }
 
+    /**
+     * Recibe un BuilderTarea. Crea una Tarea a partir de éste, la agrega al Calendario y la devuelve
+     */
+    private Tarea crearTarea(BuilderTarea builderTarea){
+        Tarea tarea = builderTarea.crearTarea();
+        tareas.add(tarea);
+        actividades.add(tarea);
+        return tarea;
+    }
 
+    //GETTERS DE ACTIVIDADES
     /**
      * Recibe un intervalo de fechas y devuelve la lista de Actividades que inician (InstanciaEventos) o vencen (Tareas) dentro
      * del mismo
@@ -225,6 +245,33 @@ public class Calendario implements Serializable {
         actividadesProximas.addAll(getInstanciasEventos(desde, hasta));
         actividadesProximas.addAll(getTareas(desde, hasta));
         return actividadesProximas;
+    }
+    /**
+     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
+     * de los Eventos del calendario que inician dentro del mismo
+     */
+    private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
+        List<InstanciaEvento> proximosEventos = new ArrayList<>();
+        for (Evento evento : eventos){
+            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
+            if (instancias != null){
+                proximosEventos.addAll(instancias);
+            }
+        }
+        return  proximosEventos;
+    }
+
+    /**
+     * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
+     */
+    private List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
+        List<Tarea> proximasTareas = new ArrayList<>();
+        for (Tarea tarea : tareas){
+            if (tarea.estaEnElIntervalo(desde, hasta)){
+                proximasTareas.add(tarea);
+            }
+        }
+        return proximasTareas;
     }
 
     /**
@@ -244,6 +291,48 @@ public class Calendario implements Serializable {
         return proximasAlarmas;
     }
 
+
+    //AGREGAR ALARMAS ACTIVIDADES
+
+    /**
+     * Recibe la información de una AlarmaEvento con tiempo relativo. La crea a partir del BuilderAlarmaEvento
+     * correspondiente, se la agrega al Evento y la devuelve
+     */
+    public  AlarmaEvento agregarAlarmaEvento(Evento evento, int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(intervalo, tiempoRelativo, aviso);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe la información de una AlarmaEvento sin tiempo relativo. La crea a partir del BuilderAlarmaEvento
+     * correspondiente, se la agrega al Evento y la devuelve
+     */
+    public  AlarmaEvento agregarAlarmaEvento(Evento evento, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(aviso);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe la información de una Alarma con tiempo relativo. La crea a partir del BuilderAlarma
+     * correspondiente, se la agrega a la Tarea y la devuelve
+     */
+    public Alarma agregarAlarmaTarea(Tarea tarea, LocalDateTime fecha ,int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarma builderAlarma = new BuilderAlarma(fecha, intervalo, tiempoRelativo, aviso);
+        return agregarAlarmaTarea(tarea, builderAlarma);
+    }
+
+    /**
+     * Recibe la información de una Alarma con fecha absoluta. La crea a partir del BuilderAlarma
+     * correspondiente, se la agrega a la Tarea y la devuelve
+     */
+    public Alarma agregarAlarmaTarea(Tarea tarea, LocalDateTime fecha ,TipoAviso aviso){
+        BuilderAlarma builderAlarma = new BuilderAlarma(fecha, aviso);
+        return agregarAlarmaTarea(tarea, builderAlarma);
+    }
+
+
+
+    //MODIFICAR ACTIVIDADES
     /**
      * Completa la tarea pasada por parámetro
      */
@@ -297,42 +386,6 @@ public class Calendario implements Serializable {
     }
 
     /**
-     * Recibe la información de una AlarmaEvento con tiempo relativo. La crea a partir del BuilderAlarmaEvento
-     * correspondiente, se la agrega al Evento y la devuelve
-     */
-    public  AlarmaEvento agregarAlarmaEvento(Evento evento, int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
-        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(intervalo, tiempoRelativo, aviso);
-        return agregarAlarmaEvento(evento, builderAlarmaEvento);
-    }
-
-    /**
-     * Recibe la información de una AlarmaEvento sin tiempo relativo. La crea a partir del BuilderAlarmaEvento
-     * correspondiente, se la agrega al Evento y la devuelve
-     */
-    public  AlarmaEvento agregarAlarmaEvento(Evento evento, TipoAviso aviso){
-        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(aviso);
-        return agregarAlarmaEvento(evento, builderAlarmaEvento);
-    }
-
-    /**
-     * Recibe la información de una Alarma con tiempo relativo. La crea a partir del BuilderAlarma
-     * correspondiente, se la agrega a la Tarea y la devuelve
-     */
-    public Alarma agregarAlarmaTarea(Tarea tarea, LocalDateTime fecha ,int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
-        BuilderAlarma builderAlarma = new BuilderAlarma(fecha, intervalo, tiempoRelativo, aviso);
-        return agregarAlarmaTarea(tarea, builderAlarma);
-    }
-
-    /**
-     * Recibe la información de una Alarma con fecha absoluta. La crea a partir del BuilderAlarma
-     * correspondiente, se la agrega a la Tarea y la devuelve
-     */
-    public Alarma agregarAlarmaTarea(Tarea tarea, LocalDateTime fecha ,TipoAviso aviso){
-        BuilderAlarma builderAlarma = new BuilderAlarma(fecha, aviso);
-        return agregarAlarmaTarea(tarea, builderAlarma);
-    }
-
-    /**
      * Recibe la información de una AlarmaEvento con tiempo relativo y la crea a partir del BuilderAlarmaEvento
      * correspondiente. La intercambia por alarmaVieja y la devuelve
      */
@@ -367,19 +420,20 @@ public class Calendario implements Serializable {
         BuilderAlarma builderAlarma = new BuilderAlarma(fecha,aviso);
         return modificarAlarmaTarea(tarea, alarmaVieja, builderAlarma);
     }
-
     /**
-     * Elimina una determinada alarma de la tarea
+     * Recibe una alarma existente y un BuilderAlarmaEvento que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
      */
-    public void eliminarAlarmaTarea(Tarea tarea, Alarma alarma){
-        tarea.eliminarAlarma(alarma);
+    private AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
+        evento.eliminarAlarma(alarmaVieja);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
     }
 
     /**
-     * Elimina una determinada alarma del evento
+     * Recibe una alarma existente y un BuilderAlarma que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
      */
-    public void eliminarAlarmaEvento(Evento evento, AlarmaEvento alarma){
-        evento.eliminarAlarma(alarma);
+    private Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
+        tarea.eliminarAlarma(alarmaVieja);
+        return agregarAlarmaTarea(tarea, builderAlarma);
     }
 
     /**
@@ -436,13 +490,13 @@ public class Calendario implements Serializable {
         evento.setRepeticion(builderRepeticion.crearRepeticion());
     }
 
+    //ELIMINAR ACTIVIDADES Y/O ALARMAS
     /**
      * Saca la tarea del Calendario y borra su información
      */
     public void eliminarTarea(Tarea tarea){
         actividades.remove(tarea);
         tareas.remove(tarea);
-        tarea = null; //borra la información de la tarea
     }
 
     /**
@@ -451,56 +505,25 @@ public class Calendario implements Serializable {
     public void eliminarEvento(Evento evento){
         actividades.remove(evento);
         eventos.remove(evento);
-        evento = null;  //borra la información del evento
+    }
+
+
+    /**
+     * Elimina una determinada alarma de la tarea
+     */
+    public void eliminarAlarmaTarea(Tarea tarea, Alarma alarma){
+        tarea.eliminarAlarma(alarma);
     }
 
     /**
-     * Reconstruye el Calendario a partir de la secuencia de bytes pasada. Devuelve un nuevo Calendario con
-     * la misma información
+     * Elimina una determinada alarma del evento
      */
-    public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInStream = new ObjectInputStream(bytes);
-        objectInStream.close();
-        return (Calendario) objectInStream.readObject();
+    public void eliminarAlarmaEvento(Evento evento, AlarmaEvento alarma){
+        evento.eliminarAlarma(alarma);
     }
 
-    /**
-     * Guarda el estado actual del Calendario.
-     */
-    public void serializar(OutputStream bytes) throws IOException {
-        ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
-        objectOutStream.writeObject(this);
-        objectOutStream.flush();
-        objectOutStream.close();
-    }
 
-    /**
-     * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
-     * de los Eventos del calendario que inician dentro del mismo
-     */
-    private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
-        List<InstanciaEvento> proximosEventos = new ArrayList<>();
-        for (Evento evento : eventos){
-            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
-            if (instancias != null){
-                proximosEventos.addAll(instancias);
-            }
-        }
-        return  proximosEventos;
-    }
-
-    /**
-     * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
-     */
-    private List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
-        List<Tarea> proximasTareas = new ArrayList<>();
-        for (Tarea tarea : tareas){
-            if (tarea.estaEnElIntervalo(desde, hasta)){
-                proximasTareas.add(tarea);
-            }
-        }
-        return proximasTareas;
-    }
+    //METODOS PARA ALARMAS
 
     /**
      * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
@@ -542,25 +565,6 @@ public class Calendario implements Serializable {
         return otra.suenaIgual(primerAlarma);
     }
 
-    /**
-     * Recibe un BuilderEvento. Crea un Evento a partir de éste, lo agrega al Calendario y lo devuelve
-     */
-    private Evento crearEvento(BuilderEvento builderEvento){
-        Evento evento = builderEvento.crearEvento();
-        eventos.add(evento);
-        actividades.add(evento);
-        return evento;
-    }
-
-    /**
-     * Recibe un BuilderTarea. Crea una Tarea a partir de éste, la agrega al Calendario y la devuelve
-     */
-    private Tarea crearTarea(BuilderTarea builderTarea){
-        Tarea tarea = builderTarea.crearTarea();
-        tareas.add(tarea);
-        actividades.add(tarea);
-        return tarea;
-    }
 
     /**
      * Recibe un BuilderAlarmaEvento. Crea la AlarmaEvento a partir de éste, se la agrega al Evento y la
@@ -582,20 +586,27 @@ public class Calendario implements Serializable {
         return alarma;
     }
 
+
+    //SERIALIZACIÓN
     /**
-     * Recibe una alarma existente y un BuilderAlarmaEvento que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
+     * Reconstruye el Calendario a partir de la secuencia de bytes pasada. Devuelve un nuevo Calendario con
+     * la misma información
      */
-    private AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
-        evento.eliminarAlarma(alarmaVieja);
-        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInStream = new ObjectInputStream(bytes);
+        objectInStream.close();
+        return (Calendario) objectInStream.readObject();
     }
 
     /**
-     * Recibe una alarma existente y un BuilderAlarma que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
+     * Guarda el estado actual del Calendario.
      */
-    private Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
-        tarea.eliminarAlarma(alarmaVieja);
-        return agregarAlarmaTarea(tarea, builderAlarma);
+    public void serializar(OutputStream bytes) throws IOException {
+        ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
+        objectOutStream.writeObject(this);
+        objectOutStream.flush();
+        objectOutStream.close();
     }
+
 
 }
