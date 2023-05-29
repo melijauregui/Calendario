@@ -699,11 +699,66 @@ public class CalendarioTest {
         assertEquals(horaNueva, resultado);
     }
 
+    @Test
+    public void TestModificarFechaEventoConHora() {
+        //Arrange
+        var calendario = new Calendario();
+
+        var titulo = "TP1";
+        var descripcion = "Entrega limite del TP1";
+
+        var diaInicio1 = LocalDate.of(2023, 4, 22);
+        var diaFin1 = LocalDate.of(2023, 4, 22);
+        var horaInicio1 = LocalTime.of(20, 0);
+        var horaFin1 = LocalTime.of(20, 5);
+
+        var evento = calendario.crearEvento(titulo, descripcion, diaInicio1, diaFin1, horaInicio1, horaFin1);
+
+        var fechaFinNueva = LocalDateTime.of(2023, 4, 22, 20, 5);
+        var diaInicio2 = LocalDate.of(2023, 4, 22);
+        var diaFin2 = fechaFinNueva.toLocalDate();
+        var horaInicio2 = LocalTime.of(20, 0);
+        var horaFin2 = fechaFinNueva.toLocalTime();
+        var fechaDesde = LocalDateTime.of(2023, 4, 21, 0, 0);
+        var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 5);
+
+        //Act
+        calendario.modificarFechaEvento(evento, diaInicio2, diaFin2, horaInicio2, horaFin2);
+        var resultado = evento.getRepeticionesEnIntervalo(fechaDesde, fechaHasta).get(0).getFechaFin();
+        //Assert
+        assertEquals(fechaFinNueva, resultado);
+    }
+
+    @Test
+    public void TestModificarFechaEventoDiaCompleto() {
+        //Arrange
+        var calendario = new Calendario();
+
+        var titulo = "TP1";
+        var descripcion = "Entrega limite del TP1";
+
+        var diaInicio1 = LocalDate.of(2023, 4, 22);
+        var diaFin1 = LocalDate.of(2023, 4, 22);
+
+        var evento = calendario.crearEvento(titulo, descripcion, diaInicio1, diaFin1);
+
+        var fechaFinNueva = LocalDateTime.of(2023, 4, 22, 23, 59);
+        var diaInicio2 = LocalDate.of(2023, 4, 22);
+        var diaFin2 = LocalDate.of(2023, 4, 22);
+        var fechaDesde = LocalDateTime.of(2023, 4, 21, 0, 0);
+        var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 5);
+
+        //Act
+        calendario.modificarFechaEvento(evento, diaInicio2, diaFin2);
+        var resultado = evento.getRepeticionesEnIntervalo(fechaDesde, fechaHasta).get(0).getFechaFin();
+        //Assert
+        assertEquals(fechaFinNueva, resultado);
+    }
 
     // Falta -->
     // -corregir tests actuales
     // -agregar:
-    //           modificarFechaEvento [diaCompleto/conHora] --> 2
+    //          
     //           modificarRepeticion [Frecuenta/Semanal] [fecha/ocurrencias/infinita] --> 6
     //           agregarAlarmaTarea [absoluta/relativa] --> 2
     //           agregarAlarmaEvento [absoluta/relativa] --> 2
@@ -711,39 +766,6 @@ public class CalendarioTest {
     //           modificarAlarmaEvento [absoluta/relativa] --> 2
 
     /*
-
-
-    @Test
-    public void TestModificarFechaEvento() {
-        //Arrange
-        var calendario = new Calendario();
-
-        var titulo = "TP1";
-        var descripcion = "Entrega limite del TP1";
-
-        var duracionInicial = new Duracion();
-        duracionInicial.setDiaInicio(LocalDate.of(2023, 4, 22));
-        duracionInicial.setDiaFin(LocalDate.of(2023, 4, 22));
-        duracionInicial.setHoraInicio(LocalTime.of(20, 0));
-        duracionInicial.setHoraFin(LocalTime.of(20, 5));
-
-        var evento = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracionInicial));
-
-        var fechaFinNueva = LocalDate.of(2023, 4, 22);
-        var duracionNueva = new Duracion();
-        duracionNueva.setDiaInicio(LocalDate.of(2023, 4, 22));
-        duracionNueva.setDiaFin(LocalDate.of(2023, 4, 22));
-        duracionNueva.setHoraInicio(LocalTime.of(20, 0));
-        duracionNueva.setHoraFin(LocalTime.of(20, 5));
-        var fechaDesde = LocalDateTime.of(2023, 4, 21, 0, 0);
-        var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 5);
-
-        //Act
-        calendario.modificarFechaEvento(evento, duracionNueva);
-        var resultado = evento.getRepeticionesEnIntervalo(fechaDesde, fechaHasta).get(0).getFechaFin().toLocalDate();
-        //Assert
-        assertEquals(fechaFinNueva, resultado);
-    }
 
     @Test
     public void TestConfigurarAlarmaTarea() {
