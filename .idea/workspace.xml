@@ -66,7 +66,7 @@
       <recent name="Calendario.Main" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CalendarioTest.TestEliminarEvento">
+  <component name="RunManager" selected="JUnit.Calendario in TpCalendario">
     <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="TEST_OBJECT" value="directory" />
@@ -75,7 +75,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestEliminarAlarmaTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.TestModificarRepeticionFechaVencimiento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -85,13 +93,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestEliminarAlarmaTarea" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionFechaVencimiento" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestEliminarEvento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarRepeticionInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -101,13 +109,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestEliminarEvento" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionInfinita" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestEliminarTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -117,13 +125,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestEliminarTarea" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionSemanalConOcurrencias" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestEliminrAlarmaEvento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarRepeticionSemanalInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -133,23 +141,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestEliminrAlarmaEvento" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarioTest.TestPersistencia2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestPersistencia2" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionSemanalInfinita" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -157,11 +149,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalendarioTest.TestEliminarEvento" />
-        <item itemvalue="JUnit.CalendarioTest.TestPersistencia2" />
-        <item itemvalue="JUnit.CalendarioTest.TestEliminarTarea" />
-        <item itemvalue="JUnit.CalendarioTest.TestEliminrAlarmaEvento" />
-        <item itemvalue="JUnit.CalendarioTest.TestEliminarAlarmaTarea" />
+        <item itemvalue="JUnit.Calendario in TpCalendario" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalInfinita" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionFechaVencimiento" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionInfinita" />
       </list>
     </recent_temporary>
   </component>
@@ -211,8 +203,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java</url>
-          <line>181</line>
-          <option name="timeStamp" value="32" />
+          <line>1038</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -241,7 +233,7 @@
     <SUITE FILE_PATH="coverage/TpCalendario$TareaTest.ic" NAME="TareaTest Coverage Results" MODIFIED="1682218695522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Tareas.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1685220206904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1685377777062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TpCalendario$TiempoRelativoTest.ic" NAME="TiempoRelativoTest Coverage Results" MODIFIED="1682218754282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Enums.*</FILTER>
     </SUITE>

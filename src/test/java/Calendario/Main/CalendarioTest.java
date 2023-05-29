@@ -844,7 +844,7 @@ public class CalendarioTest {
         var alarma = calendario.agregarAlarmaTarea(tarea, fecha, 10, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
 
         //Act
-        var alarma2 = calendario.agregarAlarmaTarea(tarea, fecha, 20, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
+        var alarma2 = calendario.modificarAlarmaTarea(tarea, alarma, fecha, 20, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
         var resultado = tarea.getProximasAlarmas(fecha.minusDays(1));
 
         //Assert
@@ -1023,6 +1023,173 @@ public class CalendarioTest {
     }
 
     @Test
+    public void TestModificarRepeticionConOcurrencias() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 22);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 25);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var fechaDesde = LocalDateTime.of(2023, 4, 23, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 23, 16, 30);
+        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+
+        //Act
+        calendario.modificarRepeticionEvento(evento, 1, Frecuencia.DIARIA, 3);
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestModificarRepeticionInfinita() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 22);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 25);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var fechaDesde = LocalDateTime.of(2023, 4, 23, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 23, 16, 30);
+        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+
+        //Act
+        calendario.modificarRepeticionEvento(evento,1, Frecuencia.DIARIA);
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestModificarRepeticionFechaVencimiento() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 22);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 25);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var fechaDesde = LocalDateTime.of(2023, 4, 23, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 23, 16, 30);
+        var fechaVencimiento = LocalDate.of(2023, 4, 23);
+        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+
+        //Act
+        calendario.modificarRepeticionEvento(evento,1, Frecuencia.DIARIA, fechaVencimiento);
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestModificarRepeticionSemanalConOcurrencias() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 20);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 21);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+
+        //Act
+        calendario.modificarRepeticionEvento(evento,3, diasSemanas, 3);
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestModificarRepeticionSemanalInfinita() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 20);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 21);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+
+        //Act
+        calendario.modificarRepeticionEvento(evento, 3, diasSemanas);
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestModificarRepeticionSemanalFechaVencimiento() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 20);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 21);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+        var fechaVencimiento = LocalDate.of(2023, 4, 23);
+        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+
+        //Act
+        calendario.modificarRepeticionEvento(evento, 2, diasSemanas, fechaVencimiento);
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
     public void TestEliminarTarea() {
         //Arrange
         var titulo = "TP1";
@@ -1070,7 +1237,7 @@ public class CalendarioTest {
         assertEquals(cantidadEsperadas, resultado.size());
     }
     @Test
-    public void TestPersistencia2() throws IOException, ClassNotFoundException{
+    public void TestPersistencia() throws IOException, ClassNotFoundException{
         // Arrange
         Calendario calendario = new Calendario();
 
@@ -1163,47 +1330,6 @@ public class CalendarioTest {
         assertEquals(cantidadEvento2Esperada, cantEvento2);
 
     }
-
-
-    // Falta -->
-    // -corregir tests actuales
-    // -agregar:
-    //           modificarRepeticion [Frecuenta/Semanal] [fecha/ocurrencias/infinita] --> 6
-
-    /*
-
-    @Test
-    public void TestModificarRepeticionEvento() {
-        //Arrange
-        var titulo = "TP1";
-        var descripcion = "Entrega limite del TP1";
-
-        var duracion = new Duracion();
-        duracion.setDiaInicio(LocalDate.of(2023, 4, 22));
-        duracion.setDiaFin(LocalDate.of(2023, 4, 22));
-        duracion.setHoraInicio(LocalTime.of(20, 0));
-        duracion.setHoraFin(LocalTime.of(20, 5));
-        var calendario = new Calendario();
-
-        var evento = calendario.crearEvento(new BuilderEvento(titulo, descripcion, duracion));
-        calendario.modificarFechaEvento(evento, duracion);
-
-        int tamanioEsperado = 1;
-
-        //Act
-        calendario.modificarRepeticionEvento(evento, 2, Frecuencia.DIARIA, 2);
-        var eventos = evento.getRepeticionesEnIntervalo(duracion.getFechaInicio().minusDays(1),
-                duracion.getFechaInicio().plusDays(1));
-        var fechaEsperada = LocalDateTime.of(2023, 4, 22, 20, 0);
-        var resultadoFecha = eventos.iterator().next().getFechaInicio();
-
-
-        //Assert
-        assertEquals(tamanioEsperado, eventos.size());
-        assertEquals(fechaEsperada, resultadoFecha);
-    }
-
-    */
 
 }
 
