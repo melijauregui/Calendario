@@ -32,7 +32,7 @@ public class BuilderEventoTest {
     }
 
     @Test
-    public void CrearEventoSinnRepeticion() {
+    public void CrearEventoSinRepeticion() {
         // Arrange
         var titulo = "Builder sinn repetición";
         var descripcion = "Crea un evento sin repetición";
