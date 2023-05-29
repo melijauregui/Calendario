@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -299,9 +300,188 @@ public class CalendarioTest {
 
     }
 
+    @Test
+    public void TestCrearYObtenerEventoConHoraYRepeticionSemanalConOcurrencias() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDateTime fechaInicio = LocalDateTime.of(2023, 4, 20, 15, 31);
+        LocalDateTime fechaFin = LocalDateTime.of(2023, 4, 21, 0, 0);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+
+        //Act
+        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),3, diasSemanas, 3);
+
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0); // repetición del domingo 23/4
+        int tamanioEsperado = 1;
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestCrearYObtenerEventoDiaCompletoYRepeticionSemanalConOcurrencias() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 20);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 21);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+
+        //Act
+        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,3, diasSemanas, 3);
+
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestCrearYObtenerEventoConHoraYRepeticionSemanalInfinita() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDateTime fechaInicio = LocalDateTime.of(2023, 4, 20, 15, 31);
+        LocalDateTime fechaFin = LocalDateTime.of(2023, 4, 21, 0, 0);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+
+        //Act
+        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),3, diasSemanas);
+
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestCrearYObtenerEventoDiaCompletoYRepeticionSemanalInfinita() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 20);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 21);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+
+        //Act
+        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,3, diasSemanas);
+
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestCrearYObtenerEventoConHoraYRepeticionSemanalConFechaVencimiento() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDateTime fechaInicio = LocalDateTime.of(2023, 4, 20, 15, 30);
+        LocalDateTime fechaFin = LocalDateTime.of(2023, 4, 21, 0, 0);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+        var fechaVencimiento = LocalDate.of(2023, 4, 23);
+
+        //Act
+        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),2,diasSemanas, fechaVencimiento);
+
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+    @Test
+    public void TestCrearYObtenerEventoDiaCompletoYRepeticionSemanalFechaVencimiento() {
+        //Arrange
+        var calendario = new Calendario();
+        LocalDate fechaInicio = LocalDate.of(2023, 4, 20);
+        LocalDate fechaFin = LocalDate.of(2023, 4, 21);
+        String titulo = "titulo";
+        String descripcion = "descripción";
+        var diasSemanas = new ArrayList<DayOfWeek>();
+        diasSemanas.add(DayOfWeek.THURSDAY);
+        diasSemanas.add(DayOfWeek.SUNDAY);
+        var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
+        var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
+        var fechaVencimiento = LocalDate.of(2023, 4, 23);
+
+        //Act
+        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,2, diasSemanas, fechaVencimiento);
+
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
+        var eventoResultado = actividadesResultado.get(0);
+        int tamanioEsperado = 1;
+
+
+        //Assert
+        assertEquals(tamanioEsperado, actividadesResultado.size());
+        assertEquals(titulo, eventoResultado.getTitulo());
+        assertEquals(descripcion, eventoResultado.getDescripcion());
+
+    }
+
+
     // Falta -->
     // -corregir tests actuales
-    // -agregar: crearEvento [diaCompleto/conHora] y Repeticion [Semanal] [fecha/ocurrencias/infinita] --> 6
+    // -agregar:
     //           modificarFechaEvento [diaCompleto/conHora] --> 2
     //           modificarRepeticion [Frecuenta/Semanal] [fecha/ocurrencias/infinita] --> 6
     //           agregarAlarmaTarea [absoluta/relativa] --> 2
