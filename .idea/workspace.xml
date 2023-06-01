@@ -58,6 +58,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
     "git-widget-placeholder": "Etapa3",
@@ -169,8 +170,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Calendario in TpCalendario" />
         <item itemvalue="Maven.TpCalendario [javafx:run]" />
+        <item itemvalue="JUnit.Calendario in TpCalendario" />
         <item itemvalue="JUnit.All in TpCalendario" />
         <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalInfinita" />
         <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" />
@@ -260,7 +261,7 @@
     <SUITE FILE_PATH="coverage/TpCalendario$TareaTest.ic" NAME="TareaTest Coverage Results" MODIFIED="1682218695522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Tareas.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1685380321522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1685585496395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TpCalendario$TiempoRelativoTest.ic" NAME="TiempoRelativoTest Coverage Results" MODIFIED="1682218754282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Enums.*</FILTER>
     </SUITE>
