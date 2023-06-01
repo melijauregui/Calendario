@@ -1,11 +1,18 @@
 package MVC;
 
-import javafx.application.Application;
+import Calendario.Main.Calendario;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
-public class Controlador extends Application {
-    @Override
-    public void start(Stage stage) throws Exception {
+public class Controlador  {
+    private Vista vista;
+    private Calendario calendario;
+    public Controlador(Calendario calendario, Vista vista){
+        this.calendario = calendario;
+        this.vista = vista;
+    }
+    public void start(){
 
     }
+
 }

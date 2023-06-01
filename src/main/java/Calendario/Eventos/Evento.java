@@ -1,5 +1,6 @@
 package Calendario.Eventos;
 
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
@@ -105,6 +106,13 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     public LocalDateTime getFechaInicio() {
         return duracion.getFechaInicio();
+    }
+
+    /**
+     * Acepta un Visitor
+     */
+    public void acceptarVisitor(ActividadVisitor actividadVisitor){
+        actividadVisitor.visitarEvento(this);
     }
 
     /**

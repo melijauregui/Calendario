@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="OrdenarFunciones">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/AppCalendario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/vistaPrincipal.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Actividad/ActividadMutableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Actividad/ActividadMutableTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +26,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit3 Test Class" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="JUnit4 Test Class" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -53,13 +61,22 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
     "git-widget-placeholder": "Etapa3",
-    "last_opened_file_path": "C:/Users/Sofia/Documents/Facultad/Fiuba/2023/Algo3/Github/TpCalendario"
+    "last_opened_file_path": "C:/Users/Sofia/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Scene Builder/SceneBuilder.lnk",
+    "settings.editor.selected.configurable": "configurable.group.editor"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\MVC\Resources" />
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\MVC" />
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Calendario.Main.Builders" />
@@ -68,7 +85,7 @@
       <recent name="Calendario.Main" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in TpCalendario">
+  <component name="RunManager" selected="Maven.TpCalendario [javafx:run]">
     <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="PACKAGE_NAME" value="" />
@@ -89,22 +106,6 @@
       <module name="TpCalendario" />
       <option name="TEST_OBJECT" value="directory" />
       <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarioTest.TestModificarRepeticionFechaVencimiento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestModificarRepeticionFechaVencimiento" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,13 +142,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TpCalendario [javafx:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="javafx:run" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in TpCalendario" />
         <item itemvalue="JUnit.Calendario in TpCalendario" />
+        <item itemvalue="Maven.TpCalendario [javafx:run]" />
+        <item itemvalue="JUnit.All in TpCalendario" />
         <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalInfinita" />
         <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" />
-        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionFechaVencimiento" />
       </list>
     </recent_temporary>
   </component>
