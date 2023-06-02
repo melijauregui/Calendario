@@ -8,23 +8,8 @@ public class RepeticionMensual extends Repeticion {
     /**
      * Crea una Repetición que termina en una determinda fecha
      */
-    public RepeticionMensual(int intervaloMensual,  LocalDate fechaHasta){
-        super(intervaloMensual, fechaHasta);
-    }
-
-    /**
-     * Crea una Repetición que termina luego de una cantidad de repeticiones dada
-     */
-    public RepeticionMensual(int intervaloMensual, int ocurrencias){
-        super(intervaloMensual, ocurrencias);
-
-    }
-
-    /**
-     * Crea una Repetición infinita
-     */
-    public RepeticionMensual(int intervaloMensual){
-        super(intervaloMensual);
+    public RepeticionMensual(int intervaloMensual,  LocalDate fechaHasta, int ocurrencias){
+        super(intervaloMensual, fechaHasta, ocurrencias);
     }
 
     /**

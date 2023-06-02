@@ -2,12 +2,7 @@ package Calendario.Main.Builders;
 
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
-import Calendario.Main.Builders.BuilderRepeticion;
-import Calendario.Repeticiones.RepeticionSemanal;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.util.List;
 
 public class BuilderEvento {
     private Evento evento  = new Evento();
@@ -19,10 +14,6 @@ public class BuilderEvento {
         setInformacion(titulo, descripcion, builderDuracion);
         evento.setRepeticion(builderRepeticion.crearRepeticion());
     }
-
-    /**
-     * Recibe la información de un Evento sin Repetición y se la setea
-     */
     public BuilderEvento(String titulo, String descripcion, BuilderDuracion builderDuracion){
         setInformacion(titulo, descripcion, builderDuracion);
     }

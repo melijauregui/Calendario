@@ -6,6 +6,9 @@ import Calendario.Duracion.Duracion;
 import Calendario.Enums.Frecuencia;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
+import Calendario.Main.Argumentos.DuracionArgs;
+import Calendario.Main.Argumentos.EventoArgs;
+import Calendario.Main.Argumentos.RepeticionArgs;
 import Calendario.Main.Builders.*;
 import org.junit.Test;
 
@@ -27,7 +30,7 @@ import static org.junit.Assert.*;
 public class CalendarioTest {
 
     @Test
-    public void TestCalendarioVacio(){
+    public void TestCalendarioVacio() {
         //Arrange
         var calendario = new Calendario();
         var fecha = LocalDateTime.of(2023, 11, 5, 2, 2, 4);
@@ -35,7 +38,7 @@ public class CalendarioTest {
         var cantAlarmasEsperadas = 0;
 
         //Act
-        var cantAlarmasResultado = calendario.getProximasAlarmas( fecha).size();
+        var cantAlarmasResultado = calendario.getProximasAlarmas(fecha).size();
         var cantActividadesResultado = calendario.getActividadesEnElIntervalo(fecha, fecha.plusYears(10)).size();
 
         //Assert
@@ -65,6 +68,7 @@ public class CalendarioTest {
         assertEquals(actividadesEsperadas, actividadesResultado);
 
     }
+
 
     @Test
     public void TestCrearYObtenerTareaDiaCompleto() {
@@ -96,7 +100,7 @@ public class CalendarioTest {
         var diaInicio = LocalDate.of(2023, 4, 22);
         var diaFin = LocalDate.of(2023, 4, 25);
         var horaInicio = LocalTime.of(15, 40);
-        var horaFin = LocalTime.of(16,0);
+        var horaFin = LocalTime.of(16, 0);
         var fechaDesde = LocalDateTime.of(2023, 4, 21, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 22, 15, 50);
 
@@ -104,7 +108,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        calendario.crearEvento(titulo, descripcion,diaInicio, diaFin, horaInicio, horaFin);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var actividadResultado = actividadesResultado.get(0);
         var tamanioEsperado = 1;
@@ -128,7 +132,7 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
         //Act
-        var evento = calendario.crearEvento(titulo, descripcion,diaInicio, diaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var actividadResultado = actividadesResultado.get(0);
         var tamanioEsperado = 1;
@@ -151,8 +155,8 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
-                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),3, Frecuencia.DIARIA, 3);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime()), new RepeticionArgs(3, Frecuencia.DIARIA, 3)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -178,7 +182,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,3, Frecuencia.DIARIA, 3);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin), new RepeticionArgs(3, Frecuencia.DIARIA, 3)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -204,8 +208,8 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
-                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),3, Frecuencia.DIARIA);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime()), new RepeticionArgs(3, Frecuencia.DIARIA)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -231,7 +235,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,3, Frecuencia.DIARIA);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin), new RepeticionArgs(3, Frecuencia.DIARIA)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -258,8 +262,8 @@ public class CalendarioTest {
         var fechaVencimiento = LocalDate.of(2023, 4, 23);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
-                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),2, Frecuencia.DIARIA, fechaVencimiento);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime()), new RepeticionArgs(2, Frecuencia.DIARIA, fechaVencimiento)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -286,7 +290,7 @@ public class CalendarioTest {
         var fechaVencimiento = LocalDate.of(2023, 4, 23);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,2, Frecuencia.DIARIA, fechaVencimiento);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin), new RepeticionArgs(2, Frecuencia.DIARIA, fechaVencimiento)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -315,8 +319,8 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
-                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),3, diasSemanas, 3);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime()), new RepeticionArgs(3, diasSemanas, 3)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0); // repetición del domingo 23/4
@@ -344,7 +348,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,3, diasSemanas, 3);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin), new RepeticionArgs(3, diasSemanas, 3)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -373,8 +377,8 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
-                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),3, diasSemanas);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime()), new RepeticionArgs(3, diasSemanas)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -403,7 +407,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,3, diasSemanas);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin), new RepeticionArgs(3, diasSemanas)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -433,8 +437,8 @@ public class CalendarioTest {
         var fechaVencimiento = LocalDate.of(2023, 4, 23);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
-                fechaInicio.toLocalTime(), fechaFin.toLocalTime(),2,diasSemanas, fechaVencimiento);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio.toLocalDate(), fechaFin.toLocalDate(),
+                fechaInicio.toLocalTime(), fechaFin.toLocalTime()), new RepeticionArgs(2,diasSemanas, fechaVencimiento)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -464,7 +468,7 @@ public class CalendarioTest {
         var fechaVencimiento = LocalDate.of(2023, 4, 23);
 
         //Act
-        calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin,2, diasSemanas, fechaVencimiento);
+        calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin), new RepeticionArgs(2, diasSemanas, fechaVencimiento)));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
@@ -494,7 +498,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
         var tarea = calendario.crearTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40));
         var cantActividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta).size();
 
@@ -534,8 +538,8 @@ public class CalendarioTest {
         int cantEvento2 = 0;
 
         //Act
-        var evento1 = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin);
-        var evento2 = calendario.crearEvento(titulo2, descripcion, diaInicio, diaFin, 1, Frecuencia.DIARIA);
+        var evento1 = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
+        var evento2 = calendario.crearEvento(new EventoArgs(titulo2, descripcion, new DuracionArgs(diaInicio, diaFin), new RepeticionArgs(1, Frecuencia.DIARIA)));
         var tarea = calendario.crearTarea(titulo3, descripcion, fechaTarea);
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
@@ -645,7 +649,7 @@ public class CalendarioTest {
         var diaInicio = LocalDate.of(2023, 4, 23);
         var diaFin = LocalDate.of(2023, 4, 25);
 
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
 
         var descripcionNueva = "descripción nueva";
 
@@ -712,7 +716,7 @@ public class CalendarioTest {
         var horaInicio1 = LocalTime.of(20, 0);
         var horaFin1 = LocalTime.of(20, 5);
 
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio1, diaFin1, horaInicio1, horaFin1);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio1, diaFin1, horaInicio1, horaFin1)));
 
         var fechaFinNueva = LocalDateTime.of(2023, 4, 22, 20, 5);
         var diaInicio2 = LocalDate.of(2023, 4, 22);
@@ -723,7 +727,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 5);
 
         //Act
-        calendario.modificarFechaEvento(evento, diaInicio2, diaFin2, horaInicio2, horaFin2);
+        calendario.modificarFechaEvento(evento, new DuracionArgs(diaInicio2, diaFin2, horaInicio2, horaFin2));
         var resultado = evento.getRepeticionesEnIntervalo(fechaDesde, fechaHasta).get(0).getFechaFin();
         //Assert
         assertEquals(fechaFinNueva, resultado);
@@ -740,7 +744,7 @@ public class CalendarioTest {
         var diaInicio1 = LocalDate.of(2023, 4, 22);
         var diaFin1 = LocalDate.of(2023, 4, 22);
 
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio1, diaFin1);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio1, diaFin1)));
 
         var fechaFinNueva = LocalDateTime.of(2023, 4, 22, 23, 59);
         var diaInicio2 = LocalDate.of(2023, 4, 22);
@@ -749,7 +753,7 @@ public class CalendarioTest {
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 0, 5);
 
         //Act
-        calendario.modificarFechaEvento(evento, diaInicio2, diaFin2);
+        calendario.modificarFechaEvento(evento, new DuracionArgs(diaInicio2, diaFin2));
         var resultado = evento.getRepeticionesEnIntervalo(fechaDesde, fechaHasta).get(0).getFechaFin();
         //Assert
         assertEquals(fechaFinNueva, resultado);
@@ -864,7 +868,7 @@ public class CalendarioTest {
         var horaFin = LocalTime.of(20, 5);
 
         var calendario = new Calendario();
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin, horaInicio, horaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
 
         var cantidadEsperadas = 1;
 
@@ -893,7 +897,7 @@ public class CalendarioTest {
         var horaFin = LocalTime.of(20, 5);
 
         var calendario = new Calendario();
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin, horaInicio, horaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
 
         var cantidadEsperadas = 1;
 
@@ -922,7 +926,7 @@ public class CalendarioTest {
         var horaFin = LocalTime.of(20, 5);
 
         var calendario = new Calendario();
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin, horaInicio, horaFin);
+        var evento = calendario.crearEvento( new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
 
         var cantidadEsperadas = 1;
         var alarma1 = calendario.agregarAlarmaEvento(evento,30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
@@ -952,7 +956,7 @@ public class CalendarioTest {
         var horaFin = LocalTime.of(20, 5);
 
         var calendario = new Calendario();
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin, horaInicio, horaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
 
         var cantidadEsperadas = 1;
         var alarma1 = calendario.agregarAlarmaEvento(evento,TipoAviso.NOTIFICACION);
@@ -1007,7 +1011,7 @@ public class CalendarioTest {
         var horaFin = LocalTime.of(20, 5);
 
         var calendario = new Calendario();
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin, horaInicio, horaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
 
         var cantidadEsperadas = 0;
         calendario.agregarAlarmaEvento(evento, 30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
@@ -1032,10 +1036,10 @@ public class CalendarioTest {
         String descripcion = "descripción";
         var fechaDesde = LocalDateTime.of(2023, 4, 23, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 16, 30);
-        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+        var evento = calendario.crearEvento( new EventoArgs(titulo, descripcion,new DuracionArgs(fechaInicio, fechaFin)));
 
         //Act
-        calendario.modificarRepeticionEvento(evento, 1, Frecuencia.DIARIA, 3);
+        calendario.modificarRepeticionEvento(evento, new RepeticionArgs(1, Frecuencia.DIARIA, 3));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
         int tamanioEsperado = 1;
@@ -1058,10 +1062,10 @@ public class CalendarioTest {
         String descripcion = "descripción";
         var fechaDesde = LocalDateTime.of(2023, 4, 23, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 16, 30);
-        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin)));
 
         //Act
-        calendario.modificarRepeticionEvento(evento,1, Frecuencia.DIARIA);
+        calendario.modificarRepeticionEvento(evento, new RepeticionArgs(1, Frecuencia.DIARIA));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
         int tamanioEsperado = 1;
@@ -1085,10 +1089,10 @@ public class CalendarioTest {
         var fechaDesde = LocalDateTime.of(2023, 4, 23, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 16, 30);
         var fechaVencimiento = LocalDate.of(2023, 4, 23);
-        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin)));
 
         //Act
-        calendario.modificarRepeticionEvento(evento,1, Frecuencia.DIARIA, fechaVencimiento);
+        calendario.modificarRepeticionEvento(evento, new RepeticionArgs(1, Frecuencia.DIARIA, fechaVencimiento));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
         int tamanioEsperado = 1;
@@ -1114,10 +1118,10 @@ public class CalendarioTest {
         diasSemanas.add(DayOfWeek.SUNDAY);
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
-        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion,  new DuracionArgs(fechaInicio, fechaFin)));
 
         //Act
-        calendario.modificarRepeticionEvento(evento,3, diasSemanas, 3);
+        calendario.modificarRepeticionEvento(evento, new RepeticionArgs(3, diasSemanas, 3));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
         int tamanioEsperado = 1;
@@ -1143,10 +1147,10 @@ public class CalendarioTest {
         diasSemanas.add(DayOfWeek.SUNDAY);
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
-        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+        var evento = calendario.crearEvento( new EventoArgs(titulo, descripcion,new DuracionArgs(fechaInicio, fechaFin)));
 
         //Act
-        calendario.modificarRepeticionEvento(evento, 3, diasSemanas);
+        calendario.modificarRepeticionEvento(evento, new RepeticionArgs(3, diasSemanas));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
         int tamanioEsperado = 1;
@@ -1173,10 +1177,10 @@ public class CalendarioTest {
         var fechaDesde = LocalDateTime.of(2023, 4, 22, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 30);
         var fechaVencimiento = LocalDate.of(2023, 4, 23);
-        var evento = calendario.crearEvento(titulo, descripcion,fechaInicio, fechaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(fechaInicio, fechaFin)));
 
         //Act
-        calendario.modificarRepeticionEvento(evento, 2, diasSemanas, fechaVencimiento);
+        calendario.modificarRepeticionEvento(evento, new RepeticionArgs(2, diasSemanas, fechaVencimiento));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
         int tamanioEsperado = 1;
@@ -1225,7 +1229,7 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var evento = calendario.crearEvento(titulo, descripcion, diaInicio, diaFin, horaInicio, horaFin);
+        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin)));
 
         var cantidadEsperadas = 0;
 
@@ -1254,7 +1258,7 @@ public class CalendarioTest {
         var diaFin1 = fechaFin.toLocalDate();
         var horaInicio1 = fechaInicio.toLocalTime();
         var horaFin1 = fechaFin.toLocalTime();
-        var evento1 = calendario.crearEvento(tituloE1, descripcionE1, diaInicio1, diaFin1, horaInicio1, horaFin1);
+        var evento1 = calendario.crearEvento(new EventoArgs(tituloE1, descripcionE1, new DuracionArgs(diaInicio1, diaFin1, horaInicio1, horaFin1)));
         calendario.agregarAlarmaEvento(evento1, TipoAviso.NOTIFICACION);
 
         //Evento2
@@ -1266,7 +1270,7 @@ public class CalendarioTest {
         var diaFin2 = fechaHasta.toLocalDate();
         var horaInicio2 = fechaDesde.toLocalTime();
         var horaFin2 = fechaHasta.toLocalTime();
-        calendario.crearEvento(tituloE2, descripcionE2, diaInicio2, diaFin2, horaInicio2, horaFin2, 1, Frecuencia.DIARIA, fechaHasta.plusMonths(1).toLocalDate());
+        calendario.crearEvento(new EventoArgs(tituloE2, descripcionE2, new DuracionArgs(diaInicio2, diaFin2, horaInicio2, horaFin2), new RepeticionArgs(1, Frecuencia.DIARIA, fechaHasta.plusMonths(1).toLocalDate())));
 
 
         //Tarea1

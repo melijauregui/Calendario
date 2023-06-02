@@ -1,6 +1,7 @@
 package Calendario.Main.Builders;
 
 import Calendario.Duracion.Duracion;
+import Calendario.Main.Argumentos.DuracionArgs;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public class BuilderDuracionTest {
         LocalTime horaFin = LocalTime.of(20, 5);
 
         // Act
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
+        BuilderDuracion builderDuracion = new BuilderDuracion(new DuracionArgs(diaInicio, diaFin, horaInicio, horaFin));
         Duracion duracion = builderDuracion.crearDuracion();
         var fechaInicioResultado = duracion.getFechaInicio();
         var fechaFinResultado = duracion.getFechaFin();
@@ -43,7 +44,7 @@ public class BuilderDuracionTest {
         LocalTime horaFin = LocalTime.of(23, 59);
 
         // Act
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
+        BuilderDuracion builderDuracion = new BuilderDuracion(new DuracionArgs(diaInicio, diaFin));
         Duracion duracion = builderDuracion.crearDuracion();
         var fechaInicioResultado = duracion.getFechaInicio();
         var fechaFinResultado = duracion.getFechaFin();

@@ -23,7 +23,7 @@ public class RepeticionDiariaTest {
 
         //Arrange
         int ocurrencias = 15;
-        var repeticionOcurrencias = new RepeticionDiaria(2, ocurrencias);
+        var repeticionOcurrencias = new RepeticionDiaria(2,null, ocurrencias);
 
         var fechaInicio = LocalDate.of(2023, 11, 11);
         var fechaFin = LocalDate.of(2023, 11, 11);
@@ -53,7 +53,7 @@ public class RepeticionDiariaTest {
 
         //Arrange
         var fechaHasta = LocalDate.of(2023, 5, 16);
-        var repeticion = new RepeticionDiaria(1, fechaHasta);
+        var repeticion = new RepeticionDiaria(1, fechaHasta, 0);
 
         var fechaInicio = LocalDate.of(2023, 5, 11);
         var fechaFin = LocalDate.of(2023, 6, 11);
@@ -84,7 +84,7 @@ public class RepeticionDiariaTest {
     public void RepeticionInfinita() {
 
         //Arrange
-        var repeticion = new RepeticionDiaria(1);
+        var repeticion = new RepeticionDiaria(1, null, 0);
 
         var fechaInicio = LocalDate.of(2023, 5, 11);
         var fechaFin = LocalDate.of(2023, 6, 11);

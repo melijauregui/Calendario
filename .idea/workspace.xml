@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="OrdenarFunciones" />
+    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="arreglarNombreTest">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/DuracionArgs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/EventoArgs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/RepeticionArgs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Frecuencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Frecuencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderDuracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderDuracion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderRepeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderRepeticion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Enums/FrecuenciaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Enums/FrecuenciaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/EventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/EventoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderDuracionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderDuracionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderEventoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderRepeticionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderRepeticionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,8 +41,8 @@
         <option value="JUnit3 Test Class" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -27,7 +52,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Tests_Calendario" />
+        <entry key="$PROJECT_DIR$" value="Correcciones-argumentos" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,15 +105,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalendarioTest.TestModificarRepeticionFechaVencimiento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -98,13 +115,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestModificarRepeticionFechaVencimiento" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestCrearYObtenerEventoSinRepeticionConHora" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -114,24 +130,36 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestModificarRepeticionSemanalConOcurrencias" />
+      <option name="METHOD_NAME" value="TestCrearYObtenerEventoSinRepeticionConHora" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest.TestModificarRepeticionSemanalInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calendario.Main.Builders in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="PATTERN" value="Calendario.Main.Builders.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="METHOD_NAME" value="TestModificarRepeticionSemanalInfinita" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="Calendario.Main.Builders" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Calendario.Repeticiones in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Repeticiones.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -139,10 +167,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in TpCalendario" />
-        <item itemvalue="JUnit.Calendario in TpCalendario" />
-        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalInfinita" />
-        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" />
-        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionFechaVencimiento" />
+        <item itemvalue="JUnit.CalendarioTest" />
+        <item itemvalue="JUnit.CalendarioTest.TestCrearYObtenerEventoSinRepeticionConHora" />
+        <item itemvalue="JUnit.Calendario.Repeticiones in TpCalendario" />
+        <item itemvalue="JUnit.Calendario.Main.Builders in TpCalendario" />
       </list>
     </recent_temporary>
   </component>
@@ -169,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685387330143</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="arreglarNombreTest">
+      <created>1685388022655</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685388022655</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,16 +222,12 @@
     <MESSAGE value="builders" />
     <MESSAGE value="borrarNull" />
     <MESSAGE value="OrdenarFunciones" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrdenarFunciones" />
+    <MESSAGE value="arreglarNombreTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="arreglarNombreTest" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Calendario/Alarmas/AlarmaTest.java</url>
           <line>43</line>

@@ -10,6 +10,9 @@ import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
+import Calendario.Main.Argumentos.DuracionArgs;
+import Calendario.Main.Argumentos.EventoArgs;
+import Calendario.Main.Argumentos.RepeticionArgs;
 import Calendario.Main.Builders.*;
 import Calendario.Tareas.Tarea;
 import java.io.*;
@@ -33,170 +36,10 @@ public class Calendario implements Serializable {
      * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición con fecha de vencimiento.
      * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
      */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin,
-                              int intervalo, Frecuencia frecuencia, LocalDate fechaHasta){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia, fechaHasta);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición con fecha de vencimiento.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              int intervalo, Frecuencia frecuencia, LocalDate fechaHasta){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia, fechaHasta);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición con límite de ocurrencias.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin,
-                              int intervalo, Frecuencia frecuencia, int ocurrencias){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia, ocurrencias);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición con límite de ocurrencias.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              int intervalo, Frecuencia frecuencia, int ocurrencias){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia, ocurrencias);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición infinita.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin,
-                              int intervalo, Frecuencia frecuencia){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición infinita.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              int intervalo, Frecuencia frecuencia){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición Semanal con fecha de vencimiento.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin,
-                              int intervalo, List<DayOfWeek> diasSemana, LocalDate fechaHasta){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana, fechaHasta);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición Semanal con fecha de vencimiento.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              int intervalo, List<DayOfWeek> diasSemana, LocalDate fechaHasta){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana, fechaHasta);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición Semanal con límite de ocurrencias.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin,
-                              int intervalo, List<DayOfWeek> diasSemana, int ocurrencias){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana, ocurrencias);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición Semanal con límite de ocurrencias.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              int intervalo, List<DayOfWeek> diasSemana, int ocurrencias){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana, ocurrencias);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición Semanal infinita.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin,
-                              int intervalo, List<DayOfWeek> diasSemana){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición Semanal infinita.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              int intervalo, List<DayOfWeek> diasSemana){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion, builderRepeticion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento con fecha y hora, sin Repetición.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin,
-                              LocalTime horaInicio, LocalTime horaFin){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion);
-        return crearEvento(builderEvento);
-    }
-
-    /**
-     * Recibe la información de un Evento de día completo, sin Repetición.
-     * Crea el Evento a partir de los Builders 'Duracion y Evento' correspondientes y lo devuelve
-     */
-    public Evento crearEvento(String titulo, String descripcion, LocalDate diaInicio, LocalDate diaFin){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        BuilderEvento builderEvento = new BuilderEvento(titulo, descripcion, builderDuracion);
+    public Evento crearEvento(EventoArgs eventoArgs){
+        BuilderDuracion builderDuracion = new BuilderDuracion(eventoArgs.getDuracion());
+        BuilderRepeticion builderRepeticion = new BuilderRepeticion(eventoArgs.getRepeticion());
+        BuilderEvento builderEvento = new BuilderEvento(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), builderDuracion, builderRepeticion);
         return crearEvento(builderEvento);
     }
 
@@ -325,21 +168,13 @@ public class Calendario implements Serializable {
     }
 
     /**
-     * Cambia la fecha la duración del evento con hora
+     * Cambia la fecha la duración del evento
      */
-    public void modificarFechaEvento(Evento evento, LocalDate diaInicio, LocalDate diaFin,
-                                     LocalTime horaInicio, LocalTime horaFin){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin, horaInicio, horaFin);
+    public void modificarFechaEvento(Evento evento, DuracionArgs duracionArgs){
+        BuilderDuracion builderDuracion = new BuilderDuracion(duracionArgs);
         evento.setDuracion(builderDuracion.crearDuracion());
     }
 
-    /**
-     * Cambia la fecha la duración del evento de día completo
-     */
-    public void modificarFechaEvento(Evento evento, LocalDate diaInicio, LocalDate diaFin){
-        BuilderDuracion builderDuracion = new BuilderDuracion(diaInicio, diaFin);
-        evento.setDuracion(builderDuracion.crearDuracion());
-    }
 
     /**
      * Recibe la información de una AlarmaEvento con tiempo relativo y la crea a partir del BuilderAlarmaEvento
@@ -381,55 +216,11 @@ public class Calendario implements Serializable {
      * Recibe la información de una Repetición con fecha de vencimiento, la crea a partir del BuilderRepeticion
      * correspondiente y se la setea al Evento
      */
-    public void modificarRepeticionEvento(Evento evento, int intervalo, Frecuencia frecuencia, LocalDate fechaHasta){
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia, fechaHasta);
+    public void modificarRepeticionEvento(Evento evento, RepeticionArgs repeticionArgs){
+        BuilderRepeticion builderRepeticion = new BuilderRepeticion(repeticionArgs);
         evento.setRepeticion(builderRepeticion.crearRepeticion());
     }
 
-    /**
-     * Recibe la información de una Repetición con límite de ocurrencias, la crea a partir del BuilderRepeticion
-     * correspondiente y se la setea al Evento
-     */
-    public void modificarRepeticionEvento(Evento evento, int intervalo, Frecuencia frecuencia, int ocurrencias){
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia, ocurrencias);
-        evento.setRepeticion(builderRepeticion.crearRepeticion());
-    }
-
-    /**
-     * Recibe la información de una Repetición infinita, la crea a partir del BuilderRepeticion
-     * correspondiente y se la setea al Evento
-     */
-    public void modificarRepeticionEvento(Evento evento, int intervalo, Frecuencia frecuencia){
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, frecuencia);
-        evento.setRepeticion(builderRepeticion.crearRepeticion());
-    }
-
-    /**
-     * Recibe la información de una RepeticiónSemanal con límite de ocurrencias, la crea a partir del BuilderRepeticion
-     * correspondiente y se la setea al Evento
-     */
-    public void modificarRepeticionEvento(Evento evento, int intervalo, List<DayOfWeek> diasSemana, int ocurrencias){
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana, ocurrencias);
-        evento.setRepeticion(builderRepeticion.crearRepeticion());
-    }
-
-    /**
-     * Recibe la información de una RepeticiónSemanal infinita, la crea a partir del BuilderRepeticion
-     * correspondiente y se la setea al Evento
-     */
-    public void modificarRepeticionEvento(Evento evento, int intervalo, List<DayOfWeek> diasSemana){
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana);
-        evento.setRepeticion(builderRepeticion.crearRepeticion());
-    }
-
-    /**
-     * Recibe la información de una RepeticiónSemanal con fecha de vencimiento, la crea a partir del BuilderRepeticion
-     * correspondiente y se la setea al Evento
-     */
-    public void modificarRepeticionEvento(Evento evento, int intervalo, List<DayOfWeek> diasSemana, LocalDate fechaHasta){
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(intervalo, diasSemana,fechaHasta);
-        evento.setRepeticion(builderRepeticion.crearRepeticion());
-    }
 
     //ELIMINAR ACTIVIDADES Y/O ALARMAS
     /**

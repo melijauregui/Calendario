@@ -7,23 +7,8 @@ public class RepeticionAnual extends Repeticion {
     /**
      * Crea una Repetición que termina en una determinda fecha
      */
-    public RepeticionAnual(int intervaloAnual,  LocalDate fechaHasta){
-        super(intervaloAnual, fechaHasta);
-    }
-
-    /**
-     * Crea una Repetición que termina luego de una cantidad de repeticiones dada
-     */
-    public RepeticionAnual(int intervaloAnual, int ocurrencias){
-        super(intervaloAnual, ocurrencias);
-
-    }
-
-    /**
-     * Crea una Repetición infinita
-     */
-    public RepeticionAnual(int intervaloAnual){
-        super(intervaloAnual);
+    public RepeticionAnual(int intervaloAnual,  LocalDate fechaHasta, int ocurrencias){
+        super(intervaloAnual, fechaHasta, ocurrencias);
     }
 
     /**

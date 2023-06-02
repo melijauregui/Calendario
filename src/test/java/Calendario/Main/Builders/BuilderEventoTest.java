@@ -3,6 +3,8 @@ package Calendario.Main.Builders;
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.Frecuencia;
 import Calendario.Eventos.Evento;
+import Calendario.Main.Argumentos.DuracionArgs;
+import Calendario.Main.Argumentos.RepeticionArgs;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -20,7 +22,7 @@ public class BuilderEventoTest {
         var tipoEsperado = Evento.class;
 
         // Act
-        var builder = new BuilderEvento(titulo, descripcion, new BuilderDuracion(fecha, fecha), new BuilderRepeticion(5, Frecuencia.DIARIA));
+        var builder = new BuilderEvento(titulo, descripcion, new BuilderDuracion(new DuracionArgs(fecha, fecha)), new BuilderRepeticion(new RepeticionArgs(5, Frecuencia.DIARIA)));
         var evento = builder.crearEvento();
         var tipoResultado = evento.getClass();
 
@@ -40,7 +42,7 @@ public class BuilderEventoTest {
         var tipoEsperado = Evento.class;
 
         // Act
-        var builder = new BuilderEvento(titulo, descripcion, new BuilderDuracion(fecha, fecha));
+        var builder = new BuilderEvento(titulo, descripcion, new BuilderDuracion(new DuracionArgs(fecha, fecha)));
         var evento = builder.crearEvento();
         var tipoResultado = evento.getClass();
 

@@ -1,6 +1,7 @@
 package Calendario.Main.Builders;
 
 import Calendario.Enums.Frecuencia;
+import Calendario.Main.Argumentos.RepeticionArgs;
 import Calendario.Repeticiones.*;
 import org.junit.Test;
 
@@ -17,13 +18,13 @@ public class BuilderRepeticionTest {
         var tipoRepeticionEsperada = RepeticionDiaria.class;
 
         //Act
-        var builderRepeticionConFecha = new BuilderRepeticion(3, Frecuencia.DIARIA,LocalDate.of(2023, 4, 4));
+        var builderRepeticionConFecha = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.DIARIA,LocalDate.of(2023, 4, 4)));
         var repeticionConFecha = builderRepeticionConFecha.crearRepeticion();
         var tipoRepeticionConFecha = repeticionConFecha.getClass();
-        var builderRepeticionConOcurrencias = new BuilderRepeticion(3, Frecuencia.DIARIA, 3);
+        var builderRepeticionConOcurrencias = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.DIARIA, 3));
         var repeticionConOcurrencias = builderRepeticionConOcurrencias.crearRepeticion();
         var tipoRepeticionConOcurrencias = repeticionConOcurrencias.getClass();
-        var builderRepeticionInfinita = new BuilderRepeticion(3, Frecuencia.DIARIA);
+        var builderRepeticionInfinita = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.DIARIA));
         var repeticionInfinita = builderRepeticionInfinita.crearRepeticion();
         var tipoRepeticionInfinita = repeticionInfinita.getClass();
 
@@ -39,13 +40,13 @@ public class BuilderRepeticionTest {
         var tipoRepeticionEsperada = RepeticionAnual.class;
 
         //Act
-        var builderRepeticionConFecha = new BuilderRepeticion(3, Frecuencia.ANUAL,LocalDate.of(2023, 4, 4));
+        var builderRepeticionConFecha = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.ANUAL,LocalDate.of(2023, 4, 4)));
         var repeticionConFecha = builderRepeticionConFecha.crearRepeticion();
         var tipoRepeticionConFecha = repeticionConFecha.getClass();
-        var builderRepeticionConOcurrencias = new BuilderRepeticion(3, Frecuencia.ANUAL, 3);
+        var builderRepeticionConOcurrencias = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.ANUAL, 3));
         var repeticionConOcurrencias = builderRepeticionConOcurrencias.crearRepeticion();
         var tipoRepeticionConOcurrencias = repeticionConOcurrencias.getClass();
-        var builderRepeticionInfinita = new BuilderRepeticion(3, Frecuencia.ANUAL);
+        var builderRepeticionInfinita = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.ANUAL));
         var repeticionInfinita = builderRepeticionInfinita.crearRepeticion();
         var tipoRepeticionInfinita = repeticionInfinita.getClass();
 
@@ -61,13 +62,13 @@ public class BuilderRepeticionTest {
         var tipoRepeticionEsperada = RepeticionMensual.class;
 
         //Act
-        var builderRepeticionConFecha = new BuilderRepeticion(3, Frecuencia.MENSUAL,LocalDate.of(2023, 4, 4));
+        var builderRepeticionConFecha = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.MENSUAL,LocalDate.of(2023, 4, 4)));
         var repeticionConFecha = builderRepeticionConFecha.crearRepeticion();
         var tipoRepeticionConFecha = repeticionConFecha.getClass();
-        var builderRepeticionConOcurrencias = new BuilderRepeticion(3, Frecuencia.MENSUAL, 3);
+        var builderRepeticionConOcurrencias = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.MENSUAL, 3));
         var repeticionConOcurrencias = builderRepeticionConOcurrencias.crearRepeticion();
         var tipoRepeticionConOcurrencias = repeticionConOcurrencias.getClass();
-        var builderRepeticionInfinita = new BuilderRepeticion(3, Frecuencia.MENSUAL);
+        var builderRepeticionInfinita = new BuilderRepeticion(new RepeticionArgs(3, Frecuencia.MENSUAL));
         var repeticionInfinita = builderRepeticionInfinita.crearRepeticion();
         var tipoRepeticionInfinita = repeticionInfinita.getClass();
 
@@ -86,13 +87,13 @@ public class BuilderRepeticionTest {
         diasSemanas.add(DayOfWeek.MONDAY);
 
         //Act
-        var builderRepeticionConFecha = new BuilderRepeticion(3, diasSemanas,LocalDate.of(2023, 4, 4));
+        var builderRepeticionConFecha = new BuilderRepeticion(new RepeticionArgs(3, diasSemanas,LocalDate.of(2023, 4, 4)));
         var repeticionConFecha = builderRepeticionConFecha.crearRepeticion();
         var tipoRepeticionConFecha = repeticionConFecha.getClass();
-        var builderRepeticionConOcurrencias = new BuilderRepeticion(3, diasSemanas, 3);
+        var builderRepeticionConOcurrencias = new BuilderRepeticion(new RepeticionArgs(3, diasSemanas, 3));
         var repeticionConOcurrencias = builderRepeticionConOcurrencias.crearRepeticion();
         var tipoRepeticionConOcurrencias = repeticionConOcurrencias.getClass();
-        var builderRepeticionInfinita = new BuilderRepeticion(3, diasSemanas);
+        var builderRepeticionInfinita = new BuilderRepeticion(new RepeticionArgs(3, diasSemanas));
         var repeticionInfinita = builderRepeticionInfinita.crearRepeticion();
         var tipoRepeticionInfinita = repeticionInfinita.getClass();
 

@@ -15,26 +15,15 @@ public abstract class Repeticion implements Serializable {
     /**
      * Crea una Repetición que termina en una determinda fecha
      */
-    public Repeticion(int intervalo, LocalDate fechaHasta){
+    public Repeticion(int intervalo, LocalDate fechaHasta, int ocurrencias){
         this.intervalo = intervalo;
         this.fechaHasta = fechaHasta;
-    }
-
-    /**
-     * Crea una Repetición que termina luego de una cantidad de repeticiones dada
-     */
-    public Repeticion(int intervalo, int ocurrencias){
-        this.intervalo = intervalo;
-        this.ocurrencias = ocurrencias;
-        this.ocurrenciasRelativas = ocurrencias;
-    }
-
-    /**
-     * Crea una Repetición infinita
-     */
-    public Repeticion(int intervalo){
-        this.intervalo = intervalo;
-        this.ocurrencias = repeticionInfinita;
+        if (ocurrencias == 0){
+            this.ocurrencias = repeticionInfinita;
+        }else{
+            this.ocurrencias = ocurrencias;
+            this.ocurrenciasRelativas = ocurrencias;
+        }
     }
 
 

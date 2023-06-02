@@ -23,7 +23,7 @@ public class RepeticionAnualTest {
 
         //Arrange
         int ocurrencias = 15;
-        var repeticionOcurrencias = new RepeticionAnual(2, ocurrencias);
+        var repeticionOcurrencias = new RepeticionAnual(2, null, ocurrencias);
 
         var fechaInicio = LocalDate.of(2023, 11, 11);
         var fechaFin = LocalDate.of(2023, 11, 11);
@@ -53,7 +53,7 @@ public class RepeticionAnualTest {
 
         //Arrange
         var fechaHasta = LocalDate.of(2028, 11, 11);
-        var repeticion = new RepeticionAnual(1, fechaHasta);
+        var repeticion = new RepeticionAnual(1, fechaHasta, 0);
 
         var fechaInicio = LocalDate.of(2023, 5, 11);
         var fechaFin = LocalDate.of(2023, 6, 11);
@@ -84,7 +84,7 @@ public class RepeticionAnualTest {
     public void RepeticionInfinita() {
 
         //Arrange
-        var repeticion = new RepeticionAnual(1);
+        var repeticion = new RepeticionAnual(1, null, 0);
 
         var fechaInicio = LocalDate.of(2023, 5, 11);
         var fechaFin = LocalDate.of(2023, 6, 11);
