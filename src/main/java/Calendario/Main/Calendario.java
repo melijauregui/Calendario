@@ -4,8 +4,6 @@ import Calendario.Actividad.Actividad;
 import Calendario.Actividad.ActividadMutable;
 import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
-import Calendario.Duracion.Duracion;
-import Calendario.Enums.Frecuencia;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
 import Calendario.Eventos.Evento;
