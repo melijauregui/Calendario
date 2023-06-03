@@ -65,7 +65,7 @@ public class EventoTest {
         evento.setDescripcion(descripcion);
 
         //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null,9);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY),9);
 
         var duracion = new Duracion();
         var diaInicio = LocalDate.of(2023, 1, 15);
@@ -151,7 +151,7 @@ public class EventoTest {
 
         //defino repeticion1
         var ocurrencias = 10;
-        var repeticion1 = new RepeticionMensual(2, null, ocurrencias);
+        var repeticion1 = new RepeticionMensual(2, ocurrencias);
         evento.setRepeticion(repeticion1);
 
         //Resultados esperados
@@ -175,7 +175,7 @@ public class EventoTest {
         }
 
         //Modifico repeticion
-        var repeticion2 = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null,9);
+        var repeticion2 = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY),9);
         evento.setRepeticion(repeticion2);
 
         //Resultados Esperados nueva repeticion
@@ -227,7 +227,7 @@ public class EventoTest {
         evento.setDescripcion(descripcion);
 
         //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null,9);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY),9);
 
         //defino dia Inicio
         var duracion = new Duracion();
@@ -312,7 +312,7 @@ public class EventoTest {
         evento.setDescripcion(descripcion);
 
         //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null, 0);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY),0);
 
         //defino dia Inicio
         var duracion = new Duracion();
@@ -394,7 +394,7 @@ public class EventoTest {
         evento.setDescripcion(descripcion);
 
         //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null,9);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), 9);
 
         //defino dia Inicio
         var duracion = new Duracion();
@@ -473,7 +473,7 @@ public class EventoTest {
         evento.setDescripcion(descripcion);
 
         //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null, 0);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), 0);
 
         //defino dia Inicio
         var duracion = new Duracion();
@@ -563,7 +563,7 @@ public class EventoTest {
         evento.setDuracion(duracion);
 
         //defino repeticion
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null,9);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), 9);
         evento.setRepeticion(repeticion);
 
         //Resultados Esperados
@@ -640,7 +640,7 @@ public class EventoTest {
         var evento = new Evento();
         evento.setTitulo(titulo);
         evento.setDescripcion(descripcion);
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY),null, 9);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), 9);
 
         var duracion = new Duracion();
 
@@ -695,7 +695,7 @@ public class EventoTest {
         var evento = new Evento();
         evento.setTitulo(titulo);
         evento.setDescripcion(descripcion);
-        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY), null,9);
+        var repeticion = new RepeticionSemanal(1, List.of(DayOfWeek.SUNDAY),9);
 
         var duracion = new Duracion();
 

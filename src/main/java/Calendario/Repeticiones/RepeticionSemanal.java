@@ -12,9 +12,26 @@ public class RepeticionSemanal extends Repeticion{
     /**
      * Crea una Repetición que termina en una determinda fecha
      */
-    public RepeticionSemanal(int intervaloSemanas, List<DayOfWeek> diasSemana ,LocalDate fechaHasta, int ocurrencias){
-        super(intervaloSemanas, fechaHasta, ocurrencias);
+    public RepeticionSemanal(int intervaloSemanas, List<DayOfWeek> diasSemana ,LocalDate fechaHasta){
+        super(intervaloSemanas, fechaHasta);
         this.diasSemana = diasSemana;
+    }
+
+    /**
+     * Crea una Repetición que termina luego de una cantidad de repeticiones dada
+     */
+    public RepeticionSemanal(int intervaloSemanas, List<DayOfWeek> diasSemana , int ocurrencias){
+        super(intervaloSemanas, ocurrencias);
+        this.diasSemana = diasSemana;
+    }
+
+    /**
+     * Crea una Repetición infinita
+     */
+    public RepeticionSemanal(int intervaloSemanas, List<DayOfWeek> diasSemana){
+        super(intervaloSemanas);
+        this.diasSemana = diasSemana;
+
     }
 
     /**

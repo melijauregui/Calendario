@@ -37,6 +37,9 @@ public class EventoArgs {
     public RepeticionArgs getRepeticion() {
         return repeticion;
     }
+    public boolean hayRepeticion(){
+        return repeticion!=null;
+    }
 }
 
 

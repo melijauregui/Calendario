@@ -36,8 +36,13 @@ public class Calendario implements Serializable {
      */
     public Evento crearEvento(EventoArgs eventoArgs){
         BuilderDuracion builderDuracion = new BuilderDuracion(eventoArgs.getDuracion());
-        BuilderRepeticion builderRepeticion = new BuilderRepeticion(eventoArgs.getRepeticion());
-        BuilderEvento builderEvento = new BuilderEvento(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), builderDuracion, builderRepeticion);
+        BuilderEvento builderEvento;
+        if (eventoArgs.hayRepeticion()){
+            BuilderRepeticion builderRepeticion = new BuilderRepeticion(eventoArgs.getRepeticion());
+            builderEvento = new BuilderEvento(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), builderDuracion, builderRepeticion);
+        }else{
+            builderEvento = new BuilderEvento(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), builderDuracion);
+        }
         return crearEvento(builderEvento);
     }
 

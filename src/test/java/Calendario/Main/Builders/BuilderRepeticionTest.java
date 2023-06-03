@@ -1,6 +1,7 @@
 package Calendario.Main.Builders;
 
-import Calendario.Enums.Frecuencia;
+
+import Calendario.Main.Argumentos.Frecuencia;
 import Calendario.Main.Argumentos.RepeticionArgs;
 import Calendario.Repeticiones.*;
 import org.junit.Test;

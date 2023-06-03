@@ -1,9 +1,10 @@
 package Calendario.Main.Builders;
 
 import Calendario.Duracion.Duracion;
-import Calendario.Enums.Frecuencia;
+
 import Calendario.Eventos.Evento;
 import Calendario.Main.Argumentos.DuracionArgs;
+import Calendario.Main.Argumentos.Frecuencia;
 import Calendario.Main.Argumentos.RepeticionArgs;
 import org.junit.Test;
 

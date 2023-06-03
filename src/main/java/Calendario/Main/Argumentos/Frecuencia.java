@@ -7,16 +7,14 @@ import Calendario.Repeticiones.RepeticionMensual;
 
 import java.time.LocalDate;
 
-public enum Frecuencia2 {
+public enum Frecuencia {
     ANUAL {
         /**
          * Recibe la información de una Repeticion con fecha de vencimiento, crea una RepeticionAnual y la devuelve
          */
         @Override
         public Repeticion crearRepeticion(int intervalo, LocalDate fechaHasta){
-            //return new RepeticionAnual(intervalo, fechaHasta);
-            return null;
-
+            return new RepeticionAnual(intervalo, fechaHasta);
         }
 
         /**
@@ -24,8 +22,8 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo, int ocurrencias){
-            //return new RepeticionAnual(intervalo, ocurrencias);
-            return null;
+            return new RepeticionAnual(intervalo, ocurrencias);
+
 
         }
 
@@ -34,8 +32,8 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo){
-            //return new RepeticionAnual(intervalo);
-            return null;
+            return new RepeticionAnual(intervalo);
+
 
         }
     },
@@ -46,8 +44,8 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo, LocalDate fechaHasta){
-            //return new RepeticionDiaria(intervalo, fechaHasta);
-            return null;
+            return new RepeticionDiaria(intervalo, fechaHasta);
+
 
         }
 
@@ -56,8 +54,8 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo, int ocurrencias){
-            //return new RepeticionDiaria(intervalo, ocurrencias);
-            return null;
+            return new RepeticionDiaria(intervalo, ocurrencias);
+
 
         }
 
@@ -66,8 +64,8 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo){
-            //return new RepeticionDiaria(intervalo);
-            return null;
+            return new RepeticionDiaria(intervalo);
+
 
         }
     },
@@ -78,8 +76,8 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo, LocalDate fechaHasta){
-            //return new RepeticionMensual(intervalo, fechaHasta);
-            return null;
+            return new RepeticionMensual(intervalo, fechaHasta);
+
 
         }
 
@@ -88,9 +86,7 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo, int ocurrencias){
-            //return new RepeticionMensual(intervalo, ocurrencias);
-            return null;
-
+            return new RepeticionMensual(intervalo, ocurrencias);
         }
 
         /**
@@ -98,12 +94,12 @@ public enum Frecuencia2 {
          */
         @Override
         public Repeticion crearRepeticion(int intervalo){
-            //return new RepeticionMensual(intervalo);
-            return null;
+            return new RepeticionMensual(intervalo);
+
         }
     };
 
-    Frecuencia2(){}
+    Frecuencia(){}
 
     /**
      * Recibe la información de una Repeticion con fecha de vencimiento, la crea y la devuelve
