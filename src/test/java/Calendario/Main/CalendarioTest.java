@@ -5,10 +5,7 @@ import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
-import Calendario.Main.Argumentos.DuracionArgs;
-import Calendario.Main.Argumentos.EventoArgs;
-import Calendario.Main.Argumentos.Frecuencia;
-import Calendario.Main.Argumentos.RepeticionArgs;
+import Calendario.Main.Argumentos.*;
 import Calendario.Main.Builders.*;
 import org.junit.Test;
 
@@ -59,7 +56,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        var tarea = calendario.crearTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40));
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40)));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var actividadesEsperadas = new ArrayList<Actividad>();
         actividadesEsperadas.add(tarea);
@@ -82,7 +79,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        var tarea = calendario.crearTarea(titulo, descripcion, LocalDate.of(2023, 4, 22));
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, LocalDate.of(2023, 4, 22)));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var actividadesEsperadas = new ArrayList<Actividad>();
         actividadesEsperadas.add(tarea);
@@ -499,7 +496,7 @@ public class CalendarioTest {
 
         //Act
         var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
-        var tarea = calendario.crearTarea(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40));
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40)));
         var cantActividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta).size();
 
 
@@ -540,7 +537,7 @@ public class CalendarioTest {
         //Act
         var evento1 = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
         var evento2 = calendario.crearEvento(new EventoArgs(titulo2, descripcion, new DuracionArgs(diaInicio, diaFin), new RepeticionArgs(1, Frecuencia.DIARIA)));
-        var tarea = calendario.crearTarea(titulo3, descripcion, fechaTarea);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo3, descripcion, fechaTarea));
 
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
 
@@ -574,9 +571,9 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var tarea1 = calendario.crearTarea(titulo, descripcion, fecha1);
+        var tarea1 = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha1));
 
-        var tarea2 = calendario.crearTarea(titulo, descripcion, fecha2);
+        var tarea2 = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha2));
 
         var cantidadEsperadas = 1; //suena 15:30
 
@@ -606,7 +603,7 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var tamanioEsperado = 0;
 
@@ -627,7 +624,7 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var tituloNuevo = "título nuevo";
 
@@ -670,7 +667,7 @@ public class CalendarioTest {
         var descripcion = "Entrega limite del TP1";
         var diaviejo = LocalDate.of(2023, 4, 22);
 
-        var tarea = calendario.crearTarea(titulo, descripcion, diaviejo);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, diaviejo));
 
         var fechaNueva = LocalDate.of(2023, 4, 23);
 
@@ -692,7 +689,7 @@ public class CalendarioTest {
 
         var fechaVieja = LocalDateTime.of(2100, 4, 22, 20, 0);
 
-        var tarea = calendario.crearTarea(titulo, descripcion,fechaVieja);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion,fechaVieja));
 
         var horaNueva = LocalTime.of(20, 5);
         //Act
@@ -769,7 +766,7 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var cantidadEsperadas = 1;
 
@@ -792,7 +789,7 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var cantidadEsperadas = 1;
 
@@ -815,7 +812,7 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var cantidadEsperadas = 1;
 
@@ -841,7 +838,7 @@ public class CalendarioTest {
 
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var cantidadEsperadas = 1;
 
@@ -983,7 +980,7 @@ public class CalendarioTest {
         var fecha = LocalDateTime.of(2100, 4, 22, 15, 30);
         var calendario = new Calendario();
 
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var cantidadEsperadas = 0;
         var alarma = calendario.agregarAlarmaTarea(tarea,fecha, TipoAviso.NOTIFICACION);
@@ -1201,7 +1198,7 @@ public class CalendarioTest {
         var calendario = new Calendario();
 
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
-        var tarea = calendario.crearTarea(titulo, descripcion, fecha);
+        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
         var tamanioEsperado = 0;
 
@@ -1277,7 +1274,7 @@ public class CalendarioTest {
         var tituloT1 = "T1";
         var descripcionT1 = "T1";
         var fechaT1 =  LocalDateTime.of(2023, 5, 10, 15, 40);
-        var tarea1 = calendario.crearTarea(tituloT1, descripcionT1, fechaT1);
+        var tarea1 = calendario.crearTarea(new TareaArgs(tituloT1, descripcionT1, fechaT1));
 
         //ESPERADO
         var actividadesEsperadas = calendario.getActividadesEnElIntervalo(desde, hasta);

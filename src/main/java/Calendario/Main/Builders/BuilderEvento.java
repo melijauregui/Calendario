@@ -2,6 +2,7 @@ package Calendario.Main.Builders;
 
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
+import Calendario.Main.Argumentos.EventoArgs;
 
 
 public class BuilderEvento {
@@ -10,12 +11,11 @@ public class BuilderEvento {
     /**
      * Recibe la información de un Evento con Repetición y se la setea
      */
-    public BuilderEvento(String titulo, String descripcion, BuilderDuracion builderDuracion, BuilderRepeticion builderRepeticion){
-        setInformacion(titulo, descripcion, builderDuracion);
-        evento.setRepeticion(builderRepeticion.crearRepeticion());
-    }
-    public BuilderEvento(String titulo, String descripcion, BuilderDuracion builderDuracion){
-        setInformacion(titulo, descripcion, builderDuracion);
+    public BuilderEvento(EventoArgs eventoArgs){
+        setInformacion(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), new BuilderDuracion(eventoArgs.getDuracion()));
+        if (eventoArgs.hayRepeticion()) {
+            evento.setRepeticion(new BuilderRepeticion(eventoArgs.getRepeticion()).crearRepeticion());
+        }
     }
 
     /**

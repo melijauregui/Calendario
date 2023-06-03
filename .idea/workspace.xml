@@ -4,31 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="arreglarNombreTest">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderRepeticion3.java" afterDir="false" />
+    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="actualizacionArgumentos2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/TareaArgs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Frecuencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Enums/Frecuencia3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/BuilderRepeticion2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/EventoArgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/EventoArgs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/Frecuencia2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/Frecuencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/RepeticionArgs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/RepeticionArgs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/RepeticionArgs2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/RepeticionArgs3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderRepeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderRepeticion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderTarea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Enums/FrecuenciaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Enums/FrecuenciaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/EventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Eventos/EventoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderEventoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderRepeticionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderRepeticionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionDiariaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionMensualTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionSemanalTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +75,21 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in TpCalendario">
+    <configuration name="ActividadMutableTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Actividad.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Actividad" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Actividad.ActividadMutableTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="PACKAGE_NAME" value="" />
@@ -115,6 +113,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Calendario.Main in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FrecuenciaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
@@ -130,43 +142,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RepeticionMensualTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Repeticiones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionMensualTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RepeticionSemanalTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Repeticiones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Repeticiones" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Repeticiones.RepeticionSemanalTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in TpCalendario" />
+        <item itemvalue="JUnit.Calendario.Main in TpCalendario" />
+        <item itemvalue="JUnit.ActividadMutableTest" />
         <item itemvalue="JUnit.CalendarioTest" />
         <item itemvalue="JUnit.FrecuenciaTest" />
-        <item itemvalue="JUnit.RepeticionSemanalTest" />
-        <item itemvalue="JUnit.RepeticionMensualTest" />
       </list>
     </recent_temporary>
   </component>
@@ -200,7 +182,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685388022655</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="actualizacionArgumentos2">
+      <created>1685766009985</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685766009985</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,7 +208,9 @@
     <MESSAGE value="borrarNull" />
     <MESSAGE value="OrdenarFunciones" />
     <MESSAGE value="arreglarNombreTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="arreglarNombreTest" />
+    <MESSAGE value="actualizacionArgumentos" />
+    <MESSAGE value="actualizacionArgumentos2" />
+    <option name="LAST_COMMIT_MESSAGE" value="actualizacionArgumentos2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

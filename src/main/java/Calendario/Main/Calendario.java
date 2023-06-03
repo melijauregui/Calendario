@@ -11,6 +11,7 @@ import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Argumentos.DuracionArgs;
 import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.RepeticionArgs;
+import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Builders.*;
 import Calendario.Tareas.Tarea;
 import java.io.*;
@@ -35,31 +36,14 @@ public class Calendario implements Serializable {
      * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
      */
     public Evento crearEvento(EventoArgs eventoArgs){
-        BuilderDuracion builderDuracion = new BuilderDuracion(eventoArgs.getDuracion());
-        BuilderEvento builderEvento;
-        if (eventoArgs.hayRepeticion()){
-            BuilderRepeticion builderRepeticion = new BuilderRepeticion(eventoArgs.getRepeticion());
-            builderEvento = new BuilderEvento(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), builderDuracion, builderRepeticion);
-        }else{
-            builderEvento = new BuilderEvento(eventoArgs.getTitulo(), eventoArgs.getDescripcion(), builderDuracion);
-        }
-        return crearEvento(builderEvento);
+        return crearEvento(new BuilderEvento(eventoArgs));
     }
 
     /**
      * Recibe la información de una Tarea de día completo. Usa un BuilderTarea para crearla, la agrega al Calendario y la devuelve
      */
-    public Tarea crearTarea(String titulo, String descripcion, LocalDate dia){
-        BuilderTarea builderTarea = new BuilderTarea(titulo, descripcion, dia);
-        return crearTarea(builderTarea);
-    }
-
-    /**
-     * Recibe la información de una Tarea con fecha y hora. Usa un BuilderTarea para crearla, la agrega al Calendario y la devuelve
-     */
-    public Tarea crearTarea(String titulo, String descripcion, LocalDateTime fecha){
-        BuilderTarea builderTarea = new BuilderTarea(titulo, descripcion, fecha);
-        return crearTarea(builderTarea);
+    public Tarea crearTarea(TareaArgs tareaArgs){
+        return crearTarea(new BuilderTarea(tareaArgs));
     }
 
 

@@ -1,5 +1,6 @@
 package Calendario.Main.Builders;
 
+import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Tareas.Tarea;
 
 import java.time.LocalDate;
@@ -13,16 +14,11 @@ public class BuilderTarea {
     /**
      * Recibe la información de una Tarea de día completo y se la setea
      */
-    public BuilderTarea(String titulo, String descripcion, LocalDate dia){
-        setInformacion(titulo, descripcion, dia);
-    }
-
-    /**
-     * Recibe la información de una Tarea con fecha y hora, y se la setea
-     */
-    public BuilderTarea(String titulo, String descripcion, LocalDateTime diaHora){
-        setInformacion(titulo, descripcion, diaHora.toLocalDate());
-        tarea.setHora(diaHora.toLocalTime());
+    public BuilderTarea(TareaArgs tareaArgs){
+        setInformacion(tareaArgs.getTitulo(), tareaArgs.getDescripcion(), tareaArgs.getDia());
+        if (!tareaArgs.esDiaCompleto()){
+            tarea.setHora(tareaArgs.getHora());
+        }
     }
 
     /**

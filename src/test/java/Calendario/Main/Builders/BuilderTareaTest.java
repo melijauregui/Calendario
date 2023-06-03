@@ -2,6 +2,7 @@ package Calendario.Main.Builders;
 
 import Calendario.Duracion.Duracion;
 import Calendario.Eventos.Evento;
+import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Tareas.Tarea;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class BuilderTareaTest {
         var tipoEsperado = Tarea.class;
 
         // Act
-        var builder = new BuilderTarea(titulo, descripcion, fecha);
+        var builder = new BuilderTarea(new TareaArgs(titulo, descripcion, fecha));
         var tarea = builder.crearTarea();
         var tipoResultado = tarea.getClass();
 
@@ -41,7 +42,7 @@ public class BuilderTareaTest {
         var tipoEsperado = Tarea.class;
 
         // Act
-        var builder = new BuilderTarea(titulo, descripcion, fecha.toLocalDate());
+        var builder = new BuilderTarea(new TareaArgs(titulo, descripcion, fecha.toLocalDate()));
         var tarea = builder.crearTarea();
         var tipoResultado = tarea.getClass();
 
