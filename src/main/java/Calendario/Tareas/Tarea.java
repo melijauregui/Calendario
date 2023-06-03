@@ -1,5 +1,6 @@
 package Calendario.Tareas;
 
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Alarmas.Alarma;
 import Calendario.Actividad.ActividadMutable;
 import Calendario.Main.Constantes;
@@ -77,6 +78,13 @@ public class Tarea extends ActividadMutable {
      */
     public void eliminarAlarma(Alarma alarma){
         getAlarmas().remove(alarma);
+    }
+
+    /**
+     * Acepta un Visitor
+     */
+    public void acceptarVisitor(ActividadVisitor actividadVisitor){
+        actividadVisitor.visitarTarea(this);
     }
 
     /**

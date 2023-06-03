@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class ActividadMutableTest {
 
-    @Test
+    /*@Test
     public void actividadVacia(){
         //Arrange
         var actividad = new ActividadMutable();
@@ -82,6 +82,6 @@ public class ActividadMutableTest {
 
         //Assert
         assertEquals(descripcion, descripcionResultado);
-    }
+    }*/
 
 }

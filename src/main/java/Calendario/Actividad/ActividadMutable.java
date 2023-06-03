@@ -2,7 +2,7 @@ package Calendario.Actividad;
 
 import java.io.Serializable;
 
-public class ActividadMutable extends Actividad implements Serializable {
+public abstract class ActividadMutable extends Actividad implements Serializable {
 
     private String titulo;
     private String descripcion;
@@ -43,5 +43,10 @@ public class ActividadMutable extends Actividad implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    /**
+     * Acepta un Visitor
+     */
+    public abstract void acceptarVisitor(ActividadVisitor actividadVisitor);
 
 }

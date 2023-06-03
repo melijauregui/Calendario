@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="actualizacionArgumentos2">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Argumentos/TareaArgs.java" afterDir="false" />
+    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="OrdenarFunciones">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/AppCalendario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/vistaPrincipal.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Builders/BuilderTarea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderEventoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/Builders/BuilderEventoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Actividad/ActividadMutable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Actividad/ActividadMutableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Actividad/ActividadMutableTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +26,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit3 Test Class" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="JUnit4 Test Class" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -49,23 +54,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;CorrecciónParametros&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sofia/Documents/Facultad/Fiuba/2023/Algo3/Github/TpCalendario&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
+    "git-widget-placeholder": "Etapa3",
+    "last_opened_file_path": "C:/Users/Sofia/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Scene Builder/SceneBuilder.lnk",
+    "settings.editor.selected.configurable": "configurable.group.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="junit.framework.TestCase" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\MVC\Resources" />
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\MVC" />
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="Calendario.Main.Builders" />
+      <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Calendario.Main.Builders" />
@@ -74,22 +86,7 @@
       <recent name="Calendario.Main" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in TpCalendario">
-    <configuration name="ActividadMutableTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Actividad.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Actividad" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Actividad.ActividadMutableTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Maven.TpCalendario [javafx:run]">
     <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="PACKAGE_NAME" value="" />
@@ -98,7 +95,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalendarioTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -108,12 +121,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionSemanalConOcurrencias" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calendario.Main in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest.TestModificarRepeticionSemanalInfinita" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
@@ -122,33 +136,45 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Calendario.Main" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionSemanalInfinita" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FrecuenciaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Enums" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Enums.FrecuenciaTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="TpCalendario [javafx:run]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="javafx:run" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Maven.TpCalendario [javafx:run]" />
+        <item itemvalue="JUnit.Calendario in TpCalendario" />
         <item itemvalue="JUnit.All in TpCalendario" />
-        <item itemvalue="JUnit.Calendario.Main in TpCalendario" />
-        <item itemvalue="JUnit.ActividadMutableTest" />
-        <item itemvalue="JUnit.CalendarioTest" />
-        <item itemvalue="JUnit.FrecuenciaTest" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalInfinita" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionSemanalConOcurrencias" />
       </list>
     </recent_temporary>
   </component>
@@ -175,21 +201,7 @@
       <option name="project" value="LOCAL" />
       <updated>1685387330143</updated>
     </task>
-    <task id="LOCAL-00003" summary="arreglarNombreTest">
-      <created>1685388022655</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1685388022655</updated>
-    </task>
-    <task id="LOCAL-00004" summary="actualizacionArgumentos2">
-      <created>1685766009985</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1685766009985</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,14 +219,16 @@
     <MESSAGE value="builders" />
     <MESSAGE value="borrarNull" />
     <MESSAGE value="OrdenarFunciones" />
-    <MESSAGE value="arreglarNombreTest" />
-    <MESSAGE value="actualizacionArgumentos" />
-    <MESSAGE value="actualizacionArgumentos2" />
-    <option name="LAST_COMMIT_MESSAGE" value="actualizacionArgumentos2" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrdenarFunciones" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Calendario/Alarmas/AlarmaTest.java</url>
           <line>43</line>
@@ -229,99 +243,99 @@
     </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/workspace_xml$BuilderAlarmaTest.ic" NAME="BuilderAlarmaTest Coverage Results" MODIFIED="1684516875102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Main.Builders.*</FILTER>
+    <SUITE FILE_PATH="coverage/workspace_xml$CalendarioTest.ic" NAME="CalendarioTest Coverage Results" MODIFIED="1684241454634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Main.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Eventos_in_TpCalendario.ic" NAME="Eventos in TpCalendario Coverage Results" MODIFIED="1683946502177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/workspace_xml$BuilderRepeticionTest.ic" NAME="BuilderRepeticionTest Coverage Results" MODIFIED="1684518548620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Main.Builders.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$ActividadMutableTest.ic" NAME="ActividadMutableTest Coverage Results" MODIFIED="1683940380199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Actividad.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionAnualTest.ic" NAME="RepeticionAnualTest Coverage Results" MODIFIED="1682218819169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Repeticiones.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$EventoTest.ic" NAME="EventoTest Coverage Results" MODIFIED="1682219097833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Eventos_in_TpCalendario.ic" NAME="Calendario.Eventos in TpCalendario Coverage Results" MODIFIED="1682219113282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Eventos.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$FrecuenciaTest.ic" NAME="FrecuenciaTest Coverage Results" MODIFIED="1684516437378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Main.Builders.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$InstanciaEventoTest.ic" NAME="InstanciaEventoTest Coverage Results" MODIFIED="1683940625562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Eventos.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1682300667781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$BuilderTareaTest.ic" NAME="BuilderTareaTest Coverage Results" MODIFIED="1684517942039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/workspace_xml$BuilderEventoTest.ic" NAME="BuilderEventoTest Coverage Results" MODIFIED="1684517644804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Main.Builders.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Repeticiones_in_TpCalendario.ic" NAME="Calendario.Repeticiones in TpCalendario Coverage Results" MODIFIED="1682218832946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Repeticiones.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$All_in_TpCalendario.ic" NAME="All in TpCalendario Coverage Results" MODIFIED="1682224038359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TpCalendario$TiempoRelativoTest.ic" NAME="TiempoRelativoTest Coverage Results" MODIFIED="1682218754282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Enums.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$CalendarioTest.ic" NAME="CalendarioTest Coverage Results" MODIFIED="1682218805484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Main.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario__1_.ic" NAME="Calendario in TpCalendario (1) Coverage Results" MODIFIED="1683931519411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Duracion_in_TpCalendario.ic" NAME="Calendario.Duracion in TpCalendario Coverage Results" MODIFIED="1682114557288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Duracion.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1682362242281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionDiariaTest.ic" NAME="RepeticionDiariaTest Coverage Results" MODIFIED="1682190976190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Repeticiones.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$BuilderEventoTest.ic" NAME="BuilderEventoTest Coverage Results" MODIFIED="1684517644804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Main.Builders.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionMensualTest.ic" NAME="RepeticionMensualTest Coverage Results" MODIFIED="1682191043256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Repeticiones.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$InstanciaEventoTest.ic" NAME="InstanciaEventoTest Coverage Results" MODIFIED="1682218785178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Eventos.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$All_in_TpCalendario.ic" NAME="All in TpCalendario Coverage Results" MODIFIED="1683955754365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionSemanalTest.ic" NAME="RepeticionSemanalTest Coverage Results" MODIFIED="1682199213054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Repeticiones.*</FILTER>
+    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Tareas_in_TpCalendario.ic" NAME="Calendario.Tareas in TpCalendario Coverage Results" MODIFIED="1682218849997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Tareas.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$TareaTest.ic" NAME="TareaTest Coverage Results" MODIFIED="1682218695522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Tareas.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionDiariaTest_AlmacenarRepeticionesFechaHasta.ic" NAME="RepeticionDiariaTest.AlmacenarRepeticionesFechaHasta Coverage Results" MODIFIED="1682190760211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1685585496395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TpCalendario$TiempoRelativoTest.ic" NAME="TiempoRelativoTest Coverage Results" MODIFIED="1682218754282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Enums.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$All_in_TpCalendario.ic" NAME="All in TpCalendario Coverage Results" MODIFIED="1682224038359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Repeticiones_in_TpCalendario.ic" NAME="Repeticiones in TpCalendario Coverage Results" MODIFIED="1683984009408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionSemanalTest.ic" NAME="RepeticionSemanalTest Coverage Results" MODIFIED="1682199213054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Repeticiones.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$EventoTest.ic" NAME="EventoTest Coverage Results" MODIFIED="1683941831896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Eventos.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Tareas_in_TpCalendario.ic" NAME="Calendario.Tareas in TpCalendario Coverage Results" MODIFIED="1682218849997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Tareas.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$DuracionTest.ic" NAME="DuracionTest Coverage Results" MODIFIED="1682218737965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Duracion.*</FILTER>
+    <SUITE FILE_PATH="coverage/workspace_xml$ActividadMutableTest.ic" NAME="ActividadMutableTest Coverage Results" MODIFIED="1683940380199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Actividad.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$AlarmaTest.ic" NAME="AlarmaTest Coverage Results" MODIFIED="1682218720899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Alarmas.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$EventoTest.ic" NAME="EventoTest Coverage Results" MODIFIED="1683941831896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Eventos.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$FrecuenciaTest.ic" NAME="FrecuenciaTest Coverage Results" MODIFIED="1684516437378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Main.Builders.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionAnualTest.ic" NAME="RepeticionAnualTest Coverage Results" MODIFIED="1682218819169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Repeticiones.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$InstanciaEventoTest.ic" NAME="InstanciaEventoTest Coverage Results" MODIFIED="1683940625562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Eventos.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$BuilderAlarmaTest.ic" NAME="BuilderAlarmaTest Coverage Results" MODIFIED="1684516875102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Main.Builders.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/TpCalendario$EventoTest_TestEventoGetProximoEventoInfinito.ic" NAME="EventoTest.TestEventoGetProximoEventoInfinito Coverage Results" MODIFIED="1682218561127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Eventos.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$DuracionTest.ic" NAME="DuracionTest Coverage Results" MODIFIED="1682218737965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Duracion.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionDiariaTest_AlmacenarRepeticionesFechaHasta.ic" NAME="RepeticionDiariaTest.AlmacenarRepeticionesFechaHasta Coverage Results" MODIFIED="1682190760211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Repeticiones.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$EventoTest.ic" NAME="EventoTest Coverage Results" MODIFIED="1682219097833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Eventos.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$TareaTest_TestEsDiaCompleto.ic" NAME="TareaTest.TestEsDiaCompleto Coverage Results" MODIFIED="1682218679820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Tareas.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$java_in_TpCalendario.ic" NAME="java in TpCalendario Coverage Results" MODIFIED="1682378517333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TpCalendario$CalendarioTest.ic" NAME="CalendarioTest Coverage Results" MODIFIED="1682218805484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Main.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$BuilderRepeticionTest.ic" NAME="BuilderRepeticionTest Coverage Results" MODIFIED="1684518548620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Main.Builders.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$InstanciaEventoTest.ic" NAME="InstanciaEventoTest Coverage Results" MODIFIED="1682218785178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Eventos.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$BuilderTareaTest.ic" NAME="BuilderTareaTest Coverage Results" MODIFIED="1684517942039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Main.Builders.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionDiariaTest.ic" NAME="RepeticionDiariaTest Coverage Results" MODIFIED="1682190976190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Repeticiones.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/workspace_xml$Eventos_in_TpCalendario.ic" NAME="Eventos in TpCalendario Coverage Results" MODIFIED="1683946502177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$All_in_TpCalendario.ic" NAME="All in TpCalendario Coverage Results" MODIFIED="1683955754365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/workspace_xml$Calendario_in_TpCalendario__1_.ic" NAME="Calendario in TpCalendario (1) Coverage Results" MODIFIED="1685148421368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Duracion_in_TpCalendario.ic" NAME="Calendario.Duracion in TpCalendario Coverage Results" MODIFIED="1682114557288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Duracion.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$RepeticionMensualTest.ic" NAME="RepeticionMensualTest Coverage Results" MODIFIED="1682191043256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.Repeticiones.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_in_TpCalendario.ic" NAME="Calendario in TpCalendario Coverage Results" MODIFIED="1682300667781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Calendario.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/workspace_xml$BuilderAlarmaEventoTest.ic" NAME="BuilderAlarmaEventoTest Coverage Results" MODIFIED="1684517053257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Calendario.Main.Builders.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$CalendarioTest.ic" NAME="CalendarioTest Coverage Results" MODIFIED="1684241454634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Main.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$java_in_TpCalendario.ic" NAME="java in TpCalendario Coverage Results" MODIFIED="1682378517333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TpCalendario$TareaTest_TestEsDiaCompleto.ic" NAME="TareaTest.TestEsDiaCompleto Coverage Results" MODIFIED="1682218679820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Tareas.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TpCalendario$Calendario_Eventos_in_TpCalendario.ic" NAME="Calendario.Eventos in TpCalendario Coverage Results" MODIFIED="1682219113282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Calendario.Eventos.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/workspace_xml$Repeticiones_in_TpCalendario.ic" NAME="Repeticiones in TpCalendario Coverage Results" MODIFIED="1683984009408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
