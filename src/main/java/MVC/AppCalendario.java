@@ -18,7 +18,7 @@ public class AppCalendario extends Application {
         Calendario calendario = new Calendario();
         Vista vista = new Vista(calendario, stage);
         Controlador controlador = new Controlador(calendario, vista);
-        //controlador.start();
+        controlador.start();
     }
 
     public static void main(String[] args) {
