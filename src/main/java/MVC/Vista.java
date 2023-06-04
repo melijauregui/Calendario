@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,21 +21,25 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import java.time.LocalDate;
 
 
 public class Vista {
     private Calendario calendario;
     private Stage stage;
     private Scene scene;
-    private ChoiceBox<String> choiceDia = crearChoiceBox();
-    private ChoiceBox<String> choiceSemana = crearChoiceBox();
-    private ChoiceBox<String> choiceMes = crearChoiceBox();
+    private Label diaActual;
+    private ChoiceBox<String> choiceFrecuencia = crearChoiceBox();
+    //private ChoiceBox<String> choiceDia = crearChoiceBox();
+    //private ChoiceBox<String> choiceSemana = crearChoiceBox();
+    //private ChoiceBox<String> choiceMes = crearChoiceBox();
+    private AnchorPane paneGeneral = new AnchorPane();
     private AnchorPane actualFondo;
+    private String frecuencia;
 
-    private AnchorPane semanaFondo = new AnchorPane();
-    private AnchorPane diaFondo = new AnchorPane();
-    private AnchorPane mesFondo = new AnchorPane();
+    //private AnchorPane semanaFondo = new AnchorPane();
+    //private AnchorPane diaFondo = new AnchorPane();
+    //private AnchorPane mesFondo = new AnchorPane();
 
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
@@ -52,9 +57,14 @@ public class Vista {
     }
 
     private void initialize(){
-        diaFondo.getChildren().add(choiceDia);
+        /*diaFondo.getChildren().add(choiceDia);
         semanaFondo.getChildren().add(choiceSemana);
-        mesFondo.getChildren().add(choiceMes);
+        mesFondo.getChildren().add(choiceMes);*/
+
+        paneGeneral.getChildren().add(choiceFrecuencia);
+
+        diaActual = new Label(LocalDate.now().toString());
+        //diaActual.
     }
     private ChoiceBox crearChoiceBox(){
         ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia","Semana", "Mes"));
@@ -65,8 +75,14 @@ public class Vista {
         box.setCursor(Cursor.HAND);
         return box;
     }
+    public void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler) {
+        choiceFrecuencia.setOnAction(eventHandler);
+    }
+    public String getEscuchaFrecuencia() {
+        return choiceFrecuencia.getValue();
+    }
 
-
+    /*
     public void registrarEscuchaMes(EventHandler<ActionEvent> eventHandler) {
         choiceMes.setOnAction(eventHandler);
     }
@@ -77,7 +93,6 @@ public class Vista {
         choiceSemana.setOnAction(eventHandler);
     }
 
-
     public String getEscuchaMes() {
         return choiceMes.getValue();
     }
@@ -86,7 +101,7 @@ public class Vista {
     }
     public String getEscuchaSemana() {
         return choiceSemana.getValue();
-    }
+    }*/
 
     public void tipoRango(String opcion) {
         if (opcion.equals("Semana")) {
@@ -98,26 +113,28 @@ public class Vista {
         }
     }
 
-    public void setearPane(Pane pane, String ruta){
+    private void setearPane(String ruta){
         AnchorPane rootPane = new AnchorPane();
         setearFondo(rootPane, ruta);
-        rootPane.getChildren().addAll(pane);
+        rootPane.getChildren().addAll(paneGeneral);
         actualFondo = rootPane;
         this.scene = new Scene(rootPane);
         stage.setScene(scene);
     }
 
-    public void setearDia(){
-        setearPane(diaFondo, "file:src/main/java/MVC/imagenes/diario.png");
+    private void setearDia(){
+        setearPane("file:src/main/java/MVC/imagenes/diario.png");
+        frecuencia = "Dia";
 
     }
-    public void setearMes(){
-        setearPane(mesFondo, "file:src/main/java/MVC/imagenes/mensual.png");
+    private void setearMes(){
+        setearPane("file:src/main/java/MVC/imagenes/mensual.png");
+        frecuencia = "Mes";
     }
-    public void setearSemana(){
-        setearPane(semanaFondo, "file:src/main/java/MVC/imagenes/semanal.png");
+    private void setearSemana(){
+        setearPane("file:src/main/java/MVC/imagenes/semanal.png");
+        frecuencia = "Semana";
     }
-
 
     private void setearFondo(AnchorPane pane, String ruta) {
         ImageView imageView = new ImageView(new Image(ruta));
@@ -125,5 +142,7 @@ public class Vista {
         imageView.fitHeightProperty().bind(pane.heightProperty());
         pane.getChildren().add(imageView);
     }
+
+
 
 }
