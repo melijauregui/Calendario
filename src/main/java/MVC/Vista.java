@@ -27,8 +27,9 @@ public class Vista {
     private AnchorPane paneGeneral = new AnchorPane();
     private AnchorPane actualFondo;
     private String frecuencia;
-    private Button siguiente = crearButton(">", 780 , 20);
-    private Button anterior = crearButton("<",730, 20);
+    private Button siguiente = crearButtonAntSig(">", 780 , 20);
+    private Button anterior = crearButtonAntSig("<",730, 20);
+    private ChoiceBox<String> crearActividad = crearChoiceBoxCrearActividad();
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -42,22 +43,20 @@ public class Vista {
     }
 
     private void initialize(){
-        paneGeneral.getChildren().add(choiceFrecuencia);
-        paneGeneral.getChildren().add(siguiente);
-        paneGeneral.getChildren().add(anterior);
+        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, crearActividad);
         diaActual = LocalDate.now();
 
     }
     private ChoiceBox crearChoiceBox(){
         ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia","Semana", "Mes"));
         box.setStyle("-fx-background-color: white; -fx-border-color: black;");
-        box.setLayoutX(700.0);
+        box.setLayoutX(715.0);
         box.setLayoutY(50.0);
-        box.setPrefWidth(150.0);
+        box.setPrefWidth(100.0);
         box.setCursor(Cursor.HAND);
         return box;
     }
-    private Button crearButton(String text, float x, float y){
+    private Button crearButtonAntSig(String text, float x, float y){
         Button button = new Button(text);
         button.setStyle("-fx-background-color: white; -fx-border-color: black;");
         button.setLayoutX(x);
@@ -65,6 +64,17 @@ public class Vista {
         button.setShape(new javafx.scene.shape.Circle(50));
         button.setCursor(Cursor.HAND);
         return button;
+    }
+
+    public ChoiceBox<String> crearChoiceBoxCrearActividad(){
+        ChoiceBox<String> crearBox = new ChoiceBox<>(FXCollections.observableArrayList("Tarea", "Evento"));
+        crearBox.setStyle("-fx-background-color: white; -fx-border-color: black;");
+        crearBox.setLayoutX(620);
+        crearBox.setLayoutY(50);
+        crearBox.setPrefWidth(80);
+        crearBox.setValue("Crear");
+        crearBox.setCursor(Cursor.HAND);
+        return crearBox;
     }
 
     public void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler) {
