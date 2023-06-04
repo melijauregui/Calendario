@@ -114,6 +114,22 @@ public class Vista {
     }
 
     private void setearFechasSemana(){
+        var diaActualSemana = diaActual.getDayOfWeek();
+        LocalDate primerDia = diaActual;
+        while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY){
+            primerDia = primerDia.minusDays(1);
+        }
+        int columna = 0;
+        double x = 109;
+        double y = 140;
+        do {
+            Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
+            fecha.setLayoutX(x+111*columna);
+            actualFondo.getChildren().add(fecha);
+            fecha.setLayoutY(y);
+            primerDia = primerDia.plusDays(1);
+            columna++;
+        } while(primerDia.getDayOfWeek() != DayOfWeek.MONDAY);
 
     }
     private void setearFechasMes(){
