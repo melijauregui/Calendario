@@ -34,13 +34,10 @@ public class Vista {
         this.calendario = calendario;
         this.stage = stage;
         initialize();
-
         stage.setWidth(900);
         stage.setHeight(600);
         stage.setResizable(false);
-
-
-        setearMes();
+        setearSemana();
         stage.show();
     }
 
@@ -100,17 +97,20 @@ public class Vista {
         setearPane("file:src/main/java/MVC/imagenes/diario.png");
         frecuencia = "Dia";
         setearFechas();
+        choiceFrecuencia.setValue(frecuencia);
 
     }
     private void setearMes(){
         setearPane("file:src/main/java/MVC/imagenes/mensual.png");
         frecuencia = "Mes";
         setearFechas();
+        choiceFrecuencia.setValue(frecuencia);
     }
     private void setearSemana(){
         setearPane("file:src/main/java/MVC/imagenes/semanal.png");
         frecuencia = "Semana";
         setearFechas();
+        choiceFrecuencia.setValue(frecuencia);
     }
 
     private void setearFondo(AnchorPane pane, String ruta) {

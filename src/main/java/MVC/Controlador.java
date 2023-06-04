@@ -15,12 +15,7 @@ public class Controlador  {
     }
     public void start(){
 
-        vista.registrarEscuchaFrecuencia(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                vista.tipoRango(vista.getEscuchaFrecuencia());
-            }
-        });
+        vista.registrarEscuchaFrecuencia(actionEvent -> {vista.tipoRango(vista.getEscuchaFrecuencia());});
 
     }
 
