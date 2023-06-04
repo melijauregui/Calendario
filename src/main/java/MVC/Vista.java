@@ -4,7 +4,10 @@ import Calendario.Main.Calendario;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Button;
@@ -12,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -30,7 +34,9 @@ public class Vista {
     private String frecuencia;
     private Button siguiente = crearButtonAntSig(">", 780 , 20);
     private Button anterior = crearButtonAntSig("<",730, 20);
-    private ChoiceBox<String> crearActividad = crearChoiceBoxCrearActividad();
+    private ChoiceBox<String> choiceCrearActividad = crearChoiceBoxCrearActividad();
+    @FXML
+    private Button botonGuardarTarea;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -44,7 +50,7 @@ public class Vista {
     }
 
     private void initialize(){
-        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, crearActividad);
+        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, choiceCrearActividad);
         diaActual = LocalDate.now();
 
     }
@@ -84,21 +90,17 @@ public class Vista {
 
 
     private void setDiaPlusActual(){
-        if (frecuencia == "Dia"){
-            diaActual = diaActual.plusDays(1);
-        }else if (frecuencia == "Semana"){
-            diaActual = diaActual.plusDays(7);
-        }if (frecuencia == "Mes"){
-            diaActual = diaActual.plusMonths(1);
+        switch(frecuencia){
+            case "Dia" -> diaActual = diaActual.plusDays(1);
+            case "Semana" -> diaActual = diaActual.plusDays(7);
+            case "Mes" -> diaActual = diaActual.plusMonths(1);
         }
     }
     private void setDiaMinusActual(){
-        if (frecuencia == "Dia"){
-            diaActual = diaActual.minusDays(1);
-        }else if (frecuencia == "Semana"){
-            diaActual = diaActual.minusDays(7);
-        }if (frecuencia == "Mes"){
-            diaActual = diaActual.minusMonths(1);
+        switch(frecuencia){
+            case "Dia" -> diaActual = diaActual.minusDays(1);
+            case "Semana" -> diaActual = diaActual.minusDays(7);
+            case "Mes" -> diaActual = diaActual.minusMonths(1);
         }
     }
     public ChoiceBox<String> crearChoiceBoxCrearActividad(){
@@ -120,12 +122,10 @@ public class Vista {
     }
 
     public void tipoRango(String opcion) {
-        if (opcion.equals("Semana")) {
-            setearSemana();
-        } else if (opcion.equals("Dia")) {
-            setearDia();
-        } else if (opcion.equals("Mes")) {
-            setearMes();
+        switch (opcion){
+            case "Semana" -> setearSemana();
+            case "Dia" -> setearDia();
+            case "Mes" -> setearMes();
         }
     }
 
@@ -171,10 +171,9 @@ public class Vista {
     }
 
     private void setearFechas(){
-        if (frecuencia == "Semana"){
-            setearFechasSemana();
-        }else if (frecuencia == "Mes"){
-            setearFechasMes();
+        switch (frecuencia){
+            case "Semana" -> setearFechasSemana();
+            case "Mes" -> setearFechasMes();
         }
     }
 
@@ -220,6 +219,53 @@ public class Vista {
                 columna++;
             }
         }
+    }
+
+    public void registrarEscuchaCrear(EventHandler<ActionEvent> eventHandler) {
+        choiceCrearActividad.setOnAction(eventHandler);
+    }
+    public String getEscuchaCrear() {
+        return choiceCrearActividad.getValue();
+    }
+
+    public void crearActividad(String actividad)throws Exception{
+        choiceCrearActividad.setValue("Crear");
+
+        switch (actividad){
+            case "Tarea"-> crearTarea();
+            case "Evento" -> crearEvento();
+        }
+
+    }
+
+    private void crearTarea() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearTarea.fxml"));
+        loader.setController(this);
+        Parent ventana = loader.load();
+        Scene sceneNueva = new Scene(ventana);
+        Stage stageNuevo = new Stage();
+        stageNuevo.setResizable(false);
+        stageNuevo.initModality(Modality.APPLICATION_MODAL);
+        stageNuevo.setScene(sceneNueva);
+        stageNuevo.showAndWait();
+
+        //
+    }
+
+    private void crearEvento(){
+
+    }
+
+    public void registrarEscuchaGuardarTarea(EventHandler<ActionEvent> eventHandler) {
+        botonGuardarTarea.setOnAction(eventHandler);
+    }
+    //public String getEscuchaGuardarTarea() {
+    //    return botonGuardarTarea
+    //}
+
+    public void guardarTarea(){
+        tipoRango(frecuencia);
+        choiceCrearActividad.setDisable(false);
     }
 
 

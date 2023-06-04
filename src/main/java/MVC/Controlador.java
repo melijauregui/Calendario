@@ -17,6 +17,14 @@ public class Controlador  {
         vista.registrarEscuchaFrecuencia(actionEvent -> {vista.tipoRango(vista.getEscuchaFrecuencia());});
         vista.registrarEscuchaSiguiente(actionEvent -> {vista.getEscuchaSiguiente();});
         vista.registrarEscuchaAnterior(actionEvent -> {vista.getEscuchaAnterior();});
+        vista.registrarEscuchaCrear(actionEvent -> {
+            try {
+                vista.crearActividad(vista.getEscuchaCrear());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 
 }
