@@ -27,8 +27,8 @@ public class Vista {
     private AnchorPane paneGeneral = new AnchorPane();
     private AnchorPane actualFondo;
     private String frecuencia;
-    private Button siguiente = crearButton("Siguiente", 550 , 50);
-    private Button anterior = crearButton("Anterior",340 , 50);
+    private Button siguiente = crearButton(">", 780 , 20);
+    private Button anterior = crearButton("<",730, 20);
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -62,7 +62,7 @@ public class Vista {
         button.setStyle("-fx-background-color: white; -fx-border-color: black;");
         button.setLayoutX(x);
         button.setLayoutY(y);
-        button.setPrefWidth(95.0);
+        button.setShape(new javafx.scene.shape.Circle(50));
         button.setCursor(Cursor.HAND);
         return button;
     }

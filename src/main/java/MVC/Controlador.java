@@ -14,7 +14,6 @@ public class Controlador  {
         this.vista = vista;
     }
     public void start(){
-
         vista.registrarEscuchaFrecuencia(actionEvent -> {vista.tipoRango(vista.getEscuchaFrecuencia());});
 
     }
