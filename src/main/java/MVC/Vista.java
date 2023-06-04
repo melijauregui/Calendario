@@ -135,7 +135,8 @@ public class Vista {
         rootPane.getChildren().addAll(paneGeneral);
         dia = new Label(diaActual.toString());
         dia.setLayoutX(500);
-        dia.setLayoutY(500);
+        dia.setLayoutY(50);
+        dia.setStyle("-fx-font-size: 16px;");
         rootPane.getChildren().add(dia);
         actualFondo = rootPane;
         this.scene = new Scene(rootPane);
