@@ -14,12 +14,26 @@ public class Controlador  {
         this.vista = vista;
     }
     public void start(){
-        vista.registrarEscuchaRango(new EventHandler<ActionEvent>() {
+
+        vista.registrarEscuchaMes(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                vista.tipoRango();
+                vista.tipoRango(vista.getEscuchaMes());
             }
         });
+        vista.registrarEscuchaSemana(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                vista.tipoRango(vista.getEscuchaSemana());
+            }
+        });
+        vista.registrarEscuchaDia(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                vista.tipoRango(vista.getEscuchaDia());
+            }
+        });
+
     }
 
 }
