@@ -26,6 +26,7 @@ public class Vista {
     private ChoiceBox<String> choiceFrecuencia = crearChoiceBox();
     private AnchorPane paneGeneral = new AnchorPane();
     private AnchorPane actualFondo;
+    private Label dia;
     private String frecuencia;
     private Button siguiente = crearButton(">", 780 , 20);
     private Button anterior = crearButton("<",730, 20);
@@ -67,6 +68,40 @@ public class Vista {
         return button;
     }
 
+    public void registrarEscuchaSiguiente(EventHandler<ActionEvent> eventHandler) {
+        siguiente.setOnAction(eventHandler);
+    }
+    public void getEscuchaSiguiente() {
+        setDiaPlusActual();
+        tipoRango(frecuencia);
+    }
+    public void registrarEscuchaAnterior(EventHandler<ActionEvent> eventHandler) {
+        anterior.setOnAction(eventHandler);
+    }
+    public void getEscuchaAnterior() {
+        setDiaMinusActual();
+        tipoRango(frecuencia);
+    }
+
+
+    private void setDiaPlusActual(){
+        if (frecuencia == "Dia"){
+            diaActual = diaActual.plusDays(1);
+        }else if (frecuencia == "Semana"){
+            diaActual = diaActual.plusDays(7);
+        }if (frecuencia == "Mes"){
+            diaActual = diaActual.plusMonths(1);
+        }
+    }
+    private void setDiaMinusActual(){
+        if (frecuencia == "Dia"){
+            diaActual = diaActual.minusDays(1);
+        }else if (frecuencia == "Semana"){
+            diaActual = diaActual.minusDays(7);
+        }if (frecuencia == "Mes"){
+            diaActual = diaActual.minusMonths(1);
+        }
+    }
     public void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler) {
         choiceFrecuencia.setOnAction(eventHandler);
     }
@@ -88,6 +123,10 @@ public class Vista {
         AnchorPane rootPane = new AnchorPane();
         setearFondo(rootPane, ruta);
         rootPane.getChildren().addAll(paneGeneral);
+        dia = new Label(diaActual.toString());
+        dia.setLayoutX(500);
+        dia.setLayoutY(500);
+        rootPane.getChildren().add(dia);
         actualFondo = rootPane;
         this.scene = new Scene(rootPane);
         stage.setScene(scene);
@@ -160,7 +199,7 @@ public class Vista {
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
             fecha.setLayoutX(x+105.5*columna);
-            fecha.setLayoutY(y+57*fila);
+            fecha.setLayoutY(y+47*fila);
             actualFondo.getChildren().add(fecha);
             primerDia = primerDia.plusDays(1);
             if (columna == 6){
