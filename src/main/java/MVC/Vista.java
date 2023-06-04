@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,6 +27,8 @@ public class Vista {
     private AnchorPane paneGeneral = new AnchorPane();
     private AnchorPane actualFondo;
     private String frecuencia;
+    private Button siguiente = crearButton("Siguiente", 550 , 50);
+    private Button anterior = crearButton("Anterior",340 , 50);
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -43,18 +46,30 @@ public class Vista {
 
     private void initialize(){
         paneGeneral.getChildren().add(choiceFrecuencia);
-
+        paneGeneral.getChildren().add(siguiente);
+        paneGeneral.getChildren().add(anterior);
         diaActual = LocalDate.now();
+
     }
     private ChoiceBox crearChoiceBox(){
         ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia","Semana", "Mes"));
         box.setStyle("-fx-background-color: white; -fx-border-color: black;");
         box.setLayoutX(700.0);
-        box.setLayoutY(31.0);
+        box.setLayoutY(50.0);
         box.setPrefWidth(150.0);
         box.setCursor(Cursor.HAND);
         return box;
     }
+    private Button crearButton(String text, float x, float y){
+        Button button = new Button(text);
+        button.setStyle("-fx-background-color: white; -fx-border-color: black;");
+        button.setLayoutX(x);
+        button.setLayoutY(y);
+        button.setPrefWidth(95.0);
+        button.setCursor(Cursor.HAND);
+        return button;
+    }
+
     public void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler) {
         choiceFrecuencia.setOnAction(eventHandler);
     }
@@ -156,4 +171,7 @@ public class Vista {
             }
         }
     }
+
+
+
 }
