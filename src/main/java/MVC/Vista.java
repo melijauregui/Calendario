@@ -28,8 +28,9 @@ public class Vista {
     private AnchorPane actualFondo;
     private Label dia;
     private String frecuencia;
-    private Button siguiente = crearButton(">", 780 , 20);
-    private Button anterior = crearButton("<",730, 20);
+    private Button siguiente = crearButtonAntSig(">", 780 , 20);
+    private Button anterior = crearButtonAntSig("<",730, 20);
+    private ChoiceBox<String> crearActividad = crearChoiceBoxCrearActividad();
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -43,22 +44,20 @@ public class Vista {
     }
 
     private void initialize(){
-        paneGeneral.getChildren().add(choiceFrecuencia);
-        paneGeneral.getChildren().add(siguiente);
-        paneGeneral.getChildren().add(anterior);
+        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, crearActividad);
         diaActual = LocalDate.now();
 
     }
     private ChoiceBox crearChoiceBox(){
         ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia","Semana", "Mes"));
         box.setStyle("-fx-background-color: white; -fx-border-color: black;");
-        box.setLayoutX(700.0);
+        box.setLayoutX(715.0);
         box.setLayoutY(50.0);
-        box.setPrefWidth(150.0);
+        box.setPrefWidth(100.0);
         box.setCursor(Cursor.HAND);
         return box;
     }
-    private Button crearButton(String text, float x, float y){
+    private Button crearButtonAntSig(String text, float x, float y){
         Button button = new Button(text);
         button.setStyle("-fx-background-color: white; -fx-border-color: black;");
         button.setLayoutX(x);
@@ -102,6 +101,17 @@ public class Vista {
             diaActual = diaActual.minusMonths(1);
         }
     }
+    public ChoiceBox<String> crearChoiceBoxCrearActividad(){
+        ChoiceBox<String> crearBox = new ChoiceBox<>(FXCollections.observableArrayList("Tarea", "Evento"));
+        crearBox.setStyle("-fx-background-color: white; -fx-border-color: black;");
+        crearBox.setLayoutX(620);
+        crearBox.setLayoutY(50);
+        crearBox.setPrefWidth(80);
+        crearBox.setValue("Crear");
+        crearBox.setCursor(Cursor.HAND);
+        return crearBox;
+    }
+
     public void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler) {
         choiceFrecuencia.setOnAction(eventHandler);
     }
@@ -199,7 +209,7 @@ public class Vista {
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
             fecha.setLayoutX(x+105.5*columna);
-            fecha.setLayoutY(y+47*fila);
+            fecha.setLayoutY(y+57*fila);
             actualFondo.getChildren().add(fecha);
             primerDia = primerDia.plusDays(1);
             if (columna == 6){
