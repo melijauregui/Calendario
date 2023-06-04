@@ -98,29 +98,24 @@ public class Vista {
         }
     }
 
-    public void setearDia(){
+    public void setearPane(Pane pane, String ruta){
         AnchorPane rootPane = new AnchorPane();
-        setearFondo(rootPane, "file:src/main/java/MVC/imagenes/diario.png");
-        rootPane.getChildren().addAll(diaFondo);
+        setearFondo(rootPane, ruta);
+        rootPane.getChildren().addAll(pane);
         actualFondo = rootPane;
         this.scene = new Scene(rootPane);
         stage.setScene(scene);
+    }
+
+    public void setearDia(){
+        setearPane(diaFondo, "file:src/main/java/MVC/imagenes/diario.png");
+
     }
     public void setearMes(){
-        AnchorPane rootPane = new AnchorPane();
-        setearFondo(rootPane, "file:src/main/java/MVC/imagenes/mensual.png");
-        rootPane.getChildren().addAll(mesFondo);
-        actualFondo = rootPane;
-        this.scene = new Scene(rootPane);
-        stage.setScene(scene);
+        setearPane(mesFondo, "file:src/main/java/MVC/imagenes/mensual.png");
     }
     public void setearSemana(){
-        AnchorPane rootPane = new AnchorPane();
-        setearFondo(rootPane, "file:src/main/java/MVC/imagenes/semanal.png");
-        rootPane.getChildren().addAll(semanaFondo);
-        actualFondo = rootPane;
-        this.scene = new Scene(rootPane);
-        stage.setScene(scene);
+        setearPane(semanaFondo, "file:src/main/java/MVC/imagenes/semanal.png");
     }
 
 
