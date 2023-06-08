@@ -9,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,7 +32,9 @@ public class Vista {
     private String frecuencia;
     private Button siguiente = crearButtonAntSig(">", 780 , 20);
     private Button anterior = crearButtonAntSig("<",730, 20);
-    private ChoiceBox<String> choiceCrearActividad = crearChoiceBoxCrearActividad();
+    private MenuButton menuCrearActividad = menuCrearActividad();
+    private MenuItem itemCrearTarea;
+    private MenuItem itemCrearEvento;
     @FXML
     private Button botonGuardarTarea;
 
@@ -50,7 +50,7 @@ public class Vista {
     }
 
     private void initialize(){
-        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, choiceCrearActividad);
+        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, menuCrearActividad);
         diaActual = LocalDate.now();
 
     }
@@ -103,13 +103,15 @@ public class Vista {
             case "Mes" -> diaActual = diaActual.minusMonths(1);
         }
     }
-    public ChoiceBox<String> crearChoiceBoxCrearActividad(){
-        ChoiceBox<String> crearBox = new ChoiceBox<>(FXCollections.observableArrayList("Tarea", "Evento"));
+    public MenuButton menuCrearActividad(){
+        MenuButton crearBox = new MenuButton("Crear");
+        itemCrearTarea = new MenuItem("Tarea");
+        itemCrearEvento = new MenuItem("Evento");
+        crearBox.getItems().addAll(itemCrearTarea, itemCrearEvento);
         crearBox.setStyle("-fx-background-color: white; -fx-border-color: black;");
         crearBox.setLayoutX(620);
         crearBox.setLayoutY(50);
         crearBox.setPrefWidth(80);
-        crearBox.setValue("Crear");
         crearBox.setCursor(Cursor.HAND);
         return crearBox;
     }
@@ -221,24 +223,11 @@ public class Vista {
         }
     }
 
-    public void registrarEscuchaCrear(EventHandler<ActionEvent> eventHandler) {
-        choiceCrearActividad.setOnAction(eventHandler);
-    }
-    public String getEscuchaCrear() {
-        return choiceCrearActividad.getValue();
+    public void registrarEscuchaCrearTarea(EventHandler<ActionEvent> eventHandler) {
+        itemCrearTarea.setOnAction(eventHandler);
     }
 
-    public void crearActividad(String actividad)throws Exception{
-        choiceCrearActividad.setValue("Crear");
-
-        switch (actividad){
-            case "Tarea"-> crearTarea();
-            case "Evento" -> crearEvento();
-        }
-
-    }
-
-    private void crearTarea() throws IOException {
+    public void abrirVentanaCrearTarea() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearTarea.fxml"));
         loader.setController(this);
         Parent ventana = loader.load();
@@ -249,10 +238,10 @@ public class Vista {
         stageNuevo.setScene(sceneNueva);
         stageNuevo.showAndWait();
 
-        //
+
     }
 
-    private void crearEvento(){
+    private void abrirVentanaCrearEvento(){
 
     }
 
@@ -263,11 +252,11 @@ public class Vista {
     //    return botonGuardarTarea
     //}
 
-    public void guardarTarea(){
+    /*public void guardarTarea(){
         tipoRango(frecuencia);
         choiceCrearActividad.setDisable(false);
     }
-
+*/
 
 
 }
