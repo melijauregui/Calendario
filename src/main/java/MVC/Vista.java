@@ -35,8 +35,7 @@ public class Vista {
     private MenuButton menuCrearActividad = menuCrearActividad();
     private MenuItem itemCrearTarea;
     private MenuItem itemCrearEvento;
-    @FXML
-    private Button botonGuardarTarea;
+    private VistaVentanaCrearTarea vistaVentanaCrearTarea;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -228,14 +227,8 @@ public class Vista {
     }
 
     public void abrirVentanaCrearTarea() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearTarea.fxml"));
-        loader.setController(this);
-        Parent ventana = loader.load();
-        Scene sceneNueva = new Scene(ventana);
         Stage stageNuevo = new Stage();
-        stageNuevo.setResizable(false);
-        stageNuevo.initModality(Modality.APPLICATION_MODAL);
-        stageNuevo.setScene(sceneNueva);
+        vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
         stageNuevo.showAndWait();
 
 
@@ -245,9 +238,7 @@ public class Vista {
 
     }
 
-    public void registrarEscuchaGuardarTarea(EventHandler<ActionEvent> eventHandler) {
-        botonGuardarTarea.setOnAction(eventHandler);
-    }
+
     //public String getEscuchaGuardarTarea() {
     //    return botonGuardarTarea
     //}
