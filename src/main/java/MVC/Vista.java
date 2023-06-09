@@ -231,7 +231,6 @@ public class Vista {
         vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
         stageNuevo.showAndWait();
 
-
     }
 
     private void abrirVentanaCrearEvento(){
