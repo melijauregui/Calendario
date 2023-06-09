@@ -230,7 +230,7 @@ public class Vista {
     public void abrirVentanaCrearTarea() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
-        getEscuchaCrearAlarma();
+        getEscuchaCrearAlarmaTarea();
         stageNuevo.showAndWait();
 
     }
@@ -242,11 +242,11 @@ public class Vista {
     public void abrirVentanaCrearEvento() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearEvento = new VistaVentanaCrearEvento(stageNuevo);
-        //getEscuchaCrearAlarma();
+        getEscuchaCrearAlarmaEvento();
         stageNuevo.showAndWait();
 
     }
-    public void getEscuchaCrearAlarma(){
+    public void getEscuchaCrearAlarmaTarea(){
         vistaVentanaCrearTarea.registrarEscuchaCrearAlarma(actionEvent -> {
             try {
                 vistaVentanaCrearTarea.abrirVentanaCrearAlarma();
@@ -256,6 +256,16 @@ public class Vista {
         });
     }
 
+    // crear interfaz común de las vistas de crear E y T para no repetir código
+    public void getEscuchaCrearAlarmaEvento(){
+        vistaVentanaCrearEvento.registrarEscuchaCrearAlarma(actionEvent -> {
+            try {
+                vistaVentanaCrearEvento.abrirVentanaCrearAlarma();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 
     //public String getEscuchaGuardarTarea() {
     //    return botonGuardarTarea

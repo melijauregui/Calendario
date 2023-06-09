@@ -31,6 +31,8 @@ public class VistaVentanaCrearTarea {
     private ComboBox<String> hora;
     @FXML
     private ComboBox<String> minuto;
+    @FXML
+    private CheckBox checkDiaCompleto;
     private Stage stage;
     @FXML
     private Button botonGuardarTarea;

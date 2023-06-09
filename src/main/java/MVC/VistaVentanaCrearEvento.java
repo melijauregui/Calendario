@@ -49,7 +49,7 @@ public class VistaVentanaCrearEvento {
     private Label infoRepeticion;
     @FXML
     private ChoiceBox<String> choiceCrearRepeticion;
-    //private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
+    private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
     public VistaVentanaCrearEvento(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearEvento.fxml"));
         loader.setController(this);
@@ -93,7 +93,7 @@ public class VistaVentanaCrearEvento {
 
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
-        //ventanaCrearAlarmaTarea = new VentanaCrearAlarmaTarea(stageNuevo);
+        ventanaCrearAlarmaTarea = new VentanaCrearAlarmaTarea(stageNuevo);
         stageNuevo.showAndWait();
     }
 }

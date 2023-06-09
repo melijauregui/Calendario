@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -66,5 +67,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
+      <CheckBox fx:id="checkDiaCompleto" layoutX="299.0" layoutY="143.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Día completo">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </CheckBox>
    </children>
 </Pane>

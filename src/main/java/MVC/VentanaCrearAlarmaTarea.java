@@ -6,10 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,9 +16,9 @@ import java.time.LocalDateTime;
 
 public class VentanaCrearAlarmaTarea {
     @FXML
-    private ComboBox<String> aviso;
+    private ChoiceBox<String> tipoTiempoRelativo;
     @FXML
-    private ComboBox<String> tipo;
+    private ChoiceBox<String> tipoAviso;
     @FXML
     private TextField intervalo;
     private Stage stage;
@@ -41,12 +38,12 @@ public class VentanaCrearAlarmaTarea {
 
     }
     private void initialize(){
-        var tipos = FXCollections.observableArrayList("Dia", "Semana","Mes");
-        tipo.setItems(tipos);
-        tipo.setVisibleRowCount(5);
+        var tipos = FXCollections.observableArrayList("Minutos", "Horas","Días", "Semana");
+        tipoTiempoRelativo.setItems(tipos);
+        tipoTiempoRelativo.setValue(tipos.get(0));
         var avisos = FXCollections.observableArrayList("Notificación", "Mail", "Sonido");
-        aviso.setItems(avisos);
-        aviso.setVisibleRowCount(5);
+        tipoAviso.setItems(avisos);
+        tipoAviso.setValue(avisos.get(0));
     }
 
 }
