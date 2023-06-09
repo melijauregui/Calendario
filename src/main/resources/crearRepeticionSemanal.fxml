@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="tituloRepeticion" alignment="CENTER" layoutX="8.0" layoutY="24.0" prefHeight="27.0" prefWidth="325.0" text="Repetición Semanal" textAlignment="CENTER">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="53.0" layoutY="60.0" prefHeight="27.0" prefWidth="81.0" text="Intervalo" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="CENTER" layoutX="207.0" layoutY="60.0" prefHeight="27.0" prefWidth="81.0" text="Ocurrencias" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="97.0" layoutY="133.0" prefHeight="27.0" prefWidth="146.0" text="Fecha de vencimiento" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="intervalo" layoutX="38.0" layoutY="97.0" prefHeight="25.0" prefWidth="110.0" promptText="Ejemplo: 1">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <TextField fx:id="ocurrencias" layoutX="193.0" layoutY="97.0" prefHeight="25.0" prefWidth="110.0" promptText="Ejemplo: 1">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <ComboBox fx:id="diaVencimiento" layoutX="28.0" layoutY="173.0" prefHeight="39.0" prefWidth="71.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="mesVencimiento" layoutX="113.0" layoutY="173.0" prefHeight="39.0" prefWidth="127.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <TextField fx:id="anioVencimiento" layoutX="254.0" layoutY="173.0" prefHeight="39" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <Button fx:id="botonGuardarRepeticion" alignment="CENTER" contentDisplay="CENTER" layoutX="258.0" layoutY="318.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="136.0" layoutY="226.0" prefHeight="27.0" prefWidth="81.0" text="Días" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

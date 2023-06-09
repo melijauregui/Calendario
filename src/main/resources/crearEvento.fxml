@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="botonGuardarEvento" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="553.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="titulo" layoutX="84.0" layoutY="35.0" prefHeight="53.0" prefWidth="294.0" promptText="Añade un título">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <TextArea fx:id="descripcion" layoutX="12.0" layoutY="253.0" prefHeight="82.0" prefWidth="415.0" promptText="Añade una descripción">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="552.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ListView layoutX="12.0" layoutY="470.0" prefHeight="68.0" prefWidth="415.0" />
+      <Label layoutX="18.0" layoutY="473.0" prefHeight="27.0" prefWidth="171.0" text="Sin alarmas" />
+      <ComboBox fx:id="diaInicio" layoutX="13.0" layoutY="137.0" prefHeight="39.0" prefWidth="71.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="mesInicio" layoutX="92.0" layoutY="137.0" prefHeight="39.0" prefWidth="127.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <TextField fx:id="anioInicio" layoutX="226.0" layoutY="137.0" prefHeight="39" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <ComboBox fx:id="horaInicio" layoutX="288.0" layoutY="137.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="minutoInicio" layoutX="361.0" layoutY="137.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Label layoutX="14.0" layoutY="105.0" prefHeight="27.0" prefWidth="116.0" text="Inicio" textAlignment="CENTER">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="176.0" prefHeight="27.0" prefWidth="116.0" text="Fin" textAlignment="CENTER">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="diaFin" layoutX="13.0" layoutY="204.0" prefHeight="39.0" prefWidth="71.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="mesFin" layoutX="92.0" layoutY="204.0" prefHeight="39.0" prefWidth="127.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <TextField fx:id="anioFin" layoutX="227.0" layoutY="205.0" prefHeight="39" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <ComboBox fx:id="horaFin" layoutX="288.0" layoutY="205.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="minutoFin" layoutX="360.0" layoutY="205.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <Label layoutX="144.0" layoutY="342.0" prefHeight="27.0" prefWidth="150.0" text="Repetición" textAlignment="CENTER">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="infoRepeticion" alignment="CENTER" layoutX="13.0" layoutY="372.0" prefHeight="39.0" prefWidth="415.0" text="Sin repetición" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choiceCrearRepeticion" layoutX="144.0" layoutY="415.0" prefHeight="39.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ChoiceBox>
+   </children>
+</Pane>
