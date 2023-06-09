@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
+      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VentanaCrearAlarmaTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VentanaCrearAlarmaTarea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/imagenes/alarmaTarea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/imagenes/alarmaTarea.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/crearAlarma.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/crearAlarma.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/crearTarea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/crearTarea.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearTarea.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

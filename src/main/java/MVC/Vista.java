@@ -36,6 +36,7 @@ public class Vista {
     private MenuItem itemCrearTarea;
     private MenuItem itemCrearEvento;
     private VistaVentanaCrearTarea vistaVentanaCrearTarea;
+    private VistaVentanaCrearEvento vistaVentanaCrearEvento;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -234,7 +235,15 @@ public class Vista {
 
     }
 
-    private void abrirVentanaCrearEvento(){
+    public void registrarEscuchaCrearEvento(EventHandler<ActionEvent> eventHandler) {
+        itemCrearEvento.setOnAction(eventHandler);
+    }
+
+    public void abrirVentanaCrearEvento() throws IOException {
+        Stage stageNuevo = new Stage();
+        vistaVentanaCrearEvento = new VistaVentanaCrearEvento(stageNuevo);
+        //getEscuchaCrearAlarma();
+        stageNuevo.showAndWait();
 
     }
     public void getEscuchaCrearAlarma(){

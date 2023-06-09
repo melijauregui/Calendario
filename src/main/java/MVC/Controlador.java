@@ -24,6 +24,14 @@ public class Controlador  {
                 throw new RuntimeException(e);
             }
         });
+
+        vista.registrarEscuchaCrearEvento(actionEvent -> {
+            try {
+                vista.abrirVentanaCrearEvento();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
         //vista.getEscuchaCrearAlarma();
 
     }
