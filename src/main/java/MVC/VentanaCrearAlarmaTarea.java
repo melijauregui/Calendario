@@ -6,10 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,6 +22,8 @@ public class VentanaCrearAlarmaTarea {
     @FXML
     private TextField intervalo;
     private Stage stage;
+    @FXML
+    private CheckBox tiempoRelativo;
     @FXML
     private Button botonGuardarAlarma;
     private LocalDateTime fechaActual = LocalDateTime.now();
@@ -48,5 +47,20 @@ public class VentanaCrearAlarmaTarea {
         aviso.setItems(avisos);
         aviso.setVisibleRowCount(5);
     }
+    public void registrarEscuchaTiempoRelativo(EventHandler<ActionEvent> eventHandler) {
+        tiempoRelativo.setOnAction(eventHandler);
+    }
+
+    public void getEscuchaTiempoRelativo() {
+        registrarEscuchaTiempoRelativo(actionEvent -> {
+            if (tiempoRelativo.isSelected()) {
+                tipo.setDisable(false);
+                intervalo.setDisable(false);
+            } else {
+                tipo.setDisable(true);
+                intervalo.setDisable(true);
+            }});
+    }
 
 }
+

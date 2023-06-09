@@ -76,6 +76,7 @@ public class VistaVentanaCrearTarea {
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
         ventanaCrearAlarmaTarea = new VentanaCrearAlarmaTarea(stageNuevo);
+        ventanaCrearAlarmaTarea.getEscuchaTiempoRelativo();
         stageNuevo.showAndWait();
     }
 
