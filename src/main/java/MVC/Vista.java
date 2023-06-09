@@ -210,7 +210,7 @@ public class Vista {
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
             fecha.setLayoutX(x+105.5*columna);
-            fecha.setLayoutY(y+57*fila);
+            fecha.setLayoutY(y+47*fila);
             actualFondo.getChildren().add(fecha);
             primerDia = primerDia.plusDays(1);
             if (columna == 6){
@@ -230,11 +230,19 @@ public class Vista {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
         stageNuevo.showAndWait();
-
     }
 
     private void abrirVentanaCrearEvento(){
 
+    }
+    public void getEscuchaCrearAlarma(){
+        vistaVentanaCrearTarea.registrarEscuchaCrearAlarma(actionEvent -> {
+            try {
+                vistaVentanaCrearTarea.abrirVentanaCrearAlarma();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 

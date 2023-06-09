@@ -34,7 +34,10 @@ public class VistaVentanaCrearTarea {
     private Stage stage;
     @FXML
     private Button botonGuardarTarea;
+    @FXML
+    private Button botonCrearAlarma;
     private LocalDateTime fechaActual = LocalDateTime.now();
+    private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
     public VistaVentanaCrearTarea(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearTarea.fxml"));
         loader.setController(this);
@@ -66,7 +69,15 @@ public class VistaVentanaCrearTarea {
         hora.setItems(horas);
 
     }
+   public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonCrearAlarma.setOnAction(eventHandler);
+    }
 
+    public void abrirVentanaCrearAlarma() throws IOException {
+        Stage stageNuevo = new Stage();
+        ventanaCrearAlarmaTarea = new VentanaCrearAlarmaTarea(stageNuevo);
+        stageNuevo.showAndWait();
+    }
 
 /*    public void registrarEscuchaGuardarTarea(EventHandler<ActionEvent> eventHandler) {
         botonGuardarTarea.setOnAction(eventHandler);

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/alarmaTarea.png);-fx-background-size: 300px 300px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Button fx:id="botonGuardarAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="280.0" layoutY="280.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ComboBox fx:id="aviso" promptText="notificacion" layoutX="30.0" layoutY="30.0" prefHeight="39.0" prefWidth="127.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ComboBox>
+        <ComboBox fx:id="tipo" promptText="Dia" layoutX="13.0" layoutY="75.0" prefHeight="39.0" prefWidth="120.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ComboBox>
+        <TextField fx:id="intervalo" layoutX="200" layoutY="75" prefHeight="39" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor>
+        </TextField>
+    </children>
+</Pane>
+
+

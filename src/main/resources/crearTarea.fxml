@@ -30,7 +30,7 @@
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
+      <Button fx:id="crearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
