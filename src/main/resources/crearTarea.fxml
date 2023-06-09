@@ -30,7 +30,7 @@
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Button fx:id="crearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
+      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -41,12 +41,12 @@
       <Label layoutX="23.0" layoutY="316.0" prefHeight="27.0" prefWidth="171.0" />
       <Label layoutX="223.0" layoutY="288.0" prefHeight="27.0" prefWidth="171.0" />
       <Label layoutX="223.0" layoutY="315.0" prefHeight="27.0" prefWidth="171.0" />
-      <ComboBox fx:id="dia" promptText="Dia" layoutX="13.0" layoutY="175.0" prefHeight="39.0" prefWidth="71.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="dia" layoutX="13.0" layoutY="175.0" prefHeight="39.0" prefWidth="71.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="mes" promptText="Mes" layoutX="92.0" layoutY="175.0" prefHeight="39.0" prefWidth="127.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="mes" layoutX="92.0" layoutY="175.0" prefHeight="39.0" prefWidth="127.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -56,12 +56,12 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="hora" promptText="00" layoutX="288.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="hora" layoutX="288.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="minuto" promptText="00" layoutX="361.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="minuto" layoutX="361.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

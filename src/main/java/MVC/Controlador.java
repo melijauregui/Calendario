@@ -24,7 +24,7 @@ public class Controlador  {
                 throw new RuntimeException(e);
             }
         });
-        vista.getEscuchaCrearAlarma();
+        //vista.getEscuchaCrearAlarma();
 
     }
 

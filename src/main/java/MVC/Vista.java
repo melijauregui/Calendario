@@ -229,7 +229,9 @@ public class Vista {
     public void abrirVentanaCrearTarea() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
+        getEscuchaCrearAlarma();
         stageNuevo.showAndWait();
+
     }
 
     private void abrirVentanaCrearEvento(){

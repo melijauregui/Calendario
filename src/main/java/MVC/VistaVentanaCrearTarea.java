@@ -69,7 +69,7 @@ public class VistaVentanaCrearTarea {
         hora.setItems(horas);
 
     }
-   public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
+    public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
         botonCrearAlarma.setOnAction(eventHandler);
     }
 
