@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class VistaVentanaCrearEvento {
+public class VistaVentanaCrearEvento implements VentanaCrear{
     @FXML
     private TextField titulo;
     @FXML
@@ -49,6 +50,7 @@ public class VistaVentanaCrearEvento {
     private Label infoRepeticion;
     @FXML
     private ChoiceBox<String> choiceCrearRepeticion;
+    private VentanaCrearAlarma ventanaCrearAlarmaTarea;
     @FXML
     private CheckBox repeticion;
     @FXML
@@ -115,7 +117,51 @@ public class VistaVentanaCrearEvento {
 
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
-        //ventanaCrearAlarmaTarea = new VentanaCrearAlarmaTarea(stageNuevo);
+        ventanaCrearAlarmaTarea = new VentanaCrearAlarma(stageNuevo);
         stageNuevo.showAndWait();
     }
+
+    @Override
+    public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
+
+    }
+
+    @Override
+    public void eliminarAlarmasSeleccionadas() {
+
+    }
+
+    @Override
+    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler) {
+
+    }
+
+    @Override
+    public void habilitarBorrarAlarma() {
+
+    }
+
+    @Override
+    public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+
+
+    }
+    public boolean esDiaCompleto(){
+        return false;
+    }
+
+    @Override
+    public void setFechaDiaCompleto() {
+
+    }
+
+    @Override
+    public void setFechaConHora() {
+
+    }
+
+    public void setMensajeErrorFecha(String mensaje){
+
+    }
+
 }

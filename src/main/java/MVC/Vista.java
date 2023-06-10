@@ -1,6 +1,9 @@
 package MVC;
 
+import Calendario.Main.Argumentos.EventoArgs;
+import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
+import Calendario.Tareas.Tarea;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,8 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Vista {
@@ -37,6 +44,12 @@ public class Vista {
     private MenuItem itemCrearEvento;
     private VistaVentanaCrearTarea vistaVentanaCrearTarea;
     private VistaVentanaCrearEvento vistaVentanaCrearEvento;
+
+    private TareaArgs argsTareaActual;
+    private EventoArgs argsEventoActual;
+    private List<List<String>> infoAlarmaActual;
+
+    private List<Tarea> tareas = new ArrayList<>();
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -230,7 +243,11 @@ public class Vista {
     public void abrirVentanaCrearTarea() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
-        getEscuchaCrearAlarma();
+        getEscuchaCrearAlarma(vistaVentanaCrearTarea);
+        getEscuchaSeleccionarAlarmas(vistaVentanaCrearTarea);
+        getEscuchaEliminarAlarmas(vistaVentanaCrearTarea);
+        getEscuchaEsDiaCompleto(vistaVentanaCrearTarea);
+        getEscuchaGuardarTarea();
         stageNuevo.showAndWait();
 
     }
@@ -242,30 +259,114 @@ public class Vista {
     public void abrirVentanaCrearEvento() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearEvento = new VistaVentanaCrearEvento(stageNuevo);
-        //getEscuchaCrearAlarma();
+        getEscuchaCrearAlarma(vistaVentanaCrearEvento);
+        getEscuchaSeleccionarAlarmas(vistaVentanaCrearEvento);
+        getEscuchaEliminarAlarmas(vistaVentanaCrearEvento);
+        getEscuchaEsDiaCompleto(vistaVentanaCrearEvento);
         stageNuevo.showAndWait();
 
     }
-    public void getEscuchaCrearAlarma(){
-        vistaVentanaCrearTarea.registrarEscuchaCrearAlarma(actionEvent -> {
+    public void getEscuchaCrearAlarma(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaCrearAlarma(actionEvent -> {
             try {
-                vistaVentanaCrearTarea.abrirVentanaCrearAlarma();
+                ventanaCrear.abrirVentanaCrearAlarma();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-
-    //public String getEscuchaGuardarTarea() {
-    //    return botonGuardarTarea
-    //}
-
-    /*public void guardarTarea(){
-        tipoRango(frecuencia);
-        choiceCrearActividad.setDisable(false);
+    public void getEscuchaEliminarAlarmas(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaEliminarAlarma(actionEvent -> ventanaCrear.eliminarAlarmasSeleccionadas());
     }
-*/
 
+    public void getEscuchaSeleccionarAlarmas(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaSeleccionarAlarma( mouseEvent -> {
+            ventanaCrear.habilitarBorrarAlarma();
+        });
+    }
 
+    public void getEscuchaEsDiaCompleto(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaSeleccionarDiaCompleto(actionEvent -> {
+            if (ventanaCrear.esDiaCompleto()){
+                ventanaCrear.setFechaDiaCompleto();
+            }else{
+                ventanaCrear.setFechaConHora();
+            }
+        });
+    }
+
+    public void getEscuchaGuardarTarea(){
+        vistaVentanaCrearTarea.registrarEscuchaGuardarTarea(actionEvent -> {
+            String titulo = vistaVentanaCrearTarea.getTitulo();
+            String descripcion = vistaVentanaCrearTarea.getDescripcion();
+            String dia = vistaVentanaCrearTarea.getDia();
+            int mes = vistaVentanaCrearTarea.getMes();
+            String anio = vistaVentanaCrearTarea.getAnio();
+            String hora = vistaVentanaCrearTarea.getHora();
+            String minuto = vistaVentanaCrearTarea.getMinuto();
+            boolean esDiaCompleto = vistaVentanaCrearTarea.esDiaCompleto();
+            List<List<String>> infoAlarmas = vistaVentanaCrearTarea.getInfoAlarmas();
+            if (esDiaCompleto){
+                if(hayErrorFechaDiaCompleto(dia, mes, anio, vistaVentanaCrearTarea)){
+                    return;
+                }
+                argsTareaActual = new TareaArgs(titulo, descripcion,
+                        LocalDate.of(Integer.parseInt(anio), mes, Integer.parseInt(dia)));
+            }else{
+                if(hayErrorFecha(dia, mes, anio, hora, minuto, vistaVentanaCrearTarea)){
+                    return;
+                }
+                argsTareaActual = new TareaArgs(titulo, descripcion,
+                        LocalDateTime.of(Integer.parseInt(anio), mes, Integer.parseInt(dia),
+                        Integer.parseInt(hora), Integer.parseInt(minuto)));
+            }
+            infoAlarmaActual = infoAlarmas;
+            vistaVentanaCrearTarea.cerrarVentana();
+        });
+    }
+
+    public TareaArgs getInfoTarea(){
+        return argsTareaActual;
+    }
+
+    public List<List<String>> getInfoAlarmaCreada(){
+        return infoAlarmaActual;
+    }
+
+    private boolean hayErrorFecha(String dia, int mes, String anio, String hora, String minuto, VentanaCrear ventanaCrear){
+        try{
+            int diaNumero = Integer.parseInt(dia);
+            int anioNumero = Integer.parseInt(anio);
+            int horaNumero = Integer.parseInt(hora);
+            int minutoNumero = Integer.parseInt(minuto);
+            LocalDateTime.of(anioNumero, mes, diaNumero, horaNumero, minutoNumero);
+            ventanaCrear.setMensajeErrorFecha("");
+            return false;
+        }catch(NumberFormatException | DateTimeException exception){
+            ventanaCrear.setMensajeErrorFecha("Fecha inválida");
+        }
+        return true;
+    }
+
+    private boolean hayErrorFechaDiaCompleto(String dia, int mes, String anio, VentanaCrear ventanaCrear){
+        try{
+            int diaNumero = Integer.parseInt(dia);
+            int anioNumero = Integer.parseInt(anio);
+            LocalDate.of(anioNumero, mes, diaNumero);
+            ventanaCrear.setMensajeErrorFecha("");
+            return false;
+        }catch(NumberFormatException | DateTimeException exception){
+            ventanaCrear.setMensajeErrorFecha("Fecha inválida");
+        }
+        return true;
+    }
+
+    public void guardarTarea(Tarea tarea){
+        this.tareas.add(tarea);
+    }
+
+    private void actualizarVistaActividades(){
+
+    }
 }
