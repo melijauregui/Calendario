@@ -137,8 +137,8 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
 
     }
 
-    @Override
-    public void registrarEscuchaDeseleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+    public void setMensajeErrorFecha(String mensaje){
 
     }
+
 }

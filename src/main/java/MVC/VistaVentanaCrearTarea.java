@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,8 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
     private Button botonEliminarAlarma;
     @FXML
     private ListView<String> listaAlarmas;
+    @FXML
+    private Label errorFecha;
     private LocalDateTime fechaActual = LocalDateTime.now();
     private VentanaCrearAlarma ventanaCrearAlarmaTarea;
 
@@ -68,14 +71,16 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
                 "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
         mes.setItems(meses);
         mes.setVisibleRowCount(5);
-        var minutos = FXCollections.observableArrayList("00","01", "02", "03","04", "05", "06", "07", "08", "09", "10", "11",
+        var minutos = FXCollections.observableArrayList("0","1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
                 "29", "30", "31","32","33", "34","35","36","37","38","39","40","41","42","43","44","45","46","47","48",
                 "49","50","51","52","53","54","55","56","57","58","59");
         minuto.setItems(minutos);
-        var horas = FXCollections.observableArrayList("00","01", "02", "03","04", "05", "06", "07", "08", "09", "10", "11",
+        minuto.setValue(minutos.get(0));
+        var horas = FXCollections.observableArrayList("0","1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
         hora.setItems(horas);
+        hora.setValue(horas.get(0));
         inicializarValorListaAlarmas();
         deshabilitarBorrarAlarma();
     }
@@ -201,8 +206,9 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
         return dia.getValue();
     }
 
-    public String getMes(){
-        return mes.getValue();
+    public int getMes(){
+        return 1 + mes.getItems().indexOf(mes.getValue());
+
     }
 
     public String getAnio(){
@@ -225,10 +231,6 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
         checkDiaCompleto.setOnAction(eventHandler);
     }
 
-    public void registrarEscuchaDeseleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
-        checkDiaCompleto.setOnAction(eventHandler);
-    }
-
     public void setFechaDiaCompleto(){
         hora.setDisable(true);
         minuto.setDisable(true);
@@ -238,6 +240,14 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
         hora.setDisable(false);
         minuto.setDisable(false);
 
+    }
+
+    public void setMensajeErrorFecha(String mensaje){
+        errorFecha.setText(mensaje);
+    }
+
+    public void cerrarVentana(){
+        stage.close();
     }
 
 

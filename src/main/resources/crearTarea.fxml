@@ -52,12 +52,12 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="hora" layoutX="288.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="hora" layoutX="288.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="minuto" layoutX="361.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="minuto" layoutX="361.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
