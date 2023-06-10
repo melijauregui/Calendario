@@ -4,5 +4,5 @@ import jdk.jfr.Event;
 import jdk.jfr.EventType;
 
 public class EventoCrearTarea extends Event {
-    //static final EventType<> tipo = new javafx.event.EventType<>()
+    //static final EventType EventoCrearTarea = new jdk.jfr.EventType<>()
 }
