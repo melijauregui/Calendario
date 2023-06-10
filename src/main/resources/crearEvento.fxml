@@ -92,31 +92,31 @@
       </ComboBox>
       <CheckBox fx:id="repeticion" layoutX="268" layoutY="331" style="-fx-background-color: white;">
       </CheckBox>
-      <ChoiceBox fx:id="frecuencia" layoutX="94.0" layoutY="368.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ChoiceBox fx:id="frecuencia" layoutX="94.0" layoutY="368.0" prefHeight="23.0" prefWidth="150.0" disable="true" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ChoiceBox>
-      <TextField fx:id="intervaloRepe" layoutX="345.0" layoutY="353.0" prefHeight="3" prefWidth="37" promptText="0" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+      <TextField fx:id="intervaloRepe" layoutX="345.0" layoutY="353.0" prefHeight="3" prefWidth="37" promptText="0" disable="true" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <CheckBox fx:id="lun" layoutX="253" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="lun"  layoutX="253" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="mar" layoutX="282" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="mar" layoutX="282" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="mie" layoutX="312" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="mie" layoutX="312" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="jue" layoutX="338" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="jue" layoutX="338" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="vie" layoutX="365" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="vie" layoutX="365" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="sab" layoutX="392" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="sab" layoutX="392" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="dom" layoutX="422" layoutY="400" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      <CheckBox fx:id="dom" layoutX="422" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
       </CheckBox>
-      <ChoiceBox fx:id="hastaRepe" layoutX="60.0" layoutY="425.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ChoiceBox fx:id="hastaRepe" layoutX="60.0" layoutY="425.0" prefHeight="23.0" prefWidth="150.0" disable="true" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

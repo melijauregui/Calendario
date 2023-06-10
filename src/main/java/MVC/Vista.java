@@ -263,6 +263,7 @@ public class Vista {
         getEscuchaSeleccionarAlarmas(vistaVentanaCrearEvento);
         getEscuchaEliminarAlarmas(vistaVentanaCrearEvento);
         getEscuchaEsDiaCompleto(vistaVentanaCrearEvento);
+        getEscuchaEventoConRepeticion();
         stageNuevo.showAndWait();
 
     }
@@ -286,7 +287,7 @@ public class Vista {
         });
     }
 
-    public void getEscuchaEsDiaCompleto(VentanaCrear ventanaCrear){
+    private void getEscuchaEsDiaCompleto(VentanaCrear ventanaCrear){
         ventanaCrear.registrarEscuchaSeleccionarDiaCompleto(actionEvent -> {
             if (ventanaCrear.esDiaCompleto()){
                 ventanaCrear.setFechaDiaCompleto();
@@ -295,6 +296,14 @@ public class Vista {
             }
         });
     }
+
+    private void getEscuchaEventoConRepeticion(){
+        vistaVentanaCrearEvento.registrarEscuchaRepeticion(actionEvent -> {
+            vistaVentanaCrearEvento.setRepeticion();
+        });
+    }
+
+
 
     public void getEscuchaGuardarTarea(){
         vistaVentanaCrearTarea.registrarEscuchaGuardarTarea(actionEvent -> {

@@ -109,8 +109,47 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
         horaInicio.setItems(horas);
         horaFin.setItems(horas);
-        //var frecuencias =
+        var frecuencias = FXCollections.observableArrayList("Diaria", "Semanal", "Mensual", "Anual");
+        frecuencia.setItems(frecuencias);
+        var hastaOpciones = FXCollections.observableArrayList("Ocurrencias", "Fecha", "Sin límite");
+        hastaRepe.setItems(hastaOpciones);
 
+    }
+    public void registrarEscuchaRepeticion(EventHandler<ActionEvent> eventHandler){
+        repeticion.setOnAction(eventHandler);
+    }
+    public void setRepeticion(){
+        boolean aux = true;
+         if (repeticion.isSelected()){
+            aux = !aux;
+        }
+        frecuencia.setDisable(aux);
+        intervaloRepe.setDisable(aux);
+        getEscuchaFrecuencia();
+        setFrecuencia();
+    }
+
+    private void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler){
+        frecuencia.setOnAction(eventHandler);
+    }
+    private void setFrecuencia(){
+        boolean aux = true;
+        if (repeticion.isSelected() && (frecuencia.getValue() == "Semanal")){
+            aux = !aux;
+        }
+        lun.setDisable(aux);
+        mar.setDisable(aux);
+        mie.setDisable(aux);
+        jue.setDisable(aux);
+        vie.setDisable(aux);
+        sab.setDisable(aux);
+        dom.setDisable(aux);
+    }
+
+    private void getEscuchaFrecuencia(){
+        registrarEscuchaFrecuencia(actionEvent -> {
+            setFrecuencia();
+        });
     }
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
         botonCrearAlarma.setOnAction(eventHandler);
