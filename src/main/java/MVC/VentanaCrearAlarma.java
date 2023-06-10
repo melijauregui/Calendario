@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class VentanaCrearAlarmaTarea {
+public class VentanaCrearAlarma {
     @FXML
     private ChoiceBox<String> tipoTiempoRelativo;
     @FXML
@@ -24,8 +24,10 @@ public class VentanaCrearAlarmaTarea {
     private Stage stage;
     @FXML
     private Button botonGuardarAlarma;
+    @FXML
+    private Label mensajeError;
     private LocalDateTime fechaActual = LocalDateTime.now();
-    public VentanaCrearAlarmaTarea(Stage stage) throws IOException {
+    public VentanaCrearAlarma(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearAlarma.fxml"));
         loader.setController(this);
         Pane ventana = loader.load();
@@ -38,7 +40,7 @@ public class VentanaCrearAlarmaTarea {
 
     }
     private void initialize(){
-        var tipos = FXCollections.observableArrayList("Minutos", "Horas","Días", "Semana");
+        var tipos = FXCollections.observableArrayList(" - ","Minutos", "Horas","Días", "Semana");
         tipoTiempoRelativo.setItems(tipos);
         tipoTiempoRelativo.setValue(tipos.get(0));
         var avisos = FXCollections.observableArrayList("Notificación", "Mail", "Sonido");
@@ -46,4 +48,27 @@ public class VentanaCrearAlarmaTarea {
         tipoAviso.setValue(avisos.get(0));
     }
 
+    public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler){
+        botonGuardarAlarma.setOnAction(eventHandler);
+    }
+
+    public void setMensajeError(String mensaje){
+        mensajeError.setText(mensaje);
+    }
+
+    public String getAviso(){
+        return tipoAviso.getValue();
+    }
+
+    public String getIntervalo(){
+        return intervalo.getText();
+    }
+
+    public String getTiempoRelativo(){
+        return tipoTiempoRelativo.getValue();
+    }
+
+    public void cerrarVentana(){
+        stage.close();
+    }
 }

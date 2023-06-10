@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +12,7 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="440.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/fondoTarea.png);-fx-background-size: 450px 550px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="botonGuardarTarea" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
+      <Button fx:id="botonGuardarTarea" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -31,17 +30,12 @@
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
+      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ListView layoutX="12.0" layoutY="354.0" prefHeight="68.0" prefWidth="415.0" />
-      <Label layoutX="23.0" layoutY="358.0" prefHeight="27.0" prefWidth="171.0" text="Sin alarmas" />
-      <Label layoutX="162.0" layoutY="315.0" prefHeight="27.0" prefWidth="212.0" />
-      <Label layoutX="23.0" layoutY="316.0" prefHeight="27.0" prefWidth="171.0" />
-      <Label layoutX="223.0" layoutY="288.0" prefHeight="27.0" prefWidth="171.0" />
-      <Label layoutX="223.0" layoutY="315.0" prefHeight="27.0" prefWidth="171.0" />
+      <ListView fx:id="listaAlarmas" layoutX="12.0" layoutY="354.0" prefHeight="68.0" prefWidth="415.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;" />
       <ComboBox fx:id="dia" layoutX="13.0" layoutY="175.0" prefHeight="39.0" prefWidth="71.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -75,5 +69,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </CheckBox>
+      <Button fx:id="botonEliminarAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Eliminar Alarma" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>

@@ -3,10 +3,11 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/alarmaTarea.png);-fx-background-size: 300px 300px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="300.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/alarmaTarea.png);-fx-background-size: 300px 300px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Button fx:id="botonGuardarAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="273.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
             <cursor>
@@ -18,7 +19,16 @@
                 <Cursor fx:constant="TEXT" />
             </cursor>
         </TextField>
-      <ChoiceBox fx:id="tipoAviso" layoutX="173.0" layoutY="111.0" prefHeight="45.0" prefWidth="111.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;" />
-      <ChoiceBox fx:id="tipoTiempoRelativo" layoutX="143.0" layoutY="213.0" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;" />
+      <ChoiceBox fx:id="tipoAviso" layoutX="173.0" layoutY="111.0" prefHeight="45.0" prefWidth="111.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ChoiceBox>
+      <ChoiceBox fx:id="tipoTiempoRelativo" layoutX="143.0" layoutY="213.0" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ChoiceBox>
+      <Label fx:id="mensajeError" layoutX="17.0" layoutY="273.0" prefHeight="27.0" prefWidth="191.0" textFill="#ff0303fa" />
     </children>
 </Pane>

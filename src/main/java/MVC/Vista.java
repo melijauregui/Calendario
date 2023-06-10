@@ -230,7 +230,9 @@ public class Vista {
     public void abrirVentanaCrearTarea() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearTarea = new VistaVentanaCrearTarea(stageNuevo);
-        getEscuchaCrearAlarmaTarea();
+        getEscuchaCrearAlarma(vistaVentanaCrearTarea);
+        getEscuchaSeleccionarAlarmas(vistaVentanaCrearTarea);
+        getEscuchaEliminarAlarmas(vistaVentanaCrearTarea);
         stageNuevo.showAndWait();
 
     }
@@ -242,28 +244,29 @@ public class Vista {
     public void abrirVentanaCrearEvento() throws IOException {
         Stage stageNuevo = new Stage();
         vistaVentanaCrearEvento = new VistaVentanaCrearEvento(stageNuevo);
-        getEscuchaCrearAlarmaEvento();
+        getEscuchaCrearAlarma(vistaVentanaCrearEvento);
+        getEscuchaSeleccionarAlarmas(vistaVentanaCrearEvento);
+        getEscuchaEliminarAlarmas(vistaVentanaCrearEvento);
         stageNuevo.showAndWait();
 
     }
-    public void getEscuchaCrearAlarmaTarea(){
-        vistaVentanaCrearTarea.registrarEscuchaCrearAlarma(actionEvent -> {
+    public void getEscuchaCrearAlarma(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaCrearAlarma(actionEvent -> {
             try {
-                vistaVentanaCrearTarea.abrirVentanaCrearAlarma();
+                ventanaCrear.abrirVentanaCrearAlarma();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-    // crear interfaz común de las vistas de crear E y T para no repetir código
-    public void getEscuchaCrearAlarmaEvento(){
-        vistaVentanaCrearEvento.registrarEscuchaCrearAlarma(actionEvent -> {
-            try {
-                vistaVentanaCrearEvento.abrirVentanaCrearAlarma();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+    public void getEscuchaEliminarAlarmas(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaEliminarAlarma(actionEvent -> ventanaCrear.eliminarAlarmasSeleccionadas());
+    }
+
+    public void getEscuchaSeleccionarAlarmas(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaSeleccionarAlarma( mouseEvent -> {
+            ventanaCrear.habilitarBorrarAlarma();
         });
     }
 
