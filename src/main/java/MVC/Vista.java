@@ -221,16 +221,16 @@ public class Vista {
     private void setListViewSemana(){
         double x = 65;
         double y = 160;
-        double width = 104;
+        double width = 102;
         double height = 255;
         LocalDate primerDia = getPrimerDia(diaActual);
-        crearListView(x, y, width+4, height, primerDia);
-        crearListView(177, y, width, height, primerDia.plusDays(1));
-        crearListView(284, y, width, height, primerDia.plusDays(2));
-        crearListView(391, y, width, height, primerDia.plusDays(3));
-        crearListView(498, y, width, height, primerDia.plusDays(4));
-        crearListView(605, y, width, height, primerDia.plusDays(5));
-        crearListView(712, y, width+10, height,primerDia.plusDays(6));
+        crearListView(x, y, width+6, height, primerDia);
+        crearListView(182, y, width, height, primerDia.plusDays(1));
+        crearListView(289, y, width, height, primerDia.plusDays(2));
+        crearListView(400, y, width, height, primerDia.plusDays(3));
+        crearListView(508, y, width, height, primerDia.plusDays(4));
+        crearListView(616, y, width, height, primerDia.plusDays(5));
+        crearListView(727, y, width+10, height,primerDia.plusDays(6));
     }
 
     private void setearFechasSemana(){
