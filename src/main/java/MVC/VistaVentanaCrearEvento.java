@@ -49,7 +49,7 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     @FXML
     private Label infoRepeticion;
     @FXML
-    private ChoiceBox<String> choiceCrearRepeticion;
+    private ChoiceBox<String> frecuencia;
     private VentanaCrearAlarma ventanaCrearAlarmaTarea;
     @FXML
     private CheckBox repeticion;
@@ -109,6 +109,7 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
         horaInicio.setItems(horas);
         horaFin.setItems(horas);
+        //var frecuencias =
 
     }
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {

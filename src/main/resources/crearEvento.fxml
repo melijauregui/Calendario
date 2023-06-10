@@ -92,7 +92,7 @@
       </ComboBox>
       <CheckBox fx:id="repeticion" layoutX="268" layoutY="331" style="-fx-background-color: white;">
       </CheckBox>
-      <ChoiceBox fx:id="choiceCrearRepeticion" layoutX="94.0" layoutY="368.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ChoiceBox fx:id="frecuencia" layoutX="94.0" layoutY="368.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
