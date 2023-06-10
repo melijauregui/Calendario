@@ -49,6 +49,28 @@ public class VistaVentanaCrearEvento {
     private Label infoRepeticion;
     @FXML
     private ChoiceBox<String> choiceCrearRepeticion;
+    @FXML
+    private CheckBox repeticion;
+    @FXML
+    private CheckBox lun;
+    @FXML
+    private CheckBox mar;
+    @FXML
+    private CheckBox mie;
+    @FXML
+    private CheckBox jue;
+    @FXML
+    private CheckBox vie;
+    @FXML
+    private CheckBox sab;
+    @FXML
+    private CheckBox dom;
+    @FXML
+    private ChoiceBox<String> hastaRepe;
+    @FXML
+    private TextField intervaloRepe;
+
+
     //private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
     public VistaVentanaCrearEvento(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearEvento.fxml"));
