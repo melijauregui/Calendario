@@ -35,7 +35,7 @@ public class Vista {
     private ChoiceBox<String> choiceFrecuencia = crearChoiceBox();
     private AnchorPane paneGeneral = new AnchorPane();
     private AnchorPane actualFondo;
-    private Label dia;
+    private Label dia = new Label();
     private String frecuencia;
     private Button siguiente = crearButtonAntSig(">", 780 , 20);
     private Button anterior = crearButtonAntSig("<",730, 20);
@@ -51,6 +51,7 @@ public class Vista {
 
     private List<Tarea> tareas = new ArrayList<>();
 
+    private AnchorPane mainLayout;
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
         this.stage = stage;
@@ -148,32 +149,56 @@ public class Vista {
         AnchorPane rootPane = new AnchorPane();
         setearFondo(rootPane, ruta);
         rootPane.getChildren().addAll(paneGeneral);
-        dia = new Label(diaActual.toString());
-        dia.setLayoutX(500);
+        //dia = new Label(diaActual.toString());
+        dia.setLayoutX(400);
         dia.setLayoutY(50);
         dia.setStyle("-fx-font-size: 16px;");
         rootPane.getChildren().add(dia);
         actualFondo = rootPane;
         this.scene = new Scene(rootPane);
         stage.setScene(scene);
+        mainLayout = rootPane;
+    }
+
+    private void setListViewDia(){
+
     }
 
     private void setearDia(){
         setearPane("file:src/main/java/MVC/imagenes/diario.png");
         frecuencia = "Dia";
-        setearFechas();
+        dia.setText(diaActual.toString());
+        setListViewDia();
         choiceFrecuencia.setValue(frecuencia);
 
     }
     private void setearMes(){
         setearPane("file:src/main/java/MVC/imagenes/mensual.png");
         frecuencia = "Mes";
+        dia.setText(diaActual.getMonth().toString());
         setearFechas();
         choiceFrecuencia.setValue(frecuencia);
     }
+
+    private void setListViewSemana(){
+        int columna = 0;
+        double x = 70;
+        double y = 160;
+        /*do {
+            ListView<String> list = new ListView<>();
+            list.setLayoutX(x+111*columna);
+            list.setLayoutY(y);
+            list.setPrefWidth(50);
+            list.setStyle("-fx-background-color: blue;");
+            actualFondo.getChildren().add(list);
+            columna++;
+        } while(columna<7);*/
+    }
+
     private void setearSemana(){
         setearPane("file:src/main/java/MVC/imagenes/semanal.png");
         frecuencia = "Semana";
+        setListViewSemana();
         setearFechas();
         choiceFrecuencia.setValue(frecuencia);
     }
@@ -198,6 +223,7 @@ public class Vista {
         while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY){
             primerDia = primerDia.minusDays(1);
         }
+        dia.setText(primerDia.toString() + " al " + primerDia.plusDays(7).toString());
         int columna = 0;
         double x = 109;
         double y = 140;
