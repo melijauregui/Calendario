@@ -1,5 +1,6 @@
 package MVC;
 
+import Calendario.Actividad.Actividad;
 import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
@@ -10,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -24,7 +26,9 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Vista {
@@ -50,6 +54,7 @@ public class Vista {
     private List<List<String>> infoAlarmaActual;
 
     private List<Tarea> tareas = new ArrayList<>();
+    private Map<LocalDate,ListView<String>> listas = new HashMap();
 
     private AnchorPane mainLayout;
     public Vista(Calendario calendario, Stage stage) throws IOException {
@@ -180,21 +185,6 @@ public class Vista {
         choiceFrecuencia.setValue(frecuencia);
     }
 
-    private void setListViewSemana(){
-        int columna = 0;
-        double x = 70;
-        double y = 160;
-        /*do {
-            ListView<String> list = new ListView<>();
-            list.setLayoutX(x+111*columna);
-            list.setLayoutY(y);
-            list.setPrefWidth(50);
-            list.setStyle("-fx-background-color: blue;");
-            actualFondo.getChildren().add(list);
-            columna++;
-        } while(columna<7);*/
-    }
-
     private void setearSemana(){
         setearPane("file:src/main/java/MVC/imagenes/semanal.png");
         frecuencia = "Semana";
@@ -217,12 +207,35 @@ public class Vista {
         }
     }
 
+    private void crearListView(double x, double y, double width, double height, LocalDate clave){
+        ListView<String> list = new ListView<>();
+        list.setLayoutX(x);
+        list.setLayoutY(y);
+        list.setPrefWidth(width);
+        list.setPrefHeight(height);
+        list.setStyle("-fx-border-color: white;");
+        listas.put(clave, list);
+        actualFondo.getChildren().add(list);
+    }
+
+    private void setListViewSemana(){
+        double x = 65;
+        double y = 160;
+        double width = 105;
+        double height = 255;
+        LocalDate primerDia = getPrimerDia(diaActual);
+        crearListView(x, y, width+4, height, primerDia);
+        crearListView(176, y, width, height, primerDia.plusDays(1));
+        crearListView(283, y, width, height, primerDia.plusDays(2));
+        crearListView(390, y, width, height, primerDia.plusDays(3));
+        crearListView(497, y, width, height, primerDia.plusDays(4));
+        crearListView(604, y, width, height, primerDia.plusDays(5));
+        crearListView(711, y, width+10, height,primerDia.plusDays(6));
+    }
+
     private void setearFechasSemana(){
-        var diaActualSemana = diaActual.getDayOfWeek();
-        LocalDate primerDia = diaActual;
-        while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY){
-            primerDia = primerDia.minusDays(1);
-        }
+        //var diaActualSemana = diaActual.getDayOfWeek();
+        LocalDate primerDia = getPrimerDia(diaActual);
         dia.setText(primerDia.toString() + " al " + primerDia.plusDays(7).toString());
         int columna = 0;
         double x = 109;
@@ -237,12 +250,16 @@ public class Vista {
         } while(primerDia.getDayOfWeek() != DayOfWeek.MONDAY);
 
     }
-    private void setearFechasMes(){
-        var mesActual = diaActual.getMonth();
-        LocalDate primerDia = LocalDate.of(diaActual.getYear(), mesActual, 1);
+
+    private LocalDate getPrimerDia(LocalDate primerDia){
         while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY){
             primerDia = primerDia.minusDays(1);
         }
+        return primerDia;
+    }
+    private void setearFechasMes(){
+        var mesActual = diaActual.getMonth();
+        LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
         int columna = 0;
         int fila = 0;
         double x = 110;
@@ -399,9 +416,15 @@ public class Vista {
 
     public void guardarTarea(Tarea tarea){
         this.tareas.add(tarea);
+        mostrarTarea(tarea);
     }
 
-    private void actualizarVistaActividades(){
-
+    private void mostrarTarea(Tarea tarea){
+        if(listas.containsKey(tarea.getFecha().toLocalDate())){
+            return;
+        }
+        ListView<String> lista = listas.get(tarea.getFecha().toLocalDate());
+        lista.getItems().add(tarea.getTitulo() + "- Fecha: " + tarea.getFecha().toString());
     }
+
 }

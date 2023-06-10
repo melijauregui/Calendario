@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,16 +12,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<?import javafx.scene.control.CheckBox?>
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="525.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/fondoEvento.png);-fx-background-size: 525px 600px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="514.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/fondoEvento.png);-fx-background-size: 525px 600px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="botonGuardarEvento" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="563.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
+      <Button fx:id="botonGuardarEvento" alignment="CENTER" contentDisplay="CENTER" layoutX="411.0" layoutY="562.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="titulo" layoutX="84.0" layoutY="70.0" prefHeight="32.0" prefWidth="294.0" promptText="Añade un título">
+      <TextField fx:id="titulo" layoutX="125.0" layoutY="64.0" prefHeight="32.0" prefWidth="294.0" promptText="Añade un título">
          <font>
             <Font size="18.0" />
          </font>
@@ -28,7 +27,7 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <TextArea fx:id="descripcion" layoutX="12.0" layoutY="242.0" prefHeight="74.0" prefWidth="434.0" promptText="Añade una descripción">
+      <TextArea fx:id="descripcion" layoutX="15.0" layoutY="242.0" prefHeight="74.0" prefWidth="484.0" promptText="Añade una descripción">
          <font>
             <Font size="14.0" />
          </font>
@@ -38,29 +37,29 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ListView layoutX="12.0" layoutY="486.0" prefHeight="68.0" prefWidth="415.0" />
+      <ListView layoutX="12.0" layoutY="486.0" prefHeight="68.0" prefWidth="484.0" />
       <Label layoutX="18.0" layoutY="489.0" prefHeight="27.0" prefWidth="171.0" text="Sin alarmas" />
       <ComboBox fx:id="diaInicio" layoutX="15.0" layoutY="140.0" prefHeight="24.0" prefWidth="75.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="mesInicio" layoutX="99.0" layoutY="140.0" prefHeight="24.0" prefWidth="131.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="mesInicio" layoutX="114.0" layoutY="140.0" prefHeight="24.0" prefWidth="131.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <TextField fx:id="anioInicio" layoutX="239.0" layoutY="140.0" prefHeight="24" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+      <TextField fx:id="anioInicio" layoutX="268.0" layoutY="140.0" prefHeight="24" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="horaInicio" layoutX="303.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="horaInicio" layoutX="345.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="minutoInicio" layoutX="378.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="minutoInicio" layoutX="430.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -70,53 +69,53 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="mesFin" layoutX="99.0" layoutY="204.0" prefHeight="24.0" prefWidth="131.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="mesFin" layoutX="114.0" layoutY="204.0" prefHeight="24.0" prefWidth="131.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <TextField fx:id="anioFin" layoutX="238.0" layoutY="204.0" prefHeight="24" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+      <TextField fx:id="anioFin" layoutX="269.0" layoutY="204.0" prefHeight="24" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="horaFin" layoutX="303.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="horaFin" layoutX="345.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="minutoFin" layoutX="378.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="minutoFin" layoutX="430.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <CheckBox fx:id="repeticion" layoutX="268" layoutY="331" style="-fx-background-color: white;">
+      <CheckBox fx:id="repeticion" layoutX="304.0" layoutY="328.0" style="-fx-background-color: white;">
       </CheckBox>
-      <ChoiceBox fx:id="frecuencia" layoutX="94.0" layoutY="368.0" prefHeight="23.0" prefWidth="150.0" disable="true" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ChoiceBox fx:id="frecuencia" disable="true" layoutX="96.0" layoutY="368.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ChoiceBox>
-      <TextField fx:id="intervaloRepe" layoutX="345.0" layoutY="353.0" prefHeight="3" prefWidth="37" promptText="0" disable="true" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+      <TextField fx:id="intervaloRepe" disable="true" layoutX="390.0" layoutY="352.0" prefHeight="3" prefWidth="37" promptText="0" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <CheckBox fx:id="lun"  layoutX="253" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="lun" disable="true" layoutX="294.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="mar" layoutX="282" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="mar" disable="true" layoutX="326.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="mie" layoutX="312" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="mie" disable="true" layoutX="358.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="jue" layoutX="338" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="jue" disable="true" layoutX="389.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="vie" layoutX="365" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="vie" disable="true" layoutX="419.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="sab" layoutX="392" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="sab" disable="true" layoutX="451.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <CheckBox fx:id="dom" layoutX="422" layoutY="400" prefHeight="5" prefWidth="5" disable="true" style="-fx-background-color: white;">
+      <CheckBox fx:id="dom" disable="true" layoutX="480.0" layoutY="400.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
       </CheckBox>
-      <ChoiceBox fx:id="hastaRepe" layoutX="60.0" layoutY="425.0" prefHeight="23.0" prefWidth="150.0" disable="true" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ChoiceBox fx:id="hastaRepe" disable="true" layoutX="62.0" layoutY="425.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

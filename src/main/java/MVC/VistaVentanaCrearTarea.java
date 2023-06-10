@@ -99,9 +99,6 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
         stageNuevo.showAndWait();
     }
 
-/*    public void registrarEscuchaGuardarTarea(EventHandler<ActionEvent> eventHandler) {
-        botonGuardarTarea.setOnAction(eventHandler);
-    }*/
     private void getEscuchaGuardarAlarma(){
         ventanaCrearAlarmaTarea.registrarEscuchaCrearAlarma(actionEvent -> {
             String aviso = ventanaCrearAlarmaTarea.getAviso();
