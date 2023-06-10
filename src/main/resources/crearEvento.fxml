@@ -13,7 +13,7 @@
 
 
 <?import javafx.scene.control.CheckBox?>
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="470.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/fondoEvento.png);-fx-background-size: 470px 600px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="525.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/fondoEvento.png);-fx-background-size: 525px 600px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="botonGuardarEvento" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="563.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
          <cursor>

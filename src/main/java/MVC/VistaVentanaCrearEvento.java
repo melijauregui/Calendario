@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -14,7 +15,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 public class VistaVentanaCrearEvento implements VentanaCrear{
     @FXML
     private TextField titulo;
@@ -72,12 +78,25 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     @FXML
     private TextField intervaloRepe;
 
+    @FXML
+    private ComboBox<String> diaHasta = crearTextField(253, 67, FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
+            "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"));
+    @FXML
+    private ComboBox<String> mesHasta = crearTextField(324, 125 ,FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril", "Mayo",
+            "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
+    @FXML
+    private TextField anioHasta = crearTextField(453, 55);
+    @FXML
+    private TextField ocurrencias = crearTextField(253, 37);
+    @FXML
+    private Pane ventana;
+
 
     //private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
     public VistaVentanaCrearEvento(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearEvento.fxml"));
         loader.setController(this);
-        Pane ventana = loader.load();
+        ventana = loader.load();
         Scene sceneNueva = new Scene(ventana);
         this.stage = stage;
         stage.setResizable(false);
@@ -113,6 +132,7 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         frecuencia.setItems(frecuencias);
         var hastaOpciones = FXCollections.observableArrayList("Ocurrencias", "Fecha", "Sin límite");
         hastaRepe.setItems(hastaOpciones);
+        hastaRepe.setValue("Sin límite");
 
     }
     public void registrarEscuchaRepeticion(EventHandler<ActionEvent> eventHandler){
@@ -125,10 +145,17 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         }
         frecuencia.setDisable(aux);
         intervaloRepe.setDisable(aux);
+        hastaRepe.setDisable(aux);
         getEscuchaFrecuencia();
         setFrecuencia();
+        getEscuchaHasta();
+        setHasta();
+
     }
 
+    private void registrarEscuchaHasta(EventHandler<ActionEvent> eventHandler){
+        hastaRepe.setOnAction(eventHandler);
+    }
     private void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler){
         frecuencia.setOnAction(eventHandler);
     }
@@ -145,10 +172,63 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         sab.setDisable(aux);
         dom.setDisable(aux);
     }
+    private void setHasta(){
+        limpiarVentana();
+        if (repeticion.isSelected() && hastaRepe.getValue() == "Ocurrencias"){
+            ventana.getChildren().add(ocurrencias);
+        }
+        if (repeticion.isSelected() && hastaRepe.getValue() == "Fecha"){
+            ventana.getChildren().add(diaHasta);
+            ventana.getChildren().add(mesHasta);
+            ventana.getChildren().add(anioHasta);
+        }
+    }
+
+    private void limpiarVentana(){
+        var aux = ventana.getChildren();
+        if (aux.contains(ocurrencias)) {
+            aux.remove(ocurrencias);
+        }
+        if (aux.contains(diaHasta)){
+            aux.removeAll(diaHasta, mesHasta, anioHasta);
+        }
+    }
+    private TextField crearTextField(int x, int width){
+        var textField = new TextField();
+        textField.setLayoutY(425);
+        textField.setLayoutX(x);
+        textField.setCursor(Cursor.HAND);
+        textField.setPrefWidth(width);
+        // Establecer el color de fondo
+        textField.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY)));
+        // Establecer el color del borde
+        textField.setStyle("-fx-border-color: #bdbbbb;");
+        return textField;
+    }
+    private ComboBox<String> crearTextField(int x, int width, javafx.collections.ObservableList<String> opciones){
+        var comboBox = new ComboBox<String>();
+        comboBox.setLayoutY(425);
+        comboBox.setLayoutX(x);
+        comboBox.setCursor(Cursor.HAND);
+        comboBox.setPrefWidth(width);
+        comboBox.setItems(opciones);
+        // Establecer el color de fondo
+        comboBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY)));
+        // Establecer el color del borde
+        comboBox.setStyle("-fx-border-color: #bdbbbb;");
+        return comboBox;
+    }
+
+
 
     private void getEscuchaFrecuencia(){
         registrarEscuchaFrecuencia(actionEvent -> {
             setFrecuencia();
+        });
+    }
+    private void getEscuchaHasta(){
+        registrarEscuchaHasta(actionEvent -> {
+            setHasta();
         });
     }
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
