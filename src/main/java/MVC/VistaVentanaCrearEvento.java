@@ -117,4 +117,28 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     public void habilitarBorrarAlarma() {
 
     }
+
+    @Override
+    public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+
+
+    }
+    public boolean esDiaCompleto(){
+        return false;
+    }
+
+    @Override
+    public void setFechaDiaCompleto() {
+
+    }
+
+    @Override
+    public void setFechaConHora() {
+
+    }
+
+    @Override
+    public void registrarEscuchaDeseleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+
+    }
 }

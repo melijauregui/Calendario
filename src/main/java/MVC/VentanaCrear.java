@@ -13,4 +13,9 @@ public interface VentanaCrear{
         void eliminarAlarmasSeleccionadas();
         void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler);
         void habilitarBorrarAlarma();
+        void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler);
+        void registrarEscuchaDeseleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler);
+        boolean esDiaCompleto();
+        void setFechaDiaCompleto();
+        void setFechaConHora();
 }

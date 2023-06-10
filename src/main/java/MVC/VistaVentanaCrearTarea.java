@@ -176,11 +176,69 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
         botonEliminarAlarma.setDisable(false);
     }
 
+
     public void deshabilitarBorrarAlarma(){
         botonEliminarAlarma.setDisable(true);
     }
 
+    public void registrarEscuchaGuardarTarea(EventHandler<ActionEvent> eventHandler){
+        botonGuardarTarea.setOnAction(eventHandler);
+    }
 
+    public String getTitulo(){
+        return titulo.getText();
+    }
+
+    public String getDescripcion(){
+        return descripcion.getText();
+    }
+
+    public List<List<String>> getInfoAlarmas(){
+        return infoAlarmas;
+    }
+
+    public String getDia(){
+        return dia.getValue();
+    }
+
+    public String getMes(){
+        return mes.getValue();
+    }
+
+    public String getAnio(){
+        return anio.getText();
+    }
+
+    public String getHora(){
+        return hora.getValue();
+    }
+
+    public String getMinuto(){
+        return minuto.getValue();
+    }
+
+    public boolean esDiaCompleto(){
+        return checkDiaCompleto.isSelected();
+    }
+
+    public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+        checkDiaCompleto.setOnAction(eventHandler);
+    }
+
+    public void registrarEscuchaDeseleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+        checkDiaCompleto.setOnAction(eventHandler);
+    }
+
+    public void setFechaDiaCompleto(){
+        hora.setDisable(true);
+        minuto.setDisable(true);
+    }
+
+    public void setFechaConHora(){
+        hora.setDisable(false);
+        minuto.setDisable(false);
+
+    }
 
 
 }

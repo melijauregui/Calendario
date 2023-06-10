@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class Vista {
@@ -233,6 +234,7 @@ public class Vista {
         getEscuchaCrearAlarma(vistaVentanaCrearTarea);
         getEscuchaSeleccionarAlarmas(vistaVentanaCrearTarea);
         getEscuchaEliminarAlarmas(vistaVentanaCrearTarea);
+        getEscuchaEsDiaCompleto(vistaVentanaCrearTarea);
         stageNuevo.showAndWait();
 
     }
@@ -247,6 +249,7 @@ public class Vista {
         getEscuchaCrearAlarma(vistaVentanaCrearEvento);
         getEscuchaSeleccionarAlarmas(vistaVentanaCrearEvento);
         getEscuchaEliminarAlarmas(vistaVentanaCrearEvento);
+        getEscuchaEsDiaCompleto(vistaVentanaCrearEvento);
         stageNuevo.showAndWait();
 
     }
@@ -269,6 +272,29 @@ public class Vista {
             ventanaCrear.habilitarBorrarAlarma();
         });
     }
+
+    public void getEscuchaGuardarTarea(){
+        vistaVentanaCrearTarea.registrarEscuchaGuardarTarea(actionEvent -> {
+            String titulo = vistaVentanaCrearTarea.getTitulo();
+            String descripcion = vistaVentanaCrearTarea.getDescripcion();
+            String dia = vistaVentanaCrearTarea.getDia();
+            String mes = vistaVentanaCrearTarea.getMes();
+            String anio = vistaVentanaCrearTarea.getAnio();
+            boolean esDiaCompleto = vistaVentanaCrearTarea.esDiaCompleto();
+            List<List<String>> infoAlarmas = vistaVentanaCrearTarea.getInfoAlarmas();
+        });
+    }
+
+    public void getEscuchaEsDiaCompleto(VentanaCrear ventanaCrear){
+        ventanaCrear.registrarEscuchaSeleccionarDiaCompleto(actionEvent -> {
+            if (ventanaCrear.esDiaCompleto()){
+                ventanaCrear.setFechaDiaCompleto();
+            }else{
+                ventanaCrear.setFechaConHora();
+            }
+        });
+    }
+
 
     //public String getEscuchaGuardarTarea() {
     //    return botonGuardarTarea
