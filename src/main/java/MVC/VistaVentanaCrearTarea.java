@@ -206,8 +206,7 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
     }
 
     public int getDia(){
-        Integer i = Integer.parseInt(dia.getValue());
-        return i.intValue();
+        return Integer.parseInt(dia.getValue());
     }
 
     public int getMes(){
@@ -216,18 +215,15 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
     }
 
     private int getAnio(){
-        Integer i = Integer.parseInt(anio.getText());
-        return i.intValue();
+        return Integer.parseInt(anio.getText());
     }
 
     private int getHora(){
-        Integer i = Integer.parseInt(hora.getValue());
-        return i.intValue();
+        return Integer.parseInt(hora.getValue());
     }
 
     private int getMinuto(){
-       Integer i = Integer.parseInt(minuto.getValue());
-       return i.intValue();
+       return Integer.parseInt(minuto.getValue());
     }
 
     public boolean esDiaCompleto(){

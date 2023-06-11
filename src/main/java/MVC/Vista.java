@@ -54,7 +54,8 @@ public class Vista {
     private List<List<String>> infoAlarmaActual;
 
     private List<Tarea> tareas = new ArrayList<>();
-    private Map<LocalDate,ListView<Label>> listas = new HashMap();
+    private Map<LocalDate,ListView<Label>> listasSemana;
+    private Map<LocalDate,MenuButton> menuMes;
 
     private AnchorPane mainLayout;
     public Vista(Calendario calendario, Stage stage) throws IOException {
@@ -181,7 +182,9 @@ public class Vista {
         setearPane("file:src/main/java/MVC/imagenes/mensual.png");
         frecuencia = "Mes";
         dia.setText(diaActual.getMonth().toString());
+        setListViewMes();
         setearFechas();
+        actualizarVistaTareas();
         choiceFrecuencia.setValue(frecuencia);
     }
 
@@ -190,6 +193,7 @@ public class Vista {
         frecuencia = "Semana";
         setListViewSemana();
         setearFechas();
+        actualizarVistaTareas();
         choiceFrecuencia.setValue(frecuencia);
     }
 
@@ -208,20 +212,19 @@ public class Vista {
     }
 
     private void crearListView(double x, double y, double width, double height, LocalDate clave){
-        if (!listas.containsKey(clave)) {
-            ListView<Label> list = new ListView<>();
-            list.setLayoutX(x);
-            list.setLayoutY(y);
-            list.setPrefWidth(width);
-            list.setPrefHeight(height);
-            list.setStyle("-fx-border-color: white;");
-            listas.put(clave, list);
-        }
-        ListView<Label> list = listas.get(clave);
+        ListView<Label> list = new ListView<>();
+        list.setLayoutX(x);
+        list.setLayoutY(y);
+        list.setPrefWidth(width);
+        list.setPrefHeight(height);
+        list.setStyle("-fx-border-color: white");
+        list.setCursor(Cursor.HAND);
+        listasSemana.put(clave, list);
         actualFondo.getChildren().add(list);
     }
 
     private void setListViewSemana(){
+        listasSemana = new HashMap<>();
         double x = 65;
         double y = 160;
         double width = 102;
@@ -259,6 +262,41 @@ public class Vista {
         }
         return primerDia;
     }
+
+    private void setListViewMes(){
+        menuMes = new HashMap<>();
+        var mesActual = diaActual.getMonth();
+        LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
+        int columna = 0;
+        int fila = 0;
+        double x = 105;
+        double y = 155;
+        double width = 95;
+        double height = 15;
+        while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
+            crearMenu(x+104*columna, y+47*fila,width, height, primerDia);
+            primerDia = primerDia.plusDays(1);
+            if (columna == 6){
+                fila++;
+                columna = 0;
+            }else{
+                columna++;
+            }
+        }
+    }
+
+    private void crearMenu(double x, double y, double width, double height, LocalDate clave){
+        MenuButton menu = new MenuButton();
+        menu.setLayoutX(x);
+        menu.setLayoutY(y);
+        menu.setPrefWidth(width);
+        menu.setPrefHeight(height);
+        menu.setStyle("-fx-border-color: #bdbbbb; -fx-background-color: white;");
+        menu.setCursor(Cursor.HAND);
+        menuMes.put(clave, menu);
+        actualFondo.getChildren().add(menu);
+    }
+
     private void setearFechasMes(){
         var mesActual = diaActual.getMonth();
         LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
@@ -349,7 +387,7 @@ public class Vista {
 
     public void getEscuchaGuardarTarea(){
         vistaVentanaCrearTarea.registrarEscuchaGuardarTarea(actionEvent -> {
-            if (vistaVentanaCrearTarea.guardarDatosTarea() == false) {
+            if (!vistaVentanaCrearTarea.guardarDatosTarea()) {
                 return;
             }
             argsTareaActual = vistaVentanaCrearTarea.getInfoTarea();
@@ -366,18 +404,29 @@ public class Vista {
         return infoAlarmaActual;
     }
 
-
-
     public void guardarTarea(Tarea tarea){
         this.tareas.add(tarea);
         mostrarTarea(tarea);
     }
 
     private void mostrarTarea(Tarea tarea){
-        if (!listas.containsKey(tarea.getFecha().toLocalDate())){
+        switch (frecuencia){
+            case "Semana" -> mostrarTareaSemana(tarea);
+            case "Mes" -> mostrarTareaMes(tarea);
+        }
+    }
+
+    private void mostrarTareaSemana(Tarea tarea){
+        if (!listasSemana.containsKey(tarea.getFecha().toLocalDate())){
             return;
         }
-        ListView<Label> lista = listas.get(tarea.getFecha().toLocalDate());
+        ListView<Label> lista = listasSemana.get(tarea.getFecha().toLocalDate());
+        Label labelTarea =new Label(getMensajeTarea(tarea));
+        labelTarea.setStyle("-fx-background-color: #adffc4;");
+        lista.getItems().add(labelTarea);
+    }
+
+    private String getMensajeTarea(Tarea tarea){
         String mensaje = "Título: ";
         if (tarea.getTitulo().length()!=0){
             mensaje+=tarea.getTitulo();
@@ -388,14 +437,34 @@ public class Vista {
         }else{
             mensaje+=tarea.getFecha().toLocalDate().toString();
         }
-        Label labelTarea = new Label(mensaje);
-        labelTarea.setStyle("-fx-background-color: #adffc4;");
-        lista.getItems().add(labelTarea);
+        return mensaje;
+    }
+
+    private  void mostrarTareaMes(Tarea tarea){
+        if (!menuMes.containsKey(tarea.getFecha().toLocalDate())){
+            return;
+        }
+        MenuButton menu = menuMes.get(tarea.getFecha().toLocalDate());
+        if(menu.getItems().isEmpty()){
+            menu.setText("Ver más");
+        }
+        MenuItem item = new MenuItem(getMensajeTarea(tarea));
+        item.setStyle("-fx-background-color: #adffc4;");
+        menu.getItems().add(item);
     }
 
     public void eliminarTareaActual(){
         this.argsTareaActual = null;
         this.infoAlarmaActual = null;
     }
+
+    private void actualizarVistaTareas(){
+        for (Tarea tarea: tareas){
+            mostrarTarea(tarea);
+        }
+    }
+
+
+
 
 }
