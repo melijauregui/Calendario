@@ -489,19 +489,21 @@ public class CalendarioTest {
 
         var fechaDesde = LocalDateTime.of(2023, 4, 24, 15, 30);
         var fechaHasta = LocalDateTime.of(2023, 4, 24, 15, 50);
-        var cantActividadesEsperadas = 0;
+        var cantActividadesEsperadas = 1;
 
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
         //Act
-        var evento = calendario.crearEvento(new EventoArgs(titulo, descripcion, new DuracionArgs(diaInicio, diaFin)));
-        var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, LocalDateTime.of(2023, 4, 22, 15, 40)));
-        var cantActividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta).size();
+        calendario.crearEvento(new EventoArgs("e", "evento", new DuracionArgs(diaInicio, diaFin)));
+        calendario.crearTarea(new TareaArgs("t", "tarea", LocalDateTime.of(2023, 4, 22, 15, 40)));
+        var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
 
 
         //Assert
-        assertEquals(cantActividadesEsperadas, cantActividadesResultado);
+        assertEquals(cantActividadesEsperadas, actividadesResultado.size());
+        assertEquals("e", actividadesResultado.get(0).getTitulo());
+        assertEquals("evento", actividadesResultado.get(0).getDescripcion());
     }
 
     @Test
@@ -1039,7 +1041,7 @@ public class CalendarioTest {
         calendario.modificarRepeticionEvento(evento, new RepeticionArgs(1, Frecuencia.DIARIA, 3));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
-        int tamanioEsperado = 1;
+        int tamanioEsperado = 2;
 
 
         //Assert
@@ -1065,7 +1067,7 @@ public class CalendarioTest {
         calendario.modificarRepeticionEvento(evento, new RepeticionArgs(1, Frecuencia.DIARIA));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
         var eventoResultado = actividadesResultado.get(0);
-        int tamanioEsperado = 1;
+        int tamanioEsperado = 2;
 
 
         //Assert
@@ -1091,14 +1093,17 @@ public class CalendarioTest {
         //Act
         calendario.modificarRepeticionEvento(evento, new RepeticionArgs(1, Frecuencia.DIARIA, fechaVencimiento));
         var actividadesResultado = calendario.getActividadesEnElIntervalo(fechaDesde, fechaHasta);
-        var eventoResultado = actividadesResultado.get(0);
-        int tamanioEsperado = 1;
+        var eventoResultado1 = actividadesResultado.get(0);
+        var eventoResultado2 = actividadesResultado.get(1);
+        int tamanioEsperado = 2;
 
 
         //Assert
         assertEquals(tamanioEsperado, actividadesResultado.size());
-        assertEquals(titulo, eventoResultado.getTitulo());
-        assertEquals(descripcion, eventoResultado.getDescripcion());
+        assertEquals(titulo, eventoResultado1.getTitulo());
+        assertEquals(descripcion, eventoResultado1.getDescripcion());
+        assertEquals(titulo, eventoResultado2.getTitulo());
+        assertEquals(descripcion, eventoResultado2.getDescripcion());
 
     }
 
@@ -1280,7 +1285,7 @@ public class CalendarioTest {
         var actividadesEsperadas = calendario.getActividadesEnElIntervalo(desde, hasta);
         var cantidadActEsperadas = actividadesEsperadas.size();
         var cantidadEvento1Esperada = 1;
-        var cantidadEvento2Esperada = 2;
+        var cantidadEvento2Esperada = 3;
         int cantidadEsperadaAlarmas = 1;
         int cantidadTareasEsperadas = 1;
 
