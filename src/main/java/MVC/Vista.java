@@ -533,7 +533,7 @@ public class Vista {
     public void actualizarListas(){
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaSemana(primerDia);
-        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(0,0)));
+        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
             act.aceptarVisitor(new ActividadVisitor() {
                 @Override
@@ -557,7 +557,7 @@ public class Vista {
     public void actualizarMenu(){
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaMes(primerDia);
-        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(0,0)));
+        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
             act.aceptarVisitor(new ActividadVisitor() {
                 @Override

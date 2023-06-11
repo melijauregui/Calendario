@@ -50,13 +50,13 @@ public class Evento extends ActividadMutable implements Serializable {
     }
 
     /**
-     * Devuelve todas las instancias del evento que se inician en el intervalo de fechas pasado
+     * Devuelve todas las instancias del evento que se encuentran en el intervalo de fechas pasado
      */
     public List<InstanciaEvento> getRepeticionesEnIntervalo(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> eventos = new ArrayList<>();
         InstanciaEvento instancia = crearInstancia(duracion.getDiaInicio(), duracion.getDiaFin());
         while (instancia != null && !instancia.empiezaDespues(hasta)){
-            if (debeIncluirInstancia(instancia, desde)){
+            if (!instancia.terminaAntes(desde)){
                 eventos.add(instancia);
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
@@ -120,13 +120,6 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     private boolean estaVacia(Collection collection){
         return collection.size() == 0;
-    }
-
-    /**
-     * Devuelve true si la instancia empieza despúes o al mismo tiempo que la fecha pasada por parámetro
-     */
-    private boolean debeIncluirInstancia(InstanciaEvento instancia, LocalDateTime desde){
-        return (instancia.empiezaDespues(desde) || instancia.empiezaIgual(desde) || (duracion.esDiaCompleto() && instancia.empiezaIgual(desde.toLocalDate())));
     }
 
     /**
