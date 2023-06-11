@@ -47,6 +47,6 @@ public abstract class ActividadMutable extends Actividad implements Serializable
     /**
      * Acepta un Visitor
      */
-    public abstract void acceptarVisitor(ActividadVisitor actividadVisitor);
+    public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
 
 }

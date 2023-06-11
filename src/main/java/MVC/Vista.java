@@ -1,6 +1,7 @@
 package MVC;
 
 import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Argumentos.EventoArgs;
@@ -24,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.*;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,9 +53,6 @@ public class Vista {
     private TareaArgs argsTareaActual;
     private EventoArgs argsEventoActual;
     private List<List<String>> infoAlarmaActual;
-
-    private List<Actividad> actividades = new ArrayList<Actividad>();
-    private Map<LocalDate, ListView<Label>> listas = new HashMap();
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
 
@@ -102,7 +101,7 @@ public class Vista {
 
     public void getEscuchaSiguiente() {
         setDiaPlusActual();
-        actualizarListas();
+        tipoRango(getEscuchaFrecuencia());
     }
 
     public void registrarEscuchaAnterior(EventHandler<ActionEvent> eventHandler) {
@@ -111,7 +110,7 @@ public class Vista {
 
     public void getEscuchaAnterior() {
         setDiaMinusActual();
-        actualizarListas();
+        tipoRango(getEscuchaFrecuencia());
     }
 
 
@@ -183,7 +182,7 @@ public class Vista {
         setearPane("file:src/main/java/MVC/imagenes/diario.png");
         frecuencia = "Dia";
         dia.setText(diaActual.toString());
-        setListViewDia();
+        //setListViewDia();
         choiceFrecuencia.setValue(frecuencia);
 
     }
@@ -192,8 +191,9 @@ public class Vista {
         setearPane("file:src/main/java/MVC/imagenes/mensual.png");
         frecuencia = "Mes";
         dia.setText(diaActual.getMonth().toString());
-        setListViewMes();
+        setMenuMes();
         setearFechas();
+        actualizarMenu();
         choiceFrecuencia.setValue(frecuencia);
     }
 
@@ -202,6 +202,7 @@ public class Vista {
         frecuencia = "Semana";
         setListViewSemana();
         setearFechas();
+        actualizarListas();
         choiceFrecuencia.setValue(frecuencia);
     }
 
@@ -249,8 +250,8 @@ public class Vista {
 
     private void setearFechasSemana() {
         LocalDate primerDia = getPrimerDia(diaActual);
-        LocalDate ultimoDia = getUltimoDia(primerDia);
-        dia.setText(primerDia.toString() + " al " + ultimoDia.toString());
+        LocalDate ultimoDia = getUltimoDiaSemana(primerDia);
+        dia.setText(primerDia + " al " + ultimoDia.toString());
         int columna = 0;
         double x = 109;
         double y = 140;
@@ -270,12 +271,18 @@ public class Vista {
         }
         return primerDia;
     }
-    private LocalDate getUltimoDia(LocalDate primerDia) {
+    private LocalDate getUltimoDiaSemana(LocalDate primerDia) {
         return primerDia.plusDays(6);
     }
 
+    private LocalDate getUltimoDiaMes(LocalDate primerDia) {
+        while (primerDia.getDayOfMonth()!= 1){
+            primerDia = primerDia.plusDays(1);
+        }
+        return primerDia.with(TemporalAdjusters.lastDayOfMonth());
+    }
 
-    private void setListViewMes(){
+    private void setMenuMes(){
         menuMes = new HashMap<>();
         var mesActual = diaActual.getMonth();
         LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
@@ -401,7 +408,7 @@ public class Vista {
 
     public void getEscuchaGuardarTarea() {
         vistaVentanaCrearTarea.registrarEscuchaGuardarTarea(actionEvent -> {
-            if (vistaVentanaCrearTarea.guardarDatosTarea() == false) {
+            if (!vistaVentanaCrearTarea.guardarDatosTarea()) {
                 return;
             }
             argsTareaActual = vistaVentanaCrearTarea.getInfoTarea();
@@ -412,7 +419,7 @@ public class Vista {
 
     public void getEscuchaGuardarEvento() {
         vistaVentanaCrearEvento.registrarEscuchaGuardarEvento(actionEvent -> {
-            if (vistaVentanaCrearEvento.guardarDatosEvento() == false) {
+            if (!vistaVentanaCrearEvento.guardarDatosEvento()) {
                 return;
             }
             argsEventoActual = vistaVentanaCrearEvento.getInfoEvento();
@@ -431,23 +438,6 @@ public class Vista {
 
     public List<List<String>> getInfoAlarmaCreada() {
         return infoAlarmaActual;
-    }
-
-
-    public void guardarTarea(Tarea tarea) {
-        this.actividades.add(tarea);
-    }
-
-    public void guardarEvento(Evento evento) {
-        this.actividades.add(evento);
-    }
-
-    private void mostrarTarea(Tarea tarea) {
-        ListView<Label> lista = listas.get(tarea.getFecha().toLocalDate());
-        switch (frecuencia){
-            case "Semana" -> mostrarTareaSemana(tarea);
-            case "Mes" -> mostrarTareaMes(tarea);
-        }
     }
 
     private void mostrarTareaSemana(Tarea tarea){
@@ -471,6 +461,24 @@ public class Vista {
         return mensaje;
     }
 
+    private void mostrarEventoMes(InstanciaEvento evento){
+        String mensaje = getMensajeEvento(evento);
+        var ultimoDia = getUltimoDiaMes(getPrimerDia(diaActual));
+        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
+        while ((!diaAct.isAfter(ultimoDia)) && (!diaAct.isAfter(evento.getDiaFin()))) {
+            if (menuMes.containsKey(diaAct)) {
+                MenuItem item = new MenuItem(mensaje);
+                item.setStyle("-fx-background-color: orange;");
+                MenuButton menu = menuMes.get(evento.getFechaInicio().toLocalDate());
+                if(menu.getItems().isEmpty()){
+                    menu.setText("Ver más");
+                }
+                menu.getItems().add(item);
+            }
+            diaAct = diaAct.plusDays(1);
+        }
+    }
+
     private  void mostrarTareaMes(Tarea tarea){
         if (!menuMes.containsKey(tarea.getFecha().toLocalDate())){
             return;
@@ -484,8 +492,7 @@ public class Vista {
         menu.getItems().add(item);
     }
 
-
-    private void mostrarEvento(InstanciaEvento evento){
+    private String getMensajeEvento(InstanciaEvento evento){
         String mensaje = "Título: ";
         if (evento.getTitulo().length()!=0){
             mensaje+=evento.getTitulo();
@@ -496,14 +503,20 @@ public class Vista {
         }else{
             mensaje+=evento.getFechaInicio().toLocalDate().toString()+"\n"+ evento.getFechaFin().toLocalDate().toString();
         }
-        var ultimoDia = getUltimoDia(getPrimerDia(diaActual));
-        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
+        return mensaje;
+    }
 
-        while ((diaAct.isBefore(ultimoDia) || diaAct.isEqual(ultimoDia)) && (diaAct.isBefore(evento.getDiaFin()) || diaAct.isEqual(evento.getDiaFin()))){
+    private void mostrarEventoSemana(InstanciaEvento evento){
+        String mensaje = getMensajeEvento(evento);
+        var ultimoDia = getUltimoDiaSemana(getPrimerDia(diaActual));
+        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
+        while (!(diaAct.isAfter(ultimoDia)) && !(diaAct.isAfter(evento.getDiaFin()))){
             Label labelEvento = new Label(mensaje);
             labelEvento.setStyle("-fx-background-color: orange;");
-            ListView<Label> lista = listas.get(diaAct);
-            lista.getItems().add(labelEvento);
+            if (listasSemana.containsKey(diaAct)){
+                ListView<Label> lista = listasSemana.get(diaAct);
+                lista.getItems().add(labelEvento);
+            }
             diaAct = diaAct.plusDays(1);
         }
     }
@@ -518,24 +531,62 @@ public class Vista {
     }
 
     public void actualizarListas(){
-        tipoRango(frecuencia);
         var primerDia = getPrimerDia(diaActual);
-        var ultimoDia = getUltimoDia(primerDia);
+        var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(0,0)));
         for (Actividad act : acts){
-            if (act instanceof Tarea){
-                mostrarTarea((Tarea) act);
-            }else{
-                mostrarEvento((InstanciaEvento) act);
-            }
+            act.aceptarVisitor(new ActividadVisitor() {
+                @Override
+                public void visitarEvento(Evento evento) {
+                    //
+                }
+
+                @Override
+                public void visitarTarea(Tarea tarea) {
+                    mostrarTareaSemana(tarea);
+                }
+
+                @Override
+                public void visitarInstancia(InstanciaEvento instancia) {
+                    mostrarEventoSemana(instancia);
+                }
+            });
         }
     }
 
-    private void actualizarVistaTareas(){
-        for (Tarea tarea: tareas){
-            mostrarTarea(tarea);
+    public void actualizarMenu(){
+        var primerDia = getPrimerDia(diaActual);
+        var ultimoDia = getUltimoDiaMes(primerDia);
+        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(0,0)));
+        for (Actividad act : acts){
+            act.aceptarVisitor(new ActividadVisitor() {
+                @Override
+                public void visitarEvento(Evento evento) {
+                    //
+                }
+
+                @Override
+                public void visitarTarea(Tarea tarea) {
+                    mostrarTareaMes(tarea);
+                }
+
+                @Override
+                public void visitarInstancia(InstanciaEvento instancia) {
+                    mostrarEventoMes(instancia);
+                }
+            });
         }
     }
+
+
+    public void actualizarVistaActividades(){
+        switch (frecuencia){
+            case "Semana" -> actualizarListas();
+            case "Mes" -> actualizarMenu();
+        }
+    }
+
+
 
 
 

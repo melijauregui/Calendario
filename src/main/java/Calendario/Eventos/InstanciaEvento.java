@@ -1,5 +1,6 @@
 package Calendario.Eventos;
 
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.Actividad;
@@ -41,14 +42,14 @@ public class InstanciaEvento extends Actividad implements Serializable {
      * Devuelve true si la instancia del evento comienza luego de la fecha recibida como argumento
      */
     public boolean empiezaDespues(LocalDateTime fecha){
-        return this.getFechaFin().isAfter(fecha);
+        return this.getFechaInicio().isAfter(fecha);
     }
 
     /**
      * Devuelve true si la instancia del evento comienza el mismo día y hora que la fecha recibida como argumento
      */
     public boolean empiezaIgual(LocalDateTime fecha){
-        return this.getFechaFin().isEqual(fecha);
+        return this.getFechaInicio().isEqual(fecha);
     }
 
     /**
@@ -84,6 +85,13 @@ public class InstanciaEvento extends Actividad implements Serializable {
      */
     public LocalDate getDiaFin(){
         return this.duracion.getDiaFin();
+    }
+
+    /**
+     * Acepta un Visitor
+     */
+    public void aceptarVisitor(ActividadVisitor actividadVisitor){
+        actividadVisitor.visitarInstancia(this);
     }
 
     /**

@@ -61,7 +61,7 @@ public class Controlador  {
                     calendario.agregarAlarmaTarea(tarea, tarea.getFecha() , intervalo, tiempoRelativo, aviso);
                 }
             }
-            vista.guardarTarea(tarea);
+            //vista.actualizarVistaActividades();
             vista.eliminarTareaActual();
         }
     }
@@ -81,7 +81,7 @@ public class Controlador  {
                     calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
                 }
             }
-            vista.guardarEvento(evento);
+           // vista.actualizarVistaActividades();
             vista.eliminarEventoActual();
         }
     }

@@ -111,7 +111,7 @@ public class Evento extends ActividadMutable implements Serializable {
     /**
      * Acepta un Visitor
      */
-    public void acceptarVisitor(ActividadVisitor actividadVisitor){
+    public void aceptarVisitor(ActividadVisitor actividadVisitor){
         actividadVisitor.visitarEvento(this);
     }
 

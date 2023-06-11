@@ -71,4 +71,9 @@ public abstract class Actividad implements Serializable {
         }
         return (ambasSonProximas(primerAlarma, alarma));
     }
+
+    /**
+     * Acepta un Visitor
+     */
+    public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
 }

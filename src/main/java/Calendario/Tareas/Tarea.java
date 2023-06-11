@@ -83,7 +83,7 @@ public class Tarea extends ActividadMutable {
     /**
      * Acepta un Visitor
      */
-    public void acceptarVisitor(ActividadVisitor actividadVisitor){
+    public void aceptarVisitor(ActividadVisitor actividadVisitor){
         actividadVisitor.visitarTarea(this);
     }
 

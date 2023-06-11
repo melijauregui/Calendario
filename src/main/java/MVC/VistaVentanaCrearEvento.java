@@ -414,31 +414,26 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
 
 
     public int getAnioInicio(){
-        Integer i = Integer.parseInt(anioInicio.getText());
-        return i.intValue();
+       return Integer.parseInt(anioInicio.getText());
+
     }
 
     public int getAnioFin(){
-        Integer i = Integer.parseInt(anioFin.getText());
-        return i.intValue();
+        return Integer.parseInt(anioFin.getText());
     }
     public int getHoraInicio(){
-        Integer i = Integer.parseInt(horaInicio.getValue());
-        return i.intValue();
+        return Integer.parseInt(horaInicio.getValue());
     }
 
     public int getHoraFin(){
-        Integer i = Integer.parseInt(horaFin.getValue());
-        return i.intValue();
+        return Integer.parseInt(horaFin.getValue());
     }
 
     public int getMinutoInicio(){
-        Integer i = Integer.parseInt(minutoInicio.getValue());
-        return i.intValue();
+        return Integer.parseInt(minutoInicio.getValue());
     }
     public int getMinutoFin(){
-        Integer i = Integer.parseInt(minutoFin.getValue());
-        return i.intValue();
+        return Integer.parseInt(minutoFin.getValue());
     }
     public void cerrarVentana(){
         stage.close();
