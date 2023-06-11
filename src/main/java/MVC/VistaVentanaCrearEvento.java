@@ -1,8 +1,7 @@
 package MVC;
 
-import Calendario.Main.Argumentos.DuracionArgs;
-import Calendario.Main.Argumentos.EventoArgs;
-import Calendario.Main.Argumentos.TareaArgs;
+import Calendario.Enums.TipoAviso;
+import Calendario.Main.Argumentos.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,10 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +59,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     @FXML
     private ListView<String> listaAlarmas;
     @FXML
-    private Label errorFecha;;
+    private Label errorFecha;
     @FXML
     private Button botonCrearAlarma;
     private LocalDateTime fechaActual = LocalDateTime.now();
@@ -95,19 +91,20 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     @FXML
     private CheckBox checkDiaCompleto;
     @FXML
-    private ComboBox<String> diaHasta = crearTextField(253, 67, FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
+    private ComboBox<String> diaHasta = crearTextField(249, 71, "Dia", FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
             "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"));
     @FXML
-    private ComboBox<String> mesHasta = crearTextField(324, 125 ,FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril", "Mayo",
+    private ComboBox<String> mesHasta = crearTextField(324, 125, "Mes" ,FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril", "Mayo",
             "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
     @FXML
-    private TextField anioHasta = crearTextField(453, 55);
+    private TextField anioHasta = crearTextField(453, 55, "Año");
     @FXML
-    private TextField ocurrencias = crearTextField(253, 37);
+    private TextField ocurrencias = crearTextField(253, 37, "Intervalo");
     @FXML
     private Pane ventana;
     private List<List<String>> infoAlarmas = new ArrayList<>();
     private EventoArgs argsEventoActual;
+    private RepeticionArgs repeticionArgs;
 
 
     //private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
@@ -220,25 +217,27 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
             aux.removeAll(diaHasta, mesHasta, anioHasta);
         }
     }
-    private TextField crearTextField(int x, int width){
+    private TextField crearTextField(int x, int width, String promText){
         var textField = new TextField();
         textField.setLayoutY(425);
         textField.setLayoutX(x);
         textField.setCursor(Cursor.HAND);
         textField.setPrefWidth(width);
+        textField.setPromptText(promText);
         // Establecer el color de fondo
         textField.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY)));
         // Establecer el color del borde
         textField.setStyle("-fx-border-color: #bdbbbb;");
         return textField;
     }
-    private ComboBox<String> crearTextField(int x, int width, javafx.collections.ObservableList<String> opciones){
+    private ComboBox<String> crearTextField(int x, int width, String promText, javafx.collections.ObservableList<String> opciones){
         var comboBox = new ComboBox<String>();
         comboBox.setLayoutY(425);
         comboBox.setLayoutX(x);
         comboBox.setCursor(Cursor.HAND);
         comboBox.setPrefWidth(width);
         comboBox.setItems(opciones);
+        comboBox.setValue(promText);
         // Establecer el color de fondo
         comboBox.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY)));
         // Establecer el color del borde
@@ -462,6 +461,116 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
             }
         }
         return true;
+    }
+
+    public RepeticionArgs getInfoRepeticion(){
+        return repeticionArgs;
+    }
+    public boolean guardarRepeticionEvento() {
+        if (!tieneRepeticion()) {
+            return true;
+        }
+        try {
+            repeticionArgs = getRepeticion();
+        } catch (NumberFormatException | DateTimeException exception) {
+            setMensajeErrorFecha("Repetición inválida");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean tieneRepeticion(){
+        return repeticion.isSelected();
+    }
+
+    public RepeticionArgs getRepeticion() throws NumberFormatException, DateTimeException{
+        int intervalo = getIntervalo();
+        if (esRepeticionSemanal()){
+            return getHasta(intervalo, getDiasSemanas());
+        }else{
+            return getHasta(intervalo, getFrecuencia());
+        }
+    }
+    private List<DayOfWeek> getDiasSemanas(){
+        List<DayOfWeek> lista = new ArrayList<>();
+        if (lun.isSelected()){
+            lista.add(DayOfWeek.MONDAY);
+        }
+        if (mar.isSelected()){
+            lista.add(DayOfWeek.TUESDAY);
+        }
+        if (mie.isSelected()){
+            lista.add(DayOfWeek.WEDNESDAY);
+        }
+        if (jue.isSelected()){
+            lista.add(DayOfWeek.THURSDAY);
+        }
+        if (vie.isSelected()){
+            lista.add(DayOfWeek.FRIDAY);
+        }
+        if (sab.isSelected()){
+            lista.add(DayOfWeek.SATURDAY);
+        }
+        if (dom.isSelected()){
+            lista.add(DayOfWeek.SUNDAY);
+        }
+        return lista;
+    }
+
+    private RepeticionArgs getHasta(int intervalo, List<DayOfWeek> listaSemana){
+        switch (hastaRepe.getValue()){
+            case "Ocurrencias" -> {return new RepeticionArgs(intervalo, listaSemana, getOcurrencias());}
+            case "Fecha" -> {return new RepeticionArgs(intervalo,listaSemana, getFechaHasta());}
+            case "Sin Límite" -> {return new RepeticionArgs(intervalo,listaSemana);}
+            default -> {return null;}
+        }
+    }
+    private RepeticionArgs getHasta(int intervalo, Frecuencia frecuencia){
+        switch (hastaRepe.getValue()){
+            case "Ocurrencias" -> {return new RepeticionArgs(intervalo, frecuencia, getOcurrencias());}
+            case "Fecha" -> {return new RepeticionArgs(intervalo,frecuencia, getFechaHasta());}
+            case "Sin Límite" -> {return new RepeticionArgs(intervalo,frecuencia);}
+            default -> {return null;}
+        }
+    }
+
+    private LocalDate getFechaHasta(){
+        return LocalDate.of(getAnioHasta(), getMesHasta(), getDiaHasta());
+    }
+
+    private int getAnioHasta(){
+        Integer i = Integer.parseInt(anioHasta.getText());
+        return i.intValue();
+    }
+    private int getMesHasta(){
+        return 1 + mesHasta.getItems().indexOf(mesHasta.getValue());
+    }
+    private int getDiaHasta(){
+        Integer i = Integer.parseInt(diaHasta.getValue());
+        return i.intValue();
+    }
+
+
+    private int getOcurrencias(){
+        Integer i = Integer.parseInt(ocurrencias.getText());
+        return i.intValue();
+    }
+
+    private Frecuencia getFrecuencia(){
+        switch (frecuencia.getValue()){
+            case "Diaria" -> {return Frecuencia.DIARIA;}
+            case "Mensual" -> {return Frecuencia.MENSUAL;}
+            case "Anual" -> {return  Frecuencia.ANUAL;}
+            default -> {return null;}
+        }
+    }
+    private int getIntervalo(){
+        Integer i = Integer.parseInt(intervaloRepe.getText());
+        return i.intValue();
+    }
+
+    private boolean esRepeticionSemanal(){
+        return frecuencia.getValue() == "Semanal";
     }
 
 

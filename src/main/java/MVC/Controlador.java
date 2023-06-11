@@ -81,8 +81,10 @@ public class Controlador  {
                     calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
                 }
             }
-           // vista.actualizarVistaActividades();
-            vista.eliminarEventoActual();
+            var repeticionArgs = vista.getInfoRepeticionEvento();
+            if (repeticionArgs != null){
+                calendario.modificarRepeticionEvento(evento, repeticionArgs);
+            }
         }
     }
 
@@ -90,7 +92,7 @@ public class Controlador  {
         switch (aviso){
             case "Notificación" -> {return TipoAviso.NOTIFICACION;}
             case "Sonido" -> {return TipoAviso.SONIDO;}
-            case "Emanil" -> {return  TipoAviso.EMAIL;}
+            case "Email" -> {return  TipoAviso.EMAIL;}
             default -> {return null;}
         }
     }

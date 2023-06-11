@@ -5,6 +5,7 @@ import Calendario.Actividad.ActividadVisitor;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Argumentos.EventoArgs;
+import Calendario.Main.Argumentos.RepeticionArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
 import Calendario.Tareas.Tarea;
@@ -49,7 +50,7 @@ public class Vista {
     private MenuItem itemCrearEvento;
     private VistaVentanaCrearTarea vistaVentanaCrearTarea;
     private VistaVentanaCrearEvento vistaVentanaCrearEvento;
-
+    private RepeticionArgs argsRepeticionEvento;
     private TareaArgs argsTareaActual;
     private EventoArgs argsEventoActual;
     private List<List<String>> infoAlarmaActual;
@@ -422,6 +423,10 @@ public class Vista {
             if (!vistaVentanaCrearEvento.guardarDatosEvento()) {
                 return;
             }
+            if (!vistaVentanaCrearEvento.guardarRepeticionEvento()){
+                return;
+            }
+            argsRepeticionEvento = vistaVentanaCrearEvento.getInfoRepeticion();
             argsEventoActual = vistaVentanaCrearEvento.getInfoEvento();
             infoAlarmaActual = vistaVentanaCrearEvento.getInfoAlarmas();
             vistaVentanaCrearEvento.cerrarVentana();
@@ -434,6 +439,9 @@ public class Vista {
 
     public EventoArgs getInfoEvento() {
         return argsEventoActual;
+    }
+    public RepeticionArgs getInfoRepeticionEvento() {
+        return argsRepeticionEvento;
     }
 
     public List<List<String>> getInfoAlarmaCreada() {
