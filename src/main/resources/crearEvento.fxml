@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -123,5 +124,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label alignment="CENTER_RIGHT" layoutX="336.0" layoutY="172.0" prefHeight="27.0" prefWidth="160.0" textFill="#ff0404" />
+      <CheckBox fx:id="checkDiaCompleto" layoutX="347.0" layoutY="108.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Día completo">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
    </children>
 </Pane>

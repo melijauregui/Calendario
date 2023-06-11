@@ -87,6 +87,8 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     @FXML
     private TextField intervaloRepe;
     @FXML
+    private CheckBox checkDiaCompleto;
+    @FXML
     private ComboBox<String> diaHasta = crearTextField(253, 67, FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
             "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"));
     @FXML
@@ -337,34 +339,91 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         botonEliminarAlarma.setDisable(false);
     }
 
-    @Override
+
     public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
-
+        checkDiaCompleto.setOnAction(eventHandler);
     }
 
-    @Override
     public boolean esDiaCompleto() {
-        return false;
+        return checkDiaCompleto.isSelected();
     }
 
-    @Override
     public void setFechaDiaCompleto() {
-
+        horaInicio.setDisable(true);
+        horaFin.setDisable(true);
+        minutoInicio.setDisable(true);
+        minutoFin.setDisable(true);
     }
 
-    @Override
+
     public void setFechaConHora() {
-
+        horaInicio.setDisable(false);
+        horaFin.setDisable(false);
+        minutoInicio.setDisable(false);
+        minutoFin.setDisable(false);
     }
-
-    @Override
     public void setMensajeErrorFecha(String mensaje) {
-
+        errorFecha.setText(mensaje);
     }
-
 
     public void deshabilitarBorrarAlarma(){
         botonEliminarAlarma.setDisable(true);
+    }
+
+    public String getTitulo(){
+        return titulo.getText();
+    }
+
+    public String getDescripcion(){
+        return descripcion.getText();
+    }
+
+    public List<List<String>> getInfoAlarmas(){
+        return infoAlarmas;
+    }
+
+    public String getDiaInicio(){
+        return diaInicio.getValue();
+    }
+
+    public String getDiaFin(){
+        return diaFin.getValue();
+    }
+
+    public int getMesInicio(){
+        return 1 + mesInicio.getItems().indexOf(mesInicio.getValue());
+
+    }
+
+    public int getMesFin(){
+        return 1 + mesFin.getItems().indexOf(mesFin.getValue());
+
+    }
+
+
+    public String getAnioInicio(){
+        return anioInicio.getText();
+    }
+
+    public String getAnioFin(){
+        return anioFin.getText();
+    }
+    public String getHoraInicio(){
+        return horaInicio.getValue();
+    }
+
+    public String getHoraFin(){
+        return horaFin.getValue();
+    }
+
+    public String getMinutoInicio(){
+        return minutoInicio.getValue();
+    }
+    public String getMinutoFin(){
+        return minutoFin.getValue();
+    }
+    public void cerrarVentana(){
+        stage.close();
     }
 
 

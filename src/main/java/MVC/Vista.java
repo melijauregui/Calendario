@@ -54,7 +54,7 @@ public class Vista {
     private List<List<String>> infoAlarmaActual;
 
     private List<Tarea> tareas = new ArrayList<>();
-    private Map<LocalDate,ListView<String>> listas = new HashMap();
+    private Map<LocalDate,ListView<Label>> listas = new HashMap();
 
     private AnchorPane mainLayout;
     public Vista(Calendario calendario, Stage stage) throws IOException {
@@ -209,7 +209,7 @@ public class Vista {
 
     private void crearListView(double x, double y, double width, double height, LocalDate clave){
         if (!listas.containsKey(clave)) {
-            ListView<String> list = new ListView<>();
+            ListView<Label> list = new ListView<>();
             list.setLayoutX(x);
             list.setLayoutY(y);
             list.setPrefWidth(width);
@@ -217,7 +217,7 @@ public class Vista {
             list.setStyle("-fx-border-color: white;");
             listas.put(clave, list);
         }
-        ListView<String> list = listas.get(clave);
+        ListView<Label> list = listas.get(clave);
         actualFondo.getChildren().add(list);
     }
 
@@ -422,8 +422,28 @@ public class Vista {
     }
 
     private void mostrarTarea(Tarea tarea){
-        ListView<String> lista = listas.getOrDefault(tarea.getFecha().toLocalDate(), new ListView<String>());
-        lista.getItems().add(tarea.getTitulo() + "- Fecha: " + tarea.getFecha().toString());
+        if (!listas.containsKey(tarea.getFecha().toLocalDate())){
+            return;
+        }
+        ListView<Label> lista = listas.get(tarea.getFecha().toLocalDate());
+        String mensaje = "Título: ";
+        if (tarea.getTitulo().length()!=0){
+            mensaje+=tarea.getTitulo();
+        }
+        mensaje+= "\nFecha ";
+        if (!tarea.esDiaCompleto()){
+            mensaje+=tarea.getFecha().toString();
+        }else{
+            mensaje+=tarea.getFecha().toLocalDate().toString();
+        }
+        Label labelTarea = new Label(mensaje);
+        labelTarea.setStyle("-fx-background-color: #adffc4;");
+        lista.getItems().add(labelTarea);
+    }
+
+    public void eliminarTareaActual(){
+        this.argsTareaActual = null;
+        this.infoAlarmaActual = null;
     }
 
 }
