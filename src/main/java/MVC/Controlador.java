@@ -62,6 +62,7 @@ public class Controlador  {
                 }
             }
             //vista.actualizarVistaActividades();
+            vista.guardarTarea(tarea);
             vista.eliminarTareaActual();
         }
     }
@@ -85,8 +86,9 @@ public class Controlador  {
             if (repeticionArgs != null){
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
             }
+            vista.guardarEvento(evento);
+            vista.eliminarEventoActual();
         }
-        vista.eliminarEventoActual();
     }
 
     private TipoAviso getTipoAviso(String aviso){

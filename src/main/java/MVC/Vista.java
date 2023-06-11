@@ -1,6 +1,7 @@
 package MVC;
 
 import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadMutable;
 import Calendario.Actividad.ActividadVisitor;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
@@ -58,6 +59,7 @@ public class Vista {
     private Map<LocalDate,MenuButton> menuMes;
     private Map<Integer,MenuButton> menuDia;
     private AnchorPane mainLayout;
+    private List<ActividadMutable> actividades = new ArrayList<>();
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -226,6 +228,7 @@ public class Vista {
         list.setPrefHeight(height);
         list.setStyle("-fx-border-color: white");
         list.setCursor(Cursor.HAND);
+        list.setId("listaSemana");
         listasSemana.put(clave, list);
         actualFondo.getChildren().add(list);
     }
@@ -596,6 +599,14 @@ public class Vista {
         this.infoAlarmaActual = null;
     }
 
+    public void guardarTarea(Tarea tarea){
+        this.actividades.add(tarea);
+    }
+
+    public void guardarEvento(Evento evento){
+        this.actividades.add(evento);
+    }
+
     public void actualizarListas(){
         reiniciarListSemana();
         var primerDia = getPrimerDia(diaActual);
@@ -695,8 +706,7 @@ public class Vista {
             case "Dia" -> actualizarMenuDia();
         }
     }
-
-
+    
 
 
 
