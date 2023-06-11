@@ -242,7 +242,7 @@ public class Vista {
         double y = 160;
         double width = 102;
         double height = 255;
-        LocalDate primerDia = getPrimerDia(diaActual);
+        LocalDate primerDia = getPrimerDiaSemana(diaActual);
         crearListView(x, y, width + 6, height, primerDia);
         crearListView(182, y, width, height, primerDia.plusDays(1));
         crearListView(289, y, width, height, primerDia.plusDays(2));
@@ -253,7 +253,7 @@ public class Vista {
     }
 
     private void setearFechasSemana() {
-        LocalDate primerDia = getPrimerDia(diaActual);
+        LocalDate primerDia = getPrimerDiaSemana(diaActual);
         LocalDate ultimoDia = getUltimoDiaSemana(primerDia);
         dia.setText(primerDia + " al " + ultimoDia);
         int columna = 0;
@@ -269,11 +269,14 @@ public class Vista {
         } while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY);
     }
 
-    private LocalDate getPrimerDia(LocalDate primerDia) {
+    private LocalDate getPrimerDiaSemana(LocalDate primerDia) {
         while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY) {
             primerDia = primerDia.minusDays(1);
         }
         return primerDia;
+    }
+    private LocalDate getPrimerDiaMes(LocalDate primerDia) {
+        return LocalDate.of(primerDia.getYear(), primerDia.getMonth(), 1);
     }
     private LocalDate getUltimoDiaSemana(LocalDate primerDia) {
         return primerDia.plusDays(6);
@@ -289,7 +292,7 @@ public class Vista {
     private void setMenuMes(){
         menuMes = new HashMap<>();
         var mesActual = diaActual.getMonth();
-        LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
+        LocalDate primerDia = getPrimerDiaSemana(getPrimerDiaMes(diaActual));
         int columna = 0;
         int fila = 0;
         double x = 105;
@@ -354,7 +357,7 @@ public class Vista {
 
     private void setearFechasMes() {
         var mesActual = diaActual.getMonth();
-        LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
+        LocalDate primerDia = getPrimerDiaSemana(LocalDate.of(diaActual.getYear(), mesActual, 1));
         int columna = 0;
         int fila = 0;
         double x = 110;
@@ -484,8 +487,8 @@ public class Vista {
     }
     private void mostrarEventoMes(InstanciaEvento evento){
         String mensaje = getMensajeEvento(evento);
-        var ultimoDia = getUltimoDiaMes(getPrimerDia(diaActual));
-        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
+        var ultimoDia = getUltimoDiaMes(getPrimerDiaMes(diaActual));
+        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDiaSemana(getPrimerDiaMes(diaActual)))) ? getPrimerDiaSemana(getPrimerDiaMes(diaActual)): evento.getDiaInicio();
         while ((!diaAct.isAfter(ultimoDia)) && (!diaAct.isAfter(evento.getDiaFin()))) {
             if (menuMes.containsKey(diaAct)) {
                 MenuItem item = new MenuItem(mensaje);
@@ -516,8 +519,8 @@ public class Vista {
 
     private void mostrarEventoSemana(InstanciaEvento evento){
         String mensaje = getMensajeEvento(evento);
-        var ultimoDia = getUltimoDiaSemana(getPrimerDia(diaActual));
-        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
+        var ultimoDia = getUltimoDiaSemana(getPrimerDiaSemana(diaActual));
+        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDiaSemana(diaActual))) ? getPrimerDiaSemana(diaActual): evento.getDiaInicio();
         while (!(diaAct.isAfter(ultimoDia)) && !(diaAct.isAfter(evento.getDiaFin()))){
             Label labelEvento = new Label(mensaje);
             labelEvento.setStyle("-fx-background-color: #ffd3a1;");
@@ -565,7 +568,7 @@ public class Vista {
     public void actualizarListas(){
         reiniciarListSemana();
         vistasTareaSemana = new HashMap<>();
-        var primerDia = getPrimerDia(diaActual);
+        var primerDia = getPrimerDiaSemana(diaActual);
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
@@ -610,7 +613,7 @@ public class Vista {
     public void actualizarMenuMes(){
         reiniciarMenuMes();
         vistasTareaMes = new HashMap<>();
-        var primerDia = getPrimerDia(diaActual);
+        var primerDia = getPrimerDiaSemana(getPrimerDiaMes(diaActual));
         var ultimoDia = getUltimoDiaMes(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
