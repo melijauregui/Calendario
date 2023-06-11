@@ -56,7 +56,7 @@ public class Vista {
     private List<List<String>> infoAlarmaActual;
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
-    private Map<LocalTime,MenuButton> menuDia;
+    private Map<Integer,MenuButton> menuDia;
     private AnchorPane mainLayout;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
@@ -249,7 +249,7 @@ public class Vista {
     private void setearFechasSemana() {
         LocalDate primerDia = getPrimerDia(diaActual);
         LocalDate ultimoDia = getUltimoDiaSemana(primerDia);
-        dia.setText(primerDia + " al " + ultimoDia.toString());
+        dia.setText(primerDia + " al " + ultimoDia);
         int columna = 0;
         double x = 109;
         double y = 140;
@@ -318,13 +318,13 @@ public class Vista {
         menuMes.put(claveFecha, menu);
     }
 
-    private void guardarMenuConClave(MenuButton menu,LocalTime claveFecha){
-        menuDia.put(claveFecha, menu);
+    private void guardarMenuConClave(MenuButton menu,int claveHora){
+        menuDia.put(claveHora, menu);
     }
 
     private void setMenuDia() {
         menuDia = new HashMap<>();
-        LocalTime hora = LocalTime.of(0,0);
+        int hora = 0;
         int columna = 0;
         int fila = 0;
         double x = 108;
@@ -333,8 +333,8 @@ public class Vista {
         double height = 25;
         while (true) {
             guardarMenuConClave(crearMenu(x+186*columna, y+47*fila,width, height), hora);
-            hora = hora.plusHours(1);
-            if (fila == 3 && columna == 3){
+            hora ++;
+            if (hora == 24){
                 break;
             }
             if (fila == 5){
@@ -559,10 +559,31 @@ public class Vista {
     }
 
     private void mostrarTareaDia(Tarea tarea){
-
+        int hora = tarea.getFecha().toLocalTime().getHour();
+        if (tarea.esDiaCompleto()){
+            hora = 0;
+        }
+        MenuButton menu = menuDia.get(hora);
+        if(menu.getItems().isEmpty()){
+            menu.setText("Ver más");
+        }
+        MenuItem item = new MenuItem(getMensajeTarea(tarea));
+        item.setStyle("-fx-background-color: #adffc4;");
+        menu.getItems().add(item);
     }
 
     private void mostrarEventoDia(InstanciaEvento evento){
+        int hora = evento.getFechaInicio().toLocalTime().getHour();
+        if (evento.esDiaCompleto()){
+            hora = 0;
+        }
+        MenuButton menu = menuDia.get(hora);
+        if(menu.getItems().isEmpty()){
+            menu.setText("Ver más");
+        }
+        MenuItem item = new MenuItem(getMensajeEvento(evento));
+        item.setStyle("-fx-background-color: #ffd3a1;");
+        menu.getItems().add(item);
 
     }
 
@@ -576,6 +597,7 @@ public class Vista {
     }
 
     public void actualizarListas(){
+        reiniciarListSemana();
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -599,7 +621,26 @@ public class Vista {
         }
     }
 
+    private void reiniciarMenuMes(){
+        for (MenuButton menu: menuMes.values()){
+            menu.getItems().clear();
+        }
+    }
+
+    private void reiniciarMenuDia(){
+        for (MenuButton menu: menuDia.values()){
+            menu.getItems().clear();
+        }
+    }
+
+    private void reiniciarListSemana(){
+        for (ListView<Label> list: listasSemana.values()){
+            list.getItems().clear();
+        }
+    }
+
     public void actualizarMenuMes(){
+        reiniciarMenuMes();
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaMes(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -625,6 +666,7 @@ public class Vista {
 
 
     public void actualizarMenuDia(){
+        reiniciarMenuDia();
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(diaActual, LocalTime.of(0,0)), LocalDateTime.of(diaActual, LocalTime.of(23,59)));
         for (Actividad act : acts){
             act.aceptarVisitor(new ActividadVisitor() {
