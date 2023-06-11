@@ -29,7 +29,7 @@ public class Controlador  {
             try {
                 vista.abrirVentanaCrearTarea();
                 guardarTarea();
-                vista.actualizarListas();
+                vista.actualizarVistaActividades();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -38,7 +38,7 @@ public class Controlador  {
             try {
                 vista.abrirVentanaCrearEvento();
                 guardarEvento();
-                vista.actualizarListas();
+                vista.actualizarVistaActividades();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

@@ -468,8 +468,8 @@ public class Vista {
         while ((!diaAct.isAfter(ultimoDia)) && (!diaAct.isAfter(evento.getDiaFin()))) {
             if (menuMes.containsKey(diaAct)) {
                 MenuItem item = new MenuItem(mensaje);
-                item.setStyle("-fx-background-color: orange;");
-                MenuButton menu = menuMes.get(evento.getFechaInicio().toLocalDate());
+                item.setStyle("-fx-background-color: #ffd3a1;");
+                MenuButton menu = menuMes.get(diaAct);
                 if(menu.getItems().isEmpty()){
                     menu.setText("Ver más");
                 }
@@ -497,11 +497,11 @@ public class Vista {
         if (evento.getTitulo().length()!=0){
             mensaje+=evento.getTitulo();
         }
-        mensaje+= "\nFecha ";
+        mensaje+= "\nFecha Inicio: ";
         if (!evento.esDiaCompleto()){
-            mensaje+=evento.getFechaInicio().toString()+"\n"+evento.getFechaFin().toString();
+            mensaje+=evento.getFechaInicio().toString()+"\nFecha fin: "+evento.getFechaFin().toString();
         }else{
-            mensaje+=evento.getFechaInicio().toLocalDate().toString()+"\n"+ evento.getFechaFin().toLocalDate().toString();
+            mensaje+=evento.getFechaInicio().toLocalDate().toString()+"\nFecha fin: "+ evento.getFechaFin().toLocalDate().toString();
         }
         return mensaje;
     }
@@ -512,7 +512,7 @@ public class Vista {
         LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
         while (!(diaAct.isAfter(ultimoDia)) && !(diaAct.isAfter(evento.getDiaFin()))){
             Label labelEvento = new Label(mensaje);
-            labelEvento.setStyle("-fx-background-color: orange;");
+            labelEvento.setStyle("-fx-background-color: #ffd3a1;");
             if (listasSemana.containsKey(diaAct)){
                 ListView<Label> lista = listasSemana.get(diaAct);
                 lista.getItems().add(labelEvento);
