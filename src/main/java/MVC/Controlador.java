@@ -2,6 +2,8 @@ package MVC;
 
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
+import Calendario.Eventos.Evento;
+import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
 import Calendario.Tareas.Tarea;
@@ -27,20 +29,20 @@ public class Controlador  {
             try {
                 vista.abrirVentanaCrearTarea();
                 guardarTarea();
+                vista.actualizarListas();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
-
         vista.registrarEscuchaCrearEvento(actionEvent -> {
             try {
                 vista.abrirVentanaCrearEvento();
+                guardarEvento();
+                vista.actualizarListas();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
-        //vista.getEscuchaCrearAlarma();
-
 
     }
 
@@ -61,6 +63,26 @@ public class Controlador  {
             }
             vista.guardarTarea(tarea);
             vista.eliminarTareaActual();
+        }
+    }
+
+    private void guardarEvento() {
+        EventoArgs eventoArgs = vista.getInfoEvento();
+        var infoAlarmas = vista.getInfoAlarmaCreada();
+        if (eventoArgs != null){
+            Evento evento = calendario.crearEvento(eventoArgs);
+            for (List<String> infoAlarma: infoAlarmas){
+                TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
+                int intervalo = Integer.parseInt(infoAlarma.get(1));
+                TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
+                if (tiempoRelativo == null){
+                    calendario.agregarAlarmaEvento(evento, aviso);
+                }else{
+                    calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
+                }
+            }
+            vista.guardarEvento(evento);
+            vista.eliminarEventoActual();
         }
     }
 

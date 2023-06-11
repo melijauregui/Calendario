@@ -1,5 +1,8 @@
 package MVC;
 
+import Calendario.Main.Argumentos.DuracionArgs;
+import Calendario.Main.Argumentos.EventoArgs;
+import Calendario.Main.Argumentos.TareaArgs;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,7 +17,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +57,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     private ComboBox<String> minutoFin;
     private Stage stage;
     @FXML
-    private Button botonGuardarTarea;
+    private Button botonGuardarEvento;
     @FXML
     private Button botonEliminarAlarma;
     @FXML
@@ -101,6 +107,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     @FXML
     private Pane ventana;
     private List<List<String>> infoAlarmas = new ArrayList<>();
+    private EventoArgs argsEventoActual;
 
 
     //private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
@@ -381,13 +388,18 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     public List<List<String>> getInfoAlarmas(){
         return infoAlarmas;
     }
-
-    public String getDiaInicio(){
-        return diaInicio.getValue();
+    public EventoArgs getInfoEvento(){
+        return argsEventoActual;
     }
 
-    public String getDiaFin(){
-        return diaFin.getValue();
+    public int getDiaInicio(){
+        Integer i = Integer.parseInt(diaInicio.getValue());
+        return i.intValue();
+    }
+
+    public int getDiaFin(){
+        Integer i = Integer.parseInt(diaFin.getValue());
+        return i.intValue();
     }
 
     public int getMesInicio(){
@@ -401,32 +413,61 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     }
 
 
-    public String getAnioInicio(){
-        return anioInicio.getText();
+    public int getAnioInicio(){
+        Integer i = Integer.parseInt(anioInicio.getText());
+        return i.intValue();
     }
 
-    public String getAnioFin(){
-        return anioFin.getText();
+    public int getAnioFin(){
+        Integer i = Integer.parseInt(anioFin.getText());
+        return i.intValue();
     }
-    public String getHoraInicio(){
-        return horaInicio.getValue();
-    }
-
-    public String getHoraFin(){
-        return horaFin.getValue();
+    public int getHoraInicio(){
+        Integer i = Integer.parseInt(horaInicio.getValue());
+        return i.intValue();
     }
 
-    public String getMinutoInicio(){
-        return minutoInicio.getValue();
+    public int getHoraFin(){
+        Integer i = Integer.parseInt(horaFin.getValue());
+        return i.intValue();
     }
-    public String getMinutoFin(){
-        return minutoFin.getValue();
+
+    public int getMinutoInicio(){
+        Integer i = Integer.parseInt(minutoInicio.getValue());
+        return i.intValue();
+    }
+    public int getMinutoFin(){
+        Integer i = Integer.parseInt(minutoFin.getValue());
+        return i.intValue();
     }
     public void cerrarVentana(){
         stage.close();
     }
 
+    public void registrarEscuchaGuardarEvento(EventHandler<ActionEvent> eventHandler){
+        botonGuardarEvento.setOnAction(eventHandler);
+    }
 
+    public boolean guardarDatosEvento() {
+        if (esDiaCompleto()) {
+            try {
+                DuracionArgs duracionArgs = new DuracionArgs(LocalDate.of(getAnioInicio(), getMesInicio(), getDiaInicio()), LocalDate.of(getAnioFin(), getMesFin(), getDiaFin()));
+                argsEventoActual = new EventoArgs(getTitulo(), getDescripcion(), duracionArgs);
+            } catch (NumberFormatException | DateTimeException exception) {
+                setMensajeErrorFecha("Fecha inválida");
+                return false;
+            }
+        } else {
+            try {
+                DuracionArgs duracionArgs = new DuracionArgs(LocalDate.of(getAnioInicio(), getMesInicio(), getDiaInicio()), LocalDate.of(getAnioFin(), getMesFin(), getDiaFin()), LocalTime.of(getHoraInicio(), getMinutoInicio()),LocalTime.of(getHoraFin(), getMinutoFin()));
+                argsEventoActual = new EventoArgs(getTitulo(), getDescripcion(), duracionArgs);
+            } catch (NumberFormatException | DateTimeException exception) {
+                setMensajeErrorFecha("Fecha inválida");
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 }

@@ -41,14 +41,14 @@ public class InstanciaEvento extends Actividad implements Serializable {
      * Devuelve true si la instancia del evento comienza luego de la fecha recibida como argumento
      */
     public boolean empiezaDespues(LocalDateTime fecha){
-        return this.getFechaInicio().isAfter(fecha);
+        return this.getFechaFin().isAfter(fecha);
     }
 
     /**
      * Devuelve true si la instancia del evento comienza el mismo día y hora que la fecha recibida como argumento
      */
     public boolean empiezaIgual(LocalDateTime fecha){
-        return this.getFechaInicio().isEqual(fecha);
+        return this.getFechaFin().isEqual(fecha);
     }
 
     /**
@@ -106,5 +106,8 @@ public class InstanciaEvento extends Actividad implements Serializable {
         }
     }
 
+    public boolean esDiaCompleto(){
+        return duracion.esDiaCompleto();
+    }
 }
 

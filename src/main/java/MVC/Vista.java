@@ -1,6 +1,8 @@
 package MVC;
 
 import Calendario.Actividad.Actividad;
+import Calendario.Eventos.Evento;
+import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
@@ -21,10 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +40,8 @@ public class Vista {
     private AnchorPane actualFondo;
     private Label dia = new Label();
     private String frecuencia;
-    private Button siguiente = crearButtonAntSig(">", 780 , 20);
-    private Button anterior = crearButtonAntSig("<",730, 20);
+    private Button siguiente = crearButtonAntSig(">", 780, 20);
+    private Button anterior = crearButtonAntSig("<", 730, 20);
     private MenuButton menuCrearActividad = menuCrearActividad();
     private MenuItem itemCrearTarea;
     private MenuItem itemCrearEvento;
@@ -53,10 +52,11 @@ public class Vista {
     private EventoArgs argsEventoActual;
     private List<List<String>> infoAlarmaActual;
 
-    private List<Tarea> tareas = new ArrayList<>();
-    private Map<LocalDate,ListView<Label>> listas = new HashMap();
+    private List<Actividad> actividades = new ArrayList<Actividad>();
+    private Map<LocalDate, ListView<Label>> listas = new HashMap();
 
     private AnchorPane mainLayout;
+
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
         this.stage = stage;
@@ -68,13 +68,14 @@ public class Vista {
         stage.show();
     }
 
-    private void initialize(){
+    private void initialize() {
         paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, menuCrearActividad);
         diaActual = LocalDate.now();
 
     }
-    private ChoiceBox crearChoiceBox(){
-        ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia","Semana", "Mes"));
+
+    private ChoiceBox crearChoiceBox() {
+        ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia", "Semana", "Mes"));
         box.setStyle("-fx-background-color: white; -fx-border-color: black;");
         box.setLayoutX(715.0);
         box.setLayoutY(50.0);
@@ -82,7 +83,8 @@ public class Vista {
         box.setCursor(Cursor.HAND);
         return box;
     }
-    private Button crearButtonAntSig(String text, float x, float y){
+
+    private Button crearButtonAntSig(String text, float x, float y) {
         Button button = new Button(text);
         button.setStyle("-fx-background-color: white; -fx-border-color: black;");
         button.setLayoutX(x);
@@ -95,34 +97,39 @@ public class Vista {
     public void registrarEscuchaSiguiente(EventHandler<ActionEvent> eventHandler) {
         siguiente.setOnAction(eventHandler);
     }
+
     public void getEscuchaSiguiente() {
         setDiaPlusActual();
-        tipoRango(frecuencia);
+        actualizarListas();
     }
+
     public void registrarEscuchaAnterior(EventHandler<ActionEvent> eventHandler) {
         anterior.setOnAction(eventHandler);
     }
+
     public void getEscuchaAnterior() {
         setDiaMinusActual();
-        tipoRango(frecuencia);
+        actualizarListas();
     }
 
 
-    private void setDiaPlusActual(){
-        switch(frecuencia){
+    private void setDiaPlusActual() {
+        switch (frecuencia) {
             case "Dia" -> diaActual = diaActual.plusDays(1);
             case "Semana" -> diaActual = diaActual.plusDays(7);
             case "Mes" -> diaActual = diaActual.plusMonths(1);
         }
     }
-    private void setDiaMinusActual(){
-        switch(frecuencia){
+
+    private void setDiaMinusActual() {
+        switch (frecuencia) {
             case "Dia" -> diaActual = diaActual.minusDays(1);
             case "Semana" -> diaActual = diaActual.minusDays(7);
             case "Mes" -> diaActual = diaActual.minusMonths(1);
         }
     }
-    public MenuButton menuCrearActividad(){
+
+    public MenuButton menuCrearActividad() {
         MenuButton crearBox = new MenuButton("Crear");
         itemCrearTarea = new MenuItem("Tarea");
         itemCrearEvento = new MenuItem("Evento");
@@ -138,19 +145,20 @@ public class Vista {
     public void registrarEscuchaFrecuencia(EventHandler<ActionEvent> eventHandler) {
         choiceFrecuencia.setOnAction(eventHandler);
     }
+
     public String getEscuchaFrecuencia() {
         return choiceFrecuencia.getValue();
     }
 
     public void tipoRango(String opcion) {
-        switch (opcion){
+        switch (opcion) {
             case "Semana" -> setearSemana();
             case "Dia" -> setearDia();
             case "Mes" -> setearMes();
         }
     }
 
-    private void setearPane(String ruta){
+    private void setearPane(String ruta) {
         AnchorPane rootPane = new AnchorPane();
         setearFondo(rootPane, ruta);
         rootPane.getChildren().addAll(paneGeneral);
@@ -165,11 +173,11 @@ public class Vista {
         mainLayout = rootPane;
     }
 
-    private void setListViewDia(){
+    private void setListViewDia() {
 
     }
 
-    private void setearDia(){
+    private void setearDia() {
         setearPane("file:src/main/java/MVC/imagenes/diario.png");
         frecuencia = "Dia";
         dia.setText(diaActual.toString());
@@ -177,7 +185,8 @@ public class Vista {
         choiceFrecuencia.setValue(frecuencia);
 
     }
-    private void setearMes(){
+
+    private void setearMes() {
         setearPane("file:src/main/java/MVC/imagenes/mensual.png");
         frecuencia = "Mes";
         dia.setText(diaActual.getMonth().toString());
@@ -185,7 +194,7 @@ public class Vista {
         choiceFrecuencia.setValue(frecuencia);
     }
 
-    private void setearSemana(){
+    private void setearSemana() {
         setearPane("file:src/main/java/MVC/imagenes/semanal.png");
         frecuencia = "Semana";
         setListViewSemana();
@@ -200,66 +209,67 @@ public class Vista {
         pane.getChildren().add(imageView);
     }
 
-    private void setearFechas(){
-        switch (frecuencia){
+    private void setearFechas() {
+        switch (frecuencia) {
             case "Semana" -> setearFechasSemana();
             case "Mes" -> setearFechasMes();
         }
     }
 
-    private void crearListView(double x, double y, double width, double height, LocalDate clave){
-        if (!listas.containsKey(clave)) {
-            ListView<Label> list = new ListView<>();
-            list.setLayoutX(x);
-            list.setLayoutY(y);
-            list.setPrefWidth(width);
-            list.setPrefHeight(height);
-            list.setStyle("-fx-border-color: white;");
-            listas.put(clave, list);
-        }
-        ListView<Label> list = listas.get(clave);
+    private void crearListView(double x, double y, double width, double height, LocalDate clave) {
+        ListView<Label> list = new ListView<>();
+        list.setLayoutX(x);
+        list.setLayoutY(y);
+        list.setPrefWidth(width);
+        list.setPrefHeight(height);
+        list.setStyle("-fx-border-color: white;");
+        listas.put(clave, list);
         actualFondo.getChildren().add(list);
     }
 
-    private void setListViewSemana(){
+    private void setListViewSemana() {
         double x = 65;
         double y = 160;
         double width = 102;
         double height = 255;
         LocalDate primerDia = getPrimerDia(diaActual);
-        crearListView(x, y, width+6, height, primerDia);
+        crearListView(x, y, width + 6, height, primerDia);
         crearListView(182, y, width, height, primerDia.plusDays(1));
         crearListView(289, y, width, height, primerDia.plusDays(2));
         crearListView(400, y, width, height, primerDia.plusDays(3));
         crearListView(508, y, width, height, primerDia.plusDays(4));
         crearListView(616, y, width, height, primerDia.plusDays(5));
-        crearListView(727, y, width+10, height,primerDia.plusDays(6));
+        crearListView(727, y, width + 10, height, primerDia.plusDays(6));
     }
 
-    private void setearFechasSemana(){
+    private void setearFechasSemana() {
         LocalDate primerDia = getPrimerDia(diaActual);
-        dia.setText(primerDia.toString() + " al " + primerDia.plusDays(7).toString());
+        LocalDate ultimoDia = getUltimoDia(primerDia);
+        dia.setText(primerDia.toString() + " al " + ultimoDia.toString());
         int columna = 0;
         double x = 109;
         double y = 140;
         do {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
-            fecha.setLayoutX(x+111*columna);
+            fecha.setLayoutX(x + 111 * columna);
             actualFondo.getChildren().add(fecha);
             fecha.setLayoutY(y);
             primerDia = primerDia.plusDays(1);
             columna++;
-        } while(primerDia.getDayOfWeek() != DayOfWeek.MONDAY);
-
+        } while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY);
     }
 
-    private LocalDate getPrimerDia(LocalDate primerDia){
-        while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY){
+    private LocalDate getPrimerDia(LocalDate primerDia) {
+        while (primerDia.getDayOfWeek() != DayOfWeek.MONDAY) {
             primerDia = primerDia.minusDays(1);
         }
         return primerDia;
     }
-    private void setearFechasMes(){
+    private LocalDate getUltimoDia(LocalDate primerDia) {
+        return primerDia.plusDays(6);
+    }
+
+    private void setearFechasMes() {
         var mesActual = diaActual.getMonth();
         LocalDate primerDia = getPrimerDia(LocalDate.of(diaActual.getYear(), mesActual, 1));
         int columna = 0;
@@ -268,14 +278,14 @@ public class Vista {
         double y = 140;
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
-            fecha.setLayoutX(x+105.5*columna);
-            fecha.setLayoutY(y+47*fila);
+            fecha.setLayoutX(x + 105.5 * columna);
+            fecha.setLayoutY(y + 47 * fila);
             actualFondo.getChildren().add(fecha);
             primerDia = primerDia.plusDays(1);
-            if (columna == 6){
+            if (columna == 6) {
                 fila++;
                 columna = 0;
-            }else{
+            } else {
                 columna++;
             }
         }
@@ -308,10 +318,12 @@ public class Vista {
         getEscuchaEliminarAlarmas(vistaVentanaCrearEvento);
         getEscuchaEsDiaCompleto(vistaVentanaCrearEvento);
         getEscuchaEventoConRepeticion();
+        getEscuchaGuardarEvento();
         stageNuevo.showAndWait();
-
     }
-    public void getEscuchaCrearAlarma(VentanaCrear ventanaCrear){
+
+
+    public void getEscuchaCrearAlarma(VentanaCrear ventanaCrear) {
         ventanaCrear.registrarEscuchaCrearAlarma(actionEvent -> {
             try {
                 ventanaCrear.abrirVentanaCrearAlarma();
@@ -321,33 +333,33 @@ public class Vista {
         });
     }
 
-    public void getEscuchaEliminarAlarmas(VentanaCrear ventanaCrear){
+    public void getEscuchaEliminarAlarmas(VentanaCrear ventanaCrear) {
         ventanaCrear.registrarEscuchaEliminarAlarma(actionEvent -> ventanaCrear.eliminarAlarmasSeleccionadas());
     }
 
-    public void getEscuchaSeleccionarAlarmas(VentanaCrear ventanaCrear){
-        ventanaCrear.registrarEscuchaSeleccionarAlarma( mouseEvent -> {
+    public void getEscuchaSeleccionarAlarmas(VentanaCrear ventanaCrear) {
+        ventanaCrear.registrarEscuchaSeleccionarAlarma(mouseEvent -> {
             ventanaCrear.habilitarBorrarAlarma();
         });
     }
 
-    private void getEscuchaEsDiaCompleto(VentanaCrear ventanaCrear){
+    private void getEscuchaEsDiaCompleto(VentanaCrear ventanaCrear) {
         ventanaCrear.registrarEscuchaSeleccionarDiaCompleto(actionEvent -> {
-            if (ventanaCrear.esDiaCompleto()){
+            if (ventanaCrear.esDiaCompleto()) {
                 ventanaCrear.setFechaDiaCompleto();
-            }else{
+            } else {
                 ventanaCrear.setFechaConHora();
             }
         });
     }
 
-    private void getEscuchaEventoConRepeticion(){
+    private void getEscuchaEventoConRepeticion() {
         vistaVentanaCrearEvento.registrarEscuchaRepeticion(actionEvent -> {
             vistaVentanaCrearEvento.setRepeticion();
         });
     }
 
-    public void getEscuchaGuardarTarea(){
+    public void getEscuchaGuardarTarea() {
         vistaVentanaCrearTarea.registrarEscuchaGuardarTarea(actionEvent -> {
             if (vistaVentanaCrearTarea.guardarDatosTarea() == false) {
                 return;
@@ -358,44 +370,100 @@ public class Vista {
         });
     }
 
-    public TareaArgs getInfoTarea(){
+    public void getEscuchaGuardarEvento() {
+        vistaVentanaCrearEvento.registrarEscuchaGuardarEvento(actionEvent -> {
+            if (vistaVentanaCrearEvento.guardarDatosEvento() == false) {
+                return;
+            }
+            argsEventoActual = vistaVentanaCrearEvento.getInfoEvento();
+            infoAlarmaActual = vistaVentanaCrearEvento.getInfoAlarmas();
+            vistaVentanaCrearEvento.cerrarVentana();
+        });
+    }
+
+    public TareaArgs getInfoTarea() {
         return argsTareaActual;
     }
 
-    public List<List<String>> getInfoAlarmaCreada(){
+    public EventoArgs getInfoEvento() {
+        return argsEventoActual;
+    }
+
+    public List<List<String>> getInfoAlarmaCreada() {
         return infoAlarmaActual;
     }
 
 
-
-    public void guardarTarea(Tarea tarea){
-        this.tareas.add(tarea);
-        mostrarTarea(tarea);
+    public void guardarTarea(Tarea tarea) {
+        this.actividades.add(tarea);
     }
 
-    private void mostrarTarea(Tarea tarea){
-        if (!listas.containsKey(tarea.getFecha().toLocalDate())){
-            return;
-        }
+    public void guardarEvento(Evento evento) {
+        this.actividades.add(evento);
+    }
+
+    private void mostrarTarea(Tarea tarea) {
         ListView<Label> lista = listas.get(tarea.getFecha().toLocalDate());
         String mensaje = "Título: ";
-        if (tarea.getTitulo().length()!=0){
-            mensaje+=tarea.getTitulo();
+        if (tarea.getTitulo().length() != 0) {
+            mensaje += tarea.getTitulo();
         }
-        mensaje+= "\nFecha ";
-        if (!tarea.esDiaCompleto()){
-            mensaje+=tarea.getFecha().toString();
-        }else{
-            mensaje+=tarea.getFecha().toLocalDate().toString();
+        mensaje += "\nFecha ";
+        if (!tarea.esDiaCompleto()) {
+            mensaje += tarea.getFecha().toString();
+        } else {
+            mensaje += tarea.getFecha().toLocalDate().toString();
         }
         Label labelTarea = new Label(mensaje);
         labelTarea.setStyle("-fx-background-color: #adffc4;");
         lista.getItems().add(labelTarea);
     }
 
+
+    private void mostrarEvento(InstanciaEvento evento){
+        String mensaje = "Título: ";
+        if (evento.getTitulo().length()!=0){
+            mensaje+=evento.getTitulo();
+        }
+        mensaje+= "\nFecha ";
+        if (!evento.esDiaCompleto()){
+            mensaje+=evento.getFechaInicio().toString()+"\n"+evento.getFechaFin().toString();
+        }else{
+            mensaje+=evento.getFechaInicio().toLocalDate().toString()+"\n"+ evento.getFechaFin().toLocalDate().toString();
+        }
+        var ultimoDia = getUltimoDia(getPrimerDia(diaActual));
+        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDia(diaActual))) ? getPrimerDia(diaActual): evento.getDiaInicio();
+
+        while ((diaAct.isBefore(ultimoDia) || diaAct.isEqual(ultimoDia)) && (diaAct.isBefore(evento.getDiaFin()) || diaAct.isEqual(evento.getDiaFin()))){
+            Label labelEvento = new Label(mensaje);
+            labelEvento.setStyle("-fx-background-color: orange;");
+            ListView<Label> lista = listas.get(diaAct);
+            lista.getItems().add(labelEvento);
+            diaAct = diaAct.plusDays(1);
+        }
+    }
+
     public void eliminarTareaActual(){
         this.argsTareaActual = null;
         this.infoAlarmaActual = null;
+    }
+    public void eliminarEventoActual(){
+        this.argsEventoActual = null;
+        this.infoAlarmaActual = null;
+    }
+
+    public void actualizarListas(){
+        tipoRango(frecuencia);
+        var primerDia = getPrimerDia(diaActual);
+        var ultimoDia = getUltimoDia(primerDia);
+        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(0,0)));
+        for (Actividad act : acts){
+            if (act instanceof Tarea){
+                mostrarTarea((Tarea) act);
+            }else{
+                mostrarEvento((InstanciaEvento) act);
+            }
+        }
     }
 
 }
