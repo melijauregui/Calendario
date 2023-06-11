@@ -60,6 +60,7 @@ public class Controlador  {
                 }
             }
             vista.guardarTarea(tarea);
+            vista.eliminarTareaActual();
         }
     }
 
