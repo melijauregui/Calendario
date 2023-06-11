@@ -208,13 +208,16 @@ public class Vista {
     }
 
     private void crearListView(double x, double y, double width, double height, LocalDate clave){
-        ListView<String> list = new ListView<>();
-        list.setLayoutX(x);
-        list.setLayoutY(y);
-        list.setPrefWidth(width);
-        list.setPrefHeight(height);
-        list.setStyle("-fx-border-color: white;");
-        listas.put(clave, list);
+        if (!listas.containsKey(clave)) {
+            ListView<String> list = new ListView<>();
+            list.setLayoutX(x);
+            list.setLayoutY(y);
+            list.setPrefWidth(width);
+            list.setPrefHeight(height);
+            list.setStyle("-fx-border-color: white;");
+            listas.put(clave, list);
+        }
+        ListView<String> list = listas.get(clave);
         actualFondo.getChildren().add(list);
     }
 
@@ -292,7 +295,6 @@ public class Vista {
         getEscuchaEsDiaCompleto(vistaVentanaCrearTarea);
         getEscuchaGuardarTarea();
         stageNuevo.showAndWait();
-
     }
 
     public void registrarEscuchaCrearEvento(EventHandler<ActionEvent> eventHandler) {
@@ -420,10 +422,7 @@ public class Vista {
     }
 
     private void mostrarTarea(Tarea tarea){
-        if(listas.containsKey(tarea.getFecha().toLocalDate())){
-            return;
-        }
-        ListView<String> lista = listas.get(tarea.getFecha().toLocalDate());
+        ListView<String> lista = listas.getOrDefault(tarea.getFecha().toLocalDate(), new ListView<String>());
         lista.getItems().add(tarea.getTitulo() + "- Fecha: " + tarea.getFecha().toString());
     }
 

@@ -219,8 +219,6 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         return comboBox;
     }
 
-
-
     private void getEscuchaFrecuencia(){
         registrarEscuchaFrecuencia(actionEvent -> {
             setFrecuencia();

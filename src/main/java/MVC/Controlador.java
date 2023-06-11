@@ -26,6 +26,7 @@ public class Controlador  {
         vista.registrarEscuchaCrearTarea(actionEvent -> {
             try {
                 vista.abrirVentanaCrearTarea();
+                guardarTarea();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -39,7 +40,7 @@ public class Controlador  {
             }
         });
         //vista.getEscuchaCrearAlarma();
-        guardarTarea();
+
 
     }
 
