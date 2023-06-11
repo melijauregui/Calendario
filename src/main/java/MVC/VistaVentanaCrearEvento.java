@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -50,6 +53,12 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     @FXML
     private Button botonGuardarTarea;
     @FXML
+    private Button botonEliminarAlarma;
+    @FXML
+    private ListView<String> listaAlarmas;
+    @FXML
+    private Label errorFecha;;
+    @FXML
     private Button botonCrearAlarma;
     private LocalDateTime fechaActual = LocalDateTime.now();
     @FXML
@@ -77,7 +86,6 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     private ChoiceBox<String> hastaRepe;
     @FXML
     private TextField intervaloRepe;
-
     @FXML
     private ComboBox<String> diaHasta = crearTextField(253, 67, FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
             "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"));
@@ -90,6 +98,7 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     private TextField ocurrencias = crearTextField(253, 37);
     @FXML
     private Pane ventana;
+    private List<List<String>> infoAlarmas = new ArrayList<>();
 
 
     //private VentanaCrearAlarmaTarea ventanaCrearAlarmaTarea;
@@ -118,22 +127,27 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         mesInicio.setVisibleRowCount(5);
         mesFin.setItems(meses);
         mesFin.setVisibleRowCount(5);
-        var minutos = FXCollections.observableArrayList("00","01", "02", "03","04", "05", "06", "07", "08", "09", "10", "11",
+        var minutos = FXCollections.observableArrayList("0","1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
                 "29", "30", "31","32","33", "34","35","36","37","38","39","40","41","42","43","44","45","46","47","48",
                 "49","50","51","52","53","54","55","56","57","58","59");
         minutoInicio.setItems(minutos);
         minutoFin.setItems(minutos);
-        var horas = FXCollections.observableArrayList("00","01", "02", "03","04", "05", "06", "07", "08", "09", "10", "11",
+        minutoInicio.setValue(minutos.get(0));
+        minutoFin.setValue(minutos.get(0));
+        var horas = FXCollections.observableArrayList("0","1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
                 "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
         horaInicio.setItems(horas);
         horaFin.setItems(horas);
+        horaInicio.setValue(horas.get(0));
+        horaFin.setValue(horas.get(0));
         var frecuencias = FXCollections.observableArrayList("Diaria", "Semanal", "Mensual", "Anual");
         frecuencia.setItems(frecuencias);
         var hastaOpciones = FXCollections.observableArrayList("Ocurrencias", "Fecha", "Sin límite");
         hastaRepe.setItems(hastaOpciones);
         hastaRepe.setValue("Sin límite");
-
+        inicializarValorListaAlarmas();
+        deshabilitarBorrarAlarma();
     }
     public void registrarEscuchaRepeticion(EventHandler<ActionEvent> eventHandler){
         repeticion.setOnAction(eventHandler);
@@ -151,6 +165,10 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
         getEscuchaHasta();
         setHasta();
 
+    }
+
+    private void inicializarValorListaAlarmas(){
+        listaAlarmas.getItems().add("Sin alarmas");
     }
 
     private void registrarEscuchaHasta(EventHandler<ActionEvent> eventHandler){
@@ -238,35 +256,96 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
         ventanaCrearAlarmaTarea = new VentanaCrearAlarma(stageNuevo);
+        getEscuchaGuardarAlarma();
         stageNuevo.showAndWait();
     }
 
-    @Override
+    private void getEscuchaGuardarAlarma(){
+        ventanaCrearAlarmaTarea.registrarEscuchaCrearAlarma(actionEvent -> {
+            String aviso = ventanaCrearAlarmaTarea.getAviso();
+            String tiempoRelativo = ventanaCrearAlarmaTarea.getTiempoRelativo();
+            String intervalo = ventanaCrearAlarmaTarea.getIntervalo();
+            if (intervalo.length()>0){
+                if(manejarErrorIntervalo(intervalo) || manejarErrorTiempoRelativo(tiempoRelativo)){
+                    return;
+                }
+            }
+            agregarAlarmaALaLista(aviso, intervalo, tiempoRelativo);
+            ventanaCrearAlarmaTarea.cerrarVentana();
+
+        });
+    }
+
+    private boolean manejarErrorTiempoRelativo(String tiempoRelativo){
+        boolean hayError = false;
+        if (tiempoRelativo.equals(" - ")){
+            ventanaCrearAlarmaTarea.setMensajeError("Tiempo relativo inválido");
+            hayError = true;
+        }else {
+            ventanaCrearAlarmaTarea.setMensajeError("");
+        }
+        return hayError;
+    }
+
+    private boolean manejarErrorIntervalo(String intervalo) {
+        try{
+            int intervaloNumero = Integer.parseInt(intervalo);
+            if (intervaloNumero <=0){
+                throw new NumberFormatException();
+            }
+            ventanaCrearAlarmaTarea.setMensajeError("");
+            return false;
+        } catch(NumberFormatException exception){
+            ventanaCrearAlarmaTarea.setMensajeError("Intervalo inválido");
+        }
+        return true;
+    }
+
+    private void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
+        String mensaje = "Alarma con " + aviso;
+        List<String> infoAlarma = new ArrayList<>();
+        infoAlarma.add(aviso);
+        if (!(intervalo.length()==0) && !(intervalo.equals(" - "))){
+            mensaje += ", " + intervalo + " " + tiempoRelativo.toLowerCase() + " antes.";
+            infoAlarma.add(intervalo);
+            infoAlarma.add(tiempoRelativo);
+        }
+        infoAlarmas.add(infoAlarma); //aviso - intervalo - tRelativo
+        var alarmas = listaAlarmas.getItems();
+        if (alarmas.get(0).equals("Sin alarmas")){
+            alarmas.remove(0);
+        }
+        alarmas.add(mensaje);
+    }
+
     public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
-
+        botonEliminarAlarma.setOnAction(eventHandler);
     }
 
-    @Override
-    public void eliminarAlarmasSeleccionadas() {
-
+    public void eliminarAlarmasSeleccionadas(){
+        var indiceSeleccionado = listaAlarmas.getSelectionModel().getSelectedIndex();
+        listaAlarmas.getItems().remove(indiceSeleccionado);
+        if (listaAlarmas.getItems().isEmpty()){
+            inicializarValorListaAlarmas();
+        }
+        deshabilitarBorrarAlarma();
     }
 
-    @Override
-    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler) {
-
+    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
+        listaAlarmas.setOnMouseClicked(eventHandler);
     }
 
-    @Override
-    public void habilitarBorrarAlarma() {
-
+    public void habilitarBorrarAlarma(){
+        botonEliminarAlarma.setDisable(false);
     }
 
     @Override
     public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
 
-
     }
-    public boolean esDiaCompleto(){
+
+    @Override
+    public boolean esDiaCompleto() {
         return false;
     }
 
@@ -280,8 +359,15 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
 
     }
 
-    public void setMensajeErrorFecha(String mensaje){
+    @Override
+    public void setMensajeErrorFecha(String mensaje) {
 
     }
+
+
+    public void deshabilitarBorrarAlarma(){
+        botonEliminarAlarma.setDisable(true);
+    }
+
 
 }
