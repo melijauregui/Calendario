@@ -83,6 +83,12 @@ public class Controlador  {
                 }
             }
             var repeticionArgs = vista.getInfoRepeticionEvento();
+            System.out.println("frecuencia"+repeticionArgs.getFrecuencia());
+            System.out.println("intervalo"+repeticionArgs.getIntervalo());
+            System.out.println("tipo"+repeticionArgs.getTipo());
+            System.out.println("ocurrencias"+repeticionArgs.getOcurrencias());
+            System.out.println("fecha Hasta"+repeticionArgs.getFechaHasta());
+            System.out.println("dias Semana"+repeticionArgs.getDiasSemana());
             if (repeticionArgs != null){
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
             }

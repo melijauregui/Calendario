@@ -521,7 +521,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         switch (hastaRepe.getValue()){
             case "Ocurrencias" -> {return new RepeticionArgs(intervalo, listaSemana, getOcurrencias());}
             case "Fecha" -> {return new RepeticionArgs(intervalo,listaSemana, getFechaHasta());}
-            case "Sin Límite" -> {return new RepeticionArgs(intervalo,listaSemana);}
+            case "Sin límite" -> {return new RepeticionArgs(intervalo,listaSemana);}
             default -> {return null;}
         }
     }
@@ -529,7 +529,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         switch (hastaRepe.getValue()){
             case "Ocurrencias" -> {return new RepeticionArgs(intervalo, frecuencia, getOcurrencias());}
             case "Fecha" -> {return new RepeticionArgs(intervalo,frecuencia, getFechaHasta());}
-            case "Sin Límite" -> {return new RepeticionArgs(intervalo,frecuencia);}
+            case "Sin límite" -> {return new RepeticionArgs(intervalo,frecuencia);}
             default -> {return null;}
         }
     }
@@ -572,6 +572,4 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     private boolean esRepeticionSemanal(){
         return frecuencia.getValue() == "Semanal";
     }
-
-
 }
