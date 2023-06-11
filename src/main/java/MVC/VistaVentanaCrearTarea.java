@@ -1,5 +1,6 @@
 package MVC;
 
+import Calendario.Main.Argumentos.TareaArgs;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,12 +14,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VistaVentanaCrearTarea implements VentanaCrear{
+public class VistaVentanaCrearTarea extends VentanaCrear{
     @FXML
     private TextField titulo;
     @FXML
@@ -48,6 +50,7 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
     private Label errorFecha;
     private LocalDateTime fechaActual = LocalDateTime.now();
     private VentanaCrearAlarma ventanaCrearAlarmaTarea;
+    private TareaArgs argsTareaActual;
 
     private List<List<String>> infoAlarmas = new ArrayList<>();
     public VistaVentanaCrearTarea(Stage stage) throws IOException {
@@ -198,9 +201,13 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
     public List<List<String>> getInfoAlarmas(){
         return infoAlarmas;
     }
+    public TareaArgs getInfoTarea(){
+        return argsTareaActual;
+    }
 
-    public String getDia(){
-        return dia.getValue();
+    public int getDia(){
+        Integer i = Integer.parseInt(dia.getValue());
+        return i.intValue();
     }
 
     public int getMes(){
@@ -208,16 +215,19 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
 
     }
 
-    public String getAnio(){
-        return anio.getText();
+    private int getAnio(){
+        Integer i = Integer.parseInt(anio.getText());
+        return i.intValue();
     }
 
-    public String getHora(){
-        return hora.getValue();
+    private int getHora(){
+        Integer i = Integer.parseInt(hora.getValue());
+        return i.intValue();
     }
 
-    public String getMinuto(){
-        return minuto.getValue();
+    private int getMinuto(){
+       Integer i = Integer.parseInt(minuto.getValue());
+       return i.intValue();
     }
 
     public boolean esDiaCompleto(){
@@ -247,5 +257,24 @@ public class VistaVentanaCrearTarea implements VentanaCrear{
         stage.close();
     }
 
+
+    public boolean guardarDatosTarea() {
+        if (esDiaCompleto()) {
+            try {
+                argsTareaActual = new TareaArgs(getTitulo(), getDescripcion(), LocalDate.of(getAnio(), getMes(), getDia()));
+            } catch (NumberFormatException | DateTimeException exception) {
+                setMensajeErrorFecha("Fecha inválida");
+                return false;
+            }
+        } else {
+            try {
+                argsTareaActual = new TareaArgs(getTitulo(), getDescripcion(), LocalDateTime.of(getAnio(), getMes(), getDia(), getHora(), getMinuto()));
+            } catch (NumberFormatException | DateTimeException exception) {
+                setMensajeErrorFecha("Fecha inválida");
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

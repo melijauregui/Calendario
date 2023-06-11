@@ -24,7 +24,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
-public class VistaVentanaCrearEvento implements VentanaCrear{
+public class VistaVentanaCrearEvento extends VentanaCrear{
     @FXML
     private TextField titulo;
     @FXML
@@ -366,6 +366,8 @@ public class VistaVentanaCrearEvento implements VentanaCrear{
     public void deshabilitarBorrarAlarma(){
         botonEliminarAlarma.setDisable(true);
     }
+
+
 
 
 }
