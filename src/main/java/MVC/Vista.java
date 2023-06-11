@@ -58,6 +58,9 @@ public class Vista {
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
     private Map<Integer,MenuButton> menuDia;
+    private Map<Label, VistaTarea> vistasTareaSemana;
+    private Map<MenuItem, VistaTarea> vistasTareaMes;
+    private Map<MenuItem, VistaTarea> vistasTareaDia;
     private AnchorPane mainLayout;
     private List<ActividadMutable> actividades = new ArrayList<>();
 
@@ -479,28 +482,6 @@ public class Vista {
     public List<List<String>> getInfoAlarmaCreada() {
         return infoAlarmaActual;
     }
-
-    private void mostrarTareaSemana(Tarea tarea){
-        ListView<Label> lista = listasSemana.get(tarea.getFecha().toLocalDate());
-        Label labelTarea =new Label(getMensajeTarea(tarea));
-        labelTarea.setStyle("-fx-background-color: #adffc4;");
-        lista.getItems().add(labelTarea);
-    }
-
-    private String getMensajeTarea(Tarea tarea){
-        String mensaje = "Título: ";
-        if (tarea.getTitulo().length() != 0) {
-            mensaje += tarea.getTitulo();
-        }
-        mensaje += "\nFecha ";
-        if (!tarea.esDiaCompleto()) {
-            mensaje += tarea.getFecha().toString();
-        } else {
-            mensaje += tarea.getFecha().toLocalDate().toString();
-        }
-        return mensaje;
-    }
-
     private void mostrarEventoMes(InstanciaEvento evento){
         String mensaje = getMensajeEvento(evento);
         var ultimoDia = getUltimoDiaMes(getPrimerDia(diaActual));
@@ -517,19 +498,6 @@ public class Vista {
             }
             diaAct = diaAct.plusDays(1);
         }
-    }
-
-    private  void mostrarTareaMes(Tarea tarea){
-        if (!menuMes.containsKey(tarea.getFecha().toLocalDate())){
-            return;
-        }
-        MenuButton menu = menuMes.get(tarea.getFecha().toLocalDate());
-        if(menu.getItems().isEmpty()){
-            menu.setText("Ver más");
-        }
-        MenuItem item = new MenuItem(getMensajeTarea(tarea));
-        item.setStyle("-fx-background-color: #adffc4;");
-        menu.getItems().add(item);
     }
 
     private String getMensajeEvento(InstanciaEvento evento){
@@ -561,20 +529,6 @@ public class Vista {
         }
     }
 
-    private void mostrarTareaDia(Tarea tarea){
-        int hora = tarea.getFecha().toLocalTime().getHour();
-        if (tarea.esDiaCompleto()){
-            hora = 0;
-        }
-        MenuButton menu = menuDia.get(hora);
-        if(menu.getItems().isEmpty()){
-            menu.setText("Ver más");
-        }
-        MenuItem item = new MenuItem(getMensajeTarea(tarea));
-        item.setStyle("-fx-background-color: #adffc4;");
-        menu.getItems().add(item);
-    }
-
     private void mostrarEventoDia(InstanciaEvento evento){
         int hora = evento.getFechaInicio().toLocalTime().getHour();
         if (evento.esDiaCompleto()){
@@ -597,6 +551,7 @@ public class Vista {
     public void eliminarEventoActual(){
         this.argsEventoActual = null;
         this.infoAlarmaActual = null;
+        this.argsRepeticionEvento = null;
     }
 
     public void guardarTarea(Tarea tarea){
@@ -609,6 +564,7 @@ public class Vista {
 
     public void actualizarListas(){
         reiniciarListSemana();
+        vistasTareaSemana = new HashMap<>();
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -621,7 +577,8 @@ public class Vista {
 
                 @Override
                 public void visitarTarea(Tarea tarea) {
-                    mostrarTareaSemana(tarea);
+                    VistaTarea vistaTarea = new VistaTarea(tarea);
+                    vistaTarea.mostrarTareaSemana(tarea, listasSemana, vistasTareaSemana);
                 }
 
                 @Override
@@ -652,6 +609,7 @@ public class Vista {
 
     public void actualizarMenuMes(){
         reiniciarMenuMes();
+        vistasTareaMes = new HashMap<>();
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaMes(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -664,7 +622,8 @@ public class Vista {
 
                 @Override
                 public void visitarTarea(Tarea tarea) {
-                    mostrarTareaMes(tarea);
+                    VistaTarea vistaTarea = new VistaTarea(tarea);
+                    vistaTarea.mostrarTareaMes(tarea, menuMes, vistasTareaMes);
                 }
 
                 @Override
@@ -678,6 +637,7 @@ public class Vista {
 
     public void actualizarMenuDia(){
         reiniciarMenuDia();
+        vistasTareaDia = new HashMap<>();
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(diaActual, LocalTime.of(0,0)), LocalDateTime.of(diaActual, LocalTime.of(23,59)));
         for (Actividad act : acts){
             act.aceptarVisitor(new ActividadVisitor() {
@@ -688,7 +648,8 @@ public class Vista {
 
                 @Override
                 public void visitarTarea(Tarea tarea) {
-                    mostrarTareaDia(tarea);
+                    VistaTarea vistaTarea = new VistaTarea(tarea);
+                    vistaTarea.mostrarTareaDia(tarea, menuDia, vistasTareaDia);
                 }
 
                 @Override
@@ -706,7 +667,7 @@ public class Vista {
             case "Dia" -> actualizarMenuDia();
         }
     }
-    
+
 
 
 
