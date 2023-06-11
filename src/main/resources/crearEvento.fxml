@@ -5,7 +5,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -32,13 +31,12 @@
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="562.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
+      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="562.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ListView layoutX="12.0" layoutY="486.0" prefHeight="68.0" prefWidth="484.0" />
-      <Label layoutX="18.0" layoutY="489.0" prefHeight="27.0" prefWidth="171.0" text="Sin alarmas" />
+      <ListView fx:id="listaAlarmas" layoutX="12.0" layoutY="486.0" prefHeight="68.0" prefWidth="484.0" />
       <ComboBox fx:id="diaInicio" layoutX="15.0" layoutY="140.0" prefHeight="24.0" prefWidth="75.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -54,12 +52,12 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="horaInicio" layoutX="345.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="horaInicio" layoutX="345.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="minutoInicio" layoutX="430.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="minutoInicio" layoutX="430.0" layoutY="140.0" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -79,12 +77,12 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="horaFin" layoutX="345.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="horaFin" layoutX="345.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ComboBox>
-      <ComboBox fx:id="minutoFin" layoutX="430.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" promptText="00" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+      <ComboBox fx:id="minutoFin" layoutX="430.0" layoutY="204.0" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -120,5 +118,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ChoiceBox>
+      <Button fx:id="botonEliminarAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="121.0" layoutY="562.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Eliminar Alarma" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>
