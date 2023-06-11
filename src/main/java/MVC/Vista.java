@@ -56,7 +56,7 @@ public class Vista {
     private List<List<String>> infoAlarmaActual;
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
-
+    private Map<LocalTime,MenuButton> menuDia;
     private AnchorPane mainLayout;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
@@ -175,15 +175,12 @@ public class Vista {
         mainLayout = rootPane;
     }
 
-    private void setListViewDia() {
-
-    }
-
     private void setearDia() {
         setearPane("file:src/main/java/MVC/imagenes/diario.png");
         frecuencia = "Dia";
         dia.setText(diaActual.toString());
-        //setListViewDia();
+        setMenuDia();
+        actualizarMenuDia();
         choiceFrecuencia.setValue(frecuencia);
 
     }
@@ -194,7 +191,7 @@ public class Vista {
         dia.setText(diaActual.getMonth().toString());
         setMenuMes();
         setearFechas();
-        actualizarMenu();
+        actualizarMenuMes();
         choiceFrecuencia.setValue(frecuencia);
     }
 
@@ -294,7 +291,7 @@ public class Vista {
         double width = 95;
         double height = 15;
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
-            crearMenu(x+104*columna, y+47*fila,width, height, primerDia);
+            guardarMenuConClave(crearMenu(x+104*columna, y+47*fila,width, height), primerDia);
             primerDia = primerDia.plusDays(1);
             if (columna == 6){
                 fila++;
@@ -305,7 +302,7 @@ public class Vista {
         }
     }
 
-    private void crearMenu(double x, double y, double width, double height, LocalDate clave){
+    private MenuButton crearMenu(double x, double y, double width, double height){
         MenuButton menu = new MenuButton();
         menu.setLayoutX(x);
         menu.setLayoutY(y);
@@ -313,8 +310,40 @@ public class Vista {
         menu.setPrefHeight(height);
         menu.setStyle("-fx-border-color: #bdbbbb; -fx-background-color: white;");
         menu.setCursor(Cursor.HAND);
-        menuMes.put(clave, menu);
         actualFondo.getChildren().add(menu);
+        return menu;
+    }
+
+    private void guardarMenuConClave(MenuButton menu,LocalDate claveFecha){
+        menuMes.put(claveFecha, menu);
+    }
+
+    private void guardarMenuConClave(MenuButton menu,LocalTime claveFecha){
+        menuDia.put(claveFecha, menu);
+    }
+
+    private void setMenuDia() {
+        menuDia = new HashMap<>();
+        LocalTime hora = LocalTime.of(0,0);
+        int columna = 0;
+        int fila = 0;
+        double x = 108;
+        double y = 105;
+        double width = 118;
+        double height = 25;
+        while (true) {
+            guardarMenuConClave(crearMenu(x+186*columna, y+47*fila,width, height), hora);
+            hora = hora.plusHours(1);
+            if (fila == 3 && columna == 3){
+                break;
+            }
+            if (fila == 5){
+                columna++;
+                fila = 0;
+            }else{
+                fila++;
+            }
+        }
     }
 
     private void setearFechasMes() {
@@ -529,6 +558,14 @@ public class Vista {
         }
     }
 
+    private void mostrarTareaDia(Tarea tarea){
+
+    }
+
+    private void mostrarEventoDia(InstanciaEvento evento){
+
+    }
+
     public void eliminarTareaActual(){
         this.argsTareaActual = null;
         this.infoAlarmaActual = null;
@@ -562,7 +599,7 @@ public class Vista {
         }
     }
 
-    public void actualizarMenu(){
+    public void actualizarMenuMes(){
         var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaMes(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -587,10 +624,33 @@ public class Vista {
     }
 
 
+    public void actualizarMenuDia(){
+        List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(diaActual, LocalTime.of(0,0)), LocalDateTime.of(diaActual, LocalTime.of(23,59)));
+        for (Actividad act : acts){
+            act.aceptarVisitor(new ActividadVisitor() {
+                @Override
+                public void visitarEvento(Evento evento) {
+                    //
+                }
+
+                @Override
+                public void visitarTarea(Tarea tarea) {
+                    mostrarTareaDia(tarea);
+                }
+
+                @Override
+                public void visitarInstancia(InstanciaEvento instancia) {
+                    mostrarEventoDia(instancia);
+                }
+            });
+        }
+    }
+
     public void actualizarVistaActividades(){
         switch (frecuencia){
             case "Semana" -> actualizarListas();
-            case "Mes" -> actualizarMenu();
+            case "Mes" -> actualizarMenuMes();
+            case "Dia" -> actualizarMenuDia();
         }
     }
 

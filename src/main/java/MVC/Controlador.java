@@ -86,6 +86,7 @@ public class Controlador  {
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
             }
         }
+        vista.eliminarEventoActual();
     }
 
     private TipoAviso getTipoAviso(String aviso){
