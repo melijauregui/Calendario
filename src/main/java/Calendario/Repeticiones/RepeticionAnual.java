@@ -1,5 +1,7 @@
 package Calendario.Repeticiones;
 
+import Calendario.Duracion.Duracion;
+
 import java.time.LocalDate;
 
 public class RepeticionAnual extends Repeticion {
@@ -33,4 +35,7 @@ public class RepeticionAnual extends Repeticion {
         return fecha.plusYears(getIntervalo());
     }
 
+    public void actualizarDuracion(Duracion d){
+        return;
+    }
 }

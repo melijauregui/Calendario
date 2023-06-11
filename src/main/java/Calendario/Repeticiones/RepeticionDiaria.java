@@ -1,5 +1,7 @@
 package Calendario.Repeticiones;
 
+import Calendario.Duracion.Duracion;
+
 import java.time.LocalDate;
 
 public class RepeticionDiaria extends Repeticion {
@@ -17,6 +19,9 @@ public class RepeticionDiaria extends Repeticion {
     public RepeticionDiaria(int intervaloDiaria, int ocurrencias){
         super(intervaloDiaria, ocurrencias);
 
+    }
+    public void actualizarDuracion(Duracion d){
+        return;
     }
 
     /**

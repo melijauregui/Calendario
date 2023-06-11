@@ -1,5 +1,7 @@
 package Calendario.Repeticiones;
 
+import Calendario.Duracion.Duracion;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -93,5 +95,5 @@ public abstract class Repeticion implements Serializable {
      */
     protected abstract LocalDate getProximaFecha(LocalDate fecha);
 
-
+    public abstract void actualizarDuracion(Duracion duracion);
 }

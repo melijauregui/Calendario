@@ -26,6 +26,9 @@ public class Evento extends ActividadMutable implements Serializable {
      * Cambia la duración del evento
      */
     public void setDuracion(Duracion duracion){
+        if (repeticion != null){
+            repeticion.actualizarDuracion(duracion);
+        }
         this.duracion = duracion;
     }
 
@@ -34,7 +37,7 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     public void setRepeticion(Repeticion repeticion){
         this.repeticion = repeticion;
-
+        repeticion.actualizarDuracion(duracion);
     }
 
     /**

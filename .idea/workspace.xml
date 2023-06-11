@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Eventos/Evento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/Repeticion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionAnual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionDiaria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionMensual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Repeticiones/RepeticionSemanal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,7 +361,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686509577901</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="labels">
+      <created>1686513279023</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1686513279023</updated>
+    </task>
+    <task id="LOCAL-00023" summary="labels">
+      <created>1686513528438</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1686513528438</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
