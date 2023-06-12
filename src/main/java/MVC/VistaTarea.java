@@ -139,6 +139,10 @@ public class VistaTarea extends VentanaCrear{
         }else {
             estado.setText("No completada");
         }
+        actualizarAlarmaText();
+    }
+
+    private void actualizarAlarmaText(){
         for (Alarma alarma: tarea.getAlarmas()){
             String mensaje = alarma.getFechaAlarma().toString();
             listaAlarmas.getItems().add(mensaje);
