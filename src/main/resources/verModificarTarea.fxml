@@ -9,45 +9,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="413.0" style="-fx-border-color: #adffc4; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="413.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/tareaModificar.png);-fx-background-size: 413px 490px;-fx-background-repeat: no-repeat; -fx-border-color: #adffc4; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="144.0" layoutY="24.0" prefHeight="49.0" prefWidth="125.0" text="TAREA">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="33.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="73.0" prefHeight="49.0" prefWidth="66.0" text="Título:">
-         <font>
-            <Font name="Comic Sans MS" size="20.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="10.0" layoutY="122.0" prefHeight="49.0" prefWidth="125.0" text="Descripción:">
-         <font>
-            <Font name="Comic Sans MS" size="20.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="10.0" layoutY="221.0" prefHeight="49.0" prefWidth="76.0" text="Fecha: ">
-         <font>
-            <Font name="Comic Sans MS" size="20.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="9.0" layoutY="270.0" prefHeight="49.0" prefWidth="76.0" text="Estado:">
-         <font>
-            <Font name="Comic Sans MS" size="20.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="10.0" layoutY="319.0" prefHeight="49.0" prefWidth="88.0" text="Alarmas:">
-         <font>
-            <Font name="Comic Sans MS" size="20.0" />
-         </font>
-      </Label>
       <ListView fx:id="infoAlarmas" layoutX="17.0" layoutY="362.0" prefHeight="84.0" prefWidth="378.0" />
-      <Button fx:id="editarTitulo" layoutX="333.0" layoutY="85.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
+      <Button fx:id="editarTitulo" layoutX="333.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="editarDescripcion" layoutX="333.0" layoutY="133.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
+      <Button fx:id="editarDescripcion" layoutX="143.0" layoutY="133.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -57,22 +27,22 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextArea>
-      <TextField fx:id="titulo" editable="false" layoutX="98.0" layoutY="86.0" prefHeight="25.0" prefWidth="225.0">
+      <TextField fx:id="titulo" editable="false" layoutX="87.0" layoutY="90.0" prefHeight="25.0" prefWidth="225.0">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <Button fx:id="editarFecha" layoutX="333.0" layoutY="235.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
+      <Button fx:id="editarFecha" layoutX="283.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="completar" layoutX="310.0" layoutY="281.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Completar">
+      <Button fx:id="completar" layoutX="283.0" layoutY="290.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Completar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="estado" layoutX="121.0" layoutY="286.0" prefHeight="27.0" prefWidth="115.0" />
+      <Label fx:id="estado" layoutX="121.0" layoutY="290.0" prefHeight="29.0" prefWidth="115.0" />
       <Button fx:id="agregarAlarma" layoutX="17.0" layoutY="449.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Agregar Alarma">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -83,6 +53,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="fecha" alignment="CENTER" layoutX="107.0" layoutY="236.0" prefHeight="25.0" prefWidth="158.0" />
+      <Label fx:id="fecha" layoutX="121.0" layoutY="240.0" prefHeight="29.0" prefWidth="158.0" />
    </children>
 </Pane>
