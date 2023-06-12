@@ -23,9 +23,17 @@ public class Controlador  {
         this.vista = vista;
     }
     public void start(){
-        vista.registrarEscuchaFrecuencia(actionEvent -> {vista.tipoRango(vista.getEscuchaFrecuencia());});
-        vista.registrarEscuchaSiguiente(actionEvent -> {vista.getEscuchaSiguiente();});
-        vista.registrarEscuchaAnterior(actionEvent -> {vista.getEscuchaAnterior();});
+        vista.registrarEscuchaFrecuencia(actionEvent -> {
+            vista.tipoRango(vista.getEscuchaFrecuencia());
+            verTarea();
+        });
+        vista.registrarEscuchaSiguiente(actionEvent -> {vista.getEscuchaSiguiente();
+            verTarea();
+        });
+
+        vista.registrarEscuchaAnterior(actionEvent -> {vista.getEscuchaAnterior();
+            verTarea();
+        });
         vista.registrarEscuchaCrearTarea(actionEvent -> {
             try {
                 vista.abrirVentanaCrearTarea();
@@ -116,14 +124,20 @@ public class Controlador  {
         switch (vista.getEscuchaFrecuencia()){
             case "Semana" -> vista.registrarEscuchaVerTareaLabel(mouseEvent -> {
                 try {
-                    vista.abrirVistaDetalladaLabel();
+                    vista.abrirVistaDetalladaSemana();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
-            default -> vista.registrarEscuchaVerTareaMenu(actionEvent -> {
-
+            default -> {
+                vista.registrarEscuchaGuardarItem();
+                vista.registrarEscuchaVerTareaMenu(actionEvent -> {
+                    try {
+                        vista.abrirVistaDetalladaMenu();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
             });
-        }
+        }}
     }
 }

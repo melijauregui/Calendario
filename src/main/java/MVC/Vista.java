@@ -61,6 +61,7 @@ public class Vista {
     private Map<Integer,MenuButton> menuDia;
     private Map<Label, VistaTarea> vistasTareaLabel;
     private Map<MenuItem, VistaTarea> vistasTareaMenu;
+    private MenuItem itemSeleccionado;
     private AnchorPane mainLayout;
     private List<ActividadMutable> actividades = new ArrayList<>();
 
@@ -680,12 +681,19 @@ public class Vista {
         }
     }
 
+    public void registrarEscuchaGuardarItem(){
+        for (MenuItem item: vistasTareaMenu.keySet()){
+            item.setOnAction(actionEvent -> itemSeleccionado = item);
+        }
+    }
+
     public void registrarEscuchaVerTareaMenu(EventHandler<ActionEvent> eventHandler){
         for (MenuItem item: vistasTareaMenu.keySet()){
             item.setOnAction(eventHandler);
         }
     }
-    public void abrirVistaDetalladaLabel() throws IOException {
+
+    public void abrirVistaDetalladaSemana() throws IOException {
         for (ListView<Label> lista: listasSemana.values()){
             Label labelSeleccionada = lista.getSelectionModel().getSelectedItem();
             if (labelSeleccionada != null){
@@ -697,6 +705,15 @@ public class Vista {
             }
         }
 
+    }
+
+    public void abrirVistaDetalladaMenu() throws IOException {
+        if (itemSeleccionado != null){
+            VistaTarea vistaTarea = vistasTareaMenu.get(itemSeleccionado);
+            Stage nuevoStage = new Stage();
+            vistaTarea.abrirVistaDetallada(nuevoStage);
+            nuevoStage.showAndWait();
+        }
     }
 
 }
