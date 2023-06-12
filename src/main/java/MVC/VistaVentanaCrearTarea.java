@@ -98,66 +98,11 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
         ventanaCrearAlarmaTarea = new VentanaCrearAlarma(stageNuevo);
-        getEscuchaGuardarAlarma();
+        getEscuchaGuardarAlarma_(ventanaCrearAlarmaTarea);
         stageNuevo.showAndWait();
     }
-
-    private void getEscuchaGuardarAlarma(){
-        ventanaCrearAlarmaTarea.registrarEscuchaCrearAlarma(actionEvent -> {
-            String aviso = ventanaCrearAlarmaTarea.getAviso();
-            String tiempoRelativo = ventanaCrearAlarmaTarea.getTiempoRelativo();
-            String intervalo = ventanaCrearAlarmaTarea.getIntervalo();
-            if (intervalo.length()>0){
-                if(manejarErrorIntervalo(intervalo) || manejarErrorTiempoRelativo(tiempoRelativo)){
-                   return;
-                }
-            }
-            agregarAlarmaALaLista(aviso, intervalo, tiempoRelativo);
-            ventanaCrearAlarmaTarea.cerrarVentana();
-
-        });
-    }
-
-    private boolean manejarErrorTiempoRelativo(String tiempoRelativo){
-        boolean hayError = false;
-        if (tiempoRelativo.equals(" - ")){
-            ventanaCrearAlarmaTarea.setMensajeError("Tiempo relativo inválido");
-            hayError = true;
-        }else {
-            ventanaCrearAlarmaTarea.setMensajeError("");
-        }
-        return hayError;
-    }
-
-    private boolean manejarErrorIntervalo(String intervalo) {
-        try{
-            int intervaloNumero = Integer.parseInt(intervalo);
-            if (intervaloNumero <=0){
-                throw new NumberFormatException();
-            }
-            ventanaCrearAlarmaTarea.setMensajeError("");
-            return false;
-        } catch(NumberFormatException exception){
-            ventanaCrearAlarmaTarea.setMensajeError("Intervalo inválido");
-        }
-        return true;
-    }
-
-    private void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
-        String mensaje = "Alarma con " + aviso;
-        List<String> infoAlarma = new ArrayList<>();
-        infoAlarma.add(aviso);
-        if (!(intervalo.length()==0) && !(intervalo.equals(" - "))){
-            mensaje += ", " + intervalo + " " + tiempoRelativo.toLowerCase() + " antes.";
-        }
-        infoAlarma.add(intervalo);
-        infoAlarma.add(tiempoRelativo);
-        infoAlarmas.add(infoAlarma); //aviso - intervalo - tRelativo
-        var alarmas = listaAlarmas.getItems();
-        if (alarmas.get(0).equals("Sin alarmas")){
-            alarmas.remove(0);
-        }
-        alarmas.add(mensaje);
+    public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
+        agregarAlarmaALaLista_(listaAlarmas, aviso, intervalo, tiempoRelativo);
     }
 
     public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
@@ -165,12 +110,7 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
     }
 
     public void eliminarAlarmasSeleccionadas(){
-        var indiceSeleccionado = listaAlarmas.getSelectionModel().getSelectedIndex();
-        listaAlarmas.getItems().remove(indiceSeleccionado);
-        if (listaAlarmas.getItems().isEmpty()){
-            inicializarValorListaAlarmas();
-        }
-        deshabilitarBorrarAlarma();
+        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma);
     }
 
     public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
@@ -199,7 +139,7 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
     }
 
     public List<List<String>> getInfoAlarmas(){
-        return infoAlarmas;
+        return getInfoAlarmas_();
     }
     public TareaArgs getInfoTarea(){
         return argsTareaActual;

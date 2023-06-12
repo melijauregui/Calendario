@@ -414,6 +414,7 @@ public class Vista {
             try {
                 ventanaCrear.abrirVentanaCrearAlarma();
             } catch (Exception e) {
+                System.out.println("AAA");
                 throw new RuntimeException(e);
             }
         });
@@ -692,6 +693,9 @@ public class Vista {
                 VistaTarea vistaTarea = vistasTareaLabel.get(labelSeleccionada);
                 Stage nuevoStage = new Stage();
                 vistaTarea.abrirVistaDetallada(nuevoStage);
+                getEscuchaCrearAlarma(vistaTarea);
+                getEscuchaSeleccionarAlarmas(vistaTarea);
+                getEscuchaEliminarAlarmas(vistaTarea);
                 nuevoStage.showAndWait();
                 break;
             }

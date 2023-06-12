@@ -4,24 +4,28 @@ import Calendario.Actividad.ActividadMutable;
 import Calendario.Alarmas.Alarma;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Tareas.Tarea;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class VistaTarea {
+public class VistaTarea extends VentanaCrear{
 
     private Tarea tarea;
     private Stage stage;
-    //private Scene scene;
     @FXML
     private TextField titulo;
     @FXML
@@ -31,7 +35,7 @@ public class VistaTarea {
     @FXML
     private  Label estado;
     @FXML
-    private ListView<Label> infoAlarmas;
+    private ListView<String> listaAlarmas;
     @FXML
     private Button editarTitulo;
     @FXML
@@ -41,9 +45,10 @@ public class VistaTarea {
     @FXML
     private Button completar;
     @FXML
-    private Button agregarAlarma;
+    private Button botonCrearAlarma;;
     @FXML
-    private Button eliminarAlarma;
+    private Button botonEliminarAlarma;
+    private VentanaCrearAlarma ventanaCrearAlarmaTarea;
     public VistaTarea(Tarea tarea) {
         this.tarea = tarea;
     }
@@ -136,9 +141,72 @@ public class VistaTarea {
         }
         for (Alarma alarma: tarea.getAlarmas()){
             String mensaje = alarma.getFechaAlarma().toString();
-            Label infoAlarma = new Label(mensaje);
-            infoAlarmas.getItems().add(infoAlarma);
+            listaAlarmas.getItems().add(mensaje);
         }
     }
+    public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonCrearAlarma.setOnAction(eventHandler);
+    }
 
+    public void abrirVentanaCrearAlarma() throws IOException {
+        Stage stageNuevo = new Stage();
+        ventanaCrearAlarmaTarea = new VentanaCrearAlarma(stageNuevo);
+        getEscuchaGuardarAlarma();
+        stageNuevo.showAndWait();
+    }
+    public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonEliminarAlarma.setOnAction(eventHandler);
+    }
+    public void eliminarAlarmasSeleccionadas(){
+        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma);
+    }
+
+    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
+        listaAlarmas.setOnMouseClicked(eventHandler);
+    }
+
+    public void habilitarBorrarAlarma(){
+        botonEliminarAlarma.setDisable(false);
+    }
+
+    @Override
+    void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
+
+    }
+
+    @Override
+    boolean esDiaCompleto() {
+        return false;
+    }
+
+    @Override
+    void setFechaDiaCompleto() {
+
+    }
+
+    @Override
+    void setFechaConHora() {
+
+    }
+
+    @Override
+    void setMensajeErrorFecha(String mensaje) {
+
+    }
+
+    private void getEscuchaGuardarAlarma(){
+        escuchaGuardarAlarma(ventanaCrearAlarmaTarea);
+    }
+    public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
+        agregarAlarmaALaLista_(listaAlarmas, aviso, intervalo, tiempoRelativo);
+    }
+    @Override
+    protected void eliminarAlarmasSeleccionadas_(ListView<String> listaAlarmas, Button botonEliminarAlarma){
+        var indiceSeleccionado = listaAlarmas.getSelectionModel().getSelectedIndex();
+        listaAlarmas.getItems().remove(indiceSeleccionado);
+        if (listaAlarmas.getItems().isEmpty()){
+            inicializarValorListaAlarmas_(listaAlarmas);
+        }
+        deshabilitarBorrarAlarma_(botonEliminarAlarma);
+    }
 }

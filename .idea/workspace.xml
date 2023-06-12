@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VentanaCrear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VentanaCrear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaTarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearTarea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +40,19 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="f9b35dbf-8733-42a9-a1fb-e4f5653c7f92" />
+        <option name="url" value="git@github.com:melijauregui/TpCalendario.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -398,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686532194722</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="labels">
+      <created>1686538172791</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1686538172791</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
