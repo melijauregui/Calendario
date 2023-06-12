@@ -96,4 +96,9 @@ public abstract class Repeticion implements Serializable {
     protected abstract LocalDate getProximaFecha(LocalDate fecha);
 
     public abstract void actualizarDuracion(Duracion duracion);
+    public void actualizarOcurrencias(){
+        if (ocurrencias > 0){
+            ocurrenciasRelativas = ocurrencias;
+        }
+    }
 }

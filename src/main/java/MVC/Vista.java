@@ -593,6 +593,7 @@ public class Vista {
         }
     }
 
+
     private void reiniciarMenuMes(){
         for (MenuButton menu: menuMes.values()){
             menu.getItems().clear();

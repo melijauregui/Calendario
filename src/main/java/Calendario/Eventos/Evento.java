@@ -64,6 +64,7 @@ public class Evento extends ActividadMutable implements Serializable {
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
         }
+        repeticion.actualizarOcurrencias();
         return eventos;
 
     }
