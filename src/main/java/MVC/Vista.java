@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,9 +59,8 @@ public class Vista {
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
     private Map<Integer,MenuButton> menuDia;
-    private Map<Label, VistaTarea> vistasTareaSemana;
-    private Map<MenuItem, VistaTarea> vistasTareaMes;
-    private Map<MenuItem, VistaTarea> vistasTareaDia;
+    private Map<Label, VistaTarea> vistasTareaLabel;
+    private Map<MenuItem, VistaTarea> vistasTareaMenu;
     private AnchorPane mainLayout;
     private List<ActividadMutable> actividades = new ArrayList<>();
 
@@ -567,8 +567,9 @@ public class Vista {
 
     public void actualizarListas(){
         reiniciarListSemana();
-        vistasTareaSemana = new HashMap<>();
         var primerDia = getPrimerDiaSemana(diaActual);
+        vistasTareaLabel = new HashMap<>();
+        //var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
@@ -581,7 +582,7 @@ public class Vista {
                 @Override
                 public void visitarTarea(Tarea tarea) {
                     VistaTarea vistaTarea = new VistaTarea(tarea);
-                    vistaTarea.mostrarTareaSemana(tarea, listasSemana, vistasTareaSemana);
+                    vistaTarea.mostrarTareaSemana(tarea, listasSemana, vistasTareaLabel);
                 }
 
                 @Override
@@ -612,8 +613,9 @@ public class Vista {
 
     public void actualizarMenuMes(){
         reiniciarMenuMes();
-        vistasTareaMes = new HashMap<>();
         var primerDia = getPrimerDiaSemana(getPrimerDiaMes(diaActual));
+        vistasTareaMenu = new HashMap<>();
+        //var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaMes(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
@@ -626,7 +628,7 @@ public class Vista {
                 @Override
                 public void visitarTarea(Tarea tarea) {
                     VistaTarea vistaTarea = new VistaTarea(tarea);
-                    vistaTarea.mostrarTareaMes(tarea, menuMes, vistasTareaMes);
+                    vistaTarea.mostrarTareaMes(tarea, menuMes, vistasTareaMenu);
                 }
 
                 @Override
@@ -640,7 +642,7 @@ public class Vista {
 
     public void actualizarMenuDia(){
         reiniciarMenuDia();
-        vistasTareaDia = new HashMap<>();
+        vistasTareaMenu = new HashMap<>();
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(diaActual, LocalTime.of(0,0)), LocalDateTime.of(diaActual, LocalTime.of(23,59)));
         for (Actividad act : acts){
             act.aceptarVisitor(new ActividadVisitor() {
@@ -650,9 +652,9 @@ public class Vista {
                 }
 
                 @Override
-                public void visitarTarea(Tarea tarea) {
+                public void visitarTarea(Tarea tarea){
                     VistaTarea vistaTarea = new VistaTarea(tarea);
-                    vistaTarea.mostrarTareaDia(tarea, menuDia, vistasTareaDia);
+                    vistaTarea.mostrarTareaDia(tarea, menuDia, vistasTareaMenu);
                 }
 
                 @Override
@@ -671,8 +673,29 @@ public class Vista {
         }
     }
 
+    public void registrarEscuchaVerTareaLabel(EventHandler<MouseEvent> eventHandler){
+        for (Label labelTarea: vistasTareaLabel.keySet()){
+            labelTarea.setOnMouseClicked(eventHandler);
+        }
+    }
 
+    public void registrarEscuchaVerTareaMenu(EventHandler<ActionEvent> eventHandler){
+        for (MenuItem item: vistasTareaMenu.keySet()){
+            item.setOnAction(eventHandler);
+        }
+    }
+    public void abrirVistaDetalladaLabel() throws IOException {
+        for (ListView<Label> lista: listasSemana.values()){
+            Label labelSeleccionada = lista.getSelectionModel().getSelectedItem();
+            if (labelSeleccionada != null){
+                VistaTarea vistaTarea = vistasTareaLabel.get(labelSeleccionada);
+                Stage nuevoStage = new Stage();
+                vistaTarea.abrirVistaDetallada(nuevoStage);
+                nuevoStage.showAndWait();
+                break;
+            }
+        }
 
-
+    }
 
 }

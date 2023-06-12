@@ -149,9 +149,9 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
         infoAlarma.add(aviso);
         if (!(intervalo.length()==0) && !(intervalo.equals(" - "))){
             mensaje += ", " + intervalo + " " + tiempoRelativo.toLowerCase() + " antes.";
-            infoAlarma.add(intervalo);
-            infoAlarma.add(tiempoRelativo);
         }
+        infoAlarma.add(intervalo);
+        infoAlarma.add(tiempoRelativo);
         infoAlarmas.add(infoAlarma); //aviso - intervalo - tRelativo
         var alarmas = listaAlarmas.getItems();
         if (alarmas.get(0).equals("Sin alarmas")){

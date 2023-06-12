@@ -5,6 +5,7 @@ import Calendario.Alarmas.Alarma;
 import Calendario.Actividad.ActividadMutable;
 import Calendario.Main.Constantes;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -46,7 +47,7 @@ public class Tarea extends ActividadMutable {
      * de fechas pasado por parámetro
      */
     public boolean estaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
-        return !this.estaCompleta() && (estaEnElIntervaloConHora(desde, hasta) || estaEnElIntervaloDiaCompleto(desde.toLocalDate()));
+        return (estaEnElIntervaloConHora(desde, hasta) || estaEnElIntervaloDiaCompleto(desde.toLocalDate()));
     }
 
     /**
@@ -83,7 +84,7 @@ public class Tarea extends ActividadMutable {
     /**
      * Acepta un Visitor
      */
-    public void aceptarVisitor(ActividadVisitor actividadVisitor){
+    public void aceptarVisitor(ActividadVisitor actividadVisitor) {
         actividadVisitor.visitarTarea(this);
     }
 
@@ -104,7 +105,7 @@ public class Tarea extends ActividadMutable {
     /**
      * Devuelve true si la tarea ha sido completada, false en caso contrario
      */
-    private boolean estaCompleta(){
+    public boolean estaCompleta(){
         return this.completada;
     }
 

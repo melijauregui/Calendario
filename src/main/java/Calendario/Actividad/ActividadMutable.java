@@ -1,5 +1,6 @@
 package Calendario.Actividad;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 public abstract class ActividadMutable extends Actividad implements Serializable {

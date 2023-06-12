@@ -40,7 +40,7 @@ public class VentanaCrearAlarma {
 
     }
     private void initialize(){
-        var tipos = FXCollections.observableArrayList(" - ","Minutos", "Horas","Días", "Semana");
+        var tipos = FXCollections.observableArrayList(" - ","Minutos", "Horas","Días", "Semanas");
         tipoTiempoRelativo.setItems(tipos);
         tipoTiempoRelativo.setValue(tipos.get(0));
         var avisos = FXCollections.observableArrayList("Notificación", "Mail", "Sonido");

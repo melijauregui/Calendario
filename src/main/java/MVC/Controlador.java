@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Controlador  {
@@ -30,6 +31,7 @@ public class Controlador  {
                 vista.abrirVentanaCrearTarea();
                 guardarTarea();
                 vista.actualizarVistaActividades();
+                verTarea();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -53,11 +55,11 @@ public class Controlador  {
             Tarea tarea = calendario.crearTarea(tareaArgs);
             for (List<String> infoAlarma: infoAlarmas){
                 TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
-                int intervalo = Integer.parseInt(infoAlarma.get(1));
                 TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
                 if (tiempoRelativo == null){
                     calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), aviso);
                 }else{
+                    int intervalo = Integer.parseInt(infoAlarma.get(1));
                     calendario.agregarAlarmaTarea(tarea, tarea.getFecha() , intervalo, tiempoRelativo, aviso);
                 }
             }
@@ -74,11 +76,11 @@ public class Controlador  {
             Evento evento = calendario.crearEvento(eventoArgs);
             for (List<String> infoAlarma: infoAlarmas){
                 TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
-                int intervalo = Integer.parseInt(infoAlarma.get(1));
                 TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
                 if (tiempoRelativo == null){
                     calendario.agregarAlarmaEvento(evento, aviso);
                 }else{
+                    int intervalo = Integer.parseInt(infoAlarma.get(1));
                     calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
                 }
             }
@@ -101,7 +103,7 @@ public class Controlador  {
         switch (aviso){
             case "Notificación" -> {return TipoAviso.NOTIFICACION;}
             case "Sonido" -> {return TipoAviso.SONIDO;}
-            case "Email" -> {return  TipoAviso.EMAIL;}
+            case "Mail" -> {return  TipoAviso.EMAIL;}
             default -> {return null;}
         }
     }
@@ -113,6 +115,21 @@ public class Controlador  {
             case "Horas" -> {return  TiempoRelativo.HORAS;}
             case "Semanas" -> {return TiempoRelativo.SEMANAS;}
             default -> {return null;}
+        }
+    }
+
+    private void verTarea(){
+        switch (vista.getEscuchaFrecuencia()){
+            case "Semana" -> vista.registrarEscuchaVerTareaLabel(mouseEvent -> {
+                try {
+                    vista.abrirVistaDetalladaLabel();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            default -> vista.registrarEscuchaVerTareaMenu(actionEvent -> {
+
+            });
         }
     }
 }
