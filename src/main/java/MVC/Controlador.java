@@ -25,21 +25,21 @@ public class Controlador  {
     public void start(){
         vista.registrarEscuchaFrecuencia(actionEvent -> {
             vista.tipoRango(vista.getEscuchaFrecuencia());
-            verTarea();
+            verActividad();
         });
         vista.registrarEscuchaSiguiente(actionEvent -> {vista.getEscuchaSiguiente();
-            verTarea();
+            verActividad();
         });
 
         vista.registrarEscuchaAnterior(actionEvent -> {vista.getEscuchaAnterior();
-            verTarea();
+            verActividad();
         });
         vista.registrarEscuchaCrearTarea(actionEvent -> {
             try {
                 vista.abrirVentanaCrearTarea();
                 guardarTarea();
                 vista.actualizarVistaActividades();
-                verTarea();
+                verActividad();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -49,6 +49,7 @@ public class Controlador  {
                 vista.abrirVentanaCrearEvento();
                 guardarEvento();
                 vista.actualizarVistaActividades();
+                verActividad();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -120,9 +121,9 @@ public class Controlador  {
         }
     }
 
-    private void verTarea(){
+    private void verActividad(){
         switch (vista.getEscuchaFrecuencia()){
-            case "Semana" -> vista.registrarEscuchaVerTareaLabel(mouseEvent -> {
+            case "Semana" -> vista.registrarEscuchaVerActividadLabel(mouseEvent -> {
                 try {
                     vista.abrirVistaDetalladaSemana();
                 } catch (IOException e) {
@@ -131,7 +132,7 @@ public class Controlador  {
             });
             default -> {
                 vista.registrarEscuchaGuardarItem();
-                vista.registrarEscuchaVerTareaMenu(actionEvent -> {
+                vista.registrarEscuchaVerActividadMenu(actionEvent -> {
                     try {
                         vista.abrirVistaDetalladaMenu();
                     } catch (IOException e) {

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="413.0" style="-fx-border-color: #ffd3a1; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView fx:id="infoAlarmas" layoutX="18.0" layoutY="413.0" prefHeight="84.0" prefWidth="378.0" />
+      <Button fx:id="editarTitulo" layoutX="344.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="editarDescripcion" layoutX="143.0" layoutY="130.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextArea fx:id="descripcion" editable="false" layoutX="15.0" layoutY="164.0" prefHeight="63.0" prefWidth="378.0">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextArea>
+      <TextField fx:id="titulo" editable="false" layoutX="95.0" layoutY="91.0" prefHeight="25.0" prefWidth="225.0">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <Button fx:id="editarFecha" layoutX="344.0" layoutY="241.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="editarRepeticion" layoutX="344.0" layoutY="319.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="estado" layoutX="121.0" layoutY="290.0" prefHeight="29.0" prefWidth="115.0" />
+      <Button fx:id="agregarAlarma" layoutX="18.0" layoutY="505.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Agregar Alarma">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="eliminarAlarma" disable="true" layoutX="294.0" layoutY="505.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Eliminar Alarma">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="fechaInicio" layoutX="143.0" layoutY="240.0" prefHeight="29.0" prefWidth="158.0" />
+      <Button fx:id="eliminar" layoutX="334.0" layoutY="28.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Eliminar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="18.0" layoutY="319.0" prefHeight="25.0" prefWidth="85.0" text="Repetición">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="378.0" prefHeight="25.0" prefWidth="85.0" text="Alarmas">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="241.0" prefHeight="27.0" prefWidth="101.0" text="Fecha Inicio">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="277.0" prefHeight="27.0" prefWidth="101.0" text="Fecha Inicio">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="fechaFin" layoutX="143.0" layoutY="276.0" prefHeight="29.0" prefWidth="158.0" />
+      <Label layoutX="18.0" layoutY="90.0" prefHeight="27.0" prefWidth="48.0" text="Título">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="126.0" prefHeight="27.0" prefWidth="101.0" text="Descripción">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="repeticion" editable="false" layoutX="18.0" layoutY="346.0" prefHeight="25.0" prefWidth="319.0" />
+      <Label layoutX="178.0" layoutY="28.0" prefHeight="27.0" prefWidth="60.0" text="Evento">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

@@ -49,6 +49,7 @@ public class Evento extends ActividadMutable implements Serializable {
         nuevaDuracion.setDiaInicio(diaInicio);
         nuevaDuracion.setDiaFin(diaFin);
         InstanciaEvento instancia = new InstanciaEvento(getTitulo(), getDescripcion(), nuevaDuracion, alarmasEvento);
+        instancia.setReferenciaEvento(this);
         return instancia;
     }
 
@@ -64,7 +65,9 @@ public class Evento extends ActividadMutable implements Serializable {
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
         }
-        repeticion.actualizarOcurrencias();
+        if (repeticion != null){
+            repeticion.actualizarOcurrencias();
+        }
         return eventos;
 
     }
@@ -113,10 +116,31 @@ public class Evento extends ActividadMutable implements Serializable {
     }
 
     /**
+     * Devuelve la fecha de finalización de la primera instancia del evento
+     */
+    public LocalDateTime getFechaFin() {
+        return duracion.getFechaFin();
+    }
+
+    /**
+     * Devuelve la repetición
+     */
+    public Repeticion getRepeticion(){
+        return repeticion;
+    }
+
+    /**
      * Acepta un Visitor
      */
     public void aceptarVisitor(ActividadVisitor actividadVisitor){
         actividadVisitor.visitarEvento(this);
+    }
+
+    /**
+     * Devuelve true si el evento es de día completo
+     */
+    public boolean esDiaCompleto(){
+        return duracion.esDiaCompleto();
     }
 
     /**

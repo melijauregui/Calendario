@@ -1,6 +1,5 @@
 package MVC;
 
-import Calendario.Enums.TipoAviso;
 import Calendario.Main.Argumentos.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -25,7 +24,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
+
 public class VistaVentanaCrearEvento extends VentanaCrear{
     @FXML
     private TextField titulo;
@@ -159,14 +158,14 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     }
     public void setRepeticion(){
         boolean aux = true;
-         if (repeticion.isSelected()){
+        if (repeticion.isSelected()){
             aux = !aux;
         }
         frecuencia.setDisable(aux);
         intervaloRepe.setDisable(aux);
         hastaRepe.setDisable(aux);
         getEscuchaFrecuencia();
-        setFrecuencia();
+        getEscuchaFrecuencia();
         getEscuchaHasta();
         setHasta();
 
@@ -187,7 +186,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
 
     private void setFrecuencia(){
         boolean aux = true;
-        if (repeticion.isSelected() && (frecuencia.getValue() == "Semanal")){
+        if (repeticion.isSelected() && (frecuencia.getValue().equals("Semanal"))){
             aux = !aux;
         }
         lun.setDisable(aux);
@@ -200,10 +199,10 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     }
     private void setHasta(){
         limpiarVentana();
-        if (repeticion.isSelected() && hastaRepe.getValue() == "Ocurrencias"){
+        if (repeticion.isSelected() && hastaRepe.getValue().equals("Ocurrencias")){
             ventana.getChildren().add(ocurrencias);
         }
-        if (repeticion.isSelected() && hastaRepe.getValue() == "Fecha"){
+        if (repeticion.isSelected() && hastaRepe.getValue().equals("Fecha")){
             ventana.getChildren().add(diaHasta);
             ventana.getChildren().add(mesHasta);
             ventana.getChildren().add(anioHasta);
@@ -212,9 +211,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
 
     private void limpiarVentana(){
         var aux = ventana.getChildren();
-        if (aux.contains(ocurrencias)) {
-            aux.remove(ocurrencias);
-        }
+        aux.remove(ocurrencias);
         if (aux.contains(diaHasta)){
             aux.removeAll(diaHasta, mesHasta, anioHasta);
         }
@@ -261,7 +258,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         botonCrearAlarma.setOnAction(eventHandler);
     }
 
-    public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
+    public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo) {
         agregarAlarmaALaLista_(listaAlarmas, aviso, intervalo, tiempoRelativo);
     }
 
@@ -280,7 +277,6 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     public void habilitarBorrarAlarma(){
         botonEliminarAlarma.setDisable(false);
     }
-
 
     public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
         checkDiaCompleto.setOnAction(eventHandler);
@@ -309,11 +305,11 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     }
 
 
-    public String getTitulo(){
+    private  String getTitulo(){
         return titulo.getText();
     }
 
-    public String getDescripcion(){
+    private String getDescripcion(){
         return descripcion.getText();
     }
 
@@ -324,47 +320,45 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         return argsEventoActual;
     }
 
-    public int getDiaInicio(){
-        Integer i = Integer.parseInt(diaInicio.getValue());
-        return i.intValue();
+    private int getDiaInicio(){
+        return Integer.parseInt(diaInicio.getValue());
     }
 
-    public int getDiaFin(){
-        Integer i = Integer.parseInt(diaFin.getValue());
-        return i.intValue();
+    private int getDiaFin(){
+        return Integer.parseInt(diaFin.getValue());
     }
 
-    public int getMesInicio(){
+    private int getMesInicio(){
         return 1 + mesInicio.getItems().indexOf(mesInicio.getValue());
 
     }
 
-    public int getMesFin(){
+    private int getMesFin(){
         return 1 + mesFin.getItems().indexOf(mesFin.getValue());
 
     }
 
 
-    public int getAnioInicio(){
+    private int getAnioInicio(){
        return Integer.parseInt(anioInicio.getText());
 
     }
 
-    public int getAnioFin(){
+    private int getAnioFin(){
         return Integer.parseInt(anioFin.getText());
     }
-    public int getHoraInicio(){
+    private int getHoraInicio(){
         return Integer.parseInt(horaInicio.getValue());
     }
 
-    public int getHoraFin(){
+    private int getHoraFin(){
         return Integer.parseInt(horaFin.getValue());
     }
 
-    public int getMinutoInicio(){
+    private int getMinutoInicio(){
         return Integer.parseInt(minutoInicio.getValue());
     }
-    public int getMinutoFin(){
+    private int getMinutoFin(){
         return Integer.parseInt(minutoFin.getValue());
     }
     public void cerrarVentana(){
@@ -378,7 +372,12 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     public boolean guardarDatosEvento() {
         if (esDiaCompleto()) {
             try {
-                DuracionArgs duracionArgs = new DuracionArgs(LocalDate.of(getAnioInicio(), getMesInicio(), getDiaInicio()), LocalDate.of(getAnioFin(), getMesFin(), getDiaFin()));
+                LocalDate fechaInicio = LocalDate.of(getAnioInicio(), getMesInicio(), getDiaInicio());
+                LocalDate fechaFin = LocalDate.of(getAnioFin(), getMesFin(), getDiaFin());
+                if (fechaInicio.isAfter(fechaFin)){
+                    throw new NumberFormatException();
+                }
+                DuracionArgs duracionArgs = new DuracionArgs(fechaInicio, fechaFin);
                 argsEventoActual = new EventoArgs(getTitulo(), getDescripcion(), duracionArgs);
             } catch (NumberFormatException | DateTimeException exception) {
                 setMensajeErrorFecha("Fecha inválida");
@@ -386,7 +385,14 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
             }
         } else {
             try {
-                DuracionArgs duracionArgs = new DuracionArgs(LocalDate.of(getAnioInicio(), getMesInicio(), getDiaInicio()), LocalDate.of(getAnioFin(), getMesFin(), getDiaFin()), LocalTime.of(getHoraInicio(), getMinutoInicio()),LocalTime.of(getHoraFin(), getMinutoFin()));
+                LocalDate fechaInicio = LocalDate.of(getAnioInicio(), getMesInicio(), getDiaInicio());
+                LocalDate fechaFin = LocalDate.of(getAnioFin(), getMesFin(), getDiaFin());
+                LocalTime horaInicio = LocalTime.of(getHoraInicio(), getMinutoInicio());
+                LocalTime horaFin = LocalTime.of(getHoraFin(), getMinutoFin());
+                if (LocalDateTime.of(fechaInicio, horaInicio).isAfter(LocalDateTime.of(fechaFin, horaFin))){
+                    throw new NumberFormatException();
+                }
+                DuracionArgs duracionArgs = new DuracionArgs(fechaInicio, fechaFin, horaInicio ,horaFin);
                 argsEventoActual = new EventoArgs(getTitulo(), getDescripcion(), duracionArgs);
             } catch (NumberFormatException | DateTimeException exception) {
                 setMensajeErrorFecha("Fecha inválida");
@@ -399,6 +405,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     public RepeticionArgs getInfoRepeticion(){
         return repeticionArgs;
     }
+
     public boolean guardarRepeticionEvento() {
         if (!tieneRepeticion()) {
             return true;
@@ -472,21 +479,19 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     }
 
     private int getAnioHasta(){
-        Integer i = Integer.parseInt(anioHasta.getText());
-        return i.intValue();
+        return Integer.parseInt(anioHasta.getText());
     }
     private int getMesHasta(){
         return 1 + mesHasta.getItems().indexOf(mesHasta.getValue());
     }
     private int getDiaHasta(){
-        Integer i = Integer.parseInt(diaHasta.getValue());
-        return i.intValue();
+        return Integer.parseInt(diaHasta.getValue());
     }
 
 
     private int getOcurrencias(){
-        Integer i = Integer.parseInt(ocurrencias.getText());
-        return i.intValue();
+        return Integer.parseInt(ocurrencias.getText());
+
     }
 
     private Frecuencia getFrecuencia(){
@@ -498,11 +503,10 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         }
     }
     private int getIntervalo(){
-        Integer i = Integer.parseInt(intervaloRepe.getText());
-        return i.intValue();
+        return Integer.parseInt(intervaloRepe.getText());
     }
 
     private boolean esRepeticionSemanal(){
-        return frecuencia.getValue() == "Semanal";
+        return frecuencia.getValue().equals("Semanal");
     }
 }

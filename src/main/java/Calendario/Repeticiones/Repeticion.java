@@ -1,9 +1,12 @@
 package Calendario.Repeticiones;
 
 import Calendario.Duracion.Duracion;
+import Calendario.Enums.TipoRepeticion;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 public abstract class Repeticion implements Serializable {
 
@@ -70,6 +73,32 @@ public abstract class Repeticion implements Serializable {
     public int getIntervalo(){
         return intervalo;
     }
+
+    /**
+     * Devuelve la cantidad de ocurrencias
+     */
+    public int getOcurrencias(){
+        return ocurrenciasRelativas;
+    }
+
+    /**
+     * Devuelve la fecha de finalización de la repetición
+     */
+    public LocalDate getFechaHasta(){
+        return fechaHasta;
+    }
+
+    /**
+     * Devuelve los días de la semana, null si no es una repetición semanal
+     */
+    public List<DayOfWeek> getDiasSemana(){
+        return null;
+    }
+
+    /**
+     * Devuelve el tipo de Repetición
+     */
+    public abstract TipoRepeticion getTipoRepeticion();
 
     /**
      * Devuelve true si la instancia pasada por parámetro es la última del

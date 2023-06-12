@@ -59,8 +59,8 @@ public class Vista {
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
     private Map<Integer,MenuButton> menuDia;
-    private Map<Label, VistaTarea> vistasTareaLabel;
-    private Map<MenuItem, VistaTarea> vistasTareaMenu;
+    private Map<Label, VistaActividad> vistasLabel;
+    private Map<MenuItem, VistaActividad> vistasMenu;
     private MenuItem itemSeleccionado;
     private AnchorPane mainLayout;
     private List<ActividadMutable> actividades = new ArrayList<>();
@@ -487,67 +487,6 @@ public class Vista {
     public List<List<String>> getInfoAlarmaCreada() {
         return infoAlarmaActual;
     }
-    private void mostrarEventoMes(InstanciaEvento evento){
-        String mensaje = getMensajeEvento(evento);
-        var ultimoDia = getUltimoDiaMes(getPrimerDiaMes(diaActual));
-        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDiaSemana(getPrimerDiaMes(diaActual)))) ? getPrimerDiaSemana(getPrimerDiaMes(diaActual)): evento.getDiaInicio();
-        while ((!diaAct.isAfter(ultimoDia)) && (!diaAct.isAfter(evento.getDiaFin()))) {
-            if (menuMes.containsKey(diaAct)) {
-                MenuItem item = new MenuItem(mensaje);
-                item.setStyle("-fx-background-color: #ffd3a1;");
-                MenuButton menu = menuMes.get(diaAct);
-                if(menu.getItems().isEmpty()){
-                    menu.setText("Ver más");
-                }
-                menu.getItems().add(item);
-            }
-            diaAct = diaAct.plusDays(1);
-        }
-    }
-
-    private String getMensajeEvento(InstanciaEvento evento){
-        String mensaje = "Título: ";
-        if (evento.getTitulo().length()!=0){
-            mensaje+=evento.getTitulo();
-        }
-        mensaje+= "\nFecha Inicio: ";
-        if (!evento.esDiaCompleto()){
-            mensaje+=evento.getFechaInicio().toString()+"\nFecha fin: "+evento.getFechaFin().toString();
-        }else{
-            mensaje+=evento.getFechaInicio().toLocalDate().toString()+"\nFecha fin: "+ evento.getFechaFin().toLocalDate().toString();
-        }
-        return mensaje;
-    }
-
-    private void mostrarEventoSemana(InstanciaEvento evento){
-        String mensaje = getMensajeEvento(evento);
-        var ultimoDia = getUltimoDiaSemana(getPrimerDiaSemana(diaActual));
-        LocalDate diaAct = (evento.getDiaInicio().isBefore(getPrimerDiaSemana(diaActual))) ? getPrimerDiaSemana(diaActual): evento.getDiaInicio();
-        while (!(diaAct.isAfter(ultimoDia)) && !(diaAct.isAfter(evento.getDiaFin()))){
-            Label labelEvento = new Label(mensaje);
-            labelEvento.setStyle("-fx-background-color: #ffd3a1;");
-            if (listasSemana.containsKey(diaAct)){
-                ListView<Label> lista = listasSemana.get(diaAct);
-                lista.getItems().add(labelEvento);
-            }
-            diaAct = diaAct.plusDays(1);
-        }
-    }
-
-    private void mostrarEventoDia(InstanciaEvento evento){
-        int hora = evento.getFechaInicio().toLocalTime().getHour();
-        if (evento.esDiaCompleto()){
-            hora = 0;
-        }
-        MenuButton menu = menuDia.get(hora);
-        if(menu.getItems().isEmpty()){
-            menu.setText("Ver más");
-        }
-        MenuItem item = new MenuItem(getMensajeEvento(evento));
-        item.setStyle("-fx-background-color: #ffd3a1;");
-        menu.getItems().add(item);
-
-    }
 
     public void eliminarTareaActual(){
         this.argsTareaActual = null;
@@ -570,7 +509,7 @@ public class Vista {
     public void actualizarListas(){
         reiniciarListSemana();
         var primerDia = getPrimerDiaSemana(diaActual);
-        vistasTareaLabel = new HashMap<>();
+        vistasLabel = new HashMap<>();
         //var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -584,12 +523,15 @@ public class Vista {
                 @Override
                 public void visitarTarea(Tarea tarea) {
                     VistaTarea vistaTarea = new VistaTarea(tarea);
-                    vistaTarea.mostrarTareaSemana(tarea, listasSemana, vistasTareaLabel);
+                    vistaTarea.mostrarTareaSemana(listasSemana, vistasLabel);
                 }
 
                 @Override
                 public void visitarInstancia(InstanciaEvento instancia) {
-                    mostrarEventoSemana(instancia);
+                    var ultimoDia = getUltimoDiaSemana(getPrimerDiaSemana(diaActual));
+                    LocalDate diaAct = (instancia.getDiaInicio().isBefore(getPrimerDiaSemana(diaActual))) ? getPrimerDiaSemana(diaActual): instancia.getDiaInicio();
+                    VistaEvento vistaEvento = new VistaEvento(instancia);
+                    vistaEvento.mostrarEventoSemana(listasSemana, vistasLabel, diaAct, ultimoDia);
                 }
             });
         }
@@ -617,7 +559,7 @@ public class Vista {
     public void actualizarMenuMes(){
         reiniciarMenuMes();
         var primerDia = getPrimerDiaSemana(getPrimerDiaMes(diaActual));
-        vistasTareaMenu = new HashMap<>();
+        vistasMenu = new HashMap<>();
         //var primerDia = getPrimerDia(diaActual);
         var ultimoDia = getUltimoDiaMes(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
@@ -631,12 +573,15 @@ public class Vista {
                 @Override
                 public void visitarTarea(Tarea tarea) {
                     VistaTarea vistaTarea = new VistaTarea(tarea);
-                    vistaTarea.mostrarTareaMes(tarea, menuMes, vistasTareaMenu);
+                    vistaTarea.mostrarTareaMes(menuMes, vistasMenu);
                 }
 
                 @Override
                 public void visitarInstancia(InstanciaEvento instancia) {
-                    mostrarEventoMes(instancia);
+                    var ultimoDia = getUltimoDiaMes(getPrimerDiaMes(diaActual));
+                    LocalDate diaAct = instancia.getDiaInicio().isBefore(getPrimerDiaSemana(getPrimerDiaMes(diaActual))) ? getPrimerDiaSemana(getPrimerDiaMes(diaActual)): instancia.getDiaInicio();
+                    VistaEvento vistaEvento = new VistaEvento(instancia);
+                    vistaEvento.mostrarEventoMes(menuMes, vistasMenu, diaAct, ultimoDia);
                 }
             });
         }
@@ -645,7 +590,7 @@ public class Vista {
 
     public void actualizarMenuDia(){
         reiniciarMenuDia();
-        vistasTareaMenu = new HashMap<>();
+        vistasMenu = new HashMap<>();
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(diaActual, LocalTime.of(0,0)), LocalDateTime.of(diaActual, LocalTime.of(23,59)));
         for (Actividad act : acts){
             act.aceptarVisitor(new ActividadVisitor() {
@@ -657,12 +602,13 @@ public class Vista {
                 @Override
                 public void visitarTarea(Tarea tarea){
                     VistaTarea vistaTarea = new VistaTarea(tarea);
-                    vistaTarea.mostrarTareaDia(tarea, menuDia, vistasTareaMenu);
+                    vistaTarea.mostrarTareaDia(menuDia, vistasMenu);
                 }
 
                 @Override
                 public void visitarInstancia(InstanciaEvento instancia) {
-                    mostrarEventoDia(instancia);
+                    VistaEvento vistaEvento = new VistaEvento(instancia);
+                    vistaEvento.mostrarEventoDia(menuDia, vistasMenu);
                 }
             });
         }
@@ -676,20 +622,20 @@ public class Vista {
         }
     }
 
-    public void registrarEscuchaVerTareaLabel(EventHandler<MouseEvent> eventHandler){
-        for (Label labelTarea: vistasTareaLabel.keySet()){
-            labelTarea.setOnMouseClicked(eventHandler);
+    public void registrarEscuchaVerActividadLabel(EventHandler<MouseEvent> eventHandler){
+        for (Label label: vistasLabel.keySet()){
+            label.setOnMouseClicked(eventHandler);
         }
     }
 
     public void registrarEscuchaGuardarItem(){
-        for (MenuItem item: vistasTareaMenu.keySet()){
+        for (MenuItem item: vistasMenu.keySet()){
             item.setOnAction(actionEvent -> itemSeleccionado = item);
         }
     }
 
-    public void registrarEscuchaVerTareaMenu(EventHandler<ActionEvent> eventHandler){
-        for (MenuItem item: vistasTareaMenu.keySet()){
+    public void registrarEscuchaVerActividadMenu(EventHandler<ActionEvent> eventHandler){
+        for (MenuItem item: vistasMenu.keySet()){
             item.setOnAction(eventHandler);
         }
     }
@@ -698,12 +644,12 @@ public class Vista {
         for (ListView<Label> lista: listasSemana.values()){
             Label labelSeleccionada = lista.getSelectionModel().getSelectedItem();
             if (labelSeleccionada != null){
-                VistaTarea vistaTarea = vistasTareaLabel.get(labelSeleccionada);
+                VistaActividad vista = vistasLabel.get(labelSeleccionada);
                 Stage nuevoStage = new Stage();
-                vistaTarea.abrirVistaDetallada(nuevoStage);
-                getEscuchaCrearAlarma(vistaTarea);
-                getEscuchaSeleccionarAlarmas(vistaTarea);
-                getEscuchaEliminarAlarmas(vistaTarea);
+                vista.abrirVistaDetallada(nuevoStage);
+                //getEscuchaCrearAlarma(vista);
+                //getEscuchaSeleccionarAlarmas(vista);
+                //getEscuchaEliminarAlarmas(vista);
                 nuevoStage.showAndWait();
                 break;
             }
@@ -713,9 +659,9 @@ public class Vista {
 
     public void abrirVistaDetalladaMenu() throws IOException {
         if (itemSeleccionado != null){
-            VistaTarea vistaTarea = vistasTareaMenu.get(itemSeleccionado);
+            VistaActividad vista = vistasMenu.get(itemSeleccionado);
             Stage nuevoStage = new Stage();
-            vistaTarea.abrirVistaDetallada(nuevoStage);
+            vista.abrirVistaDetallada(nuevoStage);
             nuevoStage.showAndWait();
         }
     }

@@ -5,17 +5,13 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class VentanaCrear {
-    private VentanaCrearAlarma ventanaCrearAlarmaTarea;
+    //private VentanaCrearAlarma ventanaCrearAlarma;
 
     abstract void abrirVentanaCrearAlarma() throws IOException;
 
@@ -41,18 +37,18 @@ public abstract class VentanaCrear {
     public abstract void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler);
 
 
-    protected void escuchaGuardarAlarma(VentanaCrearAlarma ventanaCrearAlarmaTarea) {
-        ventanaCrearAlarmaTarea.registrarEscuchaCrearAlarma(actionEvent -> {
-            String aviso = ventanaCrearAlarmaTarea.getAviso();
-            String tiempoRelativo = ventanaCrearAlarmaTarea.getTiempoRelativo();
-            String intervalo = ventanaCrearAlarmaTarea.getIntervalo();
+    protected void escuchaGuardarAlarma(VentanaCrearAlarma ventanaCrearAlarma) {
+        ventanaCrearAlarma.registrarEscuchaCrearAlarma(actionEvent -> {
+            String aviso = ventanaCrearAlarma.getAviso();
+            String tiempoRelativo = ventanaCrearAlarma.getTiempoRelativo();
+            String intervalo = ventanaCrearAlarma.getIntervalo();
             if (intervalo.length() > 0) {
-                if (manejarErrorIntervalo(intervalo, ventanaCrearAlarmaTarea) || manejarErrorTiempoRelativo(tiempoRelativo, ventanaCrearAlarmaTarea)) {
+                if (manejarErrorIntervalo(intervalo, ventanaCrearAlarma) || manejarErrorTiempoRelativo(tiempoRelativo, ventanaCrearAlarma)) {
                     return;
                 }
             }
             agregarAlarmaALaLista(aviso, intervalo, tiempoRelativo);
-            ventanaCrearAlarmaTarea.cerrarVentana();
+            ventanaCrearAlarma.cerrarVentana();
         });
     }
 
@@ -91,7 +87,6 @@ public abstract class VentanaCrear {
     }
 
     public void deshabilitarBorrarAlarma_(Button botonEliminarAlarma){
-
         botonEliminarAlarma.setDisable(true);
     }
 
@@ -111,9 +106,10 @@ public abstract class VentanaCrear {
         infoAlarma.add(aviso);
         if (!(intervalo.length()==0) && !(intervalo.equals(" - "))){
             mensaje += ", " + intervalo + " " + tiempoRelativo.toLowerCase() + " antes.";
-            infoAlarma.add(intervalo);
-            infoAlarma.add(tiempoRelativo);
+
         }
+        infoAlarma.add(intervalo);
+        infoAlarma.add(tiempoRelativo);
         infoAlarmas.add(infoAlarma); //aviso - intervalo - tRelativo
         var alarmas = listaAlarmas.getItems();
         if (alarmas.get(0).equals("Sin alarmas")){

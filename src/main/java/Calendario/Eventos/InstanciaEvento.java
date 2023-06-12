@@ -13,7 +13,7 @@ import java.util.Set;
 public class InstanciaEvento extends Actividad implements Serializable {
     private String titulo;
     private String descripcion;
-
+    private Evento referenciaEvento;
     Duracion duracion;
 
     public InstanciaEvento(String titulo, String descripcion, Duracion duracion, Set<AlarmaEvento> alarmas){
@@ -89,6 +89,20 @@ public class InstanciaEvento extends Actividad implements Serializable {
      */
     public void aceptarVisitor(ActividadVisitor actividadVisitor){
         actividadVisitor.visitarInstancia(this);
+    }
+
+    /**
+     * Guarda la referencia del evento del cual procede
+     */
+    public void setReferenciaEvento(Evento evento){
+        this.referenciaEvento = evento;
+    }
+
+    /**
+     * Devuelve la referencia del evento del cual procede
+     */
+    public Evento getReferenciaEvento(){
+        return referenciaEvento;
     }
 
     /**

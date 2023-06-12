@@ -1,6 +1,7 @@
 package Calendario.Repeticiones;
 
 import Calendario.Duracion.Duracion;
+import Calendario.Enums.TipoRepeticion;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,13 @@ public class RepeticionAnual extends Repeticion {
      */
     public RepeticionAnual(int intervaloAnual){
         super(intervaloAnual);
+    }
+
+    /**
+     * Devuelve el tipo de repetición
+     */
+    public TipoRepeticion getTipoRepeticion() {
+        return TipoRepeticion.ANUAL;
     }
 
     /**

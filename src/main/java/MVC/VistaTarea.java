@@ -1,8 +1,6 @@
 package MVC;
 
-import Calendario.Actividad.ActividadMutable;
 import Calendario.Alarmas.Alarma;
-import Calendario.Eventos.InstanciaEvento;
 import Calendario.Tareas.Tarea;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,12 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class VistaTarea extends VentanaCrear{
+public class VistaTarea extends VentanaCrear implements VistaActividad {
 
     private Tarea tarea;
     private Stage stage;
@@ -49,18 +44,21 @@ public class VistaTarea extends VentanaCrear{
     @FXML
     private Button botonEliminarAlarma;
     private VentanaCrearAlarma ventanaCrearAlarmaTarea;
+    @FXML
+    private Button eliminar;
+
     public VistaTarea(Tarea tarea) {
         this.tarea = tarea;
     }
 
 
-    public void mostrarTareaSemana(Tarea tarea, Map<LocalDate, ListView<Label>> listasSemana,
-                                   Map<Label,VistaTarea> vistaTareas){
+    public void mostrarTareaSemana(Map<LocalDate, ListView<Label>> listasSemana,
+                                   Map<Label,VistaActividad> vistas){
         ListView<Label> lista = listasSemana.get(tarea.getFecha().toLocalDate());
         Label labelTarea =new Label(getMensajeTarea());
         labelTarea.setStyle("-fx-background-color: #adffc4;");
         lista.getItems().add(labelTarea);
-        vistaTareas.put(labelTarea, this);
+        vistas.put(labelTarea, this);
     }
 
     private String getMensajeTarea() {
@@ -77,8 +75,8 @@ public class VistaTarea extends VentanaCrear{
         return mensaje;
     }
 
-    public  void mostrarTareaMes(Tarea tarea, Map<LocalDate, MenuButton> menuMes,
-                                 Map<MenuItem,VistaTarea> vistaTareas){
+    public  void mostrarTareaMes(Map<LocalDate, MenuButton> menuMes,
+                                 Map<MenuItem,VistaActividad> vistas){
         if (!menuMes.containsKey(tarea.getFecha().toLocalDate())){
             return;
         }
@@ -89,11 +87,11 @@ public class VistaTarea extends VentanaCrear{
         MenuItem item = new MenuItem(getMensajeTarea());
         item.setStyle("-fx-background-color: #adffc4;");
         menu.getItems().add(item);
-        vistaTareas.put(item, this);
+        vistas.put(item, this);
     }
 
-    public void mostrarTareaDia(Tarea tarea, Map<Integer, MenuButton> menuDia,
-                                Map<MenuItem,VistaTarea> vistaTareas){
+    public void mostrarTareaDia(Map<Integer, MenuButton> menuDia,
+                                Map<MenuItem,VistaActividad> vistas){
         int hora = tarea.getFecha().toLocalTime().getHour();
         if (tarea.esDiaCompleto()){
             hora = 0;
@@ -105,7 +103,7 @@ public class VistaTarea extends VentanaCrear{
         MenuItem item = new MenuItem(getMensajeTarea());
         item.setStyle("-fx-background-color: #adffc4;");
         menu.getItems().add(item);
-        vistaTareas.put(item, this);
+        vistas.put(item, this);
     }
 
     public Tarea getTarea(){return this.tarea;}
@@ -203,14 +201,5 @@ public class VistaTarea extends VentanaCrear{
     }
     public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
         agregarAlarmaALaLista_(listaAlarmas, aviso, intervalo, tiempoRelativo);
-    }
-    @Override
-    protected void eliminarAlarmasSeleccionadas_(ListView<String> listaAlarmas, Button botonEliminarAlarma){
-        var indiceSeleccionado = listaAlarmas.getSelectionModel().getSelectedIndex();
-        listaAlarmas.getItems().remove(indiceSeleccionado);
-        if (listaAlarmas.getItems().isEmpty()){
-            inicializarValorListaAlarmas_(listaAlarmas);
-        }
-        deshabilitarBorrarAlarma_(botonEliminarAlarma);
     }
 }
