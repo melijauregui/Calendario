@@ -529,7 +529,7 @@ public class Vista {
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
-            System.out.println("a");
+
             act.aceptarVisitor(new ActividadVisitor() {
                 @Override
                 public void visitarEvento(Evento evento) {

@@ -87,11 +87,8 @@ public class Controlador  {
             return;
         }
         for (List<String> infoAlarma : infoAlarmas) {
-            //System.out.println("NOOO NULLL ALARMAS");
             TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
             TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
-            //System.out.println("aviso "+ aviso);
-            //System.out.println("tiempo relativo "+ tiempoRelativo);
             actividad.aceptarVisitor(new ActividadVisitor() {
                 @Override
                 public void visitarEvento(Evento evento) {
@@ -120,13 +117,9 @@ public class Controlador  {
                 public void visitarInstancia(InstanciaEvento instancia) {
                     if (tiempoRelativo == null) {
                         calendario.agregarAlarmaEvento(instancia, aviso);
-                        System.out.println("aviso "+ aviso);
                     } else {
                         int intervalo = Integer.parseInt(infoAlarma.get(1));
                         calendario.agregarAlarmaEvento(instancia, intervalo, tiempoRelativo, aviso);
-                        //System.out.println("aviso "+ aviso);
-                        //System.out.println("intervalo "+ intervalo);
-                        //System.out.println("tiempo relativo "+ tiempoRelativo);
                     }
                     vista.eliminarEventoActual();
                     vista.tipoRango(vista.getEscuchaFrecuencia());

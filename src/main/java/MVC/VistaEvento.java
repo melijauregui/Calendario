@@ -72,6 +72,7 @@ public class VistaEvento extends VistaActividad{
         Scene sceneNueva = new Scene(ventana);
         this.stage = stage;
         stage.setResizable(false);
+        listaAlarmas.getItems().add("Sin alarmas");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(sceneNueva);
         initialize();
