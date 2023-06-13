@@ -64,7 +64,7 @@ public class Vista {
     private Map<MenuItem, VistaActividad> vistasMenu;
     private MenuItem itemSeleccionado;
     private AnchorPane mainLayout;
-    private List<ActividadMutable> actividades = new ArrayList<>();
+    //private List<ActividadMutable> actividades = new ArrayList<>();
     //private Tarea tareaActual;
     private VistaActividad vistaActual;
     private Actividad actividadActual;
@@ -520,13 +520,6 @@ public class Vista {
         this.argsRepeticionEvento = null;
     }
 
-    public void guardarTarea(Tarea tarea){
-        this.actividades.add(tarea);
-    }
-
-    public void guardarEvento(Evento evento){
-        this.actividades.add(evento);
-    }
 
     public void actualizarListas(){
         reiniciarListSemana();
@@ -536,6 +529,7 @@ public class Vista {
         var ultimoDia = getUltimoDiaSemana(primerDia);
         List<Actividad> acts = calendario.getActividadesEnElIntervalo(LocalDateTime.of(primerDia, LocalTime.of(0,0)), LocalDateTime.of(ultimoDia, LocalTime.of(23,59)));
         for (Actividad act : acts){
+            System.out.println("a");
             act.aceptarVisitor(new ActividadVisitor() {
                 @Override
                 public void visitarEvento(Evento evento) {

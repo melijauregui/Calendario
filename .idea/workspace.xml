@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -482,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686684258788</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="labels">
+      <created>1686687637088</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1686687637088</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

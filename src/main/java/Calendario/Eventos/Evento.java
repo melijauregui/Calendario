@@ -94,9 +94,10 @@ public class Evento extends ActividadMutable implements Serializable {
         while (instancia != null){
             if (instancia.empiezaDespues(fecha)){
                 alarmasProximas = instancia.getProximasAlarmas(fecha);
-                if (!estaVacia(alarmasProximas)){
+                return alarmasProximas;
+                /*if (!estaVacia(alarmasProximas)){
                     return alarmasProximas;
-                }
+                }*/
             }
             instancia = getProximaRepeticion(instancia.getDiaInicio(), instancia.getDiaFin());
         }

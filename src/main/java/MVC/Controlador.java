@@ -143,7 +143,6 @@ public class Controlador  {
             if (repeticionArgs != null){
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
             }
-            vista.guardarEvento(evento);
             guardarAlarma(evento);
             alarmasProximasEventos.put(evento, evento.getProximasAlarmas(LocalDateTime.now()));
             vista.eliminarEventoActual();
@@ -195,10 +194,8 @@ public class Controlador  {
     public void actualizarActividad(){
         Actividad act = vista.getActividadActual();
         if (act == null){
-            System.out.println("NULLL EVENTO??");
             return;
         }
-        System.out.println("NOOOO ES NULLL EVENTO");
         guardarAlarma(act);
     }
 
