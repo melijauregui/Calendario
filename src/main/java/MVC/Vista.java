@@ -693,9 +693,13 @@ public class Vista {
 
 
     public void abrirVistaDetalladaMenu(MenuItem item) throws IOException {
-        VistaActividad vista = vistasMenu.get(item);
+        vistaActual = vistasMenu.get(item);
         Stage nuevoStage = new Stage();
-        vista.abrirVistaDetallada(nuevoStage);
+        vistaActual.abrirVistaDetallada(nuevoStage);
+        getEscuchaCrearAlarma(vistaActual);
+        getEscuchaSeleccionarAlarmas(vistaActual);
+        getEscuchaEliminarAlarmas(vistaActual);
+        guardarActividad();
         nuevoStage.showAndWait();
 
     }

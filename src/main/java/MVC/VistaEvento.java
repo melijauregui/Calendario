@@ -63,7 +63,7 @@ public class VistaEvento extends VistaActividad{
     }
     Map<String, List<String>> alarmas = new HashMap<>();
     
-    public Evento getEvento(){return evento.getReferenciaEvento();}
+    public Evento getActividad(){return evento.getReferenciaEvento();}
 
     public void abrirVistaDetallada(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/verModificarEvento.fxml"));
@@ -225,8 +225,5 @@ public class VistaEvento extends VistaActividad{
     }
     public void inicializarListasAlarmas(){
         inicializarListasAlarmas_(evento, listaAlarmas, infoAlarmas, alarmas);
-    }
-    public Actividad getActividad(){
-        return evento;
     }
 }
