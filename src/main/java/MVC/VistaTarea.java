@@ -1,5 +1,6 @@
 package MVC;
 
+import Calendario.Actividad.Actividad;
 import Calendario.Alarmas.Alarma;
 import Calendario.Tareas.Tarea;
 import javafx.event.ActionEvent;
@@ -15,9 +16,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class VistaTarea extends VentanaCrear implements VistaActividad {
+public class VistaTarea extends VistaActividad {
 
     private Tarea tarea;
     private Stage stage;
@@ -31,6 +35,7 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
     private  Label estado;
     @FXML
     private ListView<String> listaAlarmas;
+    private List<List<String>> infoAlarmas = new ArrayList<>();
     @FXML
     private Button editarTitulo;
     @FXML
@@ -43,25 +48,37 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
     private Button botonCrearAlarma;;
     @FXML
     private Button botonEliminarAlarma;
-    private VentanaCrearAlarma ventanaCrearAlarmaTarea;
+    private VentanaCrearAlarma ventanaCrearAlarma;
     @FXML
     private Button eliminar;
+    Map<String, List<String>> alarmas = new HashMap<>();
 
     public VistaTarea(Tarea tarea) {
         this.tarea = tarea;
     }
 
+    public void abrirVistaDetallada(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/verModificarTarea.fxml"));
+        loader.setController(this);
+        Pane ventana = loader.load();
+        Scene sceneNueva = new Scene(ventana);
+        this.stage = stage;
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(sceneNueva);
+        initialize();
+    }
 
     public void mostrarTareaSemana(Map<LocalDate, ListView<Label>> listasSemana,
                                    Map<Label,VistaActividad> vistas){
         ListView<Label> lista = listasSemana.get(tarea.getFecha().toLocalDate());
-        Label labelTarea =new Label(getMensajeTarea());
+        Label labelTarea =new Label(getMensaje());
         labelTarea.setStyle("-fx-background-color: #adffc4;");
         lista.getItems().add(labelTarea);
         vistas.put(labelTarea, this);
     }
 
-    private String getMensajeTarea() {
+    private String getMensaje() {
         String mensaje = "Título: ";
         if (tarea.getTitulo().length() != 0) {
             mensaje += tarea.getTitulo();
@@ -84,7 +101,7 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
         if(menu.getItems().isEmpty()){
             menu.setText("Ver más");
         }
-        MenuItem item = new MenuItem(getMensajeTarea());
+        MenuItem item = new MenuItem(getMensaje());
         item.setStyle("-fx-background-color: #adffc4;");
         menu.getItems().add(item);
         vistas.put(item, this);
@@ -100,25 +117,12 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
         if(menu.getItems().isEmpty()){
             menu.setText("Ver más");
         }
-        MenuItem item = new MenuItem(getMensajeTarea());
+        MenuItem item = new MenuItem(getMensaje());
         item.setStyle("-fx-background-color: #adffc4;");
         menu.getItems().add(item);
         vistas.put(item, this);
     }
 
-    public Tarea getTarea(){return this.tarea;}
-
-    public void abrirVistaDetallada(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/verModificarTarea.fxml"));
-        loader.setController(this);
-        Pane ventana = loader.load();
-        Scene sceneNueva = new Scene(ventana);
-        this.stage = stage;
-        stage.setResizable(false);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(sceneNueva);
-        initialize();
-    }
 
     public void cerrarVistaDetallada(){
         stage.close();
@@ -137,14 +141,11 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
         }else {
             estado.setText("No completada");
         }
-        actualizarAlarmaText();
+        inicializarListasAlarmas();
     }
 
-    private void actualizarAlarmaText(){
-        for (Alarma alarma: tarea.getAlarmas()){
-            String mensaje = alarma.getFechaAlarma().toString();
-            listaAlarmas.getItems().add(mensaje);
-        }
+    public void inicializarListasAlarmas(){
+        inicializarListasAlarmas_(tarea, listaAlarmas, infoAlarmas, alarmas);
     }
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
         botonCrearAlarma.setOnAction(eventHandler);
@@ -152,15 +153,15 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
 
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
-        ventanaCrearAlarmaTarea = new VentanaCrearAlarma(stageNuevo);
-        getEscuchaGuardarAlarma();
+        ventanaCrearAlarma = new VentanaCrearAlarma(stageNuevo);
+        getEscuchaGuardarAlarma(ventanaCrearAlarma, infoAlarmas, listaAlarmas, alarmas);
         stageNuevo.showAndWait();
     }
     public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
         botonEliminarAlarma.setOnAction(eventHandler);
     }
     public void eliminarAlarmasSeleccionadas(){
-        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma);
+        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma, infoAlarmas, alarmas);
     }
 
     public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
@@ -171,35 +172,14 @@ public class VistaTarea extends VentanaCrear implements VistaActividad {
         botonEliminarAlarma.setDisable(false);
     }
 
-    @Override
-    void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
 
+    public List<List<String>> getInfoAlarmas(){
+        return infoAlarmas;
     }
 
-    @Override
-    boolean esDiaCompleto() {
-        return false;
+    public Actividad getActividad(){
+        return tarea;
     }
 
-    @Override
-    void setFechaDiaCompleto() {
 
-    }
-
-    @Override
-    void setFechaConHora() {
-
-    }
-
-    @Override
-    void setMensajeErrorFecha(String mensaje) {
-
-    }
-
-    private void getEscuchaGuardarAlarma(){
-        escuchaGuardarAlarma(ventanaCrearAlarmaTarea);
-    }
-    public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
-        agregarAlarmaALaLista_(listaAlarmas, aviso, intervalo, tiempoRelativo);
-    }
 }

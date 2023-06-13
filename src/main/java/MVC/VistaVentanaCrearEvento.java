@@ -90,10 +90,10 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     @FXML
     private CheckBox checkDiaCompleto;
     @FXML
-    private ComboBox<String> diaHasta = crearTextField(249, 71, "Dia", FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
+    private ComboBox<String> diaHasta = crearComboBox(249, 71, "Dia", FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
             "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"));
     @FXML
-    private ComboBox<String> mesHasta = crearTextField(324, 125, "Mes" ,FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril", "Mayo",
+    private ComboBox<String> mesHasta = crearComboBox(324, 125, "Mes" ,FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril", "Mayo",
             "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"));
     @FXML
     private TextField anioHasta = crearTextField(453, 55, "Año");
@@ -101,7 +101,6 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
     private TextField ocurrencias = crearTextField(253, 37, "Intervalo");
     @FXML
     private Pane ventana;
-    private List<List<String>> infoAlarmas = new ArrayList<>();
     private EventoArgs argsEventoActual;
     private RepeticionArgs repeticionArgs;
 
@@ -229,7 +228,7 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         textField.setStyle("-fx-border-color: #bdbbbb;");
         return textField;
     }
-    private ComboBox<String> crearTextField(int x, int width, String promText, javafx.collections.ObservableList<String> opciones){
+    private ComboBox<String> crearComboBox(int x, int width, String promText, javafx.collections.ObservableList<String> opciones){
         var comboBox = new ComboBox<String>();
         comboBox.setLayoutY(425);
         comboBox.setLayoutX(x);

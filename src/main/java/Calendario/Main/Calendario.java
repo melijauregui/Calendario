@@ -93,6 +93,22 @@ public class Calendario implements Serializable {
      * Recibe la información de una AlarmaEvento sin tiempo relativo. La crea a partir del BuilderAlarmaEvento
      * correspondiente, se la agrega al Evento y la devuelve
      */
+    public  AlarmaEvento agregarAlarmaEvento(InstanciaEvento instanciaEvento, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(aviso);
+        instanciaEvento.configurarAlarma(builderAlarmaEvento.crearAlarmaEvento());
+        return agregarAlarmaEvento(instanciaEvento.getReferenciaEvento(), builderAlarmaEvento);
+    }
+
+    public  AlarmaEvento agregarAlarmaEvento(InstanciaEvento instanciaEvento, int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(intervalo, tiempoRelativo, aviso);
+        instanciaEvento.configurarAlarma(builderAlarmaEvento.crearAlarmaEvento());
+        return agregarAlarmaEvento(instanciaEvento.getReferenciaEvento(), builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe la información de una AlarmaEvento sin tiempo relativo. La crea a partir del BuilderAlarmaEvento
+     * correspondiente, se la agrega al Evento y la devuelve
+     */
     public  AlarmaEvento agregarAlarmaEvento(Evento evento, TipoAviso aviso){
         BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(aviso);
         return agregarAlarmaEvento(evento, builderAlarmaEvento);

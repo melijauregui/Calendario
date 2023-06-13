@@ -1,8 +1,11 @@
 package MVC;
 
+import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
 import Calendario.Eventos.Evento;
+import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
@@ -59,40 +62,59 @@ public class Controlador  {
 
     private void guardarTarea() {
         TareaArgs tareaArgs = vista.getInfoTarea();
-        var infoAlarmas = vista.getInfoAlarmaCreada();
         if (tareaArgs != null){
             Tarea tarea = calendario.crearTarea(tareaArgs);
-            for (List<String> infoAlarma: infoAlarmas){
-                TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
-                TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
-                if (tiempoRelativo == null){
-                    calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), aviso);
-                }else{
-                    int intervalo = Integer.parseInt(infoAlarma.get(1));
-                    calendario.agregarAlarmaTarea(tarea, tarea.getFecha() , intervalo, tiempoRelativo, aviso);
-                }
-            }
-            //vista.actualizarVistaActividades();
-            vista.guardarTarea(tarea);
+            guardarAlarma(tarea);
             vista.eliminarTareaActual();
+        }
+    }
+    private void guardarAlarma(Actividad actividad) {
+        actividad.eliminarAlarmas();
+        var infoAlarmas = vista.getInfoAlarmaCreada();
+        for (List<String> infoAlarma : infoAlarmas) {
+            TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
+            TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
+            actividad.aceptarVisitor(new ActividadVisitor() {
+                @Override
+                public void visitarEvento(Evento evento) {
+                    if (tiempoRelativo == null) {
+                        calendario.agregarAlarmaEvento(evento, aviso);
+                    } else {
+                        int intervalo = Integer.parseInt(infoAlarma.get(1));
+                        calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
+                    }
+                    vista.eliminarEventoActual();
+                }
+                @Override
+                public void visitarTarea(Tarea tarea) {
+                    if (tiempoRelativo == null) {
+                        calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), aviso);
+                    } else {
+                        int intervalo = Integer.parseInt(infoAlarma.get(1));
+                        calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), intervalo, tiempoRelativo, aviso);
+                    }
+                    vista.eliminarTareaActual();
+                }
+
+                @Override
+                public void visitarInstancia(InstanciaEvento instancia) {
+                    if (tiempoRelativo == null) {
+                        calendario.agregarAlarmaEvento(instancia, aviso);
+                    } else {
+                        int intervalo = Integer.parseInt(infoAlarma.get(1));
+                        calendario.agregarAlarmaEvento(instancia, intervalo, tiempoRelativo, aviso);
+                    }
+                    vista.eliminarEventoActual();
+                }
+            });
         }
     }
 
     private void guardarEvento() {
         EventoArgs eventoArgs = vista.getInfoEvento();
-        var infoAlarmas = vista.getInfoAlarmaCreada();
         if (eventoArgs != null){
             Evento evento = calendario.crearEvento(eventoArgs);
-            for (List<String> infoAlarma: infoAlarmas){
-                TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
-                TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
-                if (tiempoRelativo == null){
-                    calendario.agregarAlarmaEvento(evento, aviso);
-                }else{
-                    int intervalo = Integer.parseInt(infoAlarma.get(1));
-                    calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
-                }
-            }
+            guardarAlarma(evento);
             var repeticionArgs = vista.getInfoRepeticionEvento();
             if (repeticionArgs != null){
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
@@ -126,6 +148,7 @@ public class Controlador  {
             case "Semana" -> vista.registrarEscuchaVerActividadLabel(mouseEvent -> {
                 try {
                     vista.abrirVistaDetalladaSemana();
+                    actualizarActividad();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -135,10 +158,14 @@ public class Controlador  {
                 vista.registrarEscuchaVerActividadMenu(actionEvent -> {
                     try {
                         vista.abrirVistaDetalladaMenu();
+                        actualizarActividad();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
             });
         }}
+    }
+    public void actualizarActividad(){
+        guardarAlarma(vista.getActividadActual());
     }
 }

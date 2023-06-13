@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Alarma implements Serializable {
+    private int intervalo;
+    private TiempoRelativo tiempoRelativo;
     private LocalDateTime fechaAlarma;
     private Aviso aviso;
 
@@ -22,6 +24,8 @@ public class Alarma implements Serializable {
      * Crea una Alarma con un intervalo de tiempo relativo
      */
     public Alarma(int intervalo, TiempoRelativo tiempoRelativo, LocalDateTime fecha, Aviso aviso){
+        this.intervalo = intervalo;
+        this.tiempoRelativo = tiempoRelativo;
         fechaAlarma = tiempoRelativo.determinarFechaRelativa(fecha, intervalo);
         this.aviso = aviso;
     }
@@ -66,5 +70,21 @@ public class Alarma implements Serializable {
      */
     public void avisar(){
         aviso.avisar();
+    }
+
+    public String getAviso() {
+        return aviso.getAvisoToString();
+    }
+
+    public String getTiempoRelativo(){
+       return tiempoRelativo.getTiempoRelativoToString();
+    }
+
+    public String getIntervalo(){
+        return Integer.toString(intervalo);
+    }
+
+    public boolean esConTiempoRelativo(){
+        return intervalo > 0;
     }
 }

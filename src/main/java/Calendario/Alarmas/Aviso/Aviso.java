@@ -8,4 +8,6 @@ public interface Aviso {
      * Envía el Aviso correspondiente
      */
     public void avisar();
+
+    public String getAvisoToString();
 }

@@ -8,6 +8,7 @@ import Calendario.Actividad.Actividad;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 public class InstanciaEvento extends Actividad implements Serializable {
@@ -108,7 +109,7 @@ public class InstanciaEvento extends Actividad implements Serializable {
     /**
      * Le agrega a la Instancia la alarma pasada
      */
-    private void configurarAlarma(AlarmaEvento alarmaEvento){
+    public void configurarAlarma(AlarmaEvento alarmaEvento){
         if (alarmaEvento != null){
             super.getAlarmas().add(alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio()));
         }
@@ -117,7 +118,7 @@ public class InstanciaEvento extends Actividad implements Serializable {
     /**
      * Configura todas las alarmas recibidas por parámetro
      */
-    private void configurarAlarmas(Set<AlarmaEvento> alarmas){
+    public void configurarAlarmas(Set<AlarmaEvento> alarmas){
         if (alarmas != null) {
             for (AlarmaEvento alarma : alarmas) {
                 configurarAlarma(alarma);
@@ -127,6 +128,11 @@ public class InstanciaEvento extends Actividad implements Serializable {
 
     public boolean esDiaCompleto(){
         return duracion.esDiaCompleto();
+    }
+
+    public void eliminarAlarmas(){
+        super.getAlarmas().clear();
+        referenciaEvento.eliminarAlarmas();
     }
 }
 

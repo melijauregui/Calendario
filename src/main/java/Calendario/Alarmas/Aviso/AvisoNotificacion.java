@@ -13,4 +13,9 @@ public class AvisoNotificacion implements Aviso, Serializable {
     @Override
     public void avisar() {
     }
+
+    @Override
+    public String getAvisoToString() {
+        return "Notificación";
+    }
 }

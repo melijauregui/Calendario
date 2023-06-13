@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VentanaCrear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VentanaCrear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Controlador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaTarea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistaVentanaCrearTarea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -423,7 +421,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686538172791</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="labels">
+      <created>1686596218613</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1686596218613</updated>
+    </task>
+    <task id="LOCAL-00030" summary="labels">
+      <created>1686598326085</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1686598326085</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

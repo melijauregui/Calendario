@@ -43,7 +43,7 @@ public abstract class VentanaCrear {
             String tiempoRelativo = ventanaCrearAlarma.getTiempoRelativo();
             String intervalo = ventanaCrearAlarma.getIntervalo();
             if (intervalo.length() > 0) {
-                if (manejarErrorIntervalo(intervalo, ventanaCrearAlarma) || manejarErrorTiempoRelativo(tiempoRelativo, ventanaCrearAlarma)) {
+                if (ventanaCrearAlarma.manejarErrorIntervalo(intervalo) || ventanaCrearAlarma.manejarErrorTiempoRelativo(tiempoRelativo)) {
                     return;
                 }
             }
@@ -52,30 +52,6 @@ public abstract class VentanaCrear {
         });
     }
 
-    private boolean manejarErrorTiempoRelativo(String tiempoRelativo, VentanaCrearAlarma ventanaCrearAlarma) {
-        boolean hayError = false;
-        if (tiempoRelativo.equals(" - ")) {
-            ventanaCrearAlarma.setMensajeError("Tiempo relativo inválido");
-            hayError = true;
-        } else {
-            ventanaCrearAlarma.setMensajeError("");
-        }
-        return hayError;
-    }
-
-    private boolean manejarErrorIntervalo(String intervalo, VentanaCrearAlarma ventanaCrearAlarma) {
-        try {
-            int intervaloNumero = Integer.parseInt(intervalo);
-            if (intervaloNumero <= 0) {
-                throw new NumberFormatException();
-            }
-            ventanaCrearAlarma.setMensajeError("");
-            return false;
-        } catch (NumberFormatException exception) {
-            ventanaCrearAlarma.setMensajeError("Intervalo inválido");
-        }
-        return true;
-    }
 
     protected void eliminarAlarmasSeleccionadas_(ListView<String> listaAlarmas, Button botonEliminarAlarma){
         var indiceSeleccionado = listaAlarmas.getSelectionModel().getSelectedIndex();
@@ -110,7 +86,7 @@ public abstract class VentanaCrear {
         }
         infoAlarma.add(intervalo);
         infoAlarma.add(tiempoRelativo);
-        infoAlarmas.add(infoAlarma); //aviso - intervalo - tRelativo
+        infoAlarmas.add(infoAlarma);
         var alarmas = listaAlarmas.getItems();
         if (alarmas.get(0).equals("Sin alarmas")){
             alarmas.remove(0);

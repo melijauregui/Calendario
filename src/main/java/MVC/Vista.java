@@ -56,6 +56,7 @@ public class Vista {
     private TareaArgs argsTareaActual;
     private EventoArgs argsEventoActual;
     private List<List<String>> infoAlarmaActual;
+    private Map<Label, VistaTarea> vistasTareaLabel;
     private Map<LocalDate,ListView<Label>> listasSemana;
     private Map<LocalDate,MenuButton> menuMes;
     private Map<Integer,MenuButton> menuDia;
@@ -64,6 +65,9 @@ public class Vista {
     private MenuItem itemSeleccionado;
     private AnchorPane mainLayout;
     private List<ActividadMutable> actividades = new ArrayList<>();
+    private Tarea tareaActual;
+    private VistaActividad vistaActual;
+    private Actividad actividadActual;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -415,7 +419,16 @@ public class Vista {
             try {
                 ventanaCrear.abrirVentanaCrearAlarma();
             } catch (Exception e) {
-                System.out.println("AAA");
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public void getEscuchaCrearAlarma(VistaActividad vistaActividad) {
+        vistaActividad.registrarEscuchaCrearAlarma(actionEvent -> {
+            try {
+                vistaActividad.abrirVentanaCrearAlarma();
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
@@ -424,10 +437,19 @@ public class Vista {
     public void getEscuchaEliminarAlarmas(VentanaCrear ventanaCrear) {
         ventanaCrear.registrarEscuchaEliminarAlarma(actionEvent -> ventanaCrear.eliminarAlarmasSeleccionadas());
     }
+    public void getEscuchaEliminarAlarmas(VistaActividad vistaActividad) {
+        vistaActividad.registrarEscuchaEliminarAlarma(actionEvent -> vistaActividad.eliminarAlarmasSeleccionadas());
+    }
 
     public void getEscuchaSeleccionarAlarmas(VentanaCrear ventanaCrear) {
         ventanaCrear.registrarEscuchaSeleccionarAlarma(mouseEvent -> {
             ventanaCrear.habilitarBorrarAlarma();
+        });
+    }
+
+    public void getEscuchaSeleccionarAlarmas(VistaActividad vistaActividad) {
+        vistaActividad.registrarEscuchaSeleccionarAlarma(mouseEvent -> {
+            vistaActividad.habilitarBorrarAlarma();
         });
     }
 
@@ -644,18 +666,29 @@ public class Vista {
         for (ListView<Label> lista: listasSemana.values()){
             Label labelSeleccionada = lista.getSelectionModel().getSelectedItem();
             if (labelSeleccionada != null){
-                VistaActividad vista = vistasLabel.get(labelSeleccionada);
+                vistaActual = vistasLabel.get(labelSeleccionada);
                 Stage nuevoStage = new Stage();
-                vista.abrirVistaDetallada(nuevoStage);
-                //getEscuchaCrearAlarma(vista);
-                //getEscuchaSeleccionarAlarmas(vista);
-                //getEscuchaEliminarAlarmas(vista);
+                vistaActual.abrirVistaDetallada(nuevoStage);
+                getEscuchaCrearAlarma(vistaActual);
+                getEscuchaSeleccionarAlarmas(vistaActual);
+                getEscuchaEliminarAlarmas(vistaActual);
+                guardarActividad();
                 nuevoStage.showAndWait();
                 break;
             }
         }
 
     }
+
+    public void guardarActividad() {
+        infoAlarmaActual = vistaActual.getInfoAlarmas();
+        actividadActual = vistaActual.getActividad();
+    }
+
+    public Actividad getActividadActual(){
+        return actividadActual;
+    }
+
 
     public void abrirVistaDetalladaMenu() throws IOException {
         if (itemSeleccionado != null){
@@ -664,6 +697,9 @@ public class Vista {
             vista.abrirVistaDetallada(nuevoStage);
             nuevoStage.showAndWait();
         }
+    }
+    public Tarea getTareaActual(){
+        return tareaActual;
     }
 
 }

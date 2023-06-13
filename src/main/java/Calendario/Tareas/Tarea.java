@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
 
 public class Tarea extends ActividadMutable {
 
@@ -108,6 +109,11 @@ public class Tarea extends ActividadMutable {
     public boolean estaCompleta(){
         return this.completada;
     }
+
+    public void eliminarAlarmas(){
+        getAlarmas().clear();
+    }
+
 
 }
 

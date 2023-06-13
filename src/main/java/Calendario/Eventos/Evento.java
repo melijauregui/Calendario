@@ -72,6 +72,10 @@ public class Evento extends ActividadMutable implements Serializable {
 
     }
 
+    public void eliminarAlarmas(){
+        alarmasEvento.clear();
+    }
+
 
     /**
      * Agrega la alarma al evento
@@ -165,6 +169,7 @@ public class Evento extends ActividadMutable implements Serializable {
         }
         return crearInstancia(fechaInicio, fechaFin);
     }
+
 
 
 }

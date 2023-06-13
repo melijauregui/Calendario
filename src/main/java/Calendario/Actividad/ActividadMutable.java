@@ -2,6 +2,7 @@ package Calendario.Actividad;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashSet;
 
 public abstract class ActividadMutable extends Actividad implements Serializable {
 
@@ -50,4 +51,6 @@ public abstract class ActividadMutable extends Actividad implements Serializable
      */
     public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
 
+
+    public abstract void eliminarAlarmas();
 }

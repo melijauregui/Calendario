@@ -1,15 +1,19 @@
 package MVC;
 
+import Calendario.Actividad.Actividad;
 import Calendario.Alarmas.Alarma;
 import Calendario.Enums.TipoRepeticion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Tareas.Tarea;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,9 +22,12 @@ import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class VistaEvento implements VistaActividad{
+public class VistaEvento extends VistaActividad{
     private InstanciaEvento evento;
     private Stage stage;
     @FXML
@@ -34,7 +41,7 @@ public class VistaEvento implements VistaActividad{
     @FXML
     private  TextField repeticion;
     @FXML
-    private ListView<Label> infoAlarmas;
+    private ListView<String> listaAlarmas;
     @FXML
     private Button editarTitulo;
     @FXML
@@ -44,14 +51,17 @@ public class VistaEvento implements VistaActividad{
     @FXML
     private Button editarRepeticion;
     @FXML
-    private Button agregarAlarma;
+    private Button botonCrearAlarma;
     @FXML
-    private Button eliminarAlarma;
+    private Button botonEliminarAlarma;
     @FXML
     private Button eliminar;
+    private VentanaCrearAlarma ventanaCrearAlarma;
+    private List<List<String>> infoAlarmas = new ArrayList<>();
     public VistaEvento(InstanciaEvento evento) {
         this.evento = evento;
     }
+    Map<String, List<String>> alarmas = new HashMap<>();
     
     public Evento getEvento(){return evento.getReferenciaEvento();}
 
@@ -71,9 +81,41 @@ public class VistaEvento implements VistaActividad{
         stage.close();
     }
 
+    public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonCrearAlarma.setOnAction(eventHandler);
+    }
+
+    public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonEliminarAlarma.setOnAction(eventHandler);
+    }
+
+    public void abrirVentanaCrearAlarma() throws IOException {
+        Stage stageNuevo = new Stage();
+        ventanaCrearAlarma = new VentanaCrearAlarma(stageNuevo);
+        getEscuchaGuardarAlarma(ventanaCrearAlarma, infoAlarmas, listaAlarmas, alarmas);
+        stageNuevo.showAndWait();
+    }
+
+    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
+        listaAlarmas.setOnMouseClicked(eventHandler);
+    }
+
+    public void habilitarBorrarAlarma(){
+        botonEliminarAlarma.setDisable(false);
+    }
+
+
+    public void eliminarAlarmasSeleccionadas(){
+        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma, infoAlarmas, alarmas);
+    }
+
+    public List<List<String>> getInfoAlarmas(){
+        return infoAlarmas;
+    }
+
     public void mostrarEventoMes(Map<LocalDate, MenuButton> menuMes,
                                   Map<MenuItem,VistaActividad> vistas, LocalDate diaAct, LocalDate ultimoDia){
-        String mensaje = getMensajeEvento();
+        String mensaje = getMensaje();
         while ((!diaAct.isAfter(ultimoDia)) && (!diaAct.isAfter(evento.getDiaFin()))) {
             if (menuMes.containsKey(diaAct)) {
                 MenuItem item = new MenuItem(mensaje);
@@ -89,7 +131,7 @@ public class VistaEvento implements VistaActividad{
         }
     }
 
-    private String getMensajeEvento(){
+    private String getMensaje(){
         String mensaje = "Título: ";
         if (evento.getTitulo().length()!=0){
             mensaje+=evento.getTitulo();
@@ -105,7 +147,7 @@ public class VistaEvento implements VistaActividad{
 
     public void mostrarEventoSemana(Map<LocalDate, ListView<Label>> listasSemana,
                                      Map<Label,VistaActividad> vistas, LocalDate diaAct, LocalDate ultimoDia){
-        String mensaje = getMensajeEvento();
+        String mensaje = getMensaje();
         while (!(diaAct.isAfter(ultimoDia)) && !(diaAct.isAfter(evento.getDiaFin()))){
             Label labelEvento = new Label(mensaje);
             labelEvento.setStyle("-fx-background-color: #ffd3a1;");
@@ -129,7 +171,7 @@ public class VistaEvento implements VistaActividad{
         if(menu.getItems().isEmpty()){
             menu.setText("Ver más");
         }
-        MenuItem item = new MenuItem(getMensajeEvento());
+        MenuItem item = new MenuItem(getMensaje());
         item.setStyle("-fx-background-color: #ffd3a1;");
         menu.getItems().add(item);
         vistas.put(item, this);
@@ -151,11 +193,7 @@ public class VistaEvento implements VistaActividad{
         }else {
             repeticion.setText("Sin repetición");
         }
-        for (Alarma alarma: evento.getAlarmas()){
-            String mensaje = alarma.getFechaAlarma().toString();
-            Label infoAlarma = new Label(mensaje);
-            infoAlarmas.getItems().add(infoAlarma);
-        }
+        inicializarListasAlarmas();
     }
 
     private String getMensajeRepeticion(Repeticion repeticionE){
@@ -184,5 +222,10 @@ public class VistaEvento implements VistaActividad{
         }
         return mensajeRepe.toString();
     }
-
+    public void inicializarListasAlarmas(){
+        inicializarListasAlarmas_(evento, listaAlarmas, infoAlarmas, alarmas);
+    }
+    public Actividad getActividad(){
+        return evento;
+    }
 }
