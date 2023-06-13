@@ -43,13 +43,18 @@ public abstract class VistaActividad {
         infoAlarmas.clear();
         for (Alarma alarma : act.getAlarmas()) {
             List<String> infoAlarma = new ArrayList<>();
+            String intervalo = "0";
+            String tiempoRelativo = "-";
             infoAlarma.add(alarma.getAviso());
-            infoAlarma.add(alarma.getIntervalo());
-            infoAlarma.add(alarma.getTiempoRelativo());
-            infoAlarmas.add(infoAlarma);
             String mensaje = "Alarma con " + alarma.getAviso();
-            mensaje += (alarma.esConTiempoRelativo()) ? ", " + alarma.getIntervalo() + " "
-                    + alarma.getTiempoRelativo().toLowerCase() + " antes." : "";
+            if ((alarma.esConTiempoRelativo())){
+                intervalo = alarma.getIntervalo();
+                tiempoRelativo= alarma.getTiempoRelativo();
+                mensaje += ", " + alarma.getIntervalo() + " " + alarma.getTiempoRelativo().toLowerCase() + " antes.";
+            }
+            infoAlarma.add(intervalo);
+            infoAlarma.add(tiempoRelativo);
+            infoAlarmas.add(infoAlarma);
             alarmas.put(mensaje,infoAlarma);
             listaAlarmas.getItems().add(mensaje);
         }
