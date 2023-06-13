@@ -54,6 +54,7 @@ public class Vista {
     private MenuItem itemCrearEvento;
     private VistaVentanaCrearTarea vistaVentanaCrearTarea;
     private VistaVentanaCrearEvento vistaVentanaCrearEvento;
+    private VentanaCrear vistaVentanaCrear;
     private RepeticionArgs argsRepeticionEvento;
     private TareaArgs argsTareaActual;
     private EventoArgs argsEventoActual;
@@ -689,6 +690,7 @@ public class Vista {
         infoAlarmaActual = vistaActual.getInfoAlarmas();
         actividadActual = vistaActual.getActividad();
     }
+
 
     public Actividad getActividadActual(){
         return actividadActual;

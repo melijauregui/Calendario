@@ -138,9 +138,6 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
         return descripcion.getText();
     }
 
-    public List<List<String>> getInfoAlarmas(){
-        return getInfoAlarmas_();
-    }
     public TareaArgs getInfoTarea(){
         return argsTareaActual;
     }

@@ -16,12 +16,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
-import javafx.util.Duration;
+
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -85,6 +80,7 @@ public class Controlador  {
         var infoAlarmas = vista.getInfoAlarmaCreada();
         for (List<String> infoAlarma : infoAlarmas) {
             TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
+            System.out.println("aviso "+ aviso);
             TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
             actividad.aceptarVisitor(new ActividadVisitor() {
                 @Override
@@ -93,7 +89,10 @@ public class Controlador  {
                         calendario.agregarAlarmaEvento(evento, aviso);
                     } else {
                         int intervalo = Integer.parseInt(infoAlarma.get(1));
+                        System.out.println("intervalo "+ intervalo);
+                        System.out.println("tiempo relativo "+ tiempoRelativo);
                         calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
+                        //vista.actualizarVistaActividades();
                     }
                     vista.eliminarEventoActual();
                 }
@@ -104,6 +103,7 @@ public class Controlador  {
                     } else {
                         int intervalo = Integer.parseInt(infoAlarma.get(1));
                         calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), intervalo, tiempoRelativo, aviso);
+                        //vista.actualizarVistaActividades();
                     }
                     vista.eliminarTareaActual();
                 }
@@ -115,6 +115,7 @@ public class Controlador  {
                     } else {
                         int intervalo = Integer.parseInt(infoAlarma.get(1));
                         calendario.agregarAlarmaEvento(instancia, intervalo, tiempoRelativo, aviso);
+                        //vista.actualizarVistaActividades();
                     }
                     vista.eliminarEventoActual();
                 }
@@ -126,11 +127,11 @@ public class Controlador  {
         EventoArgs eventoArgs = vista.getInfoEvento();
         if (eventoArgs != null){
             Evento evento = calendario.crearEvento(eventoArgs);
-            guardarAlarma(evento);
             var repeticionArgs = vista.getInfoRepeticionEvento();
             if (repeticionArgs != null){
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
             }
+            guardarAlarma(evento);
             vista.guardarEvento(evento);
             vista.eliminarEventoActual();
         }

@@ -1,5 +1,6 @@
 package MVC;
 
+import Calendario.Actividad.Actividad;
 import Calendario.Main.Argumentos.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -312,9 +313,6 @@ public class VistaVentanaCrearEvento extends VentanaCrear{
         return descripcion.getText();
     }
 
-    public List<List<String>> getInfoAlarmas(){
-        return getInfoAlarmas_();
-    }
     public EventoArgs getInfoEvento(){
         return argsEventoActual;
     }

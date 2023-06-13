@@ -1,5 +1,6 @@
 package MVC;
 
+import Calendario.Actividad.Actividad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -91,10 +92,14 @@ public abstract class VentanaCrear {
         if (alarmas.get(0).equals("Sin alarmas")){
             alarmas.remove(0);
         }
+        System.out.println("aviso "+ aviso);
+        System.out.println("intervalo "+ intervalo);
+        System.out.println("tiempo relativo "+ tiempoRelativo);
         alarmas.add(mensaje);
     }
 
-    public List<List<String>> getInfoAlarmas_(){
+
+    public List<List<String>> getInfoAlarmas(){
         return infoAlarmas;
     }
 
