@@ -32,7 +32,9 @@ public class AppCalendario extends Application {
                 archivo.createNewFile();
 
             } catch (IOException e) {
+                throw new RuntimeException();
             }
+        }
             // Cargar los bytes desde el archivo
             try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
                 ByteArrayOutputStream loadedBytes = new ByteArrayOutputStream();
@@ -62,7 +64,7 @@ public class AppCalendario extends Application {
                 e.printStackTrace();
             }
         }
-    }
+
 
     public static void main(String[] args) {
         launch();
