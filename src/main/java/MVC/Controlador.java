@@ -23,10 +23,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Controlador  {
     private Vista vista;
     private Calendario calendario;
+    private Set<Alarma> alarmasTareas = new HashSet<>();
+    private Map<Evento, Set<Alarma>>  alarmasProximasEventos = new HashMap<>();
     private Map<Alarma, Timer> timers = new HashMap<>();
     public Controlador(Calendario calendario, Vista vista){
         this.calendario = calendario;
@@ -73,6 +76,7 @@ public class Controlador  {
         if (tareaArgs != null){
             Tarea tarea = calendario.crearTarea(tareaArgs);
             guardarAlarma(tarea);
+            alarmasTareas.addAll(tarea.getAlarmas());
             vista.eliminarTareaActual();
         }
     }
@@ -129,8 +133,9 @@ public class Controlador  {
             if (repeticionArgs != null){
                 calendario.modificarRepeticionEvento(evento, repeticionArgs);
             }
-            guardarAlarma(evento);
             vista.guardarEvento(evento);
+            guardarAlarma(evento);
+            alarmasProximasEventos.put(evento, evento.getProximasAlarmas(LocalDateTime.now()));
             vista.eliminarEventoActual();
         }
     }
@@ -185,44 +190,74 @@ public class Controlador  {
         guardarAlarma(act);
     }
 
+    private Evento buscarEvento(Set<Alarma> alarmas){
+        for (Evento evento: alarmasProximasEventos.keySet()){
+            if (alarmasProximasEventos.get(evento).equals(alarmas)){
+                return evento;
+            }
+        }
+        return null;
+    }
+
     private void getAlarmas(){
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                Set<Alarma> alarmasProximas =  calendario.getProximasAlarmas(LocalDateTime.now());
-                for (Alarma alarma : alarmasProximas){
-                    if(LocalDateTime.of(LocalDateTime.now().getYear(),LocalDateTime.now().getMonth(), LocalDateTime.now().getDayOfMonth(),
-                                    LocalDateTime.now().getHour(), LocalDateTime.now().getMinute())
-                            .equals(alarma.getFechaAlarma())){
-                        if (alarma.getAviso().equals("Notificación")) {
-                            vista.mostrarNotificacionAlarma(alarma);
+                for (Alarma alarma: alarmasTareas){
+                    if (!timers.containsKey(alarma)){
+                        crearTimer(alarma,crearTimerTaskTarea(alarma));
+                    }
+                }
+                for (Set<Alarma> alarmasProximas : alarmasProximasEventos.values()){
+                    for (Alarma alarma : alarmasProximas){
+                        if (!timers.containsKey(alarma)){
+                            crearTimer(alarma,crearTimerTaskEvento(alarma, buscarEvento(alarmasProximas)));
                         }
                     }
-                    /*if (timers.containsKey(alarma)){
-
-                    }
-                    continue;
-                    TimerTask task = new TimerTask() {
-                        @Override
-                        public void run() {
-                            Platform.runLater(()-> {
-                                if (alarma.getAviso().equals("Notificación")) {
-                                    vista.mostrarNotificacionAlarma(alarma);
-                                }
-                            });
-                        }
-                    };
-                    Date fecha = Date.from(alarma.getFechaAlarma().atZone(ZoneId.systemDefault()).toInstant());
-                    if (!alarma.getFechaAlarma().isAfter(LocalDateTime.now())){
-                        fecha = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-                    }
-                    Timer timer = new java.util.Timer();
-                    timer.schedule(task, fecha);
-                    timers.put(alarma, timer);*/
                 }
             }
         };
         animationTimer.start();
+    }
+
+    private TimerTask crearTimerTaskTarea(Alarma alarma){
+        return new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(()-> {
+                    if (alarma.getAviso().equals("Notificación")) {
+                        vista.mostrarNotificacionAlarma(alarma);
+                    }
+                });
+            }
+        };
+    }
+
+    private TimerTask crearTimerTaskEvento(Alarma alarma, Evento evento){
+        return new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(()-> {
+                    alarmasProximasEventos.get(evento).remove(alarma);
+                    if (alarmasProximasEventos.get(evento).isEmpty()){
+                        alarmasProximasEventos.put(evento, evento.getProximasAlarmas(LocalDateTime.now()));
+                    }
+                    if (alarma.getAviso().equals("Notificación")) {
+                        vista.mostrarNotificacionAlarma(alarma);
+                    }
+                });
+            }
+        };
+    }
+
+    private void crearTimer(Alarma alarma, TimerTask task){
+        Date fecha = Date.from(alarma.getFechaAlarma().atZone(ZoneId.systemDefault()).toInstant());
+        if (!alarma.getFechaAlarma().isAfter(LocalDateTime.now())){
+            fecha = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        }
+        Timer timer = new java.util.Timer();
+        timer.schedule(task, fecha);
+        timers.put(alarma, timer);
     }
 
 }
