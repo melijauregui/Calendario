@@ -664,11 +664,11 @@ public class Vista {
             });
         }
     }
-/*
+
     public Map<MenuItem, VistaActividad> getVistasMenu(){
         return vistasMenu;
     }
-*/
+
     public void abrirVistaDetalladaSemana() throws IOException {
         for (ListView<Label> lista: listasSemana.values()){
             Label labelSeleccionada = lista.getSelectionModel().getSelectedItem();
