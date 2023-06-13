@@ -63,7 +63,7 @@ public class VistaTarea extends VistaActividad {
         Pane ventana = loader.load();
         Scene sceneNueva = new Scene(ventana);
         this.stage = stage;
-        listaAlarmas.getItems().add("Sin alarmas");
+        //listaAlarmas.getItems().add("Sin alarmas");
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(sceneNueva);

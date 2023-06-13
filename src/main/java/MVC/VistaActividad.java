@@ -41,6 +41,11 @@ public abstract class VistaActividad {
         alarmas.clear();
         listaAlarmas.getItems().clear();
         infoAlarmas.clear();
+        if (act.getAlarmas().isEmpty()){
+            listaAlarmas.getItems().add("Sin alarmas");
+                return;
+
+        }
         for (Alarma alarma : act.getAlarmas()) {
             List<String> infoAlarma = new ArrayList<>();
             String intervalo = "0";
