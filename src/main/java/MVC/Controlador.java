@@ -166,21 +166,16 @@ public class Controlador  {
                 }
             });
             default -> {
-                //vista.verActividadMenu();
-                for (MenuItem item: vista.getVistasMenu().keySet()){
-                    item.setOnAction(actionEvent -> {
-                        try {
-                            vista.abrirVistaDetalladaMenu(item);
-                            actualizarActividad();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                }
+                vista.verActividadMenu();
+                actualizarActividad();
         }}
     }
     public void actualizarActividad(){
-        guardarAlarma(vista.getActividadActual());
+        Actividad act = vista.getActividadActual();
+        if (act == null){
+            return;
+        }
+        guardarAlarma(act);
     }
 
     private void getAlarmas(){

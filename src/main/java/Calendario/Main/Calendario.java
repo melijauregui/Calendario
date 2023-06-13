@@ -307,6 +307,7 @@ public class Calendario implements Serializable {
     private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> proximosEventos = new ArrayList<>();
         for (Evento evento : eventos){
+            System.out.println("AAAAAAAAAAAAA");
             var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
             if (instancias != null){
                 proximosEventos.addAll(instancias);
