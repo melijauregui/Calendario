@@ -167,6 +167,7 @@ public class Controlador  {
                 try {
                     vista.abrirVistaDetalladaSemana();
                     actualizarActividad();
+                    verActividad();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -177,6 +178,7 @@ public class Controlador  {
                         try {
                             vista.abrirVistaDetalladaMenu(item);
                             actualizarActividad();
+                            verActividad();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
