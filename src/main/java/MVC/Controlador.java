@@ -154,15 +154,8 @@ public class Controlador  {
                 }
             });
             default -> {
-                vista.registrarEscuchaGuardarItem();
-                vista.registrarEscuchaVerActividadMenu(actionEvent -> {
-                    try {
-                        vista.abrirVistaDetalladaMenu();
-                        actualizarActividad();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-            });
+                vista.verActividadMenu();
+                actualizarActividad();
         }}
     }
     public void actualizarActividad(){

@@ -65,7 +65,7 @@ public class Vista {
     private MenuItem itemSeleccionado;
     private AnchorPane mainLayout;
     private List<ActividadMutable> actividades = new ArrayList<>();
-    private Tarea tareaActual;
+    //private Tarea tareaActual;
     private VistaActividad vistaActual;
     private Actividad actividadActual;
 
@@ -86,8 +86,8 @@ public class Vista {
 
     }
 
-    private ChoiceBox crearChoiceBox() {
-        ChoiceBox box = new ChoiceBox<>(FXCollections.observableArrayList("Dia", "Semana", "Mes"));
+    private ChoiceBox<String> crearChoiceBox() {
+        ChoiceBox<String> box = new ChoiceBox<>(FXCollections.observableArrayList("Dia", "Semana", "Mes"));
         box.setStyle("-fx-background-color: white; -fx-border-color: black;");
         box.setLayoutX(715.0);
         box.setLayoutY(50.0);
@@ -650,15 +650,15 @@ public class Vista {
         }
     }
 
-    public void registrarEscuchaGuardarItem(){
+    public void verActividadMenu(){
         for (MenuItem item: vistasMenu.keySet()){
-            item.setOnAction(actionEvent -> itemSeleccionado = item);
-        }
-    }
-
-    public void registrarEscuchaVerActividadMenu(EventHandler<ActionEvent> eventHandler){
-        for (MenuItem item: vistasMenu.keySet()){
-            item.setOnAction(eventHandler);
+            item.setOnAction(actionEvent -> {
+                try {
+                    abrirVistaDetalladaMenu(item);;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 
@@ -690,16 +690,15 @@ public class Vista {
     }
 
 
-    public void abrirVistaDetalladaMenu() throws IOException {
-        if (itemSeleccionado != null){
-            VistaActividad vista = vistasMenu.get(itemSeleccionado);
-            Stage nuevoStage = new Stage();
-            vista.abrirVistaDetallada(nuevoStage);
-            nuevoStage.showAndWait();
-        }
+    public void abrirVistaDetalladaMenu(MenuItem item) throws IOException {
+        VistaActividad vista = vistasMenu.get(item);
+        Stage nuevoStage = new Stage();
+        vista.abrirVistaDetallada(nuevoStage);
+        nuevoStage.showAndWait();
+
     }
-    public Tarea getTareaActual(){
+/*    public Tarea getTareaActual(){
         return tareaActual;
-    }
+    }*/
 
 }

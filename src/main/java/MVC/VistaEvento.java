@@ -216,9 +216,10 @@ public class VistaEvento extends VistaActividad{
         mensajeRepe.append(". Intervalo: ").append(repeticionE.getIntervalo()).append(". Hasta: ");
         if (repeticionE.getFechaHasta() != null){
             mensajeRepe.append(repeticionE.getFechaHasta().toString());
-        }
-        if (repeticionE.getOcurrencias() != 0){
+        }else if (repeticionE.getOcurrencias() != 0){
             mensajeRepe.append(repeticionE.getOcurrencias()).append(" ocurrencias.");
+        }else{
+            mensajeRepe.append(" sin límite.");
         }
         return mensajeRepe.toString();
     }
