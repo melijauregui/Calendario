@@ -11,6 +11,8 @@ public class Alarma implements Serializable {
     private TiempoRelativo tiempoRelativo;
     private LocalDateTime fechaAlarma;
     private Aviso aviso;
+    private String tituloAlarma;
+    private String descripcionAlarma;
 
     /**
      * Crea una Alarma con fecha y hora absolutas
@@ -86,5 +88,21 @@ public class Alarma implements Serializable {
 
     public boolean esConTiempoRelativo(){
         return intervalo > 0;
+    }
+
+    public void setTituloAlarma(String titulo){
+        this.tituloAlarma = titulo;
+    }
+
+    public String getDescripcionAlarma() {
+        return descripcionAlarma;
+    }
+
+    public String getTituloAlarma() {
+        return tituloAlarma;
+    }
+
+    public void setDescripcionAlarma(String descripcion){
+        this.descripcionAlarma = descripcion;
     }
 }

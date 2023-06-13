@@ -3,6 +3,8 @@ package MVC;
 import Calendario.Actividad.Actividad;
 import Calendario.Actividad.ActividadMutable;
 import Calendario.Actividad.ActividadVisitor;
+import Calendario.Alarmas.Alarma;
+import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
 import Calendario.Main.Argumentos.EventoArgs;
@@ -697,6 +699,18 @@ public class Vista {
         nuevoStage.showAndWait();
 
     }
+
+    public void mostrarNotificacionAlarma(Alarma alarma){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notificación de Alarmas");
+        alert.setHeaderText("Información Alarma");
+        String mensaje = "Título: " + alarma.getTituloAlarma() + "\nDescripción: " + alarma.getDescripcionAlarma() + "\nFecha: " + alarma.getFechaAlarma();
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+
+    }
+
+
 /*    public Tarea getTareaActual(){
         return tareaActual;
     }*/

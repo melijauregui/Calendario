@@ -347,6 +347,8 @@ public class Calendario implements Serializable {
     private Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
         var alarma = builderAlarma.crearAlarma();
         tarea.agregarAlarma(alarma);
+        alarma.setTituloAlarma(tarea.getTitulo());
+        alarma.setDescripcionAlarma(tarea.getDescripcion());
         return alarma;
     }
 

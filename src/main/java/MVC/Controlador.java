@@ -2,6 +2,7 @@ package MVC;
 
 import Calendario.Actividad.Actividad;
 import Calendario.Actividad.ActividadVisitor;
+import Calendario.Alarmas.Alarma;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
 import Calendario.Eventos.Evento;
@@ -10,22 +11,32 @@ import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
 import Calendario.Tareas.Tarea;
+import com.google.gson.internal.LinkedTreeMap;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 public class Controlador  {
     private Vista vista;
     private Calendario calendario;
+    private Map<Alarma, Timer> timers = new HashMap<>();
     public Controlador(Calendario calendario, Vista vista){
         this.calendario = calendario;
         this.vista = vista;
     }
     public void start(){
+        getAlarmas();
         vista.registrarEscuchaFrecuencia(actionEvent -> {
             vista.tipoRango(vista.getEscuchaFrecuencia());
             verActividad();
@@ -161,4 +172,37 @@ public class Controlador  {
     public void actualizarActividad(){
         guardarAlarma(vista.getActividadActual());
     }
+
+    private void getAlarmas(){
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                Set<Alarma> alarmasProximas =  calendario.getProximasAlarmas(LocalDateTime.now());
+                for (Alarma alarma : alarmasProximas){
+                    if (timers.containsKey(alarma)){
+                        continue;
+                    }
+                    TimerTask task = new TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(()-> {
+                                if (alarma.getAviso().equals("Notificación")) {
+                                    vista.mostrarNotificacionAlarma(alarma);
+                                }
+                            });
+                        }
+                    };
+                    Date fecha = Date.from(alarma.getFechaAlarma().atZone(ZoneId.systemDefault()).toInstant());
+                    if (!alarma.getFechaAlarma().isAfter(LocalDateTime.now())){
+                        fecha = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+                    }
+                    Timer timer = new java.util.Timer();
+                    timer.schedule(task, fecha);
+                    timers.put(alarma, timer);
+                }
+            }
+        };
+        animationTimer.start();
+    }
+
 }

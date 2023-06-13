@@ -1,6 +1,7 @@
 package Calendario.Eventos;
 
 import Calendario.Actividad.ActividadVisitor;
+import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.Actividad;
@@ -111,14 +112,17 @@ public class InstanciaEvento extends Actividad implements Serializable {
      */
     public void configurarAlarma(AlarmaEvento alarmaEvento){
         if (alarmaEvento != null){
-            super.getAlarmas().add(alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio()));
+            Alarma alarma = alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio());
+            alarma.setTituloAlarma(titulo);
+            alarma.setDescripcionAlarma(descripcion);
+            super.getAlarmas().add(alarma);
         }
     }
 
     /**
      * Configura todas las alarmas recibidas por parámetro
      */
-    public void configurarAlarmas(Set<AlarmaEvento> alarmas){
+    private void configurarAlarmas(Set<AlarmaEvento> alarmas){
         if (alarmas != null) {
             for (AlarmaEvento alarma : alarmas) {
                 configurarAlarma(alarma);
