@@ -19,6 +19,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -165,8 +166,17 @@ public class Controlador  {
                 }
             });
             default -> {
-                vista.verActividadMenu();
-                actualizarActividad();
+                //vista.verActividadMenu();
+                for (MenuItem item: vista.getVistasMenu().keySet()){
+                    item.setOnAction(actionEvent -> {
+                        try {
+                            vista.abrirVistaDetalladaMenu(item);
+                            actualizarActividad();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
         }}
     }
     public void actualizarActividad(){

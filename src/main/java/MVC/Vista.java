@@ -656,12 +656,16 @@ public class Vista {
         for (MenuItem item: vistasMenu.keySet()){
             item.setOnAction(actionEvent -> {
                 try {
-                    abrirVistaDetalladaMenu(item);;
+                    abrirVistaDetalladaMenu(item);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
         }
+    }
+
+    public Map<MenuItem, VistaActividad> getVistasMenu(){
+        return vistasMenu;
     }
 
     public void abrirVistaDetalladaSemana() throws IOException {
@@ -679,7 +683,6 @@ public class Vista {
                 break;
             }
         }
-
     }
 
     public void guardarActividad() {
@@ -693,9 +696,13 @@ public class Vista {
 
 
     public void abrirVistaDetalladaMenu(MenuItem item) throws IOException {
-        VistaActividad vista = vistasMenu.get(item);
+        vistaActual = vistasMenu.get(item);
         Stage nuevoStage = new Stage();
-        vista.abrirVistaDetallada(nuevoStage);
+        vistaActual.abrirVistaDetallada(nuevoStage);
+        getEscuchaCrearAlarma(vistaActual);
+        getEscuchaSeleccionarAlarmas(vistaActual);
+        getEscuchaEliminarAlarmas(vistaActual);
+        guardarActividad();
         nuevoStage.showAndWait();
 
     }

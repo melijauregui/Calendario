@@ -8,8 +8,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<!--        style="-fx-background-image: url(file:src/main/java/MVC/imagenes/eventoModificar.png);-fx-background-size: 413px 546px;-fx-background-repeat: no-repeat;-fx-border-color: #ffd3a1; -fx-border-width: 10;"-->
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="413.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/eventoModificar.png);-fx-background-size: 413px 546px;-fx-background-repeat: no-repeat;-fx-border-color: #ffd3a1; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ListView fx:id="listaAlarmas" layoutX="18.0" layoutY="413.0" prefHeight="84.0" prefWidth="378.0" />
       <Button fx:id="editarTitulo" layoutX="344.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
