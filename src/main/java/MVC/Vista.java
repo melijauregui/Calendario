@@ -31,10 +31,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.*;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Vista {

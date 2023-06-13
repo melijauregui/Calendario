@@ -72,9 +72,9 @@ public class VentanaCrearAlarma {
         stage.close();
     }
 
-    public boolean manejarErrorTiempoRelativo(String tiempoRelativo) {
+    public boolean manejarErrorTiempoRelativo() {
         boolean hayError = false;
-        if (tiempoRelativo.equals(" - ")) {
+        if (getTiempoRelativo().equals(" - ")) {
             setMensajeError("Tiempo relativo inválido");
             hayError = true;
         } else {
@@ -83,9 +83,9 @@ public class VentanaCrearAlarma {
         return hayError;
     }
 
-    public boolean manejarErrorIntervalo(String intervalo) {
+    public boolean manejarErrorIntervalo() {
         try {
-            int intervaloNumero = Integer.parseInt(intervalo);
+            int intervaloNumero = Integer.parseInt(getIntervalo());
             if (intervaloNumero <= 0) {
                 throw new NumberFormatException();
             }

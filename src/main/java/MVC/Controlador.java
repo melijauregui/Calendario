@@ -80,7 +80,6 @@ public class Controlador  {
         var infoAlarmas = vista.getInfoAlarmaCreada();
         for (List<String> infoAlarma : infoAlarmas) {
             TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
-            System.out.println("aviso "+ aviso);
             TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
             actividad.aceptarVisitor(new ActividadVisitor() {
                 @Override
@@ -89,8 +88,6 @@ public class Controlador  {
                         calendario.agregarAlarmaEvento(evento, aviso);
                     } else {
                         int intervalo = Integer.parseInt(infoAlarma.get(1));
-                        System.out.println("intervalo "+ intervalo);
-                        System.out.println("tiempo relativo "+ tiempoRelativo);
                         calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
                         //vista.actualizarVistaActividades();
                     }
@@ -185,9 +182,17 @@ public class Controlador  {
             public void handle(long l) {
                 Set<Alarma> alarmasProximas =  calendario.getProximasAlarmas(LocalDateTime.now());
                 for (Alarma alarma : alarmasProximas){
-                    if (timers.containsKey(alarma)){
-                        continue;
+                    if(LocalDateTime.of(LocalDateTime.now().getYear(),LocalDateTime.now().getMonth(), LocalDateTime.now().getDayOfMonth(),
+                                    LocalDateTime.now().getHour(), LocalDateTime.now().getMinute())
+                            .equals(alarma.getFechaAlarma())){
+                        if (alarma.getAviso().equals("Notificación")) {
+                            vista.mostrarNotificacionAlarma(alarma);
+                        }
                     }
+                    /*if (timers.containsKey(alarma)){
+
+                    }
+                    continue;
                     TimerTask task = new TimerTask() {
                         @Override
                         public void run() {
@@ -204,7 +209,7 @@ public class Controlador  {
                     }
                     Timer timer = new java.util.Timer();
                     timer.schedule(task, fecha);
-                    timers.put(alarma, timer);
+                    timers.put(alarma, timer);*/
                 }
             }
         };

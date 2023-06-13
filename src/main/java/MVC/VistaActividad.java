@@ -67,7 +67,7 @@ public abstract class VistaActividad {
             String tiempoRelativo = ventanaCrearAlarma.getTiempoRelativo();
             String intervalo = ventanaCrearAlarma.getIntervalo();
             if (intervalo.length() > 0) {
-                if (ventanaCrearAlarma.manejarErrorIntervalo(intervalo) || ventanaCrearAlarma.manejarErrorTiempoRelativo(tiempoRelativo)) {
+                if (ventanaCrearAlarma.manejarErrorIntervalo() || ventanaCrearAlarma.manejarErrorTiempoRelativo()) {
                     return;
                 }
             }
@@ -79,6 +79,9 @@ public abstract class VistaActividad {
             mensaje += (!(intervalo.length()==0) && !(intervalo.equals(" - "))) ? ", " + intervalo + " "
                     + tiempoRelativo.toLowerCase() + " antes." : "";
             alarmas.put(mensaje,infoAlarma);
+            if (listaAlarmas.getItems().get(0).equals("Sin alarmas")){
+                listaAlarmas.getItems().remove(0);
+            }
             listaAlarmas.getItems().add(mensaje);
             infoAlarmas.add(infoAlarma);
             ventanaCrearAlarma.cerrarVentana();
