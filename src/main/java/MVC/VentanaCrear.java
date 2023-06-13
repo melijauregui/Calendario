@@ -44,7 +44,7 @@ public abstract class VentanaCrear {
             String tiempoRelativo = ventanaCrearAlarma.getTiempoRelativo();
             String intervalo = ventanaCrearAlarma.getIntervalo();
             if (intervalo.length() > 0) {
-                if (ventanaCrearAlarma.manejarErrorIntervalo(intervalo) || ventanaCrearAlarma.manejarErrorTiempoRelativo(tiempoRelativo)) {
+                if (ventanaCrearAlarma.manejarErrorIntervalo() || ventanaCrearAlarma.manejarErrorTiempoRelativo()) {
                     return;
                 }
             }
@@ -92,9 +92,6 @@ public abstract class VentanaCrear {
         if (alarmas.get(0).equals("Sin alarmas")){
             alarmas.remove(0);
         }
-        System.out.println("aviso "+ aviso);
-        System.out.println("intervalo "+ intervalo);
-        System.out.println("tiempo relativo "+ tiempoRelativo);
         alarmas.add(mensaje);
     }
 
