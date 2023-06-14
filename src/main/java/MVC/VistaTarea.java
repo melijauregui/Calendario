@@ -84,11 +84,17 @@ public class VistaTarea extends VistaActividad {
         if (tarea.getTitulo().length() != 0) {
             mensaje += tarea.getTitulo();
         }
-        mensaje += "\nFecha ";
+        mensaje += "\nFecha: ";
         if (!tarea.esDiaCompleto()) {
             mensaje += tarea.getFecha().toString();
         } else {
             mensaje += tarea.getFecha().toLocalDate().toString();
+        }
+        mensaje += "\nEstado: ";
+        if (tarea.estaCompleta()){
+            mensaje += "completada";
+        }else{
+            mensaje += "no completada";
         }
         return mensaje;
     }

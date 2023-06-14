@@ -214,7 +214,7 @@ public class VistaEvento extends VistaActividad{
             }
             mensajeRepe = new StringBuilder(mensajeRepe.substring(0, mensajeRepe.length() - 1));
         }
-        mensajeRepe.append(". Intervalo: ").append(repeticionE.getIntervalo()).append(". Hasta: ");
+        mensajeRepe.append("Intervalo: ").append(repeticionE.getIntervalo()).append(". Hasta: ");
         if (repeticionE.getFechaHasta() != null){
             mensajeRepe.append(repeticionE.getFechaHasta().toString());
         }else if (repeticionE.getOcurrencias() != 0){

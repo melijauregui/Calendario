@@ -265,8 +265,9 @@ public class Calendario implements Serializable {
      */
     public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInStream = new ObjectInputStream(bytes);
+        Calendario calendario = (Calendario) objectInStream.readObject();
         objectInStream.close();
-        return (Calendario) objectInStream.readObject();
+        return calendario;
     }
 
     /**

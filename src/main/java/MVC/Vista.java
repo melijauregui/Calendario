@@ -727,9 +727,4 @@ public class Vista {
 
     }
 
-
-/*    public Tarea getTareaActual(){
-        return tareaActual;
-    }*/
-
 }

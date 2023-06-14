@@ -17,9 +17,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -68,8 +69,9 @@ public class Controlador  {
                 throw new RuntimeException(e);
             }
         });
-
+        verActividad();
     }
+
 
     private void guardarTarea() {
         TareaArgs tareaArgs = vista.getInfoTarea();
@@ -210,13 +212,13 @@ public class Controlador  {
             @Override
             public void handle(long l) {
                 for (Alarma alarma: alarmasTareas){
-                    if (!timers.containsKey(alarma)){
+                    if (debeIncluirAlarma(alarma)){
                         crearTimer(alarma,crearTimerTaskTarea(alarma));
                     }
                 }
                 for (Set<Alarma> alarmasProximas : alarmasProximasEventos.values()){
                     for (Alarma alarma : alarmasProximas){
-                        if (!timers.containsKey(alarma)){
+                        if (debeIncluirAlarma(alarma)){
                             crearTimer(alarma,crearTimerTaskEvento(alarma, buscarEvento(alarmasProximas)));
                         }
                     }
@@ -224,6 +226,10 @@ public class Controlador  {
             }
         };
         animationTimer.start();
+    }
+
+    private boolean debeIncluirAlarma(Alarma alarma){
+        return !timers.containsKey(alarma) && !alarma.suenaAntes(LocalDateTime.now());
     }
 
     private TimerTask crearTimerTaskTarea(Alarma alarma){
