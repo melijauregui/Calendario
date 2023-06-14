@@ -188,7 +188,9 @@ public class Controlador  {
     }
     public void actualizarActividad(){
         Actividad act = vista.getActividadActual();
-        if (act == null){
+        if (vista.eliminarActividad()){
+            eliminarActividad(act);
+            vista.actualizarEliminar();
             return;
         }
         guardarAlarma(act);
@@ -262,6 +264,29 @@ public class Controlador  {
         Timer timer = new java.util.Timer();
         timer.schedule(task, fecha);
         timers.put(alarma, timer);
+    }
+
+    private void eliminarActividad(Actividad actividad){
+        System.out.println("BBB");
+        actividad.aceptarVisitor(new ActividadVisitor() {
+            @Override
+            public void visitarEvento(Evento evento) {
+                calendario.eliminarEvento(evento);
+                vista.actualizarEliminar();
+                vista.tipoRango(vista.getEscuchaFrecuencia());
+            }
+            @Override
+            public void visitarTarea(Tarea tarea) {
+                calendario.eliminarTarea(tarea);
+                vista.actualizarEliminar();
+                vista.tipoRango(vista.getEscuchaFrecuencia());
+            }
+
+            @Override
+            public void visitarInstancia(InstanciaEvento instancia) {
+                //
+            }
+        });
     }
 
 }

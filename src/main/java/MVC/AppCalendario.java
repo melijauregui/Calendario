@@ -22,7 +22,7 @@ public class AppCalendario extends Application {
         Controlador controlador = new Controlador(calendario, vista);
         controlador.start();*/
         Calendario calendario = new Calendario();
-
+        /*
         String filePath = "persistencia.bin";
 
         File archivo = new File(filePath);
@@ -46,12 +46,12 @@ public class AppCalendario extends Application {
             } catch (IOException | ClassNotFoundException e) {
             }
 
-
+            */
 
             Vista vista = new Vista(calendario, stage);
             Controlador controlador = new Controlador(calendario, vista);
             controlador.start();
-
+            /*
             // Serializar
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             calendario.serializar(bytes);
@@ -61,7 +61,7 @@ public class AppCalendario extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     public static void main(String[] args) {

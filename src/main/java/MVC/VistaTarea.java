@@ -183,4 +183,8 @@ public class VistaTarea extends VistaActividad {
     }
 
 
+    public void registrarEscuchaEliminar(EventHandler<ActionEvent> eventHandler) {
+        eliminar.setOnAction(eventHandler);
+    }
+
 }

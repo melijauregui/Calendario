@@ -24,6 +24,7 @@ public abstract class VistaActividad {
     abstract void eliminarAlarmasSeleccionadas();
     abstract void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler);
     abstract void habilitarBorrarAlarma();
+    abstract void registrarEscuchaEliminar(EventHandler<ActionEvent> eventHandler);
 
 
     protected void eliminarAlarmasSeleccionadas_(ListView<String> listaAlarmas, Button botonEliminarAlarma, List<List<String>> infoAlarmas, Map<String, List<String>> alarmas){
@@ -96,6 +97,7 @@ public abstract class VistaActividad {
     public abstract List<List<String>> getInfoAlarmas();
 
     public abstract Actividad getActividad();
+
 
 
 }

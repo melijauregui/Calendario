@@ -227,4 +227,7 @@ public class VistaEvento extends VistaActividad{
     public void inicializarListasAlarmas(){
         inicializarListasAlarmas_(evento, listaAlarmas, infoAlarmas, alarmas);
     }
+    public void registrarEscuchaEliminar(EventHandler<ActionEvent> eventHandler) {
+        eliminar.setOnAction(eventHandler);
+    }
 }

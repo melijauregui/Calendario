@@ -68,6 +68,7 @@ public class Vista {
     //private Tarea tareaActual;
     private VistaActividad vistaActual;
     private Actividad actividadActual;
+    private boolean eliminarActividad;
 
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
@@ -440,6 +441,20 @@ public class Vista {
     public void getEscuchaEliminarAlarmas(VistaActividad vistaActividad) {
         vistaActividad.registrarEscuchaEliminarAlarma(actionEvent -> vistaActividad.eliminarAlarmasSeleccionadas());
     }
+    public void getEscuchaEliminar(VistaActividad vistaActividad) {
+        vistaActividad.registrarEscuchaEliminar(actionEvent -> {
+            //vistaActividad.eliminar();
+            eliminarActividad = true;
+            vistaActividad.cerrarVistaDetallada();
+                });
+    }
+    public boolean eliminarActividad(){
+        return eliminarActividad;
+    }
+    public void actualizarEliminar(){
+        eliminarActividad = false;
+    }
+
 
     public void getEscuchaSeleccionarAlarmas(VentanaCrear ventanaCrear) {
         ventanaCrear.registrarEscuchaSeleccionarAlarma(mouseEvent -> {
@@ -670,6 +685,7 @@ public class Vista {
                 getEscuchaCrearAlarma(vistaActual);
                 getEscuchaSeleccionarAlarmas(vistaActual);
                 getEscuchaEliminarAlarmas(vistaActual);
+                getEscuchaEliminar(vistaActual);
                 guardarActividad();
                 nuevoStage.showAndWait();
                 break;
@@ -695,6 +711,7 @@ public class Vista {
         getEscuchaCrearAlarma(vistaActual);
         getEscuchaSeleccionarAlarmas(vistaActual);
         getEscuchaEliminarAlarmas(vistaActual);
+        getEscuchaEliminar(vistaActual);
         guardarActividad();
         nuevoStage.showAndWait();
 
