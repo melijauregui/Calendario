@@ -5,6 +5,7 @@ import Calendario.Alarmas.Alarma;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -27,23 +28,23 @@ public abstract class VistaActividad {
     abstract void registrarEscuchaEliminar(EventHandler<ActionEvent> eventHandler);
 
 
-    protected void eliminarAlarmasSeleccionadas_(ListView<String> listaAlarmas, Button botonEliminarAlarma, List<List<String>> infoAlarmas, Map<String, List<String>> alarmas){
+    protected void eliminarAlarmasSeleccionadas_(ListView<Label> listaAlarmas, Button botonEliminarAlarma, List<List<String>> infoAlarmas, Map<Label, List<String>> alarmas){
         int indiceSeleccionado = listaAlarmas.getSelectionModel().getSelectedIndex();
-        String mensaje = listaAlarmas.getItems().remove(indiceSeleccionado);
+        Label mensaje = listaAlarmas.getItems().remove(indiceSeleccionado);
         List<String> lista = alarmas.remove(mensaje);
         infoAlarmas.remove(lista);
         if (listaAlarmas.getItems().isEmpty()){
-            listaAlarmas.getItems().add("Sin alarmas");
+            listaAlarmas.getItems().add(new Label("Sin alarmas"));
         }
         botonEliminarAlarma.setDisable(true);
     }
 
-    protected void inicializarListasAlarmas_(Actividad act, ListView<String> listaAlarmas, List<List<String>> infoAlarmas, Map<String, List<String>> alarmas) {
+    protected void inicializarListasAlarmas_(Actividad act, ListView<Label> listaAlarmas, List<List<String>> infoAlarmas, Map<Label, List<String>> alarmas) {
         alarmas.clear();
         listaAlarmas.getItems().clear();
         infoAlarmas.clear();
         if (act.getAlarmas().isEmpty()){
-            listaAlarmas.getItems().add("Sin alarmas");
+            listaAlarmas.getItems().add(new Label("Sin alarmas"));
                 return;
 
         }
@@ -58,16 +59,17 @@ public abstract class VistaActividad {
                 tiempoRelativo= alarma.getTiempoRelativo();
                 mensaje += ", " + alarma.getIntervalo() + " " + alarma.getTiempoRelativo().toLowerCase() + " antes.";
             }
+            Label label = new Label(mensaje);
             infoAlarma.add(intervalo);
             infoAlarma.add(tiempoRelativo);
             infoAlarmas.add(infoAlarma);
-            alarmas.put(mensaje,infoAlarma);
-            listaAlarmas.getItems().add(mensaje);
+            alarmas.put(label,infoAlarma);
+            listaAlarmas.getItems().add(label);
         }
     }
 
     public abstract void inicializarListasAlarmas();
-    protected void getEscuchaGuardarAlarma(VentanaCrearAlarma ventanaCrearAlarma, List<List<String>> infoAlarmas, ListView<String> listaAlarmas, Map<String, List<String>> alarmas){
+    protected void getEscuchaGuardarAlarma(VentanaCrearAlarma ventanaCrearAlarma, List<List<String>> infoAlarmas, ListView<Label> listaAlarmas, Map<Label, List<String>> alarmas){
         ventanaCrearAlarma.registrarEscuchaCrearAlarma(actionEvent -> {
             String aviso = ventanaCrearAlarma.getAviso();
             String tiempoRelativo = ventanaCrearAlarma.getTiempoRelativo();
@@ -84,11 +86,12 @@ public abstract class VistaActividad {
             String mensaje = "Alarma con " + aviso;
             mensaje += (!(intervalo.length()==0) && !(intervalo.equals(" - "))) ? ", " + intervalo + " "
                     + tiempoRelativo.toLowerCase() + " antes." : "";
-            alarmas.put(mensaje,infoAlarma);
-            if (listaAlarmas.getItems().get(0).equals("Sin alarmas")){
+            Label label = new Label(mensaje);
+            alarmas.put(label,infoAlarma);
+            if (listaAlarmas.getItems().get(0).getText().equals("Sin alarmas")){
                 listaAlarmas.getItems().remove(0);
             }
-            listaAlarmas.getItems().add(mensaje);
+            listaAlarmas.getItems().add(label);
             infoAlarmas.add(infoAlarma);
             ventanaCrearAlarma.cerrarVentana();
         });

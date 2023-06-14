@@ -41,7 +41,7 @@ public class VistaEvento extends VistaActividad{
     @FXML
     private  TextField repeticion;
     @FXML
-    private ListView<String> listaAlarmas;
+    private ListView<Label> listaAlarmas;
     @FXML
     private Button editarTitulo;
     @FXML
@@ -58,10 +58,11 @@ public class VistaEvento extends VistaActividad{
     private Button eliminar;
     private VentanaCrearAlarma ventanaCrearAlarma;
     private List<List<String>> infoAlarmas = new ArrayList<>();
+    private Map<Label, List<String>> alarmas = new HashMap<>();
     public VistaEvento(InstanciaEvento evento) {
         this.evento = evento;
     }
-    Map<String, List<String>> alarmas = new HashMap<>();
+
     
     public Evento getActividad(){return evento.getReferenciaEvento();}
 
