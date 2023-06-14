@@ -193,7 +193,7 @@ public class Vista {
         label.setLayoutY(472);
         label.setLayoutX(122);
         label.setStyle("-fx-font-size: 16px;");
-        label.setText(LocalDate.now().getDayOfWeek().toString());
+        label.setText(LocalDate.now().toString());
         setearPane("file:src/main/java/MVC/imagenes/diario.png", label, 425, 47, 700, 470 );
         frecuencia = "Dia";
         setMenuDia();
@@ -207,7 +207,7 @@ public class Vista {
         label.setLayoutY(474);
         label.setLayoutX(122);
         label.setStyle("-fx-font-size: 16px;");
-        label.setText(diaActual.getMonth().toString());
+        label.setText(diaActual.getMonth().toString() +" "+ diaActual.getYear() );
         setearPane("file:src/main/java/MVC/imagenes/mensual.png", label, 474, 58, 700, 470);
         frecuencia = "Mes";
         setMenuMes();
