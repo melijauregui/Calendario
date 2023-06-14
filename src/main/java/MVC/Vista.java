@@ -44,8 +44,8 @@ public class Vista {
     private AnchorPane actualFondo;
     private Label dia = new Label();
     private String frecuencia;
-    private Button siguiente = crearButtonAntSig(">", 780, 20);
-    private Button anterior = crearButtonAntSig("<", 730, 20);
+    private Button siguiente = crearButtonAntSig(">");
+    private Button anterior = crearButtonAntSig("<");
     private MenuButton menuCrearActividad = menuCrearActividad();
     private MenuItem itemCrearTarea;
     private MenuItem itemCrearEvento;
@@ -91,17 +91,15 @@ public class Vista {
         ChoiceBox<String> box = new ChoiceBox<>(FXCollections.observableArrayList("Dia", "Semana", "Mes"));
         box.setStyle("-fx-background-color: white; -fx-border-color: black;");
         box.setLayoutX(715.0);
-        box.setLayoutY(50.0);
+        box.setLayoutY(57.0);
         box.setPrefWidth(100.0);
         box.setCursor(Cursor.HAND);
         return box;
     }
 
-    private Button crearButtonAntSig(String text, float x, float y) {
+    private Button crearButtonAntSig(String text) {
         Button button = new Button(text);
         button.setStyle("-fx-background-color: white; -fx-border-color: black;");
-        button.setLayoutX(x);
-        button.setLayoutY(y);
         button.setShape(new javafx.scene.shape.Circle(50));
         button.setCursor(Cursor.HAND);
         return button;
@@ -149,7 +147,7 @@ public class Vista {
         crearBox.getItems().addAll(itemCrearTarea, itemCrearEvento);
         crearBox.setStyle("-fx-background-color: white; -fx-border-color: black;");
         crearBox.setLayoutX(620);
-        crearBox.setLayoutY(50);
+        crearBox.setLayoutY(57);
         crearBox.setPrefWidth(80);
         crearBox.setCursor(Cursor.HAND);
         return crearBox;
@@ -171,14 +169,18 @@ public class Vista {
         }
     }
 
-    private void setearPane(String ruta) {
+    private void setearPane(String ruta, Label label, int x, int y, int x1, int y2) {
         AnchorPane rootPane = new AnchorPane();
         setearFondo(rootPane, ruta);
-        rootPane.getChildren().addAll(paneGeneral);
-        //dia = new Label(diaActual.toString());
-        dia.setLayoutX(400);
-        dia.setLayoutY(50);
+        rootPane.getChildren().addAll(paneGeneral, label);
+        siguiente.setLayoutX(x1+50);
+        anterior.setLayoutX(x1);
+        siguiente.setLayoutY(y2);
+        anterior.setLayoutY(y2);
         dia.setStyle("-fx-font-size: 16px;");
+        dia.setLayoutX(x);
+        dia.setLayoutY(y);
+        dia.setText(LocalDate.now().toString());
         rootPane.getChildren().add(dia);
         actualFondo = rootPane;
         this.scene = new Scene(rootPane);
@@ -187,9 +189,13 @@ public class Vista {
     }
 
     private void setearDia() {
-        setearPane("file:src/main/java/MVC/imagenes/diario.png");
+        Label label = new Label();
+        label.setLayoutY(472);
+        label.setLayoutX(122);
+        label.setStyle("-fx-font-size: 16px;");
+        label.setText(LocalDate.now().getDayOfWeek().toString());
+        setearPane("file:src/main/java/MVC/imagenes/diario.png", label, 425, 47, 700, 470 );
         frecuencia = "Dia";
-        dia.setText(diaActual.toString());
         setMenuDia();
         actualizarMenuDia();
         choiceFrecuencia.setValue(frecuencia);
@@ -197,9 +203,13 @@ public class Vista {
     }
 
     private void setearMes() {
-        setearPane("file:src/main/java/MVC/imagenes/mensual.png");
+        Label label = new Label();
+        label.setLayoutY(474);
+        label.setLayoutX(122);
+        label.setStyle("-fx-font-size: 16px;");
+        label.setText(diaActual.getMonth().toString());
+        setearPane("file:src/main/java/MVC/imagenes/mensual.png", label, 474, 58, 700, 470);
         frecuencia = "Mes";
-        dia.setText(diaActual.getMonth().toString());
         setMenuMes();
         setearFechas();
         actualizarMenuMes();
@@ -207,7 +217,14 @@ public class Vista {
     }
 
     private void setearSemana() {
-        setearPane("file:src/main/java/MVC/imagenes/semanal.png");
+        Label label = new Label();
+        label.setLayoutY(445);
+        label.setLayoutX(133);
+        label.setStyle("-fx-font-size: 16px;");
+        LocalDate primerDia = getPrimerDiaSemana(diaActual);
+        LocalDate ultimoDia = getUltimoDiaSemana(primerDia);
+        label.setText(primerDia + "\n \n"+ ultimoDia);
+        setearPane("file:src/main/java/MVC/imagenes/semanal.png", label, 473, 58, 700, 457);
         frecuencia = "Semana";
         setListViewSemana();
         setearFechas();
@@ -260,8 +277,6 @@ public class Vista {
 
     private void setearFechasSemana() {
         LocalDate primerDia = getPrimerDiaSemana(diaActual);
-        LocalDate ultimoDia = getUltimoDiaSemana(primerDia);
-        dia.setText(primerDia + " al " + ultimoDia);
         int columna = 0;
         double x = 109;
         double y = 140;
@@ -304,9 +319,9 @@ public class Vista {
         double x = 105;
         double y = 155;
         double width = 95;
-        double height = 15;
+        double height = 25;
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
-            guardarMenuConClave(crearMenu(x+104*columna, y+47*fila,width, height), primerDia);
+            guardarMenuConClave(crearMenu(x+104*columna, y+52*fila,width, height), primerDia);
             primerDia = primerDia.plusDays(1);
             if (columna == 6){
                 fila++;
@@ -347,7 +362,7 @@ public class Vista {
         double width = 118;
         double height = 25;
         while (true) {
-            guardarMenuConClave(crearMenu(x+186*columna, y+47*fila,width, height), hora);
+            guardarMenuConClave(crearMenu(x+186*columna, y+58*fila,width, height), hora);
             hora ++;
             if (hora == 24){
                 break;
@@ -371,7 +386,7 @@ public class Vista {
         while (primerDia.getMonth() == mesActual || primerDia.getMonth() == mesActual.minus(1)) {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
             fecha.setLayoutX(x + 105.5 * columna);
-            fecha.setLayoutY(y + 47 * fila);
+            fecha.setLayoutY(y + 52 * fila);
             actualFondo.getChildren().add(fecha);
             primerDia = primerDia.plusDays(1);
             if (columna == 6) {

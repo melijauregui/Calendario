@@ -2,15 +2,10 @@ package MVC;
 
 import Calendario.Main.Calendario;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.*;
-import java.util.Objects;
 
 public class AppCalendario extends Application {
     @Override
