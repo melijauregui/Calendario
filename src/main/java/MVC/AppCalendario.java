@@ -13,12 +13,10 @@ import java.io.*;
 import java.util.Objects;
 
 public class AppCalendario extends Application {
-
-    static String dataDirectory = System.getProperty("user.dir");
-    static String filePath = dataDirectory + "/calendario.bin";
     @Override
     public void start(Stage stage) throws Exception {
         Calendario calendario = new Calendario();
+        String filePath = System.getProperty("user.dir") + "/calendario.bin" ;
         File archivo = new File(filePath);
 
         if (!archivo.exists()){
@@ -36,7 +34,7 @@ public class AppCalendario extends Application {
         Calendario finalCalendario = calendario;
         stage.setOnCloseRequest(windowEvent -> {
             try {
-                finalCalendario.serializar(new BufferedOutputStream(new FileOutputStream(AppCalendario.filePath)));
+                finalCalendario.serializar(new BufferedOutputStream(new FileOutputStream(archivo)));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
