@@ -26,7 +26,6 @@ public class VentanaCrearAlarma {
     private Button botonGuardarAlarma;
     @FXML
     private Label mensajeError;
-    private LocalDateTime fechaActual = LocalDateTime.now();
     public VentanaCrearAlarma(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearAlarma.fxml"));
         loader.setController(this);

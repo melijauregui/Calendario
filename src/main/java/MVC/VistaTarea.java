@@ -34,7 +34,7 @@ public class VistaTarea extends VistaActividad {
     @FXML
     private  Label estado;
     @FXML
-    private ListView<String> listaAlarmas;
+    private ListView<Label> listaAlarmas;
     private List<List<String>> infoAlarmas = new ArrayList<>();
     @FXML
     private Button editarTitulo;
@@ -51,7 +51,7 @@ public class VistaTarea extends VistaActividad {
     private VentanaCrearAlarma ventanaCrearAlarma;
     @FXML
     private Button eliminar;
-    Map<String, List<String>> alarmas = new HashMap<>();
+    private Map<Label, List<String>> alarmas = new HashMap<>();
 
     public VistaTarea(Tarea tarea) {
         this.tarea = tarea;
