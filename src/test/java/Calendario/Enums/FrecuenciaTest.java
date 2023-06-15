@@ -1,7 +1,6 @@
 package Calendario.Enums;
 
 
-import Calendario.Main.Argumentos.Frecuencia;
 import Calendario.Repeticiones.RepeticionAnual;
 import Calendario.Repeticiones.RepeticionDiaria;
 import Calendario.Repeticiones.RepeticionMensual;

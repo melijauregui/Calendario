@@ -13,10 +13,7 @@ public enum TiempoRelativo implements Serializable {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusMinutes(intervalo);
         }
-        @Override
-        public String getTiempoRelativoToString() {
-            return "Minutos";
-        }
+
     },
     HORAS{
         /**
@@ -27,10 +24,7 @@ public enum TiempoRelativo implements Serializable {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusHours(intervalo);
         }
-        @Override
-        public String getTiempoRelativoToString() {
-            return "Horas";
-        }
+
     },
     DIAS{
         /**
@@ -41,10 +35,7 @@ public enum TiempoRelativo implements Serializable {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusDays(intervalo);
         }
-        @Override
-        public String getTiempoRelativoToString() {
-            return "Días";
-        }
+
     },
     SEMANAS{
         /**
@@ -56,10 +47,6 @@ public enum TiempoRelativo implements Serializable {
             return fecha.minusWeeks(intervalo);
         }
 
-        @Override
-        public String getTiempoRelativoToString() {
-            return "Semanas";
-        }
     };
 
     TiempoRelativo(){}
@@ -68,5 +55,4 @@ public enum TiempoRelativo implements Serializable {
      * Calcula una fecha relativa a otra
      */
     public abstract LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo);
-    public abstract String getTiempoRelativoToString();
 }

@@ -15,14 +15,14 @@ public class BuilderAlarmaEvento {
      * Recibe la información de una AlarmaEvento con Tiempo Relativo y se la setea
      */
     public BuilderAlarmaEvento(int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
-        alarmaEvento = new AlarmaEvento(intervalo, tiempoRelativo, aviso.crearAviso());
+        alarmaEvento = new AlarmaEvento(intervalo, tiempoRelativo, aviso);
     }
 
     /**
      * Recibe la información de una AlarmaEvento sin Tiempo Relativo y se la setea
      */
     public BuilderAlarmaEvento(TipoAviso aviso){
-        alarmaEvento = new AlarmaEvento(aviso.crearAviso());
+        alarmaEvento = new AlarmaEvento(aviso);
     }
 
     /**

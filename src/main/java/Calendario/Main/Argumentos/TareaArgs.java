@@ -34,21 +34,37 @@ public class TareaArgs {
         this.dia = dia;
     }
 
+    /**
+     * Devuelve el título
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * Devuelve la descripción
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * Devuelve el día de vencimiento
+     */
     public LocalDate getDia() {
         return dia;
     }
 
+    /**
+     * Devuelve la hora de vencimiento
+     */
     public LocalTime getHora() {
         return hora;
     }
+
+    /**
+     * Devuelve true si tiene información de una Tarea de día completo
+     */
     public boolean esDiaCompleto(){
         return hora == null;
     }

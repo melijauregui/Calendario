@@ -49,6 +49,16 @@ public abstract class Actividad implements Serializable {
     }
 
     /**
+     * Acepta un Visitor
+     */
+    public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
+
+    /**
+     * Elimina todas las alarmas de la Actividad
+     */
+    public abstract void eliminarAlarmas();
+
+    /**
      * Devuelve true si 'otra' suena antes que 'primerAlarma' y es más próxima a la fecha pasada por parámetro
      */
     private boolean esMasProxima(Alarma primerAlarma, Alarma otra, LocalDateTime fecha) {
@@ -73,10 +83,4 @@ public abstract class Actividad implements Serializable {
         return (ambasSonProximas(primerAlarma, alarma));
     }
 
-    /**
-     * Acepta un Visitor
-     */
-    public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
-
-    public abstract void eliminarAlarmas();
 }

@@ -1,12 +1,10 @@
 package Calendario.Main;
 
 import Calendario.Actividad.Actividad;
-import Calendario.Alarmas.Aviso.AvisoNotificacion;
-import Calendario.Duracion.Duracion;
+import Calendario.Enums.Frecuencia;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
 import Calendario.Main.Argumentos.*;
-import Calendario.Main.Builders.*;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -1002,7 +1000,7 @@ public class CalendarioTest {
         var titulo = "TP1";
         var descripcion = "Entrega limite del TP1";
 
-        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, new AvisoNotificacion());
+        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
 
         var diaInicio = LocalDate.of(2023, 4, 22);
         var diaFin = LocalDate.of(2023, 4, 22);

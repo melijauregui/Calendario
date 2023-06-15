@@ -5,6 +5,10 @@ public class EventoArgs {
     private String descripcion;
     private DuracionArgs duracion;
     private RepeticionArgs repeticion;
+
+    /**
+     * Recibe la información de un Evento con repetición y la guarda
+     */
     public EventoArgs(String titulo, String descripcion, DuracionArgs duracion, RepeticionArgs repeticion){
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -13,8 +17,7 @@ public class EventoArgs {
     }
 
     /**
-     * Recibe la información de un Evento de día completo, y los datos de una Repetición con fecha de vencimiento.
-     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
+     * Recibe la información de un Evento sin repetición y la guarda
      */
     public EventoArgs(String titulo, String descripcion, DuracionArgs duracion){
         this.titulo = titulo;
@@ -22,21 +25,37 @@ public class EventoArgs {
         this.duracion = duracion;
     }
 
+    /**
+     * Devuelve el título
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * Devuelve la descripción
+     */
     public String getDescripcion() {
         return descripcion;
     }
 
+    /**
+     * Devuelve la información sobre la Duración
+     */
     public DuracionArgs getDuracion() {
         return duracion;
     }
 
+    /**
+     * Devuelve la información sobre la Repetición
+     */
     public RepeticionArgs getRepeticion() {
         return repeticion;
     }
+
+    /**
+     * Devuelve true si tiene información sobre la Repetición
+     */
     public boolean hayRepeticion(){
         return repeticion!=null;
     }

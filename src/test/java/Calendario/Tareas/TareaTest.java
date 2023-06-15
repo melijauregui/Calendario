@@ -1,10 +1,8 @@
 package Calendario.Tareas;
 
 import Calendario.Alarmas.Alarma;
-import Calendario.Alarmas.Aviso.AvisoConSonido;
-import Calendario.Alarmas.Aviso.AvisoEmail;
-import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Enums.TiempoRelativo;
+import Calendario.Enums.TipoAviso;
 import org.junit.Test;
 
 import java.io.Serializable;
@@ -72,7 +70,7 @@ public class TareaTest implements Serializable {
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
-        Alarma alarma = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoNotificacion());
+        Alarma alarma = new Alarma(10, TiempoRelativo.MINUTOS, fecha, TipoAviso.NOTIFICACION);
 
         //Act
         tarea.agregarAlarma(alarma);
@@ -94,9 +92,9 @@ public class TareaTest implements Serializable {
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
-        var alarma1 = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoConSonido());
-        var alarma2 = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoNotificacion());
-        var alarma3 = new Alarma(fecha.plusDays(1), new AvisoEmail());
+        var alarma1 = new Alarma(10, TiempoRelativo.MINUTOS, fecha, TipoAviso.SONIDO);
+        var alarma2 = new Alarma(10, TiempoRelativo.MINUTOS, fecha,TipoAviso.NOTIFICACION);
+        var alarma3 = new Alarma(fecha.plusDays(1), TipoAviso.EMAIL);
         tarea.agregarAlarma(alarma1);
         tarea.agregarAlarma(alarma2);
         tarea.agregarAlarma(alarma3);
@@ -123,7 +121,7 @@ public class TareaTest implements Serializable {
         var fecha = LocalDateTime.of(2023, 4, 22, 20, 0);
         tarea.setDia(fecha.toLocalDate());
         tarea.setHora(fecha.toLocalTime());
-        var alarma = new Alarma(10, TiempoRelativo.MINUTOS, fecha, new AvisoConSonido());
+        var alarma = new Alarma(10, TiempoRelativo.MINUTOS, fecha, TipoAviso.SONIDO);
         tarea.agregarAlarma(alarma);
 
         //Act

@@ -4,7 +4,6 @@ import Calendario.Main.Argumentos.RepeticionArgs;
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Repeticiones.RepeticionSemanal;
 
-import static Calendario.Main.Argumentos.TipoRepeticion.FECHA_LIMITE;
 
 public class BuilderRepeticion {
     Repeticion repeticion;

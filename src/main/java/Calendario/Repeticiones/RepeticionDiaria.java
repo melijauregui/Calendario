@@ -21,9 +21,6 @@ public class RepeticionDiaria extends Repeticion {
         super(intervaloDiaria, ocurrencias);
 
     }
-    public void actualizarDuracion(Duracion d){
-        return;
-    }
 
     /**
      * Crea una Repetición infinita

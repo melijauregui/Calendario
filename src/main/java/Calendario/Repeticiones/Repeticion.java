@@ -101,6 +101,20 @@ public abstract class Repeticion implements Serializable {
     public abstract TipoRepeticion getTipoRepeticion();
 
     /**
+     * Actualiza las ocurrencias
+     */
+    public void actualizarOcurrencias(){
+        if (ocurrencias > 0){
+            ocurrenciasRelativas = ocurrencias;
+        }
+    }
+
+    /**
+     * Método implementado por RepeticionSemanal.
+     */
+    public void actualizarDuracion(Duracion duracion){};
+
+    /**
      * Devuelve true si la instancia pasada por parámetro es la última del
      * evento
      */
@@ -123,11 +137,4 @@ public abstract class Repeticion implements Serializable {
      * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de repetición
      */
     protected abstract LocalDate getProximaFecha(LocalDate fecha);
-
-    public abstract void actualizarDuracion(Duracion duracion);
-    public void actualizarOcurrencias(){
-        if (ocurrencias > 0){
-            ocurrenciasRelativas = ocurrencias;
-        }
-    }
 }

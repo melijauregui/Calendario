@@ -1,4 +1,4 @@
-package MVC;
+package MVC.Crear;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -38,43 +38,56 @@ public class VentanaCrearAlarma {
         initialize();
 
     }
-    private void initialize(){
-        var tipos = FXCollections.observableArrayList(" - ","Minutos", "Horas","Días", "Semanas");
-        tipoTiempoRelativo.setItems(tipos);
-        tipoTiempoRelativo.setValue(tipos.get(0));
-        var avisos = FXCollections.observableArrayList("Notificación", "Mail", "Sonido");
-        tipoAviso.setItems(avisos);
-        tipoAviso.setValue(avisos.get(0));
-    }
 
+    /**
+     * Registra el eventHandler para crear una alarma
+     */
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler){
         botonGuardarAlarma.setOnAction(eventHandler);
     }
 
+    /**
+     * Muestra un mensaje de error
+     */
     public void setMensajeError(String mensaje){
         mensajeError.setText(mensaje);
     }
 
+    /**
+     * Devuelve el tipo de aviso elegido
+     */
     public String getAviso(){
         return tipoAviso.getValue();
     }
 
+    /**
+     * Devuelve el intervalo relativo seleccionado
+     */
     public String getIntervalo(){
         return intervalo.getText();
     }
 
+    /**
+     * Devuelve el tipo de tiempo relativo seleccionado
+     */
     public String getTiempoRelativo(){
         return tipoTiempoRelativo.getValue();
     }
 
+    /**
+     * Cierra la ventana
+     */
     public void cerrarVentana(){
         stage.close();
     }
 
+    /**
+     * Si se selecciona un intervalo, pero no un tiempo relativo, muestra el mensaje de error correspondiente
+     */
     public boolean manejarErrorTiempoRelativo() {
         boolean hayError = false;
         if (getTiempoRelativo().equals(" - ")) {
-            setMensajeError("Tiempo relativo inválido");
+            setMensajeError(Constantes.TIEMPO_RELATIVO_INVALIDO);
             hayError = true;
         } else {
             setMensajeError("");
@@ -82,6 +95,9 @@ public class VentanaCrearAlarma {
         return hayError;
     }
 
+    /**
+     * Si se selecciona un intervalo incorrecto muestra el mensaje de error correspondiente
+     */
     public boolean manejarErrorIntervalo() {
         try {
             int intervaloNumero = Integer.parseInt(getIntervalo());
@@ -91,8 +107,20 @@ public class VentanaCrearAlarma {
             setMensajeError("");
             return false;
         } catch (NumberFormatException exception) {
-            setMensajeError("Intervalo inválido");
+            setMensajeError(Constantes.INTERVALO_INVALIDO);
         }
         return true;
+    }
+
+    /**
+     * Inicializa los controles
+     */
+    private void initialize(){
+        var tipos = FXCollections.observableArrayList(" - ","Minutos", "Horas","Días", "Semanas");
+        tipoTiempoRelativo.setItems(tipos);
+        tipoTiempoRelativo.setValue(tipos.get(0));
+        var avisos = FXCollections.observableArrayList("Notificación", "Mail", "Sonido");
+        tipoAviso.setItems(avisos);
+        tipoAviso.setValue(avisos.get(0));
     }
 }

@@ -1,4 +1,4 @@
-package MVC;
+package MVC.Crear;
 
 import Calendario.Main.Argumentos.TareaArgs;
 import javafx.collections.FXCollections;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VistaVentanaCrearTarea extends VentanaCrear{
+public class VistaVentanaCrearTarea extends VentanaCrear {
     @FXML
     private TextField titulo;
     @FXML
@@ -48,11 +48,9 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
     private ListView<String> listaAlarmas;
     @FXML
     private Label errorFecha;
-    private LocalDateTime fechaActual = LocalDateTime.now();
     private VentanaCrearAlarma ventanaCrearAlarmaTarea;
     private TareaArgs argsTareaActual;
 
-    private List<List<String>> infoAlarmas = new ArrayList<>();
     public VistaVentanaCrearTarea(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/crearTarea.fxml"));
         loader.setController(this);
@@ -65,149 +63,211 @@ public class VistaVentanaCrearTarea extends VentanaCrear{
         initialize();
 
     }
-    private void initialize(){
-        var dias = FXCollections.observableArrayList("1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
-                "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31");
-        dia.setItems(dias);
-        dia.setVisibleRowCount(5);
-        var meses = FXCollections.observableArrayList("Enero", "Febrero", "Marzo", "Abril", "Mayo",
-                "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-        mes.setItems(meses);
-        mes.setVisibleRowCount(5);
-        var minutos = FXCollections.observableArrayList("0","1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
-                "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28",
-                "29", "30", "31","32","33", "34","35","36","37","38","39","40","41","42","43","44","45","46","47","48",
-                "49","50","51","52","53","54","55","56","57","58","59");
-        minuto.setItems(minutos);
-        minuto.setValue(minutos.get(0));
-        var horas = FXCollections.observableArrayList("0","1", "2", "3","4", "5", "6", "7", "8", "9", "10", "11",
-                "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
-        hora.setItems(horas);
-        hora.setValue(horas.get(0));
-        inicializarValorListaAlarmas();
-        deshabilitarBorrarAlarma();
-    }
 
-    private void inicializarValorListaAlarmas(){
-        listaAlarmas.getItems().add("Sin alarmas");
-    }
+    /**
+     * Registra el eventHandler para crear una alarma
+     */
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
         botonCrearAlarma.setOnAction(eventHandler);
     }
 
+    /**
+     * Abre la ventana para crear una Alarma y maneja los eventos asociados
+     */
     public void abrirVentanaCrearAlarma() throws IOException {
         Stage stageNuevo = new Stage();
         ventanaCrearAlarmaTarea = new VentanaCrearAlarma(stageNuevo);
         getEscuchaGuardarAlarma_(ventanaCrearAlarmaTarea);
         stageNuevo.showAndWait();
     }
+
+    /**
+     * Guarda la información de la alarma a crear en listaAlarmas
+     */
     public void agregarAlarmaALaLista(String aviso, String intervalo, String tiempoRelativo){
         agregarAlarmaALaLista_(listaAlarmas, aviso, intervalo, tiempoRelativo);
     }
 
+    /**
+     * Registra el eventHandler para eliminar una alarma
+     */
     public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
         botonEliminarAlarma.setOnAction(eventHandler);
     }
 
+    /**
+     * Elimina la información de la Alarma seleccionada y deshabilita el botón de Eliminar
+     */
     public void eliminarAlarmasSeleccionadas(){
         eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma);
     }
 
+    /**
+     * Registra el eventHandler para seleccionar una alarma
+     */
     public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
         listaAlarmas.setOnMouseClicked(eventHandler);
     }
 
+    /**
+     * Habilita el botón para eliminar alarmas
+     */
     public void habilitarBorrarAlarma(){
         botonEliminarAlarma.setDisable(false);
     }
 
 
-    public void deshabilitarBorrarAlarma(){
-        botonEliminarAlarma.setDisable(true);
-    }
-
+    /**
+     * Registra el eventHandler para guardar la información de la tarea a crear
+     */
     public void registrarEscuchaGuardarTarea(EventHandler<ActionEvent> eventHandler){
         botonGuardarTarea.setOnAction(eventHandler);
     }
 
-    public String getTitulo(){
-        return titulo.getText();
-    }
-
-    public String getDescripcion(){
-        return descripcion.getText();
-    }
-
+    /**
+     * Devuelve la información de la tarea a crear
+     */
     public TareaArgs getInfoTarea(){
         return argsTareaActual;
     }
 
-    public int getDia(){
-        return Integer.parseInt(dia.getValue());
-    }
-
-    public int getMes(){
-        return 1 + mes.getItems().indexOf(mes.getValue());
-
-    }
-
-    private int getAnio(){
-        return Integer.parseInt(anio.getText());
-    }
-
-    private int getHora(){
-        return Integer.parseInt(hora.getValue());
-    }
-
-    private int getMinuto(){
-       return Integer.parseInt(minuto.getValue());
-    }
-
-    public boolean esDiaCompleto(){
+    /**
+     * Devuelve true si la checkBox de día completo fue seleccionada
+     */    public boolean esDiaCompleto(){
         return checkDiaCompleto.isSelected();
     }
 
+    /**
+     * Registra el eventHandler al seleccionar la checkBox de día completo
+     */
     public void registrarEscuchaSeleccionarDiaCompleto(EventHandler<ActionEvent> eventHandler) {
         checkDiaCompleto.setOnAction(eventHandler);
     }
 
+    /**
+     * Deshabilita las comboBox de hora y minuto
+     */
     public void setFechaDiaCompleto(){
         hora.setDisable(true);
         minuto.setDisable(true);
     }
 
+    /**
+     * Habilita las comboBox de hora y minuto
+     */
     public void setFechaConHora(){
         hora.setDisable(false);
         minuto.setDisable(false);
 
     }
 
+    /**
+     * Escribe en la label errorFecha el error correspondiente
+     */
     public void setMensajeErrorFecha(String mensaje){
         errorFecha.setText(mensaje);
     }
 
+    /**
+     * Cierra la ventana
+     */
     public void cerrarVentana(){
         stage.close();
     }
 
-
+    /**
+     * Guarda la información de la tarea a crear. Si hubo algún problema, detiene el proceso y muestra
+     * el mensaje de error correspondiente
+     */
     public boolean guardarDatosTarea() {
         if (esDiaCompleto()) {
             try {
                 argsTareaActual = new TareaArgs(getTitulo(), getDescripcion(), LocalDate.of(getAnio(), getMes(), getDia()));
             } catch (NumberFormatException | DateTimeException exception) {
-                setMensajeErrorFecha("Fecha inválida");
+                setMensajeErrorFecha(Constantes.FECHA_INVALIDA);
                 return false;
             }
         } else {
             try {
                 argsTareaActual = new TareaArgs(getTitulo(), getDescripcion(), LocalDateTime.of(getAnio(), getMes(), getDia(), getHora(), getMinuto()));
             } catch (NumberFormatException | DateTimeException exception) {
-                setMensajeErrorFecha("Fecha inválida");
+                setMensajeErrorFecha(Constantes.FECHA_INVALIDA);
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Inicializa los controles
+     */
+    private void initialize(){
+        var dias = Constantes.DIAS_MES;
+        dia.setItems(dias);
+        dia.setVisibleRowCount(5);
+        var meses = Constantes.MESES;
+        mes.setItems(meses);
+        mes.setVisibleRowCount(5);
+        var minutos = Constantes.MINUTOS;
+        minuto.setItems(minutos);
+        minuto.setValue(minutos.get(0));
+        var horas = Constantes.HORAS;
+        hora.setItems(horas);
+        hora.setValue(horas.get(0));
+        inicializarValorListaAlarmas_(listaAlarmas);
+        deshabilitarBorrarAlarma_(botonEliminarAlarma);
+    }
+
+
+    /**
+     * Devuelve el título de la tarea a crear
+     */
+    private String getTitulo(){
+        return titulo.getText();
+    }
+
+    /**
+     * Devuelve la descripción de la tarea a crear
+     */
+    private String getDescripcion(){
+        return descripcion.getText();
+    }
+
+
+    /**
+     * Devuelve el día de la tarea a crear
+     */
+    private int getDia(){
+        return Integer.parseInt(dia.getValue());
+    }
+
+    /**
+     * Devuelve el mes de la tarea a crear
+     */
+    private int getMes(){
+        return 1 + mes.getItems().indexOf(mes.getValue());
+
+    }
+
+    /**
+     * Devuelve el año de la tarea a crear
+     */
+    private int getAnio(){
+        return Integer.parseInt(anio.getText());
+    }
+
+    /**
+     * Devuelve la hora de la tarea a crear
+     */
+    private int getHora(){
+        return Integer.parseInt(hora.getValue());
+    }
+
+    /**
+     * Devuelve los minutos de la tarea a crear
+     */
+    private int getMinuto(){
+        return Integer.parseInt(minuto.getValue());
     }
 
 }

@@ -2,9 +2,9 @@ package Calendario.Eventos;
 
 import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
-import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.TiempoRelativo;
+import Calendario.Enums.TipoAviso;
 import Calendario.Repeticiones.RepeticionMensual;
 import Calendario.Repeticiones.RepeticionSemanal;
 import org.junit.Test;
@@ -657,8 +657,8 @@ public class EventoTest {
 
         evento.setRepeticion(repeticion);
 
-        AlarmaEvento alarma1 = new AlarmaEvento(1, TiempoRelativo.HORAS, new AvisoNotificacion());
-        AlarmaEvento alarma2 = new AlarmaEvento(10, TiempoRelativo.HORAS, new AvisoNotificacion());
+        AlarmaEvento alarma1 = new AlarmaEvento(1, TiempoRelativo.HORAS, TipoAviso.NOTIFICACION);
+        AlarmaEvento alarma2 = new AlarmaEvento(10, TiempoRelativo.HORAS, TipoAviso.NOTIFICACION);
 
 
         //Act
@@ -713,7 +713,7 @@ public class EventoTest {
 
         evento.setRepeticion(repeticion);
 
-        var alarma1 = new AlarmaEvento(2, TiempoRelativo.HORAS, new AvisoNotificacion());
+        var alarma1 = new AlarmaEvento(2, TiempoRelativo.HORAS, TipoAviso.NOTIFICACION);
         evento.agregarAlarma(alarma1);
 
         //Act

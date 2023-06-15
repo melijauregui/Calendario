@@ -5,6 +5,7 @@ import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.ActividadMutable;
+import Calendario.Enums.TipoRepeticion;
 import Calendario.Repeticiones.Repeticion;
 
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     public void setDuracion(Duracion duracion){
         if (repeticion != null){
-            repeticion.actualizarDuracion(duracion);
+            actualizarDuracion();
         }
         this.duracion = duracion;
     }
@@ -37,7 +38,7 @@ public class Evento extends ActividadMutable implements Serializable {
      */
     public void setRepeticion(Repeticion repeticion){
         this.repeticion = repeticion;
-        repeticion.actualizarDuracion(duracion);
+        actualizarDuracion();
     }
 
     /**
@@ -72,6 +73,9 @@ public class Evento extends ActividadMutable implements Serializable {
 
     }
 
+    /**
+     * Elimina las alarmas de la ActividadMutable
+     */
     public void eliminarAlarmas(){
         alarmasEvento.clear();
     }
@@ -149,13 +153,6 @@ public class Evento extends ActividadMutable implements Serializable {
     }
 
     /**
-     * Devuelve true si la colección pasada está vacía
-     */
-    private boolean estaVacia(Collection collection){
-        return collection.size() == 0;
-    }
-
-    /**
      * Devuelve la siguiente Instancia de Evento a la fechaInicio recibida.
      * Si el evento no tiene repetición, o la misma acabó devuelve null.
      */
@@ -169,6 +166,16 @@ public class Evento extends ActividadMutable implements Serializable {
             return null;
         }
         return crearInstancia(fechaInicio, fechaFin);
+    }
+
+    /**
+     * Si la Repetición es Semanal, actualiza la Duración del Evento para que inicie
+     * el día de semana correspondiente
+     */
+    private void actualizarDuracion(){
+        if (repeticion.getTipoRepeticion().equals(TipoRepeticion.SEMANAL)){
+            repeticion.actualizarDuracion(duracion);
+        }
     }
 
 

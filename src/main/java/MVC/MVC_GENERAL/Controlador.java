@@ -1,4 +1,4 @@
-package MVC;
+package MVC.MVC_GENERAL;
 
 import Calendario.Actividad.Actividad;
 import Calendario.Actividad.ActividadVisitor;
@@ -11,20 +11,14 @@ import Calendario.Main.Argumentos.EventoArgs;
 import Calendario.Main.Argumentos.TareaArgs;
 import Calendario.Main.Calendario;
 import Calendario.Tareas.Tarea;
-import com.google.gson.internal.LinkedTreeMap;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
 
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.function.Consumer;
 
 public class Controlador  {
     private Vista vista;
@@ -37,18 +31,18 @@ public class Controlador  {
         this.vista = vista;
     }
     public void start(){
-        getAlarmas();
-        vista.registrarEscuchaFrecuencia(actionEvent -> {
-            vista.tipoRango(vista.getEscuchaFrecuencia());
+        setTimers();
+        vista.registrarEscuchaRango(actionEvent -> {
+            vista.setTipoRango(vista.getEscuchaRango());
             verActividad();
         });
         vista.registrarEscuchaSiguiente(actionEvent -> {vista.getEscuchaSiguiente();
             verActividad();
         });
-
         vista.registrarEscuchaAnterior(actionEvent -> {vista.getEscuchaAnterior();
             verActividad();
         });
+
         vista.registrarEscuchaCrearTarea(actionEvent -> {
             try {
                 vista.abrirVentanaCrearTarea();
@@ -59,6 +53,7 @@ public class Controlador  {
                 throw new RuntimeException(e);
             }
         });
+
         vista.registrarEscuchaCrearEvento(actionEvent -> {
             try {
                 vista.abrirVentanaCrearEvento();
@@ -69,10 +64,13 @@ public class Controlador  {
                 throw new RuntimeException(e);
             }
         });
+
         verActividad();
     }
 
-
+    /**
+     * Crea una Tarea guardándola en el Calendario
+     */
     private void guardarTarea() {
         TareaArgs tareaArgs = vista.getInfoTarea();
         if (tareaArgs != null){
@@ -82,6 +80,10 @@ public class Controlador  {
             vista.eliminarTareaActual();
         }
     }
+
+    /**
+     * Crea las Alarmas de la actividad recibida, guardándolas en el Calendario
+     */
     private void guardarAlarma(Actividad actividad) {
         actividad.eliminarAlarmas();
         var infoAlarmas = vista.getInfoAlarmaCreada();
@@ -101,7 +103,7 @@ public class Controlador  {
                         calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
                     }
                     vista.eliminarEventoActual();
-                    vista.tipoRango(vista.getEscuchaFrecuencia());
+                    vista.setTipoRango(vista.getEscuchaRango());
                 }
                 @Override
                 public void visitarTarea(Tarea tarea) {
@@ -112,24 +114,19 @@ public class Controlador  {
                         calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), intervalo, tiempoRelativo, aviso);
                     }
                     vista.eliminarTareaActual();
-                    vista.tipoRango(vista.getEscuchaFrecuencia());
+                    vista.setTipoRango(vista.getEscuchaRango());
                 }
 
                 @Override
                 public void visitarInstancia(InstanciaEvento instancia) {
-                    if (tiempoRelativo == null) {
-                        calendario.agregarAlarmaEvento(instancia, aviso);
-                    } else {
-                        int intervalo = Integer.parseInt(infoAlarma.get(1));
-                        calendario.agregarAlarmaEvento(instancia, intervalo, tiempoRelativo, aviso);
-                    }
-                    vista.eliminarEventoActual();
-                    vista.tipoRango(vista.getEscuchaFrecuencia());
                 }
             });
         }
     }
 
+    /**
+     * Crea un Evento guardándolo en el Calendario
+     */
     private void guardarEvento() {
         EventoArgs eventoArgs = vista.getInfoEvento();
         if (eventoArgs != null){
@@ -144,6 +141,9 @@ public class Controlador  {
         }
     }
 
+    /**
+     * Devuelve el Tipo de Aviso según el String pasado. Nunca devuelve null
+     */
     private TipoAviso getTipoAviso(String aviso){
         switch (aviso){
             case "Notificación" -> {return TipoAviso.NOTIFICACION;}
@@ -153,6 +153,9 @@ public class Controlador  {
         }
     }
 
+    /**
+     * Devuelve el Tiempo Relativo según el String pasado. Nunca devuelve null
+     */
     private TiempoRelativo getTiempoRelativo(String tiempoRelativo){
         switch (tiempoRelativo){
             case "Minutos" -> {return TiempoRelativo.MINUTOS;}
@@ -163,8 +166,11 @@ public class Controlador  {
         }
     }
 
+    /**
+     * Si se selecciona una Actividad, se abre su vista detallada
+     */
     private void verActividad(){
-        switch (vista.getEscuchaFrecuencia()){
+        switch (vista.getEscuchaRango()){
             case "Semana" -> vista.registrarEscuchaVerActividadLabel(mouseEvent -> {
                 try {
                     vista.abrirVistaDetalladaSemana();
@@ -175,19 +181,14 @@ public class Controlador  {
                 }
             });
             default -> {
-                for (MenuItem item: vista.getVistasMenu().keySet()){
-                    item.setOnAction(actionEvent -> {
-                        try {
-                            vista.abrirVistaDetalladaMenu(item);
-                            actualizarActividad();
-                            verActividad();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
+                vista.verActividadMenu();
                 }
-        }}
+        }
     }
+
+    /**
+     * Actualiza la información de la Actividad. La elimina si el usuario ha indicado eso
+     */
     public void actualizarActividad(){
         Actividad act = vista.getActividadActual();
         if (vista.eliminarActividad()){
@@ -198,6 +199,9 @@ public class Controlador  {
         guardarAlarma(act);
     }
 
+    /**
+     * Busca en alarmasProximasEventos el Evento cuyo valor es el conjunto de alarmas paso
+     */
     private Evento buscarEvento(Set<Alarma> alarmas){
         for (Evento evento: alarmasProximasEventos.keySet()){
             if (alarmasProximasEventos.get(evento).equals(alarmas)){
@@ -207,7 +211,10 @@ public class Controlador  {
         return null;
     }
 
-    private void getAlarmas(){
+    /**
+     * Crea un timer para cada Alarma creada por el usuario
+     */
+    private void setTimers(){
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -228,16 +235,23 @@ public class Controlador  {
         animationTimer.start();
     }
 
+    /**
+     * Devuelve true si la Alarma no tiene un timer y suena igual o después que la fecha actual
+     */
     private boolean debeIncluirAlarma(Alarma alarma){
         return !timers.containsKey(alarma) && !alarma.suenaAntes(LocalDateTime.now());
     }
 
+    /**
+     * Crea un TimerTask para la Alarma pasada, la cual corresponde a una Tarea
+     * Si la Alarma es de Notificación, le indica a la vista que  muestra una Alerta
+     */
     private TimerTask crearTimerTaskTarea(Alarma alarma){
         return new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(()-> {
-                    if (alarma.getAviso().equals("Notificación")) {
+                    if (alarma.getAviso().equals(TipoAviso.NOTIFICACION)) {
                         vista.mostrarNotificacionAlarma(alarma);
                     }
                 });
@@ -245,6 +259,10 @@ public class Controlador  {
         };
     }
 
+    /**
+     * Crea un TimerTask para la Alarma pasada, la cual corresponde a un Evento
+     * Si la Alarma es de Notificación, le indica a la vista que  muestra una Alerta
+     */
     private TimerTask crearTimerTaskEvento(Alarma alarma, Evento evento){
         return new TimerTask() {
             @Override
@@ -254,7 +272,7 @@ public class Controlador  {
                     if (alarmasProximasEventos.get(evento).isEmpty()){
                         alarmasProximasEventos.put(evento, evento.getProximasAlarmas(LocalDateTime.now()));
                     }
-                    if (alarma.getAviso().equals("Notificación")) {
+                    if (alarma.getAviso().equals(TipoAviso.NOTIFICACION)) {
                         vista.mostrarNotificacionAlarma(alarma);
                     }
                 });
@@ -262,35 +280,36 @@ public class Controlador  {
         };
     }
 
+    /**
+     * Crea un Timer para la Alarma, según la task pasada
+     */
     private void crearTimer(Alarma alarma, TimerTask task){
         Date fecha = Date.from(alarma.getFechaAlarma().atZone(ZoneId.systemDefault()).toInstant());
-        if (!alarma.getFechaAlarma().isAfter(LocalDateTime.now())){
-            fecha = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-        }
         Timer timer = new java.util.Timer();
         timer.schedule(task, fecha);
         timers.put(alarma, timer);
     }
 
+    /**
+     * Elimina la actividad del calendario
+     */
     private void eliminarActividad(Actividad actividad){
-        System.out.println("BBB");
         actividad.aceptarVisitor(new ActividadVisitor() {
             @Override
             public void visitarEvento(Evento evento) {
                 calendario.eliminarEvento(evento);
                 vista.actualizarEliminar();
-                vista.tipoRango(vista.getEscuchaFrecuencia());
+                vista.setTipoRango(vista.getEscuchaRango());
             }
             @Override
             public void visitarTarea(Tarea tarea) {
                 calendario.eliminarTarea(tarea);
                 vista.actualizarEliminar();
-                vista.tipoRango(vista.getEscuchaFrecuencia());
+                vista.setTipoRango(vista.getEscuchaRango());
             }
 
             @Override
             public void visitarInstancia(InstanciaEvento instancia) {
-                //
             }
         });
     }

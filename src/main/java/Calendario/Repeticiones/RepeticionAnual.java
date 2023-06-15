@@ -43,7 +43,4 @@ public class RepeticionAnual extends Repeticion {
         return fecha.plusYears(getIntervalo());
     }
 
-    public void actualizarDuracion(Duracion d){
-        return;
-    }
 }

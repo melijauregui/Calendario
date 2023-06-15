@@ -14,14 +14,14 @@ public class BuilderAlarma {
      * Recibe la información de una Alarma con Tiempo Relativo y se la setea
      */
     public BuilderAlarma(LocalDateTime fecha ,int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
-        alarma = new Alarma(intervalo, tiempoRelativo, fecha, aviso.crearAviso());
+        alarma = new Alarma(intervalo, tiempoRelativo, fecha, aviso);
     }
 
     /**
      * Recibe la información de una Alarma con fecha y hora absoluta y se la setea
      */
     public BuilderAlarma(LocalDateTime fecha, TipoAviso aviso){
-        alarma = new Alarma(fecha, aviso.crearAviso());
+        alarma = new Alarma(fecha, aviso);
     }
 
     /**

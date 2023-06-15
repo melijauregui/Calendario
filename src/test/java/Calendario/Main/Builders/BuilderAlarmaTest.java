@@ -23,10 +23,12 @@ public class BuilderAlarmaTest {
         var alarma = builder.crearAlarma();
         var tipoResultado = alarma.getClass();
         var fechaResultado = alarma.getFechaAlarma();
+        var avisoResultado = alarma.getAviso();
 
         // Assert
         assertEquals(tipoEsperado, tipoResultado);
         assertEquals(fecha, fechaResultado);
+        assertEquals(aviso, avisoResultado);
     }
 
     @Test

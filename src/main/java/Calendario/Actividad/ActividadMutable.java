@@ -9,11 +9,6 @@ public abstract class ActividadMutable extends Actividad implements Serializable
     private String titulo;
     private String descripcion;
 
-    public ActividadMutable(String titulo, String descripcion){
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-    }
-
     public ActividadMutable(){
 
     }
@@ -51,6 +46,8 @@ public abstract class ActividadMutable extends Actividad implements Serializable
      */
     public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
 
-
+    /**
+     * Elimina las alarmas de la ActividadMutable
+     */
     public abstract void eliminarAlarmas();
 }

@@ -1,11 +1,9 @@
 package Calendario.Eventos;
 
-import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
-import Calendario.Alarmas.Aviso.AvisoConSonido;
-import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Duracion.Duracion;
 import Calendario.Enums.TiempoRelativo;
+import Calendario.Enums.TipoAviso;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -326,8 +324,8 @@ public class InstanciaEventoTest {
         duracion.setHoraFin(horaFin);
 
 
-        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, new AvisoNotificacion());
-        var alarma2 = new AlarmaEvento(40, TiempoRelativo.MINUTOS, new AvisoConSonido());
+        var alarma1 = new AlarmaEvento(30, TiempoRelativo.MINUTOS, TipoAviso.NOTIFICACION);
+        var alarma2 = new AlarmaEvento(40, TiempoRelativo.MINUTOS, TipoAviso.SONIDO);
 
         var titulo = "LastOfUs";
         var descripcion = "Capítulos nuevos de la serie The Last of Us";

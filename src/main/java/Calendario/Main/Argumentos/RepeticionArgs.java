@@ -1,5 +1,8 @@
 package Calendario.Main.Argumentos;
 
+import Calendario.Enums.Frecuencia;
+import Calendario.Enums.LimiteRepeticion;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,7 +13,7 @@ public class RepeticionArgs {
     private LocalDate fechaHasta;
     private int ocurrencias;
     private List<DayOfWeek> diasSemana;
-    private TipoRepeticion tipo;
+    private LimiteRepeticion tipo;
 
     /**
      * Recibe la información de una Repetición con fecha de vencimiento
@@ -19,7 +22,7 @@ public class RepeticionArgs {
         this.intervalo = intervalo;
         this.frecuencia = frecuencia;
         this.fechaHasta = fechaHasta;
-        this.tipo = TipoRepeticion.FECHA_LIMITE;
+        this.tipo = LimiteRepeticion.FECHA_LIMITE;
     }
 
     /**
@@ -29,7 +32,7 @@ public class RepeticionArgs {
         this.intervalo = intervalo;
         this.frecuencia = frecuencia;
         this.ocurrencias = ocurrencias;
-        this.tipo = TipoRepeticion.OCURRENCIAS;
+        this.tipo = LimiteRepeticion.OCURRENCIAS;
     }
 
     /**
@@ -38,7 +41,7 @@ public class RepeticionArgs {
     public RepeticionArgs(int intervalo, Frecuencia frecuencia){
         this.intervalo = intervalo;
         this.frecuencia = frecuencia;
-        this.tipo = TipoRepeticion.INFINITA;
+        this.tipo = LimiteRepeticion.INFINITA;
     }
 
     /**
@@ -48,7 +51,7 @@ public class RepeticionArgs {
         this.intervalo = intervalo;
         this.diasSemana = diasSemana;
         this.ocurrencias = ocurrencias;
-        this.tipo = TipoRepeticion.OCURRENCIAS;
+        this.tipo = LimiteRepeticion.OCURRENCIAS;
     }
 
     /**
@@ -58,7 +61,7 @@ public class RepeticionArgs {
         this.intervalo = intervalo;
         this.diasSemana = diasSemana;
         this.fechaHasta = fechaHasta;
-        this.tipo = TipoRepeticion.FECHA_LIMITE;
+        this.tipo = LimiteRepeticion.FECHA_LIMITE;
     }
 
     /**
@@ -67,7 +70,7 @@ public class RepeticionArgs {
     public RepeticionArgs(int intervalo, List<DayOfWeek> diasSemana){
         this.intervalo = intervalo;
         this.diasSemana = diasSemana;
-        this.tipo = TipoRepeticion.INFINITA;
+        this.tipo = LimiteRepeticion.INFINITA;
     }
 
     public List<DayOfWeek> getDiasSemana() {
@@ -90,5 +93,5 @@ public class RepeticionArgs {
         return frecuencia;
     }
 
-    public TipoRepeticion getTipo(){return  tipo;}
+    public LimiteRepeticion getTipo(){return  tipo;}
 }

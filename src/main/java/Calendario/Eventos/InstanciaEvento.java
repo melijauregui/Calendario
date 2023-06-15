@@ -130,9 +130,13 @@ public class InstanciaEvento extends Actividad implements Serializable {
         }
     }
 
+    /**
+     * Devuelve true si su duración es de día completo
+     */
     public boolean esDiaCompleto(){
         return duracion.esDiaCompleto();
     }
+
 
     public void eliminarAlarmas(){
         super.getAlarmas().clear();

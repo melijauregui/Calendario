@@ -90,6 +90,20 @@ public class Tarea extends ActividadMutable {
     }
 
     /**
+     * Devuelve true si la tarea ha sido completada, false en caso contrario
+     */
+    public boolean estaCompleta(){
+        return this.completada;
+    }
+
+    /**
+     * Elimina todas las alarmas de la Tarea
+     */
+    public void eliminarAlarmas(){
+        getAlarmas().clear();
+    }
+
+    /**
      * Devuelve true si la tarea es de día completo y se encuentra dentro del intervalo de fechas dado
      */
     private boolean estaEnElIntervaloDiaCompleto(LocalDate fecha){
@@ -102,18 +116,6 @@ public class Tarea extends ActividadMutable {
     private boolean estaEnElIntervaloConHora(LocalDateTime desde, LocalDateTime hasta){
         return !this.getFecha().isBefore(desde) && this.getFecha().isBefore(hasta);
     }
-
-    /**
-     * Devuelve true si la tarea ha sido completada, false en caso contrario
-     */
-    public boolean estaCompleta(){
-        return this.completada;
-    }
-
-    public void eliminarAlarmas(){
-        getAlarmas().clear();
-    }
-
 
 }
 

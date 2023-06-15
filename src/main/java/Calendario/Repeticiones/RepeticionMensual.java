@@ -22,9 +22,6 @@ public class RepeticionMensual extends Repeticion {
         super(intervaloMensual, ocurrencias);
 
     }
-    public void actualizarDuracion(Duracion d){
-        return;
-    }
 
     /**
      * Crea una Repetición infinita

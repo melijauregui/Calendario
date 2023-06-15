@@ -1,4 +1,4 @@
-package Calendario.Main.Argumentos;
+package Calendario.Enums;
 
 import Calendario.Repeticiones.Repeticion;
 import Calendario.Repeticiones.RepeticionAnual;

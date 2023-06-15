@@ -1,8 +1,9 @@
-package MVC;
+package MVC.VistasActividades;
 
 import Calendario.Actividad.Actividad;
-import Calendario.Alarmas.Alarma;
 import Calendario.Tareas.Tarea;
+import MVC.Crear.Constantes;
+import MVC.Crear.VentanaCrearAlarma;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletionService;
 
 public class VistaTarea extends VistaActividad {
 
@@ -57,19 +59,24 @@ public class VistaTarea extends VistaActividad {
         this.tarea = tarea;
     }
 
+    /**
+     * Abre la vista detallada
+     */
     public void abrirVistaDetallada(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/verModificarTarea.fxml"));
         loader.setController(this);
         Pane ventana = loader.load();
         Scene sceneNueva = new Scene(ventana);
         this.stage = stage;
-        //listaAlarmas.getItems().add("Sin alarmas");
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(sceneNueva);
         initialize();
     }
 
+    /**
+     * Muestra la Tarea según el rango semanal
+     */
     public void mostrarTareaSemana(Map<LocalDate, ListView<Label>> listasSemana,
                                    Map<Label,VistaActividad> vistas){
         ListView<Label> lista = listasSemana.get(tarea.getFecha().toLocalDate());
@@ -79,6 +86,114 @@ public class VistaTarea extends VistaActividad {
         vistas.put(labelTarea, this);
     }
 
+    /**
+     * Muestra la Tarea según el rango mensual
+     */
+    public  void mostrarTareaMes(Map<LocalDate, MenuButton> menuMes,
+                                 Map<MenuItem,VistaActividad> vistas){
+        if (!menuMes.containsKey(tarea.getFecha().toLocalDate())){
+            return;
+        }
+        MenuButton menu = menuMes.get(tarea.getFecha().toLocalDate());
+        guardarItem(menu, vistas, getMensaje(), "-fx-background-color: #adffc4;");
+    }
+
+    /**
+     * Muestra la Tarea según el rango diario
+     */
+    public void mostrarTareaDia(Map<Integer, MenuButton> menuDia,
+                                Map<MenuItem,VistaActividad> vistas){
+        int hora = tarea.getFecha().toLocalTime().getHour();
+        if (tarea.esDiaCompleto()){
+            hora = 0;
+        }
+        MenuButton menu = menuDia.get(hora);
+        guardarItem(menu, vistas, getMensaje(), "-fx-background-color: #adffc4;");
+    }
+
+    /**
+     * Cierra la vista detallada
+     */
+    public void cerrarVistaDetallada(){
+        stage.close();
+    }
+
+    /**
+     * Inicializa la lista de alarmas
+     */
+    public void inicializarListasAlarmas(){
+        inicializarListasAlarmas_(tarea, listaAlarmas, infoAlarmas, alarmas);
+    }
+
+    /**
+     * Registra el eventHandler para crear alarmas
+     */
+    public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonCrearAlarma.setOnAction(eventHandler);
+    }
+
+    /**
+     * Abre la ventana para crear alarmas
+     */
+    public void abrirVentanaCrearAlarma() throws IOException {
+        Stage stageNuevo = new Stage();
+        ventanaCrearAlarma = new VentanaCrearAlarma(stageNuevo);
+        getEscuchaGuardarAlarma(ventanaCrearAlarma, infoAlarmas, listaAlarmas, alarmas);
+        stageNuevo.showAndWait();
+    }
+
+    /**
+     * Registra el eventHandler para eliminar alarmas
+     */
+    public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
+        botonEliminarAlarma.setOnAction(eventHandler);
+    }
+
+    /**
+     * Elimina la información asociada a la alarma seleccionada
+     */
+    public void eliminarAlarmasSeleccionadas(){
+        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma, infoAlarmas, alarmas);
+    }
+
+    /**
+     * Registra el eventHandler para seleccionar alarmas
+     */
+    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
+        listaAlarmas.setOnMouseClicked(eventHandler);
+    }
+
+    /**
+     * Habilita el botón para borrar alarmas
+     */
+    public void habilitarBorrarAlarma(){
+        botonEliminarAlarma.setDisable(false);
+    }
+
+    /**
+     * Devuelve la información de las alarmas a crear
+     */
+    public List<List<String>> getInfoAlarmas(){
+        return infoAlarmas;
+    }
+
+    /**
+     * Devuelve la actividad asociada a la vista detallada
+     */
+    public Actividad getActividad(){
+        return tarea;
+    }
+
+    /**
+     * Registra el eventHandler para eliminar la Actividad
+     */
+    public void registrarEscuchaEliminar(EventHandler<ActionEvent> eventHandler) {
+        eliminar.setOnAction(eventHandler);
+    }
+
+    /**
+     * Devuelve el mensaje con la información básica de la Tarea
+     */
     private String getMensaje() {
         String mensaje = "Título: ";
         if (tarea.getTitulo().length() != 0) {
@@ -99,42 +214,9 @@ public class VistaTarea extends VistaActividad {
         return mensaje;
     }
 
-    public  void mostrarTareaMes(Map<LocalDate, MenuButton> menuMes,
-                                 Map<MenuItem,VistaActividad> vistas){
-        if (!menuMes.containsKey(tarea.getFecha().toLocalDate())){
-            return;
-        }
-        MenuButton menu = menuMes.get(tarea.getFecha().toLocalDate());
-        if(menu.getItems().isEmpty()){
-            menu.setText("Ver más");
-        }
-        MenuItem item = new MenuItem(getMensaje());
-        item.setStyle("-fx-background-color: #adffc4;");
-        menu.getItems().add(item);
-        vistas.put(item, this);
-    }
-
-    public void mostrarTareaDia(Map<Integer, MenuButton> menuDia,
-                                Map<MenuItem,VistaActividad> vistas){
-        int hora = tarea.getFecha().toLocalTime().getHour();
-        if (tarea.esDiaCompleto()){
-            hora = 0;
-        }
-        MenuButton menu = menuDia.get(hora);
-        if(menu.getItems().isEmpty()){
-            menu.setText("Ver más");
-        }
-        MenuItem item = new MenuItem(getMensaje());
-        item.setStyle("-fx-background-color: #adffc4;");
-        menu.getItems().add(item);
-        vistas.put(item, this);
-    }
-
-
-    public void cerrarVistaDetallada(){
-        stage.close();
-    }
-
+    /**
+     * Inicializa los controles de la Vista detallada
+     */
     private void initialize(){
         titulo.setText(tarea.getTitulo());
         descripcion.setText(tarea.getDescripcion());
@@ -149,48 +231,6 @@ public class VistaTarea extends VistaActividad {
             estado.setText("No completada");
         }
         inicializarListasAlarmas();
-    }
-
-    public void inicializarListasAlarmas(){
-        inicializarListasAlarmas_(tarea, listaAlarmas, infoAlarmas, alarmas);
-    }
-    public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
-        botonCrearAlarma.setOnAction(eventHandler);
-    }
-
-    public void abrirVentanaCrearAlarma() throws IOException {
-        Stage stageNuevo = new Stage();
-        ventanaCrearAlarma = new VentanaCrearAlarma(stageNuevo);
-        getEscuchaGuardarAlarma(ventanaCrearAlarma, infoAlarmas, listaAlarmas, alarmas);
-        stageNuevo.showAndWait();
-    }
-    public void registrarEscuchaEliminarAlarma(EventHandler<ActionEvent> eventHandler) {
-        botonEliminarAlarma.setOnAction(eventHandler);
-    }
-    public void eliminarAlarmasSeleccionadas(){
-        eliminarAlarmasSeleccionadas_(listaAlarmas, botonEliminarAlarma, infoAlarmas, alarmas);
-    }
-
-    public void registrarEscuchaSeleccionarAlarma(EventHandler<MouseEvent> eventHandler){
-        listaAlarmas.setOnMouseClicked(eventHandler);
-    }
-
-    public void habilitarBorrarAlarma(){
-        botonEliminarAlarma.setDisable(false);
-    }
-
-
-    public List<List<String>> getInfoAlarmas(){
-        return infoAlarmas;
-    }
-
-    public Actividad getActividad(){
-        return tarea;
-    }
-
-
-    public void registrarEscuchaEliminar(EventHandler<ActionEvent> eventHandler) {
-        eliminar.setOnAction(eventHandler);
     }
 
 }

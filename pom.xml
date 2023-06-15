@@ -54,7 +54,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>MVC.AppCalendario</mainClass>
+                    <mainClass>MVC.MVC_GENERAL.AppCalendario</mainClass>
                 </configuration>
             </plugin>
             <plugin>

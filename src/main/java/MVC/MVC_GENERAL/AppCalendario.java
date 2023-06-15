@@ -1,10 +1,9 @@
-package MVC;
+package MVC.MVC_GENERAL;
 
 import Calendario.Main.Calendario;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.*;
 
 public class AppCalendario extends Application {

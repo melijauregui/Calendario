@@ -1,7 +1,6 @@
 package Calendario.Alarmas;
-
-import Calendario.Alarmas.Aviso.Aviso;
 import Calendario.Enums.TiempoRelativo;
+import Calendario.Enums.TipoAviso;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -9,13 +8,13 @@ import java.time.LocalDateTime;
 public class AlarmaEvento implements Serializable {
     private int intervalo;
     private TiempoRelativo tiempoRelativo;
-    private Aviso aviso;
+    private TipoAviso aviso;
     private static final int sinIntervalo = 0;
 
     /**
      * Crea una AlarmaEvento con tiempo relativo
      */
-    public AlarmaEvento(int intervalo, TiempoRelativo tiempoRelativo, Aviso aviso){
+    public AlarmaEvento(int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
         this.intervalo = intervalo;
         this.tiempoRelativo = tiempoRelativo;
         this.aviso = aviso;
@@ -24,7 +23,7 @@ public class AlarmaEvento implements Serializable {
     /**
      * Crea una AlarmaEvento sin tiempo relativo
      */
-    public AlarmaEvento(Aviso aviso){
+    public AlarmaEvento(TipoAviso aviso){
         this.intervalo = sinIntervalo;
         this.aviso = aviso;
     }

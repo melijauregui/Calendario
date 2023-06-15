@@ -70,6 +70,20 @@ public class RepeticionSemanal extends Repeticion{
     }
 
     /**
+     * Ajusta la Duracion recibida para que coincida con los días de semana
+     * que se repite
+     */
+    @Override
+    public void actualizarDuracion(Duracion d){
+        if (diasSemana.contains(d.getFechaInicio().getDayOfWeek())){
+            return;
+        }
+        d.setDiaInicio(getProximaFechaInicio(d.getDiaInicio()));
+        d.setDiaFin(getProximaFechaFin(d.getDiaFin()));
+
+    }
+
+    /**
      * Devuelve la próxima fecha a la pasada por parámetro, según la diferencia de días entre las
      * repeticiones
      */
@@ -141,12 +155,5 @@ public class RepeticionSemanal extends Repeticion{
     private int calcularDiferenciaSemanas(DayOfWeek diaEvento){
         return 7*getIntervalo()-calcularDiferenciaDias(diaEvento, getPrimerDiaSemana());
     }
-    public void actualizarDuracion(Duracion d){
-        if (diasSemana.contains(d.getFechaInicio().getDayOfWeek())){
-            return;
-        }
-        d.setDiaInicio(getProximaFechaInicio(d.getDiaInicio()));
-        d.setDiaFin(getProximaFechaFin(d.getDiaFin()));
 
-    }
 }
