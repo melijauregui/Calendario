@@ -107,7 +107,7 @@ public abstract class VistaActividad {
         }
         for (Alarma alarma : act.getAlarmas()) {
             String intervalo = "0";
-            String tiempoRelativo = "-";
+            String tiempoRelativo = " - ";
             if ((alarma.esConTiempoRelativo())){
                 intervalo = String.valueOf(alarma.getIntervalo());
                 tiempoRelativo= getTiempoRelativoToString(alarma.getTiempoRelativo());
@@ -132,7 +132,7 @@ public abstract class VistaActividad {
             if (listaAlarmas.getItems().get(0).getText().equals(Constantes.SIN_ALARMAS)){
                 listaAlarmas.getItems().remove(0);
             }
-            guardarInfoAlarma(aviso, tiempoRelativo, intervalo,infoAlarmas, listaAlarmas, alarmas);
+            guardarInfoAlarma(aviso, intervalo, tiempoRelativo,infoAlarmas, listaAlarmas, alarmas);
             ventanaCrearAlarma.cerrarVentana();
         });
     }
@@ -160,7 +160,7 @@ public abstract class VistaActividad {
         infoAlarma.add(intervalo);
         infoAlarma.add(tiempoRelativo);
         String mensaje = "Alarma con " + aviso;
-        if (intervalo != "0" && !tiempoRelativo.equals(" - ")){
+        if ((!intervalo.equals("0") || !intervalo.equals("")) && !tiempoRelativo.equals(" - ")){
             mensaje+= ", " + intervalo + " "
                     + tiempoRelativo.toLowerCase() + " antes.";
         }
