@@ -160,7 +160,7 @@ public abstract class VistaActividad {
         infoAlarma.add(intervalo);
         infoAlarma.add(tiempoRelativo);
         String mensaje = "Alarma con " + aviso;
-        if (intervalo.length() != 0 && !intervalo.equals(" - ")){
+        if (intervalo != "0" && !tiempoRelativo.equals(" - ")){
             mensaje+= ", " + intervalo + " "
                     + tiempoRelativo.toLowerCase() + " antes.";
         }
