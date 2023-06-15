@@ -38,9 +38,9 @@ public class Vista {
     private Calendario calendario;
     private Stage stage;
     private Scene scene;
-    private LocalDate diaActual;
+    private LocalDate diaActual = LocalDate.now();
     private ChoiceBox<String> choiceFrecuencia = crearChoiceBox();
-    private AnchorPane paneGeneral = new AnchorPane();
+    private AnchorPane paneGeneral;
     private AnchorPane actualFondo;
     private Label dia = new Label();
     private String frecuencia;
@@ -73,17 +73,16 @@ public class Vista {
     public Vista(Calendario calendario, Stage stage) throws IOException {
         this.calendario = calendario;
         this.stage = stage;
-        initialize();
         stage.setWidth(900);
         stage.setHeight(600);
         stage.setResizable(false);
         setearSemana();
+        initialize();
         stage.show();
     }
 
     private void initialize() {
-        paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, menuCrearActividad);
-        diaActual = LocalDate.now();
+        //paneGeneral.getChildren().addAll(choiceFrecuencia, siguiente, anterior, menuCrearActividad);
 
     }
 
@@ -170,9 +169,9 @@ public class Vista {
     }
 
     private void setearPane(String ruta, Label label, int x, int y, int x1, int y2) {
-        AnchorPane rootPane = new AnchorPane();
-        setearFondo(rootPane, ruta);
-        rootPane.getChildren().addAll(paneGeneral, label);
+        paneGeneral = new AnchorPane();
+        setearFondo(paneGeneral, ruta);
+        paneGeneral.getChildren().addAll(label);
         siguiente.setLayoutX(x1+50);
         anterior.setLayoutX(x1);
         siguiente.setLayoutY(y2);
@@ -181,11 +180,11 @@ public class Vista {
         dia.setLayoutX(x);
         dia.setLayoutY(y);
         dia.setText(LocalDate.now().toString());
-        rootPane.getChildren().add(dia);
-        actualFondo = rootPane;
-        this.scene = new Scene(rootPane);
+        paneGeneral.getChildren().addAll(dia, choiceFrecuencia, siguiente, anterior, menuCrearActividad);
+        //actualFondo = paneGeneral;
+        this.scene = new Scene(paneGeneral);
         stage.setScene(scene);
-        mainLayout = rootPane;
+        //mainLayout = rootPane;
     }
 
     private void setearDia() {
@@ -248,15 +247,19 @@ public class Vista {
 
     private void crearListView(double x, double y, double width, double height, LocalDate clave) {
         ListView<Label> list = new ListView<>();
+        paneGeneral.getChildren().add(list);
+        //AnchorPane.setTopAnchor(list, y / 100.0 * paneGeneral.getHeight());
+        //AnchorPane.setLeftAnchor(list, x / 100.0 * paneGeneral.getWidth());
         list.setLayoutX(x);
         list.setLayoutY(y);
-        list.setPrefWidth(width);
+        //list.setPrefWidth(width / 100.0 * paneGeneral.getWidth());
+        //list.setPrefHeight(height / 100.0 * paneGeneral.getHeight());
         list.setPrefHeight(height);
+        list.setPrefWidth(width);
         list.setStyle("-fx-border-color: white");
         list.setCursor(Cursor.HAND);
         list.setId("listaSemana");
         listasSemana.put(clave, list);
-        actualFondo.getChildren().add(list);
     }
 
     private void setListViewSemana() {
@@ -283,7 +286,7 @@ public class Vista {
         do {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
             fecha.setLayoutX(x + 111 * columna);
-            actualFondo.getChildren().add(fecha);
+            paneGeneral.getChildren().add(fecha);
             fecha.setLayoutY(y);
             primerDia = primerDia.plusDays(1);
             columna++;
@@ -340,7 +343,7 @@ public class Vista {
         menu.setPrefHeight(height);
         menu.setStyle("-fx-border-color: #bdbbbb; -fx-background-color: white;");
         menu.setCursor(Cursor.HAND);
-        actualFondo.getChildren().add(menu);
+        paneGeneral.getChildren().add(menu);
         return menu;
     }
 
@@ -387,7 +390,7 @@ public class Vista {
             Label fecha = new Label(Integer.toString(primerDia.getDayOfMonth()));
             fecha.setLayoutX(x + 105.5 * columna);
             fecha.setLayoutY(y + 52 * fila);
-            actualFondo.getChildren().add(fecha);
+            paneGeneral.getChildren().add(fecha);
             primerDia = primerDia.plusDays(1);
             if (columna == 6) {
                 fila++;
