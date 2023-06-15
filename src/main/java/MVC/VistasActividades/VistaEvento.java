@@ -158,7 +158,7 @@ public class VistaEvento extends VistaActividad {
         String mensaje = getMensaje();
         while (!(diaAct.isAfter(ultimoDia)) && !(diaAct.isAfter(evento.getDiaFin()))){
             Label labelEvento = new Label(mensaje);
-            labelEvento.setStyle("-fx-background-color: #ffd3a1;");
+            labelEvento.setStyle(getBackgroundColor());
             if (listasSemana.containsKey(diaAct)){
                 ListView<Label> lista = listasSemana.get(diaAct);
                 lista.getItems().add(labelEvento);
@@ -177,7 +177,7 @@ public class VistaEvento extends VistaActividad {
         while ((!diaAct.isAfter(ultimoDia)) && (!diaAct.isAfter(evento.getDiaFin()))) {
             if (menuMes.containsKey(diaAct)) {
                 MenuButton menu = menuMes.get(diaAct);
-                guardarItem(menu, vistas, getMensaje(), "-fx-background-color: #ffd3a1;");
+                guardarItem(menu, vistas, getMensaje(), getBackgroundColor());
             }
             diaAct = diaAct.plusDays(CantidadDias.UNO_LONG);
         }
@@ -193,7 +193,7 @@ public class VistaEvento extends VistaActividad {
             hora = 0;
         }
         MenuButton menu = menuDia.get(hora);
-        guardarItem(menu, vistas, getMensaje(), "-fx-background-color: #ffd3a1;");
+        guardarItem(menu, vistas, getMensaje(), getBackgroundColor());
     }
 
     /**
@@ -276,6 +276,14 @@ public class VistaEvento extends VistaActividad {
             mensaje+=evento.getFechaInicio().toLocalDate().toString()+"\nFecha fin: "+ evento.getFechaFin().toLocalDate().toString();
         }
         return mensaje;
+    }
+
+    private String getBackgroundColor(){
+        String background = "-fx-background-color: #ffd3a1;";
+        if (evento.esDiaCompleto()){
+            background = "-fx-background-color: #fc9c26;";
+        }
+        return background;
     }
 
 }

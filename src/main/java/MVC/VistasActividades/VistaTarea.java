@@ -81,7 +81,7 @@ public class VistaTarea extends VistaActividad {
                                    Map<Label,VistaActividad> vistas){
         ListView<Label> lista = listasSemana.get(tarea.getFecha().toLocalDate());
         Label labelTarea =new Label(getMensaje());
-        labelTarea.setStyle("-fx-background-color: #adffc4;");
+        labelTarea.setStyle(getBackgroundColor());
         lista.getItems().add(labelTarea);
         vistas.put(labelTarea, this);
     }
@@ -95,7 +95,7 @@ public class VistaTarea extends VistaActividad {
             return;
         }
         MenuButton menu = menuMes.get(tarea.getFecha().toLocalDate());
-        guardarItem(menu, vistas, getMensaje(), "-fx-background-color: #adffc4;");
+        guardarItem(menu, vistas, getMensaje(), getBackgroundColor());
     }
 
     /**
@@ -108,7 +108,7 @@ public class VistaTarea extends VistaActividad {
             hora = 0;
         }
         MenuButton menu = menuDia.get(hora);
-        guardarItem(menu, vistas, getMensaje(), "-fx-background-color: #adffc4;");
+        guardarItem(menu, vistas, getMensaje(), getBackgroundColor());
     }
 
     /**
@@ -231,6 +231,14 @@ public class VistaTarea extends VistaActividad {
             estado.setText("No completada");
         }
         inicializarListasAlarmas();
+    }
+
+    private String getBackgroundColor(){
+        String background = "-fx-background-color: #adffc4;";
+        if (tarea.esDiaCompleto()){
+            background = "-fx-background-color: #1adb6b;";
+        }
+        return background;
     }
 
 }
