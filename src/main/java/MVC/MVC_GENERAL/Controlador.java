@@ -91,7 +91,6 @@ public class Controlador  {
         if (infoAlarmas == null){
             return;
         }
-        System.out.println(infoAlarmas);
         for (List<String> infoAlarma : infoAlarmas) {
             TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
             TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
