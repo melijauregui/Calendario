@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
+      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaActividadVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calendario.bin" beforeDir="false" afterPath="$PROJECT_DIR$/calendario.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaActividad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaTarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/verModificarEvento.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/verModificarEvento.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ModificacionesE3" />
+        <entry key="$PROJECT_DIR$" value="022326be3752c5a48e16ba7d7a25140da59db81f" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,31 +105,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Maven.TpCalendario [javafx:run]">
-    <configuration name="AppCalendario" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.AppCalendario" />
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MVC.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/Calendario" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -133,6 +124,22 @@
       <option name="PACKAGE_NAME" value="Calendario.Main" />
       <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.TestCompletarTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestCompletarTarea" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -195,8 +202,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.AppCalendario" />
-      <item itemvalue="JUnit.Calendario in TpCalendario" />
+      <item itemvalue="JUnit.CalendarioTest.TestCompletarTarea" />
       <item itemvalue="JUnit.All in TpCalendario" />
       <item itemvalue="JUnit.CalendarioTest" />
       <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionConOcurrencias" />
@@ -205,11 +211,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AppCalendario" />
         <item itemvalue="JUnit.All in TpCalendario" />
+        <item itemvalue="JUnit.CalendarioTest.TestCompletarTarea" />
         <item itemvalue="JUnit.CalendarioTest.TestPersistencia" />
-        <item itemvalue="JUnit.CalendarioTest" />
         <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionConOcurrencias" />
+        <item itemvalue="JUnit.CalendarioTest" />
       </list>
     </recent_temporary>
   </component>
@@ -523,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686776484091</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="labels">
+      <created>1686778691733</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1686778691733</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -531,7 +544,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/MergeE3yArgs" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/MergeE3yArgs" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -547,15 +587,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="labels" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Alarmas/AlarmaTest.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Calendario.Eventos.InstanciaEvento" memberName="alarmas" />

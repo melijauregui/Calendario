@@ -11,16 +11,6 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="413.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/eventoModificar.png);-fx-background-size: 413px 546px;-fx-background-repeat: no-repeat;-fx-border-color: #ffd3a1; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ListView fx:id="listaAlarmas" layoutX="18.0" layoutY="413.0" prefHeight="84.0" prefWidth="378.0" />
-      <Button fx:id="editarTitulo" layoutX="344.0" layoutY="74.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="editarDescripcion" layoutX="143.0" layoutY="114.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <TextArea fx:id="descripcion" editable="false" layoutX="18.0" layoutY="154.0" prefHeight="63.0" prefWidth="378.0">
          <cursor>
             <Cursor fx:constant="TEXT" />
@@ -31,16 +21,6 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <Button fx:id="editarFecha" layoutX="345.0" layoutY="228.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="editarRepeticion" layoutX="167.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Label fx:id="estado" layoutX="121.0" layoutY="290.0" prefHeight="29.0" prefWidth="115.0" />
       <Button fx:id="botonCrearAlarma" layoutX="18.0" layoutY="505.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #ffd3a1;" text="Agregar Alarma">
          <cursor>

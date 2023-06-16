@@ -8,19 +8,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.control.CheckBox?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="413.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/tareaModificar.png); -fx-background-size: 413px 490px; -fx-background-repeat: no-repeat; -fx-border-color: #adffc4; -fx-border-width: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ListView fx:id="listaAlarmas" layoutX="17.0" layoutY="362.0" prefHeight="84.0" prefWidth="378.0" />
-      <Button fx:id="editarTitulo" layoutX="333.0" layoutY="90.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="editarDescripcion" layoutX="143.0" layoutY="133.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <TextArea fx:id="descripcion" editable="false" layoutX="15.0" layoutY="164.0" prefHeight="63.0" prefWidth="369.0">
          <cursor>
             <Cursor fx:constant="TEXT" />
@@ -31,16 +22,8 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <Button fx:id="editarFecha" layoutX="283.0" layoutY="240.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Editar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="completar" layoutX="283.0" layoutY="290.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Completar">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <CheckBox fx:id="completar" layoutX="253.0" layoutY="300.0" prefHeight="5" prefWidth="5" style="-fx-background-color: white;">
+      </CheckBox>
       <Label fx:id="estado" layoutX="121.0" layoutY="290.0" prefHeight="29.0" prefWidth="115.0" />
       <Button fx:id="botonCrearAlarma" layoutX="17.0" layoutY="449.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #adffc4;" text="Agregar Alarma">
          <cursor>

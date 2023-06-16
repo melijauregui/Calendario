@@ -54,8 +54,8 @@ public class Tarea extends ActividadMutable {
     /**
      * Marca la tarea como completada
      */
-    public void completar(){
-        this.completada = true;
+    public void completar(boolean b){
+        this.completada = b;
     }
 
     /**

@@ -14,6 +14,7 @@ import MVC.Crear.VentanaCrear;
 import MVC.Crear.VistaVentanaCrearEvento;
 import MVC.Crear.VistaVentanaCrearTarea;
 import MVC.VistasActividades.VistaActividad;
+import MVC.VistasActividades.VistaActividadVisitor;
 import MVC.VistasActividades.VistaEvento;
 import MVC.VistasActividades.VistaTarea;
 import javafx.collections.FXCollections;
@@ -37,6 +38,7 @@ public class Vista {
     private Calendario calendario;
     private Stage stage;
     private Scene scene;
+    private boolean completarTarea;
     private LocalDate diaActual = LocalDate.now();
     private ChoiceBox<String> choiceRango;
     private AnchorPane paneGeneral;
@@ -323,6 +325,7 @@ public class Vista {
      */
     public void eliminarTareaActual(){
         this.argsTareaActual = null;
+        completarTarea = false;
         eliminarAlarmaActual();
     }
 
@@ -475,6 +478,16 @@ public class Vista {
                 getEscuchaSeleccionarAlarmas(vistaActual);
                 getEscuchaEliminarAlarmas(vistaActual);
                 getEscuchaEliminar(vistaActual);
+                vistaActual.aceptarVisitor(new VistaActividadVisitor() {
+                    @Override
+                    public void visitarVistaTarea(VistaTarea vistaTarea) {
+                        getEscuchaCompletarTarea(vistaTarea);
+                    }
+                    @Override
+                    public void visitarVistaEvento(VistaEvento vistaEvento) {
+                        //
+                    }
+                });
                 nuevoStage.showAndWait();
                 guardarActividad();
                 break;
@@ -494,10 +507,20 @@ public class Vista {
         getEscuchaSeleccionarAlarmas(vistaActual);
         getEscuchaEliminarAlarmas(vistaActual);
         getEscuchaEliminar(vistaActual);
+        vistaActual.aceptarVisitor(new VistaActividadVisitor() {
+            @Override
+            public void visitarVistaTarea(VistaTarea vistaTarea) {
+                getEscuchaCompletarTarea(vistaTarea);
+            }
+            @Override
+            public void visitarVistaEvento(VistaEvento vistaEvento) {
+                //
+            }
+        });
         nuevoStage.showAndWait();
         guardarActividad();
-
     }
+
 
     /**
      * Maneja el evento para crear una Alarma al ver una Actividad
@@ -510,6 +533,15 @@ public class Vista {
                 throw new RuntimeException(e);
             }
         });
+    }
+    public void getEscuchaCompletarTarea(VistaTarea vistaTarea){
+        vistaTarea.registrarEscuchaCompletar(actionEvent -> {
+           vistaTarea.completarTarea();
+        });
+    }
+
+    public boolean getCompletarTarea(){
+        return completarTarea;
     }
 
     /**
@@ -979,6 +1011,16 @@ public class Vista {
     private void guardarActividad() {
         infoAlarmaActual = vistaActual.getInfoAlarmas();
         actividadActual = vistaActual.getActividad();
+        vistaActual.aceptarVisitor(new VistaActividadVisitor() {
+            @Override
+            public void visitarVistaTarea(VistaTarea vistaTarea) {
+                completarTarea = vistaTarea.getCompletar();
+            }
+            @Override
+            public void visitarVistaEvento(VistaEvento vistaEvento) {
+                //
+            }
+        });
     }
 
 }

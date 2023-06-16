@@ -605,10 +605,10 @@ public class CalendarioTest {
 
         var tarea = calendario.crearTarea(new TareaArgs(titulo, descripcion, fecha));
 
-        var tamanioEsperado = 0;
+        var tamanioEsperado = 1;
 
         //Act
-        calendario.completarTarea(tarea);
+        calendario.completarTarea(tarea, true);
         var resultado = calendario.getActividadesEnElIntervalo(fecha.minusDays(1), fecha.plusDays(1)).size();
 
         //Assert

@@ -1,6 +1,7 @@
 package MVC.VistasActividades;
 
 import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Tareas.Tarea;
 import MVC.Crear.Constantes;
 import MVC.Crear.VentanaCrearAlarma;
@@ -45,7 +46,7 @@ public class VistaTarea extends VistaActividad {
     @FXML
     private Button editarFecha;
     @FXML
-    private Button completar;
+    private CheckBox completar;
     @FXML
     private Button botonCrearAlarma;;
     @FXML
@@ -131,6 +132,19 @@ public class VistaTarea extends VistaActividad {
     public void registrarEscuchaCrearAlarma(EventHandler<ActionEvent> eventHandler) {
         botonCrearAlarma.setOnAction(eventHandler);
     }
+
+    public void registrarEscuchaCompletar(EventHandler<ActionEvent> eventHandler) {
+        completar.setOnAction(eventHandler);
+    }
+
+    public void completarTarea(){
+        if (completar.isSelected()){
+            estado.setText("Completada");
+        }else {
+            estado.setText("No completada");
+        }
+    }
+
 
     /**
      * Abre la ventana para crear alarmas
@@ -227,8 +241,10 @@ public class VistaTarea extends VistaActividad {
         }
         if (tarea.estaCompleta()){
             estado.setText("Completada");
+            completar.setSelected(true);
         }else {
             estado.setText("No completada");
+            completar.setSelected(false);
         }
         inicializarListasAlarmas();
     }
@@ -240,5 +256,10 @@ public class VistaTarea extends VistaActividad {
         }
         return background;
     }
-
+    public boolean getCompletar(){
+        return completar.isSelected();
+    }
+    public void aceptarVisitor(VistaActividadVisitor vistaActividadVisitor){
+        vistaActividadVisitor.visitarVistaTarea(this);
+    }
 }

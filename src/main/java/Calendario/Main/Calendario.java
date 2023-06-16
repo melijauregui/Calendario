@@ -122,8 +122,8 @@ public class Calendario implements Serializable {
     /**
      * Completa la tarea pasada por parámetro
      */
-    public void completarTarea(Tarea tarea){
-        tarea.completar();
+    public void completarTarea(Tarea tarea, boolean b){
+        tarea.completar(b);
     }
 
     /**

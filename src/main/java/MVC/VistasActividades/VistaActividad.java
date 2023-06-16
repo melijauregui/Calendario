@@ -1,6 +1,7 @@
 package MVC.VistasActividades;
 
 import Calendario.Actividad.Actividad;
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Alarmas.Alarma;
 import Calendario.Enums.TiempoRelativo;
 import Calendario.Enums.TipoAviso;
@@ -193,6 +194,6 @@ public abstract class VistaActividad {
         }
     }
 
-
+    public abstract void aceptarVisitor(VistaActividadVisitor actividadVisitor);
 
 }

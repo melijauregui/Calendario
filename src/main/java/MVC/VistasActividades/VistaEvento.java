@@ -286,4 +286,8 @@ public class VistaEvento extends VistaActividad {
         return background;
     }
 
+    public void aceptarVisitor(VistaActividadVisitor vistaActividadVisitor){
+        vistaActividadVisitor.visitarVistaEvento(this);
+    }
+
 }

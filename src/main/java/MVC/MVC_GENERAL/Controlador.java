@@ -65,7 +65,6 @@ public class Controlador  {
                 throw new RuntimeException(e);
             }
         });
-
         verActividad();
     }
 
@@ -208,6 +207,20 @@ public class Controlador  {
             vista.actualizarEliminar();
             return;
         }
+        act.aceptarVisitor(new ActividadVisitor() {
+            @Override
+            public void visitarEvento(Evento evento) {
+                //
+            }
+            @Override
+            public void visitarTarea(Tarea tarea) {
+                tarea.completar(vista.getCompletarTarea());
+            }
+
+            @Override
+            public void visitarInstancia(InstanciaEvento instancia) {
+            }
+        });
         guardarAlarma(act);
     }
 

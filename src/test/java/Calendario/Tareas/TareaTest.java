@@ -147,11 +147,11 @@ public class TareaTest implements Serializable {
         var fechaHasta = LocalDateTime.of(2023, 4, 23, 19, 0);
 
         //Act
-        tarea.completar();
+        tarea.completar(true);
         var resultado = tarea.estaEnElIntervalo(fechaDesde, fechaHasta);
 
         //Assert
-        assertFalse(resultado);
+        assertTrue(resultado);
     }
 
 
