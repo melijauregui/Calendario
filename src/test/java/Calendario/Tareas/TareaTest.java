@@ -143,15 +143,13 @@ public class TareaTest implements Serializable {
         tarea.setDescripcion(descripcion);
         tarea.setDia(LocalDate.of(2023, 4, 22));
         tarea.setHora(LocalTime.of(20, 0));
-        var fechaDesde = LocalDateTime.of(2023, 4, 22, 19, 0);
-        var fechaHasta = LocalDateTime.of(2023, 4, 23, 19, 0);
 
         //Act
         tarea.completar();
-        var resultado = tarea.estaEnElIntervalo(fechaDesde, fechaHasta);
+        var resultado = tarea.estaCompleta();
 
         //Assert
-        assertFalse(resultado);
+        assertTrue(resultado);
     }
 
 
