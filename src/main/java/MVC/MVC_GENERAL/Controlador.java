@@ -13,6 +13,7 @@ import Calendario.Main.Calendario;
 import Calendario.Tareas.Tarea;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.scene.control.MenuItem;
 
 
 import java.io.*;
@@ -90,6 +91,7 @@ public class Controlador  {
         if (infoAlarmas == null){
             return;
         }
+        System.out.println(infoAlarmas);
         for (List<String> infoAlarma : infoAlarmas) {
             TipoAviso aviso = getTipoAviso(infoAlarma.get(0));
             TiempoRelativo tiempoRelativo = getTiempoRelativo(infoAlarma.get(2));
@@ -103,7 +105,7 @@ public class Controlador  {
                         calendario.agregarAlarmaEvento(evento, intervalo, tiempoRelativo, aviso);
                     }
                     vista.eliminarEventoActual();
-                    vista.setTipoRango(vista.getEscuchaRango());
+                    //vista.setTipoRango(vista.getEscuchaRango());
                 }
                 @Override
                 public void visitarTarea(Tarea tarea) {
@@ -114,7 +116,7 @@ public class Controlador  {
                         calendario.agregarAlarmaTarea(tarea, tarea.getFecha(), intervalo, tiempoRelativo, aviso);
                     }
                     vista.eliminarTareaActual();
-                    vista.setTipoRango(vista.getEscuchaRango());
+                    //vista.setTipoRango(vista.getEscuchaRango());
                 }
 
                 @Override
@@ -122,6 +124,7 @@ public class Controlador  {
                 }
             });
         }
+        vista.actualizarVistaActividades();
     }
 
     /**
@@ -181,8 +184,18 @@ public class Controlador  {
                 }
             });
             default -> {
-                vista.verActividadMenu();
+                for (MenuItem item: vista.verActividadMenu()){
+                    item.setOnAction(actionEvent -> {
+                        try {
+                            vista.abrirVistaDetalladaMenu(item);
+                            actualizarActividad();
+                            verActividad();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
                 }
+            }
         }
     }
 

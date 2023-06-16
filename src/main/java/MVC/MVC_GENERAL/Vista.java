@@ -456,16 +456,8 @@ public class Vista {
     /**
      * Maneja el evento para ver la vista detallada de las actividades en el rango 'mes' o 'día'
      */
-    public void verActividadMenu(){
-        for (MenuItem item: vistasMenu.keySet()){
-            item.setOnAction(actionEvent -> {
-                try {
-                    abrirVistaDetalladaMenu(item);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        }
+    public Set<MenuItem> verActividadMenu(){
+        return vistasMenu.keySet();
     }
 
     /**
@@ -483,8 +475,8 @@ public class Vista {
                 getEscuchaSeleccionarAlarmas(vistaActual);
                 getEscuchaEliminarAlarmas(vistaActual);
                 getEscuchaEliminar(vistaActual);
-                guardarActividad();
                 nuevoStage.showAndWait();
+                guardarActividad();
                 break;
             }
         }
@@ -502,8 +494,8 @@ public class Vista {
         getEscuchaSeleccionarAlarmas(vistaActual);
         getEscuchaEliminarAlarmas(vistaActual);
         getEscuchaEliminar(vistaActual);
-        guardarActividad();
         nuevoStage.showAndWait();
+        guardarActividad();
 
     }
 
@@ -981,7 +973,9 @@ public class Vista {
         }
     }
 
-    // Guarda la información de la Actividad seleccionada
+    /**
+     * Guarda la información de la Actividad seleccionada
+     */
     private void guardarActividad() {
         infoAlarmaActual = vistaActual.getInfoAlarmas();
         actividadActual = vistaActual.getActividad();
