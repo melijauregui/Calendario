@@ -454,7 +454,7 @@ public class Vista {
     }
 
     /**
-     * Maneja el evento para ver la vista detallada de las actividades en el rango 'mes' o 'día'
+     * Devuelve los MenuItem que tienen la información básica de las actividades
      */
     public Set<MenuItem> verActividadMenu(){
         return vistasMenu.keySet();
@@ -742,7 +742,7 @@ public class Vista {
         label.setLayoutY(Tamanio.LABEL_FECHA_DIA_Y);
         label.setLayoutX(Tamanio.LABEL_FECHA_DIA_X);
         label.setStyle("-fx-font-size: 16px;");
-        label.setText(LocalDate.now().toString());
+        label.setText(diaActual.toString());
         setearPane("file:src/main/java/MVC/imagenes/diario.png", label, Tamanio.LABEL_DIA_X_RANGO_DIA,
                 Tamanio.LABEL_DIA_Y_RANGO_DIA, Tamanio.BTN_ANT_SIG_X_RANGO_DIA, Tamanio.BTN_ANT_SIG_Y_RANGO_DIA);
         rango = TipoRango.DIA;
