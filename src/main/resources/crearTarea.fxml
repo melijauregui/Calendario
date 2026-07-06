@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="440.0" style="-fx-background-image: url(file:src/main/java/MVC/imagenes/fondoTarea.png);-fx-background-size: 450px 550px;-fx-background-repeat: no-repeat;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="botonGuardarTarea" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Guardar" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="titulo" layoutX="66.0" layoutY="76.0" prefHeight="53.0" prefWidth="294.0" promptText="Añade un título">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <TextArea fx:id="descripcion" layoutX="12.0" layoutY="235.0" prefHeight="82.0" prefWidth="415.0" promptText="Añade una descripción">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="botonCrearAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Agregar Alarma" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ListView fx:id="listaAlarmas" layoutX="12.0" layoutY="354.0" prefHeight="68.0" prefWidth="415.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;" />
+      <ComboBox fx:id="dia" layoutX="13.0" layoutY="175.0" prefHeight="39.0" prefWidth="71.0" promptText="Dia" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="mes" layoutX="92.0" layoutY="175.0" prefHeight="39.0" prefWidth="127.0" promptText="Mes" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <TextField fx:id="anio" layoutX="226" layoutY="175" prefHeight="39" prefWidth="55" promptText="Año" style="-fx-background-color: white; -fx-border-color: #bdbbbb; -fx-text-alignment: center;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextField>
+      <ComboBox fx:id="hora" layoutX="288.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <ComboBox fx:id="minuto" layoutX="361.0" layoutY="175.0" prefHeight="39.0" prefWidth="66.0" style="-fx-background-color: white; -fx-border-color: #bdbbbb;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ComboBox>
+      <CheckBox fx:id="checkDiaCompleto" layoutX="299.0" layoutY="142.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Día completo">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </CheckBox>
+      <Button fx:id="botonEliminarAlarma" alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="434.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: #88e7f7;" text="Eliminar Alarma" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="errorFecha" layoutX="14.0" layoutY="216.0" prefHeight="17.0" prefWidth="209.0" textFill="#ff0505" />
+   </children>
+</Pane>

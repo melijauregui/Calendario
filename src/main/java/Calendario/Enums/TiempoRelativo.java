@@ -1,8 +1,9 @@
 package Calendario.Enums;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public enum TiempoRelativo {
+public enum TiempoRelativo implements Serializable {
     MINUTOS {
         /**
          * Obtiene una fecha relativa a otra, dado un intervalo medido en
@@ -12,6 +13,7 @@ public enum TiempoRelativo {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusMinutes(intervalo);
         }
+
     },
     HORAS{
         /**
@@ -22,6 +24,7 @@ public enum TiempoRelativo {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusHours(intervalo);
         }
+
     },
     DIAS{
         /**
@@ -32,6 +35,7 @@ public enum TiempoRelativo {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusDays(intervalo);
         }
+
     },
     SEMANAS{
         /**
@@ -42,6 +46,7 @@ public enum TiempoRelativo {
         public LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo) {
             return fecha.minusWeeks(intervalo);
         }
+
     };
 
     TiempoRelativo(){}
@@ -49,4 +54,5 @@ public enum TiempoRelativo {
     /**
      * Calcula una fecha relativa a otra
      */
-    public abstract LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo);}
+    public abstract LocalDateTime determinarFechaRelativa(LocalDateTime fecha, int intervalo);
+}

@@ -1,12 +1,19 @@
 package Calendario.Duracion;
 
+import Calendario.Main.Calendario;
 import Calendario.Main.Constantes;
+import com.google.gson.Gson;
 
+import javax.json.*;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 
-public class Duracion {
+public class Duracion implements Serializable {
     private LocalDate diaInicio;
     private LocalDate diaFin;
 
@@ -77,7 +84,7 @@ public class Duracion {
 
     /**
      * Devuelve una copia de la duración
-     */
+     */{}
     public Duracion Clone(){
         Duracion nuevaDuracion = new Duracion();
         nuevaDuracion.setDiaInicio(this.diaInicio);
@@ -90,9 +97,10 @@ public class Duracion {
     }
 
     /**
-     * esDiaCompleto devuelve true si la duración es de día completo
+     * Devuelve true si la duración es de día completo
      */
-    private boolean esDiaCompleto(){
+    public boolean esDiaCompleto(){
         return (horaInicio == null && horaFin == null);
     }
+
 }

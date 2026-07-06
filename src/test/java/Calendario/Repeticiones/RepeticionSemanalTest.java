@@ -25,7 +25,7 @@ public class RepeticionSemanalTest {
         var diasSemanas = new ArrayList<DayOfWeek>();
         diasSemanas.add(DayOfWeek.THURSDAY);
         diasSemanas.add(DayOfWeek.MONDAY);
-        var repeticionOcurrencias = new RepeticionSemanal(2, diasSemanas, ocurrencias);
+        var repeticionOcurrencias = new RepeticionSemanal(2, diasSemanas,ocurrencias);
 
         var fechaInicio = LocalDate.of(2023, 5, 12);
         var fechaFin = LocalDate.of(2023, 5, 13);
@@ -108,7 +108,7 @@ public class RepeticionSemanalTest {
         var diasSemanas = new ArrayList<DayOfWeek>();
         diasSemanas.add(DayOfWeek.THURSDAY);
         diasSemanas.add(DayOfWeek.MONDAY);
-        var repeticion = new RepeticionSemanal(2, diasSemanas);
+        var repeticion = new RepeticionSemanal(2, diasSemanas, 0);
 
 
         var fechaInicio = LocalDate.of(2023, 5, 12);

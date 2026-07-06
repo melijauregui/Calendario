@@ -4,105 +4,126 @@ import Calendario.Actividad.Actividad;
 import Calendario.Actividad.ActividadMutable;
 import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
-import Calendario.Duracion.Duracion;
+import Calendario.Enums.TiempoRelativo;
+import Calendario.Enums.TipoAviso;
 import Calendario.Eventos.Evento;
 import Calendario.Eventos.InstanciaEvento;
-import Calendario.Repeticiones.Repeticion;
+import Calendario.Main.Argumentos.DuracionArgs;
+import Calendario.Main.Argumentos.EventoArgs;
+import Calendario.Main.Argumentos.RepeticionArgs;
+import Calendario.Main.Argumentos.TareaArgs;
+import Calendario.Main.Builders.*;
 import Calendario.Tareas.Tarea;
-
+import java.io.*;
 import java.time.*;
 import java.util.*;
 
-public class Calendario {
+public class Calendario implements Serializable {
     private Set<Evento> eventos;
     private Set<Tarea> tareas;
     private Set<ActividadMutable> actividades;
-    private LocalDateTime fechaActual;
 
     public Calendario(){
         this.eventos = new HashSet<>();
         this.tareas = new HashSet<>();
         this.actividades = new HashSet<>();
-        this.fechaActual = LocalDateTime.now();
     }
 
+    //CREACIÓN DE ACTIVIDADES
 
     /**
-     * Recibe la información de un evento sin repetición. Lo crea, lo agrega al Calendario y lo devuelve
+     * Recibe la información de un Evento con fecha y hora, y los datos de una Repetición con fecha de vencimiento.
+     * Crea el Evento a partir de los Builders 'Duracion, Repeticion y Evento' correspondientes y lo devuelve
      */
-    public Evento crearEvento(String titulo, String descripcion, Duracion duracion){
-        Evento evento = new Evento();
-        agregarInformacionEvento(evento, titulo, descripcion, duracion);
-        return evento;
+    public Evento crearEvento(EventoArgs eventoArgs){
+        return crearEvento(new BuilderEvento(eventoArgs));
     }
 
     /**
-     * Recibe la información de un evento con repetición. Lo crea, lo agrega al Calendario y lo devuelve
+     * Recibe la información de una Tarea de día completo. Usa un BuilderTarea para crearla, la agrega al Calendario y la devuelve
      */
-    public Evento crearEvento(String titulo, String descripcion, Duracion duracion, Repeticion repeticion){
-        Evento evento = new Evento();
-        agregarInformacionEvento(evento, titulo, descripcion, duracion);
-        modificarRepeticionEvento(evento, repeticion);
-        return evento;
-    }
-
-    /**
-     * Recibe la información de una tarea de día completo. La crea, la agreaga al calendario y la devuelve
-     */
-    public Tarea crearTarea(String titulo, String descripcion, LocalDate dia){
-        Tarea tarea = new Tarea();
-        agregarInformacionTarea(tarea, titulo, descripcion, dia);
-        return tarea;
-    }
-
-    /**
-     * Recibe la información de una tarea con fecha y hora de vencimiento. La crea, la agreaga al calendario
-     * y la devuelve
-     */
-    public Tarea crearTarea(String titulo, String descripcion, LocalDateTime fecha){
-        Tarea tarea = new Tarea();
-        agregarInformacionTarea(tarea,titulo, descripcion, fecha.toLocalDate());
-        modificarHoraTarea(tarea, fecha.toLocalTime());
-        return tarea;
+    public Tarea crearTarea(TareaArgs tareaArgs){
+        return crearTarea(new BuilderTarea(tareaArgs));
     }
 
 
+    //GETTERS DE ACTIVIDADES
     /**
-     * Recibe un intervalo de fechas y devuelve la lista de Actividades que inician (Eventos) o vencen (Tareas) dentro
+     * Recibe un intervalo de fechas y devuelve la lista de Actividades que inician (InstanciaEventos) o vencen (Tareas) dentro
      * del mismo
      */
     public List<Actividad> getActividadesEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
         List<Actividad> actividadesProximas = new ArrayList<>();
-        actividadesProximas.addAll(getEventos(desde, hasta));
+        actividadesProximas.addAll(getInstanciasEventos(desde, hasta));
         actividadesProximas.addAll(getTareas(desde, hasta));
         return actividadesProximas;
     }
 
+
     /**
-     * Dada la próxima alarma que debe sonar (tiene la fecha más próxima a la actual), obtiene todas las
+     * Dada la próxima alarma que debe sonar (tiene la fecha más próxima a la pasada por parámetro), obtiene todas las
      * alarmas de cada Actividad que suenan a esa misma fecha. Las guarda en un conjunto y lo devueve.
      */
-    public Set<Alarma> getProximasAlarmas(){
+    public Set<Alarma> getProximasAlarmas(LocalDateTime fecha){
         Set<Alarma> proximasAlarmas = new HashSet<>();
         Set<Alarma> primerasAlarmas = new HashSet<>();
         for(Actividad actividad : actividades){
-            Set<Alarma> alarmas = actividad.getProximasAlarmas(fechaActual);
-            if (sonMasProximas(primerasAlarmas, alarmas)){
+            Set<Alarma> alarmas = actividad.getProximasAlarmas(fecha);
+            if (debeIncluirAlarma(proximasAlarmas, primerasAlarmas,alarmas, fecha)){
                 primerasAlarmas = alarmas;
-                proximasAlarmas.clear();
-            }
-            if (sonMasProximas(primerasAlarmas, alarmas) || todasSonProximas(primerasAlarmas, alarmas)){
                 proximasAlarmas.addAll(alarmas);
             }
         }
         return proximasAlarmas;
     }
 
+
+    //AGREGAR ALARMAS ACTIVIDADES
+
+    /**
+     * Recibe la información de una AlarmaEvento con tiempo relativo. La crea a partir del BuilderAlarmaEvento
+     * correspondiente, se la agrega al Evento y la devuelve
+     */
+    public  AlarmaEvento agregarAlarmaEvento(Evento evento, int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(intervalo, tiempoRelativo, aviso);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe la información de una AlarmaEvento sin tiempo relativo. La crea a partir del BuilderAlarmaEvento
+     * correspondiente, se la agrega al Evento y la devuelve
+     */
+    public  AlarmaEvento agregarAlarmaEvento(Evento evento, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(aviso);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe la información de una Alarma con tiempo relativo. La crea a partir del BuilderAlarma
+     * correspondiente, se la agrega a la Tarea y la devuelve
+     */
+    public Alarma agregarAlarmaTarea(Tarea tarea, LocalDateTime fecha ,int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarma builderAlarma = new BuilderAlarma(fecha, intervalo, tiempoRelativo, aviso);
+        return agregarAlarmaTarea(tarea, builderAlarma);
+    }
+
+    /**
+     * Recibe la información de una Alarma con fecha absoluta. La crea a partir del BuilderAlarma
+     * correspondiente, se la agrega a la Tarea y la devuelve
+     */
+    public Alarma agregarAlarmaTarea(Tarea tarea, LocalDateTime fecha ,TipoAviso aviso){
+        BuilderAlarma builderAlarma = new BuilderAlarma(fecha, aviso);
+        return agregarAlarmaTarea(tarea, builderAlarma);
+    }
+
+
+
+    //MODIFICAR ACTIVIDADES
     /**
      * Completa la tarea pasada por parámetro
      */
-    public void completarTarea(Tarea tarea){
-        tarea.completar();
+    public void completarTarea(Tarea tarea, boolean b){
+        tarea.completar(b);
     }
 
     /**
@@ -136,37 +157,75 @@ public class Calendario {
     /**
      * Cambia la fecha la duración del evento
      */
-    public void modificarFechaEvento(Evento evento, Duracion duracion){
-        evento.setDuracion(duracion);
+    public void modificarFechaEvento(Evento evento, DuracionArgs duracionArgs){
+        BuilderDuracion builderDuracion = new BuilderDuracion(duracionArgs);
+        evento.setDuracion(builderDuracion.crearDuracion());
+    }
+
+
+    /**
+     * Recibe la información de una AlarmaEvento con tiempo relativo y la crea a partir del BuilderAlarmaEvento
+     * correspondiente. La intercambia por alarmaVieja y la devuelve
+     */
+    public AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(intervalo, tiempoRelativo, aviso);
+        return modificarAlarmaEvento(evento, alarmaVieja, builderAlarmaEvento);
     }
 
     /**
-     * Recibe una Alarma y se la agrega al evento dado.
+     * Recibe la información de una AlarmaEvento sin tiempo relativo y la crea a partir del BuilderAlarmaEvento
+     * correspondiente. La intercambia por alarmaVieja y la devuelve
      */
-    public void agregarAlarmaEvento(Evento evento, AlarmaEvento alarma){
-        evento.agregarAlarma(alarma);
-    }
-    /**
-     * Recibe una Alarma y se la agrega a la tarea dada.
-     */
-    public void agregarAlarmaTarea(Tarea tarea, Alarma alarma){
-        tarea.agregarAlarma(alarma);
+    public AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, TipoAviso aviso){
+        BuilderAlarmaEvento builderAlarmaEvento = new BuilderAlarmaEvento(aviso);
+        return modificarAlarmaEvento(evento, alarmaVieja, builderAlarmaEvento);
     }
 
     /**
-     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
+     * Recibe la información de una Alarma con tiempo relativo y la crea a partir del BuilderAlarma
+     * correspondiente. La intercambia por alarmaVieja y la devuelve
      */
-    public void modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, AlarmaEvento alarmaNueva){
-        evento.eliminarAlarma(alarmaVieja);
-        evento.agregarAlarma(alarmaNueva);
+    public Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, LocalDateTime fecha, int intervalo, TiempoRelativo tiempoRelativo, TipoAviso aviso){
+        BuilderAlarma builderAlarma = new BuilderAlarma(fecha,intervalo, tiempoRelativo, aviso);
+        return modificarAlarmaTarea(tarea, alarmaVieja, builderAlarma);
     }
+
     /**
-     * Recibe dos Alarmas. Elimina alarmaVieja y la cambia por alarmaNueva.
+     * Recibe la información de una Alarma con tiempo relativo y la crea a partir del BuilderAlarma
+     * correspondiente. La intercambia por alarmaVieja y la devuelve
      */
-    public void modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, Alarma alarmaNueva){
-        tarea.eliminarAlarma(alarmaVieja);
-        tarea.agregarAlarma(alarmaNueva);
+    public Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, LocalDateTime fecha, TipoAviso aviso){
+        BuilderAlarma builderAlarma = new BuilderAlarma(fecha,aviso);
+        return modificarAlarmaTarea(tarea, alarmaVieja, builderAlarma);
     }
+
+    /**
+     * Recibe la información de una Repetición con fecha de vencimiento, la crea a partir del BuilderRepeticion
+     * correspondiente y se la setea al Evento
+     */
+    public void modificarRepeticionEvento(Evento evento, RepeticionArgs repeticionArgs){
+        BuilderRepeticion builderRepeticion = new BuilderRepeticion(repeticionArgs);
+        evento.setRepeticion(builderRepeticion.crearRepeticion());
+    }
+
+
+    //ELIMINAR ACTIVIDADES Y/O ALARMAS
+    /**
+     * Saca la tarea del Calendario y borra su información
+     */
+    public void eliminarTarea(Tarea tarea){
+        actividades.remove(tarea);
+        tareas.remove(tarea);
+    }
+
+    /**
+     * Saca el evento del Calendario y borra su información
+     */
+    public void eliminarEvento(Evento evento){
+        actividades.remove(evento);
+        eventos.remove(evento);
+    }
+
 
     /**
      * Elimina una determinada alarma de la tarea
@@ -183,39 +242,57 @@ public class Calendario {
     }
 
 
+    //SERIALIZACIÓN
     /**
-     * Cambia la repetición del evento
+     * Reconstruye el Calendario a partir de la secuencia de bytes pasada. Devuelve un nuevo Calendario con
+     * la misma información
      */
-    public void modificarRepeticionEvento(Evento evento, Repeticion repeticion){
-        evento.setRepeticion(repeticion);
+    public static Calendario deserializar(InputStream bytes) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInStream = new ObjectInputStream(bytes);
+        Calendario calendario = (Calendario) objectInStream.readObject();
+        objectInStream.close();
+        return calendario;
     }
 
     /**
-     * Saca la tarea del Calendario y borra su información
+     * Guarda el estado actual del Calendario.
      */
-    public void eliminarTarea(Tarea tarea){
-        actividades.remove(tarea);
-        tareas.remove(tarea);
-        tarea = null; //borra la información de la tarea
+    public void serializar(OutputStream bytes) throws IOException {
+        ObjectOutputStream objectOutStream = new ObjectOutputStream(bytes);
+        objectOutStream.writeObject(this);
+        objectOutStream.flush();
+        objectOutStream.close();
+    }
+
+    //MÉTODOS PRIVADOS ACTIVIDADES
+    /**
+     * Recibe un BuilderEvento. Crea un Evento a partir de éste, lo agrega al Calendario y lo devuelve
+     */
+    private Evento crearEvento(BuilderEvento builderEvento){
+        Evento evento = builderEvento.crearEvento();
+        eventos.add(evento);
+        actividades.add(evento);
+        return evento;
     }
 
     /**
-     * Saca el evento del Calendario y borra su información
+     * Recibe un BuilderTarea. Crea una Tarea a partir de éste, la agrega al Calendario y la devuelve
      */
-    public void eliminarEvento(Evento evento){
-        actividades.remove(evento);
-        eventos.remove(evento);
-        evento = null;  //borra la información del evento
+    private Tarea crearTarea(BuilderTarea builderTarea){
+        Tarea tarea = builderTarea.crearTarea();
+        tareas.add(tarea);
+        actividades.add(tarea);
+        return tarea;
     }
 
     /**
      * Recibe un intervalo de tiempo y guarda en una lista las instancias (repeticiones)
      * de los Eventos del calendario que inician dentro del mismo
      */
-    private List<InstanciaEvento> getEventos(LocalDateTime desde, LocalDateTime hasta){
+    private List<InstanciaEvento> getInstanciasEventos(LocalDateTime desde, LocalDateTime hasta){
         List<InstanciaEvento> proximosEventos = new ArrayList<>();
         for (Evento evento : eventos){
-            var instancias = evento.getProximasRepeticiones(desde, hasta);
+            var instancias = evento.getRepeticionesEnIntervalo(desde, hasta);
             if (instancias != null){
                 proximosEventos.addAll(instancias);
             }
@@ -223,11 +300,12 @@ public class Calendario {
         return  proximosEventos;
     }
 
+
     /**
      * Recibe un intervalo de tiempo y guarda en una lista las tareas del calendario que vencen dentro del mismo
      */
-    private List<Actividad> getTareas(LocalDateTime desde, LocalDateTime hasta){
-        List<Actividad> proximasTareas = new ArrayList<>();
+    private List<Tarea> getTareas(LocalDateTime desde, LocalDateTime hasta){
+        List<Tarea> proximasTareas = new ArrayList<>();
         for (Tarea tarea : tareas){
             if (tarea.estaEnElIntervalo(desde, hasta)){
                 proximasTareas.add(tarea);
@@ -235,65 +313,87 @@ public class Calendario {
         }
         return proximasTareas;
     }
+    //METODOS PARA ALARMAS PRIVADOS
 
     /**
-     * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
-     * La función devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha actual que una del conjunto
-     * PRIMERAS_ALARMAS
+     * Recibe un BuilderAlarmaEvento. Crea la AlarmaEvento a partir de éste, se la agrega al Evento y la
+     * devuelve
      */
-    private boolean sonMasProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
-        if (primerasAlarmas.size() == 0){
-            return true;
-        }
-        Alarma primerAlarma = primerasAlarmas.iterator().next();
-        Alarma otra = otras.iterator().next();
-        return !otra.suenaAntes(fechaActual) && otra.suenaAntes(primerAlarma);
+    private AlarmaEvento agregarAlarmaEvento(Evento evento, BuilderAlarmaEvento builderAlarmaEvento){
+        var alarmaEvento = builderAlarmaEvento.crearAlarmaEvento();
+        evento.agregarAlarma(alarmaEvento);
+        return alarmaEvento;
+    }
+
+    /**
+     * Recibe un BuilderAlarma. Crea la Alarma a partir de éste, se la agrega a la Tarea y la
+     * devuelve
+     */
+    private Alarma agregarAlarmaTarea(Tarea tarea, BuilderAlarma builderAlarma){
+        var alarma = builderAlarma.crearAlarma();
+        tarea.agregarAlarma(alarma);
+        alarma.setTituloAlarma(tarea.getTitulo());
+        alarma.setDescripcionAlarma(tarea.getDescripcion());
+        return alarma;
+    }
+
+
+    /**
+     * Recibe una alarma existente y un BuilderAlarmaEvento que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
+     */
+    private AlarmaEvento modificarAlarmaEvento(Evento evento, AlarmaEvento alarmaVieja, BuilderAlarmaEvento builderAlarmaEvento){
+        evento.eliminarAlarma(alarmaVieja);
+        return agregarAlarmaEvento(evento, builderAlarmaEvento);
+    }
+
+    /**
+     * Recibe una alarma existente y un BuilderAlarma que crea una nueva alarma. Elimina la alarma vieja y agrega la nueva.
+     */
+    private Alarma modificarAlarmaTarea(Tarea tarea, Alarma alarmaVieja, BuilderAlarma builderAlarma){
+        tarea.eliminarAlarma(alarmaVieja);
+        return agregarAlarmaTarea(tarea, builderAlarma);
     }
 
     /**
      * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
-     * La función devuelve true si una alarma del conjunto OTRAS es igual de próxima a la fecha actual que una del conjunto
+     * Devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha pasada que una del conjunto
      * PRIMERAS_ALARMAS
      */
-    private boolean todasSonProximas(Set<Alarma> primerasAlarmas, Set<Alarma> otras){
+    private boolean esMasProxima(Alarma primerAlarma, Alarma otra, LocalDateTime fecha){
+        return !otra.suenaAntes(fecha) && otra.suenaAntes(primerAlarma);
+    }
+
+    /**
+     * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
+     * Devuelve true si una alarma del conjunto OTRAS es más próxima a la fecha pasada que una del conjunto
+     * PRIMERAS_ALARMAS, o si suenan al mismo tiempo
+     */
+    private boolean debeIncluirAlarma(Set<Alarma> proximasAlarmas, Set<Alarma> primerasAlarmas, Set<Alarma> otras, LocalDateTime fecha){
         if (primerasAlarmas.size() == 0){
             return true;
         }
+        if (otras.size() == 0){
+            return false;
+        }
         Alarma primerAlarma = primerasAlarmas.iterator().next();
         Alarma otra = otras.iterator().next();
-        return primerasAlarmas.size() != 0 && otra.suenaIgual(primerAlarma);
-    }
-
-    /**
-     *  Recibe una Actividad y la información de la misma. La agrega a las actividades del Calendario
-     *  y modifica su título y descripción
-     */
-    private void agregarInformacionActividad(ActividadMutable actividad, String titulo, String descripcion) {
-        actividades.add(actividad);
-        modificarTitulo(actividad, titulo);
-        modificarDescripcion(actividad, descripcion);
+        if (esMasProxima(primerAlarma, otra, fecha)){
+            proximasAlarmas.clear();
+            return true;
+        }
+        return (ambasSonProximas(primerAlarma, otra));
 
     }
 
     /**
-     *  Recibe un Evento y la información del mismo. Lo agrega a los eventos del Calendario y modifica
-     *  su duración, título y descripción
+     * Recibe dos conjuntos de alarmas. Cada uno tiene distintas alarmas que suenan al mismo tiempo.
+     * Devuelve true si una alarma del conjunto OTRAS es igual de próxima a la fecha pasada que una del conjunto
+     * PRIMERAS_ALARMAS
      */
-    private void agregarInformacionEvento(Evento evento, String titulo, String descripcion, Duracion duracion){
-        eventos.add(evento);
-        agregarInformacionActividad(evento, titulo, descripcion);
-        modificarFechaEvento(evento, duracion);
+    private boolean ambasSonProximas(Alarma primerAlarma, Alarma otra){
+        return otra.suenaIgual(primerAlarma);
     }
 
-    /**
-     * Recibe una Tarea y la información de la misma. La agrega a las tareas del calendario y modifica su día,
-     * título y descripción
-     */
-    private void agregarInformacionTarea(Tarea tarea, String titulo, String descripcion, LocalDate dia){
-        tareas.add(tarea);
-        agregarInformacionActividad(tarea, titulo, descripcion);
-        modificarDiaTarea(tarea, dia);
-    }
 
 
 }

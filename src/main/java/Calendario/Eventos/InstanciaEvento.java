@@ -1,17 +1,21 @@
 package Calendario.Eventos;
 
+import Calendario.Actividad.ActividadVisitor;
+import Calendario.Alarmas.Alarma;
 import Calendario.Alarmas.AlarmaEvento;
 import Calendario.Duracion.Duracion;
 import Calendario.Actividad.Actividad;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
-public class InstanciaEvento extends Actividad {
+public class InstanciaEvento extends Actividad implements Serializable {
     private String titulo;
     private String descripcion;
-
+    private Evento referenciaEvento;
     Duracion duracion;
 
     public InstanciaEvento(String titulo, String descripcion, Duracion duracion, Set<AlarmaEvento> alarmas){
@@ -44,12 +48,16 @@ public class InstanciaEvento extends Actividad {
     }
 
     /**
-     * Devuelve true si la instancia del evento comienza al mismo tiempo que la fecha recibida como argumento
+     * Devuelve true si la instancia del evento comienza el mismo día y hora que la fecha recibida como argumento
      */
     public boolean empiezaIgual(LocalDateTime fecha){
         return this.getFechaInicio().isEqual(fecha);
     }
 
+    /**
+     * Devuelve true si la instancia del evento termina antes que la fecha recibida
+     */
+    public boolean terminaAntes(LocalDateTime fecha){return  this.getFechaFin().isBefore(fecha);}
     /**
      * Devuelve la fecha y hora de inicio
      */
@@ -79,11 +87,35 @@ public class InstanciaEvento extends Actividad {
     }
 
     /**
+     * Acepta un Visitor
+     */
+    public void aceptarVisitor(ActividadVisitor actividadVisitor){
+        actividadVisitor.visitarInstancia(this);
+    }
+
+    /**
+     * Guarda la referencia del evento del cual procede
+     */
+    public void setReferenciaEvento(Evento evento){
+        this.referenciaEvento = evento;
+    }
+
+    /**
+     * Devuelve la referencia del evento del cual procede
+     */
+    public Evento getReferenciaEvento(){
+        return referenciaEvento;
+    }
+
+    /**
      * Le agrega a la Instancia la alarma pasada
      */
-    private void configurarAlarma(AlarmaEvento alarmaEvento){
+    public void configurarAlarma(AlarmaEvento alarmaEvento){
         if (alarmaEvento != null){
-            super.getAlarmas().add(alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio()));
+            Alarma alarma = alarmaEvento.crearAlarmaInstaciaEvento(getFechaInicio());
+            alarma.setTituloAlarma(titulo);
+            alarma.setDescripcionAlarma(descripcion);
+            super.getAlarmas().add(alarma);
         }
     }
 
@@ -98,5 +130,17 @@ public class InstanciaEvento extends Actividad {
         }
     }
 
+    /**
+     * Devuelve true si su duración es de día completo
+     */
+    public boolean esDiaCompleto(){
+        return duracion.esDiaCompleto();
+    }
+
+
+    public void eliminarAlarmas(){
+        super.getAlarmas().clear();
+        referenciaEvento.eliminarAlarmas();
+    }
 }
 

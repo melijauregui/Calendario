@@ -4,27 +4,67 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="" />
+    <list default="true" id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="labels">
+      <change afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaActividadVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calendario.bin" beforeDir="false" afterPath="$PROJECT_DIR$/calendario.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Main/Calendario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Calendario/Tareas/Tarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Vista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/MVC_GENERAL/Vista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaActividad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaActividad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaTarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MVC/VistasActividades/VistaTarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/verModificarEvento.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/verModificarEvento.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/verModificarTarea.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Main/CalendarioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Calendario/Tareas/TareaTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit3 Test Class" />
+        <option value="Enum" />
+        <option value="JUnit4 Test Class" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="Modificaciones3" />
+    <option name="BRANCH" value="origin/Etapa3" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Modificaciones2" />
+        <entry key="$PROJECT_DIR$" value="022326be3752c5a48e16ba7d7a25140da59db81f" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="f9b35dbf-8733-42a9-a1fb-e4f5653c7f92" />
+        <option name="url" value="git@github.com:melijauregui/TpCalendario.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2PhPIdLBgU1j8bycjBHq2rscnSl" />
+  <component name="ProjectId" id="2PzA8nNTgPksvIzahxEAKM6TI1V" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,41 +73,38 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MergeE3yArgs&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/melina/Documents/Algo3/TpCalendario&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.All in TpCalendario">
-    <configuration name="AlarmaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Alarmas.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Alarmas" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Alarmas.AlarmaTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AlarmaTest.TestDeterminarFechaRelativa" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Alarmas.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Alarmas" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Alarmas.AlarmaTest" />
-      <option name="METHOD_NAME" value="TestDeterminarFechaRelativa" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/MVC/imagenes" />
+      <recent name="$PROJECT_DIR$/src/main/java/imagenes" />
+      <recent name="$PROJECT_DIR$/src/main/java/MVC" />
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\MVC\Resources" />
+      <recent name="C:\Users\Sofia\Documents\Facultad\Fiuba\2023\Algo3\Github\TpCalendario\src\main\java\MVC" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="Calendario.Main.Builders" />
+      <recent name="Calendario.Enums" />
+      <recent name="Calendario.Actividad" />
+      <recent name="Calendario.Main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.TpCalendario [javafx:run]">
     <configuration name="All in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <option name="PACKAGE_NAME" value="" />
@@ -76,76 +113,430 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Calendario in TpCalendario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalendarioTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TpCalendario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Calendario.*" />
+          <option name="PATTERN" value="Calendario.Main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Calendario" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TareaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TpCalendario" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Calendario.Tareas.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Calendario.Tareas" />
-      <option name="MAIN_CLASS_NAME" value="Calendario.Tareas.TareaTest" />
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CalendarioTest.TestCompletarTarea" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestCompletarTarea" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.TestModificarRepeticionConOcurrencias" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestModificarRepeticionConOcurrencias" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalendarioTest.TestPersistencia" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TpCalendario" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Calendario.Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Calendario.Main" />
+      <option name="MAIN_CLASS_NAME" value="Calendario.Main.CalendarioTest" />
+      <option name="METHOD_NAME" value="TestPersistencia" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TpCalendario [javafx:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="javafx:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.CalendarioTest.TestCompletarTarea" />
+      <item itemvalue="JUnit.All in TpCalendario" />
+      <item itemvalue="JUnit.CalendarioTest" />
+      <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionConOcurrencias" />
+      <item itemvalue="JUnit.CalendarioTest.TestPersistencia" />
+      <item itemvalue="Maven.TpCalendario [javafx:run]" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TareaTest" />
-        <item itemvalue="JUnit.Calendario in TpCalendario" />
         <item itemvalue="JUnit.All in TpCalendario" />
-        <item itemvalue="JUnit.AlarmaTest.TestDeterminarFechaRelativa" />
-        <item itemvalue="JUnit.AlarmaTest" />
+        <item itemvalue="JUnit.CalendarioTest.TestCompletarTarea" />
+        <item itemvalue="JUnit.CalendarioTest.TestPersistencia" />
+        <item itemvalue="JUnit.CalendarioTest.TestModificarRepeticionConOcurrencias" />
+        <item itemvalue="JUnit.CalendarioTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="" />
-      <created>1683906269731</created>
+      <changelist id="9160b5c9-1cf7-4cb3-b364-f8482229b2fa" name="Changes" comment="builders" />
+      <created>1685212742532</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1683906269731</updated>
+      <updated>1685212742532</updated>
     </task>
-    <task id="LOCAL-00001" summary="TestEvento">
-      <created>1683920123910</created>
+    <task id="LOCAL-00001" summary="borrarNull">
+      <created>1685385864782</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1683920123910</updated>
+      <updated>1685385864782</updated>
     </task>
-    <task id="LOCAL-00002" summary="TestEvento">
-      <created>1683920135041</created>
+    <task id="LOCAL-00002" summary="OrdenarFunciones">
+      <created>1685387330143</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1683920135041</updated>
+      <updated>1685387330143</updated>
     </task>
-    <task id="LOCAL-00003" summary="TestEvento">
-      <created>1683925046943</created>
+    <task id="LOCAL-00003" summary="ventana">
+      <created>1685836366659</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1683925046943</updated>
+      <updated>1685836366659</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ventana">
+      <created>1685842276240</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685842276240</updated>
+    </task>
+    <task id="LOCAL-00005" summary="unFondo">
+      <created>1685908961064</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685908961064</updated>
+    </task>
+    <task id="LOCAL-00006" summary="unFondo">
+      <created>1685910926935</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685910926935</updated>
+    </task>
+    <task id="LOCAL-00007" summary="labels">
+      <created>1685912350241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685912350241</updated>
+    </task>
+    <task id="LOCAL-00008" summary="labels">
+      <created>1686287558680</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686287558680</updated>
+    </task>
+    <task id="LOCAL-00009" summary="labels">
+      <created>1686288198832</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1686288198832</updated>
+    </task>
+    <task id="LOCAL-00010" summary="labels">
+      <created>1686290253085</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1686290253085</updated>
+    </task>
+    <task id="LOCAL-00011" summary="labels">
+      <created>1686340133880</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686340133880</updated>
+    </task>
+    <task id="LOCAL-00012" summary="labels">
+      <created>1686423504937</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1686423504937</updated>
+    </task>
+    <task id="LOCAL-00013" summary="labels">
+      <created>1686424228964</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1686424228964</updated>
+    </task>
+    <task id="LOCAL-00014" summary="labels">
+      <created>1686427190944</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686427190944</updated>
+    </task>
+    <task id="LOCAL-00015" summary="labels">
+      <created>1686434714190</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1686434714190</updated>
+    </task>
+    <task id="LOCAL-00016" summary="labels">
+      <created>1686436503974</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1686436503974</updated>
+    </task>
+    <task id="LOCAL-00017" summary="labels">
+      <created>1686443760466</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1686443760466</updated>
+    </task>
+    <task id="LOCAL-00018" summary="labels">
+      <created>1686463943403</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1686463943403</updated>
+    </task>
+    <task id="LOCAL-00019" summary="labels">
+      <created>1686497740303</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1686497740303</updated>
+    </task>
+    <task id="LOCAL-00020" summary="labels">
+      <created>1686506148465</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1686506148465</updated>
+    </task>
+    <task id="LOCAL-00021" summary="labels">
+      <created>1686509577901</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1686509577901</updated>
+    </task>
+    <task id="LOCAL-00022" summary="labels">
+      <created>1686513279023</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1686513279023</updated>
+    </task>
+    <task id="LOCAL-00023" summary="labels">
+      <created>1686513528438</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1686513528438</updated>
+    </task>
+    <task id="LOCAL-00024" summary="labels">
+      <created>1686515190072</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1686515190072</updated>
+    </task>
+    <task id="LOCAL-00025" summary="labels">
+      <created>1686516493309</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1686516493309</updated>
+    </task>
+    <task id="LOCAL-00026" summary="labels">
+      <created>1686525827376</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1686525827376</updated>
+    </task>
+    <task id="LOCAL-00027" summary="labels">
+      <created>1686532194722</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1686532194722</updated>
+    </task>
+    <task id="LOCAL-00028" summary="labels">
+      <created>1686538172791</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1686538172791</updated>
+    </task>
+    <task id="LOCAL-00029" summary="labels">
+      <created>1686596218613</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1686596218613</updated>
+    </task>
+    <task id="LOCAL-00030" summary="labels">
+      <created>1686598326085</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1686598326085</updated>
+    </task>
+    <task id="LOCAL-00031" summary="labels">
+      <created>1686636949366</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1686636949366</updated>
+    </task>
+    <task id="LOCAL-00032" summary="labels">
+      <created>1686637688500</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1686637688500</updated>
+    </task>
+    <task id="LOCAL-00033" summary="labels">
+      <created>1686666908826</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1686666908826</updated>
+    </task>
+    <task id="LOCAL-00034" summary="labels">
+      <created>1686669319848</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1686669319848</updated>
+    </task>
+    <task id="LOCAL-00035" summary="labels">
+      <created>1686670726378</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1686670726378</updated>
+    </task>
+    <task id="LOCAL-00036" summary="labels">
+      <created>1686675851052</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1686675851052</updated>
+    </task>
+    <task id="LOCAL-00037" summary="labels">
+      <created>1686684258788</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1686684258788</updated>
+    </task>
+    <task id="LOCAL-00038" summary="labels">
+      <created>1686687637088</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1686687637088</updated>
+    </task>
+    <task id="LOCAL-00039" summary="labels">
+      <created>1686690841998</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1686690841998</updated>
+    </task>
+    <task id="LOCAL-00040" summary="labels">
+      <created>1686692449506</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1686692449506</updated>
+    </task>
+    <task id="LOCAL-00041" summary="labels">
+      <created>1686696855454</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1686696855454</updated>
+    </task>
+    <task id="LOCAL-00042" summary="labels">
+      <created>1686707269984</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1686707269984</updated>
+    </task>
+    <task id="LOCAL-00043" summary="labels">
+      <created>1686776484091</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1686776484091</updated>
+    </task>
+    <task id="LOCAL-00044" summary="labels">
+      <created>1686778691733</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1686778691733</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,37 +544,58 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/MergeE3yArgs" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/MergeE3yArgs" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="TestEvento" />
-    <MESSAGE value="TestTarea" />
-    <option name="LAST_COMMIT_MESSAGE" value="TestTarea" />
+    <MESSAGE value="builders" />
+    <MESSAGE value="borrarNull" />
+    <MESSAGE value="OrdenarFunciones" />
+    <MESSAGE value="ventana" />
+    <MESSAGE value="unFondo" />
+    <MESSAGE value="labels" />
+    <option name="LAST_COMMIT_MESSAGE" value="labels" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Repeticiones/RepeticionAnualTest.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/Calendario/Alarmas/AlarmaTest.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Calendario.Eventos.InstanciaEvento" memberName="alarmas" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/workspace_xml$BuilderAlarmaTest.ic" NAME="BuilderAlarmaTest Coverage Results" MODIFIED="1684516875102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

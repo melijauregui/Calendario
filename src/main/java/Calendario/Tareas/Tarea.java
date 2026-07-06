@@ -1,12 +1,15 @@
 package Calendario.Tareas;
 
+import Calendario.Actividad.ActividadVisitor;
 import Calendario.Alarmas.Alarma;
 import Calendario.Actividad.ActividadMutable;
 import Calendario.Main.Constantes;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
 
 public class Tarea extends ActividadMutable {
 
@@ -45,14 +48,14 @@ public class Tarea extends ActividadMutable {
      * de fechas pasado por parámetro
      */
     public boolean estaEnElIntervalo(LocalDateTime desde, LocalDateTime hasta){
-        return !this.estaCompleta() && (this.getFecha().isAfter(desde) || estaEnElIntervaloDiaCompleto(desde.toLocalDate())) && this.getFecha().isBefore(hasta);
+        return (estaEnElIntervaloConHora(desde, hasta) || estaEnElIntervaloDiaCompleto(desde.toLocalDate()));
     }
 
     /**
      * Marca la tarea como completada
      */
-    public void completar(){
-        this.completada = true;
+    public void completar(boolean b){
+        this.completada = b;
     }
 
     /**
@@ -80,6 +83,27 @@ public class Tarea extends ActividadMutable {
     }
 
     /**
+     * Acepta un Visitor
+     */
+    public void aceptarVisitor(ActividadVisitor actividadVisitor) {
+        actividadVisitor.visitarTarea(this);
+    }
+
+    /**
+     * Devuelve true si la tarea ha sido completada, false en caso contrario
+     */
+    public boolean estaCompleta(){
+        return this.completada;
+    }
+
+    /**
+     * Elimina todas las alarmas de la Tarea
+     */
+    public void eliminarAlarmas(){
+        getAlarmas().clear();
+    }
+
+    /**
      * Devuelve true si la tarea es de día completo y se encuentra dentro del intervalo de fechas dado
      */
     private boolean estaEnElIntervaloDiaCompleto(LocalDate fecha){
@@ -87,10 +111,10 @@ public class Tarea extends ActividadMutable {
     }
 
     /**
-     * Devuelve true si la tarea ha sido completada, false en caso contrario
+     * Devuelve true si la tarea con hora se encuentra dentro del intervalo de fechas dado
      */
-    private boolean estaCompleta(){
-        return this.completada;
+    private boolean estaEnElIntervaloConHora(LocalDateTime desde, LocalDateTime hasta){
+        return !this.getFecha().isBefore(desde) && this.getFecha().isBefore(hasta);
     }
 
 }

@@ -84,7 +84,7 @@ public class RepeticionMensualTest {
     public void RepeticionInfinita() {
 
         //Arrange
-        var repeticion = new RepeticionMensual(1);
+        var repeticion = new RepeticionMensual(1, 0);
 
         var fechaInicio = LocalDate.of(2023, 5, 11);
         var fechaFin = LocalDate.of(2023, 6, 11);

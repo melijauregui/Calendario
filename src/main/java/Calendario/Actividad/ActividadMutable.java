@@ -1,14 +1,13 @@
 package Calendario.Actividad;
 
-public class ActividadMutable extends Actividad {
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashSet;
+
+public abstract class ActividadMutable extends Actividad implements Serializable {
 
     private String titulo;
     private String descripcion;
-
-    public ActividadMutable(String titulo, String descripcion){
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-    }
 
     public ActividadMutable(){
 
@@ -42,4 +41,13 @@ public class ActividadMutable extends Actividad {
         this.descripcion = descripcion;
     }
 
+    /**
+     * Acepta un Visitor
+     */
+    public abstract void aceptarVisitor(ActividadVisitor actividadVisitor);
+
+    /**
+     * Elimina las alarmas de la ActividadMutable
+     */
+    public abstract void eliminarAlarmas();
 }

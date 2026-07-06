@@ -1,10 +1,14 @@
 package Calendario.Repeticiones;
 
+import Calendario.Duracion.Duracion;
+import Calendario.Enums.TipoRepeticion;
+
+import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
-import Calendario.Eventos.InstanciaEvento;
 
-public abstract class Repeticion {
+public abstract class Repeticion implements Serializable {
 
     private LocalDate fechaHasta;
     private int intervalo;
@@ -12,6 +16,7 @@ public abstract class Repeticion {
     private int ocurrenciasRelativas = 0;
     private static final int sinRepeticion = 0;
     private static final int repeticionInfinita = -1;
+
 
     /**
      * Crea una Repetición que termina en una determinda fecha
@@ -39,6 +44,7 @@ public abstract class Repeticion {
     }
 
 
+
     /**
      * Dada la fecha de inicio de la repetición anterior, devuelve la de la siguiente
      * o null si la misma ya acabó
@@ -61,18 +67,52 @@ public abstract class Repeticion {
 
     }
 
-
-    /**
-     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de repetición
-     */
-    protected abstract LocalDate getProximaFecha(LocalDate fecha);
-
     /**
      * Devuelve el intervalo
      */
     public int getIntervalo(){
         return intervalo;
     }
+
+    /**
+     * Devuelve la cantidad de ocurrencias
+     */
+    public int getOcurrencias(){
+        return ocurrenciasRelativas;
+    }
+
+    /**
+     * Devuelve la fecha de finalización de la repetición
+     */
+    public LocalDate getFechaHasta(){
+        return fechaHasta;
+    }
+
+    /**
+     * Devuelve los días de la semana, null si no es una repetición semanal
+     */
+    public List<DayOfWeek> getDiasSemana(){
+        return null;
+    }
+
+    /**
+     * Devuelve el tipo de Repetición
+     */
+    public abstract TipoRepeticion getTipoRepeticion();
+
+    /**
+     * Actualiza las ocurrencias
+     */
+    public void actualizarOcurrencias(){
+        if (ocurrencias > 0){
+            ocurrenciasRelativas = ocurrencias;
+        }
+    }
+
+    /**
+     * Método implementado por RepeticionSemanal.
+     */
+    public void actualizarDuracion(Duracion duracion){};
 
     /**
      * Devuelve true si la instancia pasada por parámetro es la última del
@@ -93,5 +133,8 @@ public abstract class Repeticion {
             this.ocurrenciasRelativas-=1;
         }
     }
-
+    /**
+     * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de repetición
+     */
+    protected abstract LocalDate getProximaFecha(LocalDate fecha);
 }

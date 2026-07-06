@@ -1,6 +1,7 @@
 package Calendario.Repeticiones;
 
-import Calendario.Eventos.InstanciaEvento;
+import Calendario.Duracion.Duracion;
+import Calendario.Enums.TipoRepeticion;
 
 import java.time.LocalDate;
 
@@ -33,6 +34,13 @@ public class RepeticionDiaria extends Repeticion {
      */
     public LocalDate getProximaFecha(LocalDate fecha){
         return fecha.plusDays(getIntervalo());
+    }
+
+    /**
+     * Devuelve el tipo de repetición
+     */
+    public TipoRepeticion getTipoRepeticion() {
+        return TipoRepeticion.DIARIA;
     }
 
 }

@@ -1,6 +1,8 @@
 package Calendario.Repeticiones;
 
-import Calendario.Eventos.InstanciaEvento;
+import Calendario.Duracion.Duracion;
+import Calendario.Enums.TipoRepeticion;
+
 import java.time.LocalDate;
 
 public class RepeticionAnual extends Repeticion {
@@ -28,11 +30,17 @@ public class RepeticionAnual extends Repeticion {
     }
 
     /**
+     * Devuelve el tipo de repetición
+     */
+    public TipoRepeticion getTipoRepeticion() {
+        return TipoRepeticion.ANUAL;
+    }
+
+    /**
      * Devuelve la próxima fecha a la pasada por parámetro, según el intervalo de años
      */
     public LocalDate getProximaFecha(LocalDate fecha){
         return fecha.plusYears(getIntervalo());
     }
-
 
 }

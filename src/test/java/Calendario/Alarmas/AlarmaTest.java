@@ -1,9 +1,7 @@
 package Calendario.Alarmas;
 
-import Calendario.Alarmas.Aviso.Aviso;
-import Calendario.Alarmas.Aviso.AvisoConSonido;
-import Calendario.Alarmas.Aviso.AvisoNotificacion;
 import Calendario.Enums.TiempoRelativo;
+import Calendario.Enums.TipoAviso;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -15,7 +13,7 @@ public class AlarmaTest {
     public void TestAlarmaSuenaAntesDeUnaFecha() {
         // Arrange
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 15);
-        Alarma alarma = new Alarma(fecha, new AvisoConSonido());
+        Alarma alarma = new Alarma(fecha, TipoAviso.SONIDO);
         LocalDateTime fechaAntes = LocalDateTime.of(2023, 4, 22, 16, 14);
         LocalDateTime fechaDespues = LocalDateTime.of(2023, 4, 22, 16, 16);
 
@@ -31,7 +29,7 @@ public class AlarmaTest {
     @Test
     public void TestDeterminarFechaRelativa() {
         //Arrange
-        AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoConSonido());
+        AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, TipoAviso.SONIDO);
         LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 15);
         LocalDateTime fechaAntes = LocalDateTime.of(2023, 4, 22, 16, 4);
         LocalDateTime fechaDespues = LocalDateTime.of(2023, 4, 22, 16, 6);
@@ -48,9 +46,9 @@ public class AlarmaTest {
     @Test
     public void TestSuenaAntesDeOtraAlarma() {
          //Arrange
-         AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoConSonido());
+         AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, TipoAviso.SONIDO);
          LocalDateTime fecha = LocalDateTime.of(2023, 4, 22, 16, 15);
-         Alarma otra = new Alarma(fecha, new AvisoNotificacion());
+         Alarma otra = new Alarma(fecha, TipoAviso.NOTIFICACION);
          var alarmaFecha = alarma.crearAlarmaInstaciaEvento(fecha);
 
          //Act
@@ -63,10 +61,10 @@ public class AlarmaTest {
     @Test
     public void TestAlarmasSuenanAlMismoTiempo() {
         //Arrange
-        AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, new AvisoConSonido());
+        AlarmaEvento alarma = new AlarmaEvento(10, TiempoRelativo.MINUTOS, TipoAviso.SONIDO);
         LocalDateTime fechaAlarma = LocalDateTime.of(2023, 4, 22, 16, 25);
         LocalDateTime fechaOtra = LocalDateTime.of(2023, 4, 22, 16, 15);
-        Alarma otra = new Alarma(fechaOtra, new AvisoNotificacion());
+        Alarma otra = new Alarma(fechaOtra, TipoAviso.NOTIFICACION);
         var alarmaFecha = alarma.crearAlarmaInstaciaEvento(fechaAlarma);
 
         //Act

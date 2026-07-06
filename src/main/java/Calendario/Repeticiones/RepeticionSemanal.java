@@ -1,7 +1,8 @@
 package Calendario.Repeticiones;
 
 
-import Calendario.Eventos.InstanciaEvento;
+import Calendario.Duracion.Duracion;
+import Calendario.Enums.TipoRepeticion;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -54,14 +55,41 @@ public class RepeticionSemanal extends Repeticion{
     }
 
     /**
+     * Devuelve el tipo de repetición
+     */
+    public TipoRepeticion getTipoRepeticion() {
+        return TipoRepeticion.SEMANAL;
+    }
+
+    /**
+     * Devuelve los días de la semana, null si no es una repetición semanal
+     */
+    @Override
+    public List<DayOfWeek> getDiasSemana(){
+        return diasSemana;
+    }
+
+    /**
+     * Ajusta la Duracion recibida para que coincida con los días de semana
+     * que se repite
+     */
+    @Override
+    public void actualizarDuracion(Duracion d){
+        if (diasSemana.contains(d.getFechaInicio().getDayOfWeek())){
+            return;
+        }
+        d.setDiaInicio(getProximaFechaInicio(d.getDiaInicio()));
+        d.setDiaFin(getProximaFechaFin(d.getDiaFin()));
+
+    }
+
+    /**
      * Devuelve la próxima fecha a la pasada por parámetro, según la diferencia de días entre las
      * repeticiones
      */
     private LocalDate getProximaFecha(LocalDate fecha, int diferencia){
         return fecha.plusDays(diferencia);
     }
-
-
 
     /**
      * Calcula la cantidad de días entre la fecha pasada por parámetro
@@ -127,4 +155,5 @@ public class RepeticionSemanal extends Repeticion{
     private int calcularDiferenciaSemanas(DayOfWeek diaEvento){
         return 7*getIntervalo()-calcularDiferenciaDias(diaEvento, getPrimerDiaSemana());
     }
+
 }
